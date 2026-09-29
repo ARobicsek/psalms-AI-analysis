@@ -54,6 +54,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 import requests
 
 from src.utils.cost_tracker import price_tokens
+from src.utils.openai_usage import split_input_tokens, split_output_tokens
 
 try:  # the project's .env (OPENAI_API_KEY) wherever the checker is imported from
     from dotenv import load_dotenv
@@ -328,6 +329,12 @@ def lookup_commentary(commentator: str, ref: str, bundle: str = "") -> Dict[str,
             return {"error": f"Sefaria has no text for {tref}"}
         out["source"] = "Sefaria"
         return out
+    except requests.HTTPError as e:
+        if getattr(e.response, "status_code", None) == 404:
+            # Session 388: usually a verse the commentator passes over, which is itself evidence.
+            return {"error": f"no entry: neither the research bundle nor Sefaria has {name} on {book} "
+                             f"{ch}:{v}; he most likely does not comment on this verse"}
+        return {"error": f"lookup failed for {tref}: {e}"}
     except Exception as e:
         return {"error": f"lookup failed for {tref}: {e}"}
 
@@ -721,7 +728,13 @@ the poem "does". For a flagged conjecture ("perhaps", "may"), list only the fact
    against the text itself (get_text) or hand the claim on (step 3).
 2. get_verse(ref) for a biblical verse; search_tanakh(hebrew) for occurrences;
    get_commentary(commentator, ref) for a commentary entry; get_text(ref) for any other text
-   Sefaria holds (Talmud, midrash, halakhic works, the siddur), e.g. "Shabbat 88a".
+   Sefaria holds (Talmud, midrash, halakhic works), e.g. "Shabbat 88a".
+   - PRAYERS AND THEIR ORDER (siddur, machzor, selichot, Ne'ilah, the Haggadah): search_liturgy,
+     with a Hebrew phrase from the prayer or the prayer's name. Do not guess siddur or machzor
+     refs for get_text; use the refs search_liturgy returns.
+   - THE SEPTUAGINT: get_lxx(ref), with the Hebrew-Bible reference. Sefaria has none.
+   - A get_text that fails lists Sefaria's closest titles: try one of those at most once. A work
+     Sefaria does not hold (a modern poem, a folk custom) is settled as in step 3.
 3. You have NO web search. For a claim that can only be settled outside these sources (a
    classical or Near Eastern text, an inscription, a poem or other literature, a historical fact
    or date, a liturgical custom the materials do not document):
@@ -766,7 +779,8 @@ the traditional commentators, could not settle them. Verify each one against evi
 
 Tools: web search (prefer primary texts and standard references: a translation of the ancient
 text itself, a museum or library catalogue, a scholarly edition); get_text(ref) for anything on
-Sefaria (Talmud, midrash, the siddur, piyyut); get_verse(ref) for a biblical verse. Search for
+Sefaria (Talmud, midrash); search_liturgy for the siddur and machzor; get_lxx for the Septuagint;
+get_verse(ref) for a biblical verse. Search for
 each claim once, twice at most; batch lookups; do not search for what the sentence does not
 claim.
 
@@ -854,7 +868,8 @@ its own memory. A researcher looked for sources on each one and copied passages 
   contradiction.
 - "quote NOT found on the page": the passage may be misquoted or invented. It is not evidence.
 Judge each claim from that evidence. You may also use get_text (Sefaria:
-Talmud, midrash, siddur, piyyut) and get_verse. You have no web search.
+Talmud, midrash), search_liturgy (the siddur and machzor, with their order), get_lxx (the
+Septuagint) and get_verse. You have no web search.
 
 {divine_names}
 
@@ -987,7 +1002,18 @@ FUNCTION_TOOLS = [
         "literary echoes, commentators) for a word or phrase, Hebrew or English. Returns the matching passages.",
         {"query": {"type": "string"}}, ["query"]),
     _fn("get_text", "Any text Sefaria holds, by its Sefaria reference: Talmud ('Shabbat 88a'), midrash "
-        "('Bereishit Rabbah 56:10'), halakhic works, the siddur, piyyut. Hebrew and English where available.",
+        "('Bereishit Rabbah 56:10'), halakhic works, or a prayer by the exact ref search_liturgy gave. "
+        "Hebrew and English where available. A ref Sefaria lacks returns its closest titles.",
+        {"ref": {"type": "string"}}, ["ref"]),
+    # Session 388: both $0.
+    _fn("search_liturgy", "The siddur and machzor (Ashkenaz, Sefard, Edot HaMizrach; Rosh Hashanah and "
+        "Yom Kippur; selichot; the Haggadah). A Hebrew phrase returns the passage around it in each prayer "
+        "that has it; a name ('Neilah', 'Fast of Esther', 'Maariv Aleinu') returns matching prayers and "
+        "their exact refs. Every hit names the prayers before and after it in its service.",
+        {"query": {"type": "string"}}, ["query"]),
+    _fn("get_lxx", "The Septuagint for a verse, by its HEBREW-Bible reference ('Psalms 77:11'): Brenton's "
+        "English translation, and the Greek as dictionary forms (lemmas) only, so it shows which word the "
+        "translators used but not its case, tense or person. Sefaria holds no Septuagint.",
         {"ref": {"type": "string"}}, ["ref"]),
 ]
 
@@ -1033,14 +1059,34 @@ def cited_refs(text: str) -> List[str]:
     return out
 
 
+def psalm_text(psalm: int, db_path: Optional[Path]) -> str:
+    """The whole psalm, verse by verse, in Hebrew numbering (tanakh.db, else Sefaria)."""
+    if usable_db(db_path):
+        rows = _db_rows(db_path, "SELECT verse, hebrew, english FROM verses WHERE book_name='Psalms' "
+                        "AND chapter=? ORDER BY verse", (psalm,))
+        if rows:
+            return "\n".join(f"**{psalm}:{v}** {h}\n{e}" for v, h, e in rows)
+    try:
+        out = _sefaria_text(f"Psalms {psalm}")
+        return f"{out.get('hebrew', '')}\n{out.get('english', '')}".strip()
+    except Exception:
+        return ""
+
+
 def shared_evidence(guide_text: str, bundle: str, db_path: Optional[Path], max_verses: int = 150,
-                    verses: Optional[set] = None) -> str:
+                    verses: Optional[set] = None, psalm: Optional[int] = None) -> str:
     """The evidence a stage-1 call starts with: the commentators' entries (all of them, or
     those on `verses`) and the text of every verse `guide_text` cites (tanakh.db, else
     Sefaria). Session 386: handing these over up front replaced ~560 lookups whose outputs
     were each paid for on every later round; scoping them to the chunk keeps the prefix
-    that every round replays small."""
+    that every round replays small. Session 388: with `psalm`, the psalm itself comes first
+    (~1.3K tokens for Ps 77), which the checker had fetched 17 times on Ps 77."""
     out = []
+    if psalm:
+        whole = psalm_text(psalm, db_path)
+        if whole:
+            out += [f"## PSALM {psalm} ITSELF (Masoretic text and a translation; the guide numbers verses "
+                    "as the Hebrew does, heading included, so English Bibles may be one lower)", "", whole, ""]
     comm = commentary_entries(bundle, verses)
     if comm:
         out += ["## THE COMMENTATORS' ENTRIES ON THIS PSALM (full text, as the writer had them)", "", comm, ""]
@@ -1201,6 +1247,16 @@ def summarize_tool_result(name: str, result: Dict, n: int = 240) -> str:
         return (f"{result.get('matches', len(hits))} match(es) in the research bundle"
                 + (f" (in: {_clip(where, 120)})" if where else "")
                 + (f"; first: {_clip(first, n)}" if first else ""))
+    if name == "search_liturgy":
+        ps = result.get("prayers") or []
+        first = ps[0] if ps else {}
+        return (f"{result.get('matches', len(ps))} prayer(s) in the liturgy database"
+                + (": " + _clip("; ".join(p.get("ref", "") for p in ps), 200) if ps else "")
+                + (f"; first: {_clip(_norm_ws(first.get('text') or first.get('opening') or ''), n)}"
+                   if first else ""))
+    if name == "get_lxx":
+        return (f"ref={result.get('ref')} (LXX ch. {result.get('lxx_chapter')}); Brenton: "
+                f"{_clip(result.get('english_brenton', ''), n)}; Greek lemmas: {_clip(result.get('greek_lemmas', ''), 120)}")
     parts = []
     for k in ("ref", "source", "commentator"):
         if result.get(k):
@@ -1227,18 +1283,215 @@ def _web_action(item) -> Dict:
     return out
 
 
-def lookup_text(ref: str) -> Dict[str, str]:
+# -- free lookups added in Session 388 ------------------------------------------------
+# On Ps 77, 29 of 315 stage-1 lookups failed: 13 guessed siddur/machzor refs in a form Sefaria
+# rejects, 5 asked Sefaria for the Septuagint (it has none), 8 named works Sefaria does not hold
+# or spells differently, 3 were commentary entries that do not exist. Four liturgical claims then
+# passed as "supported" with no stated basis. The prayer texts were on disk all along.
+
+LITURGY_DB = Path(__file__).resolve().parents[2] / "data" / "liturgy.db"
+_LITURGY_COLS = ("sefaria_ref", "source_text", "nusach", "occasion", "service", "section",
+                 "prayer_name", "canonical_prayer_name", "sequence_order", "hebrew_text", "english_text")
+_liturgy_cache: Dict[str, List[Dict]] = {}
+
+
+def _norm_name(s: str) -> str:
+    """Lower-case, apostrophes and hyphens dropped: "Ne'ilah" == "Neilah", "Ta'anit" == "Taanit"."""
+    s = unicodedata.normalize("NFKD", s or "").lower()
+    s = re.sub(r"[̀-ͯ'’ʼ`\-_]", "", s)
+    return re.sub(r"[^a-z0-9א-ת ]+", " ", s).strip()
+
+
+def _liturgy_rows(db_path: Optional[Path] = None) -> List[Dict]:
+    """Every prayer in liturgy.db (harvested from Sefaria's siddurim and machzorim), loaded once."""
+    path = Path(db_path or LITURGY_DB)
+    key = str(path)
+    if key not in _liturgy_cache:
+        if not path.exists():
+            _liturgy_cache[key] = []
+        else:
+            rows = _db_rows(path, f"SELECT {', '.join(_LITURGY_COLS)} FROM prayers ORDER BY source_text, "
+                                  "service, sequence_order")
+            out = []
+            for r in rows:
+                d = dict(zip(_LITURGY_COLS, r))
+                d["_names"] = _norm_name(" ".join(str(d[k] or "") for k in (
+                    "sefaria_ref", "source_text", "nusach", "occasion", "service", "section",
+                    "prayer_name", "canonical_prayer_name")))
+                out.append(d)
+            _liturgy_cache[key] = out
+    return _liturgy_cache[key]
+
+
+def _flat_consonants(text: str):
+    """(consonants-and-single-spaces copy of `text`, index map back into it) — as search_bundle."""
+    flat, idx, prev_space = [], [], True
+    for i, ch in enumerate(unicodedata.normalize("NFC", text or "")):
+        if "א" <= ch <= "ת":
+            flat.append(ch)
+            idx.append(i)
+            prev_space = False
+        elif ch in " \n\t־" and not prev_space:
+            flat.append(" ")
+            idx.append(i)
+            prev_space = True
+    return "".join(flat), idx
+
+
+def _prayer_place(rows: List[Dict], d: Dict) -> Dict:
+    """Where a prayer sits: its rite and service, and the prayers before and after it there.
+    A prayer filed under no service gets no neighbours: the rest of that pile is unrelated."""
+    if not d["service"]:
+        return {"book": d["source_text"], "service": "", "before": "", "after": ""}
+    same = [r for r in rows if r["source_text"] == d["source_text"] and r["service"] == d["service"]]
+    i = next((k for k, r in enumerate(same) if r["sefaria_ref"] == d["sefaria_ref"]), -1)
+    name = lambda r: r["canonical_prayer_name"] or r["prayer_name"]  # noqa: E731
+    return {"book": d["source_text"], "service": d["service"] or "",
+            "before": name(same[i - 1]) if i > 0 else "", "after": name(same[i + 1]) if 0 <= i < len(same) - 1 else ""}
+
+
+def search_liturgy(query: str, db_path: Optional[Path] = None, max_hits: int = 6,
+                   window: int = 600) -> Dict:
+    """The siddur and machzor texts in liturgy.db ($0). A Hebrew query is matched on consonants
+    against every prayer's text and returns a passage around each match; any other query is
+    matched against the prayers' titles, rite and service ("Neilah", "Fast of Esther selichot")
+    and returns their exact Sefaria refs, for get_text. Each hit says which prayers come before
+    and after it in its service."""
+    rows = _liturgy_rows(db_path)
+    if not rows:
+        return {"error": "the liturgy database is not available"}
+    q = (query or "").strip()
+    if not q:
+        return {"error": "empty query"}
+    hits = []
+    if re.search(r"[א-ת]", q):
+        qc = _consonants(q)
+        for d in rows:
+            if "_flat" not in d:   # built once per process; ~1,100 prayers, 5.4M chars
+                d["_flat"], d["_idx"] = _flat_consonants(d["hebrew_text"])
+            flat, idx = d["_flat"], d["_idx"]
+            pos = flat.find(qc) if qc else -1
+            if pos < 0:
+                continue
+            st = idx[pos]
+            a, b = max(0, st - window // 2), min(len(d["hebrew_text"]), st + window // 2)
+            hits.append({"ref": d["sefaria_ref"], **_prayer_place(rows, d),
+                         "occurrences": flat.count(qc),
+                         "text": ("…" if a else "") + d["hebrew_text"][a:b] + ("…" if b < len(d["hebrew_text"]) else "")})
+    else:
+        # Every word must match; failing that, the prayers matching the most words ("Neilah
+        # selichot": the Ashkenaz selichot of Ne'ilah sit inside a block titled otherwise).
+        words = _norm_name(q).split()
+        scored = [(sum(w in d["_names"] for w in words), d) for d in rows] if words else []
+        best = max((sc for sc, _ in scored), default=0)
+        partial = 0 < best < len(words)
+        for sc, d in scored:
+            if best and sc == best:
+                hits.append({"ref": d["sefaria_ref"], **_prayer_place(rows, d),
+                             "opening": _clip(_norm_ws(d["hebrew_text"] or d["english_text"] or ""), 200)})
+    partial = locals().get("partial", False)
+    return {"query": q, "source": "liturgy.db (siddurim and machzorim harvested from Sefaria)",
+            "matches": len(hits), "prayers": hits[:max_hits],
+            **({"partial": "no prayer matches every word; these match the most"} if partial else {}),
+            **({"note": f"{len(hits) - max_hits} more; narrow the query"} if len(hits) > max_hits else {})}
+
+
+def sefaria_suggestions(name: str, limit: int = 6) -> List[str]:
+    """Sefaria's own completions for a title that did not resolve (texts only, not topics), $0."""
     try:
-        out = _sefaria_text(ref.strip())
-        if not (out.get("hebrew") or out.get("english")):
-            return {"error": f"Sefaria has no text for {ref!r}; check the reference's spelling"}
-        out["source"] = "Sefaria"
-        for k in ("hebrew", "english"):
-            if len(out.get(k, "")) > 2500:
-                out[k] = out[k][:2500] + " […truncated]"
-        return out
+        r = requests.get(f"{SEFARIA}/api/name/{requests.utils.quote(name.strip())}",
+                         params={"limit": limit}, timeout=15)
+        r.raise_for_status()
+        objs = r.json().get("completion_objects") or []
+        return [o.get("key") or o.get("title") for o in objs if o.get("type") == "ref"][:limit]
+    except Exception:
+        return []
+
+
+# Bolls.life, as src/data_sources/sefaria_client.py uses it for the pipeline. Its Greek
+# ("LXX") is LEMMATIZED -- dictionary forms, not the inflected text -- so it settles which
+# WORD the translators used but never a case, tense or person; "LXXE" is Brenton's 1851
+# English translation of the Septuagint. Psalms are numbered by the Greek (MT 77 = LXX 76).
+BOLLS = "https://bolls.life"
+_BOLLS_BOOK = {"Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5, "Joshua": 6,
+               "Judges": 7, "Ruth": 8, "I Samuel": 9, "II Samuel": 10, "I Kings": 11, "II Kings": 12,
+               "I Chronicles": 13, "II Chronicles": 14, "Job": 18, "Psalms": 19, "Proverbs": 20,
+               "Ecclesiastes": 21, "Song of Songs": 22, "Isaiah": 23, "Lamentations": 25, "Ezekiel": 26,
+               "Daniel": 27, "Hosea": 28, "Joel": 29, "Amos": 30, "Obadiah": 31, "Jonah": 32, "Micah": 33,
+               "Nahum": 34, "Habakkuk": 35, "Zephaniah": 36, "Haggai": 37, "Zechariah": 38, "Malachi": 39}
+
+
+def lookup_lxx(ref: str) -> Dict:
+    """The Septuagint for a verse (MT reference): Brenton's English, and the Greek as LEMMAS.
+    Sefaria holds no Septuagint. For a Psalm the Greek numbering is applied, and Brenton, who
+    leaves the heading unnumbered, is aligned by the two editions' verse counts."""
+    parsed = parse_ref(ref)
+    if not parsed:
+        return {"error": f"could not parse reference {ref!r}; use e.g. 'Psalms 77:11'"}
+    book, ch, v, end = parsed
+    bid = _BOLLS_BOOK.get(book)
+    if bid is None:
+        return {"error": f"no Septuagint lookup for {book} (its chapters differ from the Hebrew)"}
+    lch = ch
+    if book == "Psalms":
+        from src.data_sources.sefaria_client import get_lxx_psalm_number
+        lch = get_lxx_psalm_number(ch)
+    try:
+        grk = requests.get(f"{BOLLS}/get-chapter/LXX/{bid}/{lch}/", timeout=20).json()
+        eng = requests.get(f"{BOLLS}/get-chapter/LXXE/{bid}/{lch}/", timeout=20).json()
     except Exception as e:
-        return {"error": f"lookup failed for {ref!r}: {e}"}
+        return {"error": f"Septuagint lookup failed: {e}"}
+    shift = max(0, len(grk) - len(eng)) if book == "Psalms" else 0
+    want = range(v, (end or v) + 1)
+    g = " ".join(x["text"] for x in grk if x.get("verse") in want)
+    e = " ".join(_strip_html(x["text"]) for x in eng if x.get("verse", 0) + shift in want)
+    if not (g or e):
+        return {"error": f"no Septuagint text found for {ref}"}
+    return {"ref": f"{book} {ch}:{v}" + (f"-{end}" if end else ""), "lxx_chapter": lch,
+            "source": "Bolls.life: Brenton's English Septuagint (1851); Greek LEMMAS only",
+            "english_brenton": e, "greek_lemmas": g}
+
+
+def lookup_text(ref: str, liturgy_db: Optional[Path] = None) -> Dict[str, str]:
+    r = (ref or "").strip()
+    # A ref from search_liturgy: answer it from disk, with no network call.
+    local = next((d for d in _liturgy_rows(liturgy_db) if d["sefaria_ref"] == r), None)
+    if local:
+        out = {"ref": r, "source": "liturgy.db (harvested from Sefaria)", "url": f"{SEFARIA}/{r.replace(' ', '_')}",
+               **{k: v for k, v in _prayer_place(_liturgy_rows(liturgy_db), local).items()},
+               "hebrew": local["hebrew_text"] or "", "english": local["english_text"] or ""}
+    else:
+        try:
+            out = _sefaria_text(r)
+            if not (out.get("hebrew") or out.get("english")):
+                raise ValueError("no text")
+            out["source"] = "Sefaria"
+        except Exception as e:
+            return _text_not_found(r, e)
+    for k in ("hebrew", "english"):
+        if len(out.get(k, "")) > 2500:
+            out[k] = out[k][:2500] + " […truncated; for a passage inside a prayer, use search_liturgy]"
+    return out
+
+
+_LITURGICAL = re.compile(r"siddur|machzor|mahzor|selich|slich|neilah|ne.ilah|maariv|shacharit|mussaf|musaf|"
+                         r"minchah|mincha|kinot|haggadah|piyyut", re.I)
+
+
+def _text_not_found(ref: str, err: Exception) -> Dict[str, str]:
+    """A failed get_text that says what to try instead, so the checker does not guess variants."""
+    msg = f"Sefaria has no text at {ref!r} ({str(err)[:80]})."
+    if re.search(r"septuagint|\blxx\b", ref, re.I):
+        return {"error": msg + " Sefaria holds no Septuagint: use get_lxx."}
+    if _LITURGICAL.search(ref):
+        return {"error": msg + " For the siddur and machzor, use search_liturgy (a prayer's name, or a "
+                "Hebrew phrase from it); it returns the exact refs."}
+    title = re.split(r"[,:]|\s\d", ref)[0].strip()
+    sugg = sefaria_suggestions(title)
+    if sugg:
+        return {"error": msg + " Sefaria titles like it: " + "; ".join(sugg) + "."}
+    return {"error": msg + " Sefaria does not seem to hold this work: settle the claim from the other "
+            "sources, or hand it on as needs_web if it is doubtful."}
 
 
 @dataclass
@@ -1269,7 +1522,8 @@ class FactCheckResult:
 
 
 def _empty_usage() -> Dict[str, int]:
-    return {"input": 0, "cached": 0, "output": 0, "reasoning": 0}
+    # cache_write (Session 388): GPT-5.6+ bills a cache write at 1.25x input.
+    return {"input": 0, "cached": 0, "cache_write": 0, "output": 0, "reasoning": 0}
 
 
 class FactChecker:
@@ -1331,6 +1585,10 @@ class FactChecker:
             return lookup_text(args.get("ref", ""))
         if name == "search_research":
             return search_bundle(bundle, args.get("query", ""))
+        if name == "search_liturgy":
+            return search_liturgy(args.get("query", ""))
+        if name == "get_lxx":
+            return lookup_lxx(args.get("ref", ""))
         return {"error": f"unknown tool {name}"}
 
     # -- one tool loop ---------------------------------------------------------
@@ -1349,10 +1607,9 @@ class FactChecker:
         resp = self._create(input=[{"role": "user", "content": content}], **common)
         for rnd in range(MAX_TOOL_ROUNDS + 1):
             u = resp.usage
-            cached = getattr(getattr(u, "input_tokens_details", None), "cached_tokens", 0) or 0
-            rsn = getattr(getattr(u, "output_tokens_details", None), "reasoning_tokens", 0) or 0
-            step = {"input": u.input_tokens - cached, "cached": cached,
-                    "output": u.output_tokens - rsn, "reasoning": rsn}
+            fresh, cached, write = split_input_tokens(u)
+            out, rsn = split_output_tokens(u)
+            step = {"input": fresh, "cached": cached, "cache_write": write, "output": out, "reasoning": rsn}
             for k in usage:
                 usage[k] += step[k]
             calls = []
@@ -1432,7 +1689,8 @@ class FactChecker:
     def _price(model: str, usage: Dict, searches: int) -> float:
         fee = 0.0 if model.startswith("gemini-") else searches * WEB_SEARCH_USD_PER_CALL
         return price_tokens(model, input_tokens=usage["input"], output_tokens=usage["output"],
-                            thinking_tokens=usage["reasoning"], cached_input_tokens=usage["cached"]) + fee
+                            thinking_tokens=usage["reasoning"], cached_input_tokens=usage["cached"],
+                            cache_write_tokens=usage.get("cache_write", 0)) + fee
 
     # -- the web stage on Gemini ----------------------------------------------------
     def _gemini(self):
@@ -1469,7 +1727,7 @@ class FactChecker:
             raise RuntimeError(f"{label}: Gemini web check failed: {last}")
         um = resp.usage_metadata
         cached = getattr(um, "cached_content_token_count", 0) or 0
-        usage = {"input": (um.prompt_token_count or 0) - cached, "cached": cached,
+        usage = {"input": (um.prompt_token_count or 0) - cached, "cached": cached, "cache_write": 0,
                  "output": um.candidates_token_count or 0, "reasoning": um.thoughts_token_count or 0}
         gm = getattr(resp.candidates[0], "grounding_metadata", None) if resp.candidates else None
         queries = list(getattr(gm, "web_search_queries", None) or [])
@@ -1513,7 +1771,8 @@ class FactChecker:
         self._log(f"  local {idx}/{n}: answer truncated; re-checking in {len(halves)} parts")
         runs = []
         for j, h in enumerate(halves, 1):
-            ev = shared_evidence(h["text"], bundle, self.db_path, verses=chunk_verses(h["text"]) or None)
+            ev = shared_evidence(h["text"], bundle, self.db_path, verses=chunk_verses(h["text"]) or None,
+                                 psalm=psalm)
             runs.append(self._local_chunk(psalm, h, bundle, f"{idx}.{j}", n, ev))
         if any(r.get("truncated") for r in runs):
             return [first] + runs          # keep what was salvaged from every attempt
@@ -1608,7 +1867,8 @@ class FactChecker:
         for m, v in self._spent.items():
             self.cost_tracker.add_usage(m, input_tokens=v["usage"]["input"], output_tokens=v["usage"]["output"],
                                         thinking_tokens=v["usage"]["reasoning"],
-                                        cache_read_tokens=v["usage"]["cached"])
+                                        cache_read_tokens=v["usage"]["cached"],
+                                        cache_write_tokens=v["usage"].get("cache_write", 0))
             if not m.startswith("gemini-"):
                 fee_searches += v["searches"]
         if fee_searches:
@@ -1638,7 +1898,8 @@ class FactChecker:
         self._failed_chunks: List[Dict] = []
         # Stage 1: the first chunk alone, to write the bundle into the cache; the rest in parallel.
         local: List[Optional[List[Dict]]] = [None] * len(chunks)
-        evid = [shared_evidence(ch["text"], bundle_text, self.db_path, verses=chunk_verses(ch["text"]) or None)
+        evid = [shared_evidence(ch["text"], bundle_text, self.db_path, verses=chunk_verses(ch["text"]) or None,
+                                psalm=psalm_number)
                 for ch in chunks]
         self._log("  evidence per chunk: " + ", ".join(f"{len(e):,}" for e in evid) + " chars")
         with ThreadPoolExecutor(max_workers=max(self.parallel, len(chunks))) as ex:
@@ -1688,10 +1949,11 @@ class FactChecker:
         usage, token_cost, searches, fcalls = _empty_usage(), 0.0, 0, 0
         for m, v in self._spent.items():
             for k in usage:
-                usage[k] += v["usage"][k]
+                usage[k] += v["usage"].get(k, 0)
             token_cost += price_tokens(m, input_tokens=v["usage"]["input"], output_tokens=v["usage"]["output"],
                                        thinking_tokens=v["usage"]["reasoning"],
-                                       cached_input_tokens=v["usage"]["cached"])
+                                       cached_input_tokens=v["usage"]["cached"],
+                                       cache_write_tokens=v["usage"].get("cache_write", 0))
             searches += v["searches"]
         fcalls = sum(r["fcalls"] for r in runs)
         per_stage: Dict[str, Dict] = {}
@@ -1699,7 +1961,7 @@ class FactChecker:
             st = per_stage.setdefault(r["label"].split()[0], {"model": r["model"], "usage": _empty_usage(),
                                                                "searches": 0, "tools": {}})
             for k in st["usage"]:
-                st["usage"][k] += r["usage"][k]
+                st["usage"][k] += r["usage"].get(k, 0)
             st["searches"] += r["searches"]
             for name, c in r.get("tool_counts", {}).items():
                 st["tools"][name] = st["tools"].get(name, 0) + c

@@ -21,7 +21,7 @@ from typing import List, Dict, Any, Optional, Tuple
 
 from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
 from src.utils.cost_tracker import price_tokens
-from src.utils.openai_usage import split_output_tokens
+from src.utils.openai_usage import split_input_tokens, split_output_tokens
 
 
 @dataclass
@@ -207,9 +207,12 @@ class FigurativeCurator:
         response_text = response.choices[0].message.content or ""
 
         # Get token usage
-        token_usage = {"input": 0, "output": 0, "thinking": 0, "cost": 0.0}
+        token_usage = {"input": 0, "cached": 0, "cache_write": 0, "output": 0, "thinking": 0, "cost": 0.0}
         if response.usage:
-            token_usage["input"] = getattr(response.usage, 'prompt_tokens', 0) or 0
+            # Session 388: prompt_tokens folds in cache hits (0.1x) and cache writes
+            # (1.25x on GPT-5.6+); split them so each is billed at its own rate.
+            (token_usage["input"], token_usage["cached"],
+             token_usage["cache_write"]) = split_input_tokens(response.usage)
             # completion_tokens contains reasoning; the cost math below adds
             # output + thinking, so report the split rather than both totals.
             token_usage["output"], token_usage["thinking"] = split_output_tokens(response.usage)
@@ -221,6 +224,8 @@ class FigurativeCurator:
                 input_tokens=token_usage["input"],
                 output_tokens=token_usage["output"],
                 thinking_tokens=token_usage["thinking"],
+                cached_input_tokens=token_usage["cached"],
+                cache_write_tokens=token_usage["cache_write"],
             )
 
             if self.cost_tracker is not None:
@@ -229,6 +234,8 @@ class FigurativeCurator:
                     input_tokens=token_usage["input"],
                     output_tokens=token_usage["output"],
                     thinking_tokens=token_usage["thinking"],
+                    cache_read_tokens=token_usage["cached"],
+                    cache_write_tokens=token_usage["cache_write"],
                 )
 
         return response_text, token_usage

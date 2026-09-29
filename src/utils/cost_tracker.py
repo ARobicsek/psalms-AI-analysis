@@ -315,42 +315,49 @@ PRICING = {
     #      SMALL calls, not one big one: echoes Pass 3 is one call per entry (~14K
     #      input each, 350K summed over 20 calls on Ps 73). The tier is per REQUEST,
     #      so summed volume never trips it -- only a single oversized prompt would.
+    # Session 388: cache WRITES are billed at 1.25x input from GPT-5.6 on (OpenAI's
+    # prompt-caching guide and pricing table, read 2026-09-29; the table has a "cache
+    # writes" column: $2.50 for Terra). OpenAI has one write rate whatever the
+    # retention, so cache_write_1h carries the same figure. Callers report the split
+    # with openai_usage.split_input_tokens.
     "gpt-5.6-terra": {
         "input": 2.00,
         "output": 12.00,
         "thinking": 12.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.20,  # 10% of input; wired up since Session 374
-        "cache_write": 0.0,  # OpenAI does not charge for cache writes
-        "cache_write_1h": 0.00,
+        "cache_write": 2.50,  # 1.25x input (GPT-5.6+), Session 388
+        "cache_write_1h": 2.50,  # OpenAI has no separate long-retention write rate
     },
-    # GPT-6 Sol (OpenAI, launched 2026-09-22). Session 384: added for the writer-prompt
-    # essay trials. THE $2/$10 LAUNCH PRICE IS A PROMO, encoded in INTRO_PRICING below
-    # ("guaranteed at least through 2026-11-21"). THIS DURABLE ROW IS AN ASSUMPTION,
-    # NOT A VERIFIED PRICE: OpenAI described the promo as half of GPT-5.6 Sol's
-    # $4/$20, so that is what is encoded here. Session 382's lesson applies with full
-    # force -- when the promo expires, RE-CHECK this row; the promo may become the
-    # price, as Sonnet 5's did. Long-context tier (> 272K input tokens: $4 / $15 on the
-    # promo) NOT encoded; the Ps 76 writer inputs are ~129K o200k tokens.
+    # GPT-6 Sol (OpenAI, launched 2026-09-22). Session 388: CORRECTED from an assumed
+    # durable $4/$20 behind a $2/$10 "promo" through 2026-11-21. OpenAI's pricing table
+    # (read 2026-09-29) lists gpt-6-sol at $2.00 / $0.20 cached / $2.50 cache writes /
+    # $10.00 as STANDARD, with no expiry; the only promo footnote on the page reads
+    # "GPT-5.6 Sol's promotional pricing is available at least through November 21,
+    # 2026" -- a different model, listed at $4/$20. S384 had pinned that note to the
+    # wrong Sol, so every "at durable rates" figure since (the Ps 77 report's $11.17)
+    # doubled the fact check for no reason. Long-context tier (> 272K input tokens:
+    # $4 / $0.40 / $5.00 / $15) NOT encoded; stage-1 calls stay well under it.
     "gpt-6-sol": {
-        "input": 4.00,
-        "output": 20.00,
-        "thinking": 20.00,  # reasoning tokens billed as output
-        "cache_read": 0.40,  # 10% of input
-        "cache_write": 0.0,  # OpenAI does not charge for cache writes
-        "cache_write_1h": 0.00,
+        "input": 2.00,
+        "output": 10.00,
+        "thinking": 10.00,  # reasoning tokens billed as output
+        "cache_read": 0.20,  # 10% of input
+        "cache_write": 2.50,  # 1.25x input (GPT-5.6+), Session 388
+        "cache_write_1h": 2.50,  # OpenAI has no separate long-retention write rate
     },
     # GPT-6 Luna (OpenAI). Session 386: added for the fact checker's cost work. Verified
     # on OpenAI's pricing page 2026-09-28 as STANDARD pricing (no promo note): $0.10
     # input / $0.01 cached / $0.50 output; long-context tier $0.20 / $0.02 / $0.75 NOT
     # encoded (same threshold shape as gpt-6-sol). Web search is billed on top at
-    # $10 / 1k calls + search content tokens at these rates.
+    # $10 / 1k calls + search content tokens at these rates. Session 388: cache writes
+    # $0.125 (1.25x), per the same table.
     "gpt-6-luna": {
         "input": 0.10,
         "output": 0.50,
         "thinking": 0.50,  # reasoning tokens billed as output
         "cache_read": 0.01,  # 10% of input
-        "cache_write": 0.0,  # OpenAI does not charge for cache writes
-        "cache_write_1h": 0.00,
+        "cache_write": 0.125,  # 1.25x input (GPT-5.6+), Session 388
+        "cache_write_1h": 0.125,
     },
     # Gemini 3.8 Flash (Google). Session 386: the fact checker's web-evidence gatherer.
     # Verified on Google's pricing page 2026-09-28: "$0.75 through December 31, 2026.
@@ -428,13 +435,8 @@ INTRO_PRICING = {
         "through": date(2026, 12, 31),
         "rates": {"input": 0.75, "output": 3.75, "thinking": 3.75, "cache_read": 0.075},
     },
-    # GPT-6 Sol launch promo (Session 384): $2 / $0.20 cached / $10, "guaranteed at
-    # least through 2026-11-21" (OpenAI launch coverage, checked 2026-09-28). When this
-    # expires, RE-CHECK the durable row -- see the note at the bottom of this dict.
-    "gpt-6-sol": {
-        "through": date(2026, 11, 21),
-        "rates": {"input": 2.00, "output": 10.00, "thinking": 10.00, "cache_read": 0.20},
-    },
+    # (Session 388: the gpt-6-sol entry that stood here from S384 was a mix-up with
+    # GPT-5.6 Sol's promotion; $2/$10 is gpt-6-sol's standard price -- see its row.)
     # WAS EMPTY from Session 382 until Session 384, and that emptiness was a finding.
     #
     # Claude Sonnet 5's $2/$10 was announced as introductory through 2026-08-31. On
@@ -493,6 +495,7 @@ def price_tokens(
     thinking_tokens: int = 0,
     cached_input_tokens: int = 0,
     on_date: Optional[date] = None,
+    cache_write_tokens: int = 0,
 ) -> float:
     """Cost of one call, priced from the single table above.
 
@@ -500,6 +503,8 @@ def price_tokens(
     expects, because costs are SUMMED:
         input_tokens         fresh (uncached) input only
         cached_input_tokens  input served from cache, priced at cache_read
+        cache_write_tokens   input written to the cache, priced at cache_write
+                             (OpenAI GPT-5.6+: see openai_usage.split_input_tokens)
         output_tokens        visible output, EXCLUDING reasoning
         thinking_tokens      reasoning only
     See `src/utils/openai_usage.py` for why the OpenAI split is not optional.
@@ -520,6 +525,7 @@ def price_tokens(
         + output_tokens / 1_000_000 * rates["output"]
         + thinking_tokens / 1_000_000 * rates["thinking"]
         + cached_input_tokens / 1_000_000 * rates["cache_read"]
+        + cache_write_tokens / 1_000_000 * rates["cache_write"]
     )
 
 

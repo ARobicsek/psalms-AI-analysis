@@ -36,7 +36,7 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
-    from src.utils.openai_usage import split_output_tokens
+    from src.utils.openai_usage import split_input_tokens, split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
     from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
     from src.utils.superlatives import (
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
-    from src.utils.openai_usage import split_output_tokens
+    from src.utils.openai_usage import split_input_tokens, split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
     from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
     from src.utils.superlatives import (
@@ -406,6 +406,183 @@ if _banned_rule:
 
 
 # =============================================================================
+# EDIT-LIST OUTPUT (Session 388)
+# =============================================================================
+# In "full" mode the editor re-types the whole guide to change a few dozen sentences: on
+# Ps 77, ~19K of its 21K output tokens were unchanged text (≈ $0.28 of $0.56 at gpt-5.4's
+# $15/M) and the call took 542 s, against a 600 s client timeout that had already failed it
+# once. In "edits" mode it returns only its numbered changes, each with an exact FIND/REPLACE
+# block, and Python applies them. The system prompt is untouched (a test pins its hash): the
+# user message carries the output format and says it overrides the system prompt's. Nothing
+# the model did not name can change, and every edit it names is either applied or reported
+# as NOT APPLIED. The rest of the pipeline sees the same "corrected text + ## Changes".
+
+EDIT_LIST_FORMAT = """## OUTPUT FORMAT FOR THIS RUN
+
+This replaces the output instructions at the end of your system prompt. Do NOT return the
+corrected commentary. Return ONLY a "## Changes" section. Number and describe each change
+exactly as your system prompt asks (category in square brackets, location, what changed,
+why), and follow each description with the exact edit as a FIND/REPLACE block:
+
+## Changes
+1. [7] **Verse 3**: Corrected the LXX rendering from plural to singular — the LXX reads
+   ἐχθροῦ αὐτοῦ (singular).
+<<<FIND
+the original text, copied character for character from the commentary above (Hebrew
+pointing, punctuation, quotation marks, markdown and all), long enough to occur only once —
+usually the whole sentence
+===
+the text that replaces it
+>>>
+
+- One FIND/REPLACE block per place changed; a change that touches two places gets two blocks
+  under one number.
+- Copy each FIND from the commentary above; do not retype it from memory. A FIND that does
+  not match the commentary exactly is not applied.
+- To delete, leave the text after === empty. To insert, include neighbouring words in both
+  FIND and the replacement.
+- Everything your system prompt says about WHAT to change and what to leave alone still
+  applies; only the output format changes.
+- If no changes are needed, return "## Changes" followed by "No changes required."
+"""
+
+_EDIT_BLOCK = re.compile(r"<<<FIND[ \t]*\n(.*?)\n?===[ \t]*\n(.*?)\n?>>>", re.S)
+_CHANGE_START = re.compile(r"^\s*(\d+)\.\s", re.M)
+
+
+def _loose_pattern(find: str) -> "re.Pattern":
+    """`find` as a regex tolerant of whitespace runs and quote/dash styles, nothing else."""
+    classes = {'"': '["“”]', '“': '["“”]', '”': '["“”]', "'": "['‘’]", "‘": "['‘’]", "’": "['‘’]",
+               "–": "[–—-]", "—": "[–—-]", "-": "[–—-]"}
+    out = []
+    for tok in re.split(r"(\s+)", find.strip()):
+        if not tok:
+            continue
+        if tok.isspace():
+            out.append(r"\s+")
+        else:
+            out.append("".join(classes.get(ch, re.escape(ch)) for ch in tok))
+    return re.compile("".join(out))
+
+
+# -- a $0 guard only edits mode makes possible (Session 388) ----------------------------------
+# On Ps 77 the edits-mode run "corrected the pointing" of רָאוּךָ מַּיִם (77:17) by removing the
+# dagesh, which the Masoretic text has. Full mode can make the same mistake invisibly; in edits
+# mode each change is a discrete FIND/REPLACE, so a change that touches ONLY Hebrew pointing
+# can be checked against tanakh.db: if the original's word pair is in the Bible and the
+# replacement's is not, the edit is refused.
+_CANTILLATION = re.compile(r"[֑-ֽ֯׀׃-׆]")
+_HEB_WORD = re.compile(r"[א-תְ-ׇ]+")
+_mt_cache: Dict[str, str] = {}
+
+
+def _pointed_words(s: str) -> list:
+    import unicodedata
+    s = unicodedata.normalize("NFC", _CANTILLATION.sub("", s.replace("־", " ")))
+    return [w for w in _HEB_WORD.findall(s) if re.search(r"[א-ת]", w)]
+
+
+def _bare(w: str) -> str:
+    return re.sub(r"[^א-ת]", "", w)
+
+
+def masoretic_word_stream(db_path) -> str:
+    """Every verse of tanakh.db as pointed words (no cantillation), space-separated, verses
+    delimited by ' | '. Built once per process; '' when the database is unusable."""
+    key = str(db_path)
+    if key not in _mt_cache:
+        text = ""
+        try:
+            import sqlite3
+            p = Path(db_path)
+            if p.exists():
+                con = sqlite3.connect(p.resolve().as_uri() + "?mode=ro", uri=True)
+                try:
+                    rows = con.execute("SELECT hebrew FROM verses").fetchall()
+                finally:
+                    con.close()
+                text = " | ".join(" ".join(_pointed_words(r[0] or "")) for r in rows)
+                text = f" {text} " if text else ""
+        except Exception:
+            text = ""
+        _mt_cache[key] = text
+    return _mt_cache[key]
+
+
+def pointing_regression(find: str, repl: str, mt: str) -> Optional[str]:
+    """A reason to refuse the edit, or None. Only for edits whose Hebrew letters are unchanged
+    and whose pointing is: a changed word is judged with its neighbour, so a divine-name
+    spelling or a common word elsewhere cannot decide it."""
+    if not mt:
+        return None
+    f, r = _pointed_words(find), _pointed_words(repl)
+    if not f or len(f) != len(r) or [_bare(w) for w in f] != [_bare(w) for w in r] or f == r:
+        return None
+    for i in (k for k in range(len(f)) if f[k] != r[k]):
+        for a, b in ((i - 1, i), (i, i + 1)):
+            if a < 0 or b >= len(f):
+                continue
+            fb, rb = f" {f[a]} {f[b]} ", f" {r[a]} {r[b]} "
+            if fb in mt and rb not in mt:
+                return (f"the original pointing ({f[a]} {f[b]}) is what the Masoretic text has; "
+                        f"the replacement is not")
+    return None
+
+
+def apply_edit_list(text: str, response: str, guard=None) -> Tuple[str, str, Dict]:
+    """Apply an edits-mode response to `text` (pure). Returns (corrected text, the "## Changes"
+    section without the FIND/REPLACE blocks, stats). An edit applies only where its FIND occurs
+    exactly once (verbatim, else modulo whitespace and quote/dash style); anything else is left
+    undone and marked NOT APPLIED in the change's own line, so the report shows it. `guard`
+    (find, replacement) -> reason or None can refuse an edit (see pointing_regression)."""
+    m = re.search(r"^## Changes\s*$", response, re.M)
+    body = response[m.end():] if m else response
+    blocks = [b.span() for b in _EDIT_BLOCK.finditer(body)]
+    # a numbered line INSIDE a FIND/REPLACE block is the guide's text, not a new change
+    starts = [s for s in _CHANGE_START.finditer(body) if not any(a <= s.start() < b for a, b in blocks)]
+    stats = {"changes": len(starts), "edits": 0, "applied": 0, "loose": 0, "not_found": 0, "ambiguous": 0,
+             "refused": 0}
+    if not starts:
+        note = body.strip() or "No changes required."
+        return text, f"## Changes\n{_EDIT_BLOCK.sub('', note).strip()}\n", stats
+    lines = []
+    for i, st in enumerate(starts):
+        chunk = body[st.start(): starts[i + 1].start() if i + 1 < len(starts) else len(body)]
+        desc = _EDIT_BLOCK.sub("", chunk).strip()
+        failed = []
+        for find, repl in _EDIT_BLOCK.findall(chunk):
+            stats["edits"] += 1
+            reason = guard(find, repl) if guard else None
+            if reason:
+                stats["refused"] += 1
+                failed.append(reason)
+                continue
+            n = text.count(find) if find else 0
+            if n == 1:
+                text = text.replace(find, repl, 1)
+                stats["applied"] += 1
+                continue
+            if n > 1:
+                stats["ambiguous"] += 1
+                failed.append("the text to change occurs more than once")
+                continue
+            hits = list(_loose_pattern(find).finditer(text)) if find.strip() else []
+            if len(hits) == 1:
+                a, b = hits[0].span()
+                text = text[:a] + repl + text[b:]
+                stats["applied"] += 1
+                stats["loose"] += 1
+            else:
+                stats["not_found" if not hits else "ambiguous"] += 1
+                failed.append("the text to change was not found" if not hits
+                              else "the text to change occurs more than once")
+        if failed:
+            desc += f" *(NOT APPLIED: {'; '.join(dict.fromkeys(failed))})*"
+        lines.append(desc)
+    return text, "## Changes\n\n" + "\n".join(lines) + "\n", stats
+
+
+# =============================================================================
 # COPY EDITOR CLASS
 # =============================================================================
 
@@ -430,8 +607,17 @@ class CopyEditor:
         r'^\*\*Verses?\s+\d+(?:\s*[-–]\s*\d+)?\*\*\s*$', re.MULTILINE
     )
 
-    def __init__(self, model: str = None, logger=None, cost_tracker=None):
+    # Session 388: "full" re-types the whole guide (the pre-S388 behaviour, byte-identical
+    # user message); "edits" returns FIND/REPLACE edits only (see EDIT_LIST_FORMAT).
+    EDIT_MODES = ("full", "edits")
+    DEFAULT_EDIT_MODE = "edits"   # Session 388, author-approved after the Ps 77 test
+
+    def __init__(self, model: str = None, logger=None, cost_tracker=None, edit_mode: str = None):
         self.model = model or self.DEFAULT_MODEL
+        self.edit_mode = edit_mode or self.DEFAULT_EDIT_MODE
+        if self.edit_mode not in self.EDIT_MODES:
+            raise ValueError(f"edit_mode must be one of {self.EDIT_MODES}, not {self.edit_mode!r}")
+        self.last_edit_stats: Optional[Dict] = None
         self.logger = logger or get_logger("copy_editor")
         self.cost_tracker = cost_tracker or CostTracker()
         
@@ -498,6 +684,11 @@ class CopyEditor:
             editable_content, psalm_number,
             supplementary_prompt=supplementary_prompt,
         )
+
+        # 3a. Edits mode: apply the FIND/REPLACE list to the text sent, and hand the rest of
+        #     this method the same "corrected text + ## Changes" a full-mode reply would be.
+        if getattr(self, "edit_mode", "full") == "edits":
+            edited_content = self._from_edit_list(editable_content, edited_content)
 
         # 3b. Strip any echoed supplementary prompt from the response
         edited_content = self._strip_echoed_supplementary(edited_content)
@@ -845,13 +1036,44 @@ class CopyEditor:
     # LLM call
     # -------------------------------------------------------------------------
 
+    def _from_edit_list(self, editable_content: str, response: str) -> str:
+        """An edits-mode reply turned into corrected text + ## Changes. A reply that ignored the
+        format and returned the full text anyway (long text before '## Changes', no FIND blocks)
+        is passed through unchanged, so it is handled exactly as in full mode."""
+        head = re.split(r"^## Changes\s*$", response, maxsplit=1, flags=re.M)[0]
+        if "<<<FIND" not in response and len(head.strip()) > 0.5 * len(editable_content):
+            self.logger.warning("Edits mode: the editor returned the full text; using it as in full mode")
+            self.last_edit_stats = {"fallback": "full text returned"}
+            return response
+        mt = masoretic_word_stream(Path("database/tanakh.db"))
+        corrected, changes, stats = apply_edit_list(
+            editable_content, response, guard=lambda f, r: pointing_regression(f, r, mt))
+        self.last_edit_stats = stats
+        self.logger.info(
+            f"Edits mode: {stats['changes']} change(s), {stats['edits']} edit(s): {stats['applied']} applied"
+            f" ({stats['loose']} after whitespace/quote normalisation), {stats['not_found']} not found,"
+            f" {stats['ambiguous']} ambiguous, {stats['refused']} refused (pointing the Masoretic text has)")
+        missed = stats["not_found"] + stats["ambiguous"] + stats["refused"]
+        if missed:
+            self.logger.warning(f"Edits mode: {missed} edit(s) NOT APPLIED; they are marked in the changes file")
+        return f"{corrected}\n\n{changes}"
+
     @staticmethod
     def build_user_message(editable_content: str, psalm_number: int,
-                           supplementary_prompt: Optional[str] = None) -> str:
+                           supplementary_prompt: Optional[str] = None, edit_mode: str = "full") -> str:
         """The user turn. Supplementary context (the citation report, the
         Session-385 fact-check report) is APPENDED here and never spliced into
         COPY_EDITOR_SYSTEM_PROMPT; with none supplied, the message is exactly
-        what it was before Session 385 (tests pin both)."""
+        what it was before Session 385 (tests pin both). Session 388: edit_mode
+        "edits" asks for FIND/REPLACE edits instead of the full text, and puts the
+        format LAST, after any report, so it is the final instruction read."""
+        if edit_mode == "edits":
+            user_message = f"""Here is the commentary for Psalm {psalm_number}. Apply the copy editing rules from your system prompt. Do NOT return the corrected text: return only the ## Changes section, with the exact edit for each change, in the format given at the end of this message.
+
+{editable_content}"""
+            if supplementary_prompt:
+                user_message += f"\n\n{supplementary_prompt}"
+            return user_message + f"\n\n{EDIT_LIST_FORMAT}"
         user_message = f"""Here is the commentary for Psalm {psalm_number}. Apply the copy editing rules from your system prompt. Return the FULL corrected text followed by a ## Changes section.
 
 {editable_content}"""
@@ -864,7 +1086,8 @@ class CopyEditor:
         """Call Claude Opus 4.6 with the copy editor prompt. Retries on connection errors."""
         self.logger.info(f"Calling {self.model} with adaptive thinking...")
 
-        user_message = self.build_user_message(editable_content, psalm_number, supplementary_prompt)
+        user_message = self.build_user_message(editable_content, psalm_number, supplementary_prompt,
+                                               edit_mode=getattr(self, "edit_mode", "full"))
         if supplementary_prompt:
             self.logger.info(f"Appended supplementary prompt ({len(supplementary_prompt):,} chars)")
 
@@ -897,8 +1120,9 @@ class CopyEditor:
                     visible_out, reasoning_tokens = split_output_tokens(response.usage)
                     if reasoning_tokens:
                         thinking_text = "Reasoning used " + str(reasoning_tokens) + " tokens."
+                    fresh, cached, write = split_input_tokens(response.usage)
                     usage_data = {
-                        'input_tokens': getattr(response.usage, 'input_tokens', 0),
+                        'input_tokens': fresh, 'cache_read_tokens': cached, 'cache_write_tokens': write,
                         'output_tokens': visible_out,
                         'thinking_tokens': reasoning_tokens,
                     }
@@ -926,8 +1150,10 @@ class CopyEditor:
                     if reasoning_tokens:
                         thinking_text = "Reasoning used " + str(reasoning_tokens) + " tokens."
 
+                    # Session 388: cache hits (and, on GPT-5.6+, writes) split out of prompt_tokens.
+                    fresh, cached, write = split_input_tokens(response.usage)
                     usage_data = {
-                        'input_tokens': getattr(response.usage, 'prompt_tokens', 0),
+                        'input_tokens': fresh, 'cache_read_tokens': cached, 'cache_write_tokens': write,
                         'output_tokens': visible_out,
                         'thinking_tokens': reasoning_tokens,
                     }
@@ -988,7 +1214,9 @@ class CopyEditor:
                 input_tokens = usage_data.get('input_tokens', 0)
                 output_tokens = usage_data.get('output_tokens', 0)
                 self.cost_tracker.add_usage(self.model, input_tokens=input_tokens, output_tokens=output_tokens,
-                                            thinking_tokens=usage_data.get('thinking_tokens', 0))
+                                            thinking_tokens=usage_data.get('thinking_tokens', 0),
+                                            cache_read_tokens=usage_data.get('cache_read_tokens', 0),
+                                            cache_write_tokens=usage_data.get('cache_write_tokens', 0))
                 cost_breakdown = self.cost_tracker.calculate_cost(self.model)
                 cost = cost_breakdown['total_cost']
                 self.logger.info(f"Tokens: {input_tokens:,} in / {output_tokens:,} out — Cost: ${cost:.4f}")

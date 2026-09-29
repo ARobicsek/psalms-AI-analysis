@@ -30,11 +30,11 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
-    from src.utils.openai_usage import split_output_tokens
+    from src.utils.openai_usage import split_input_tokens, split_output_tokens
 else:
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
-    from ..utils.openai_usage import split_output_tokens
+    from ..utils.openai_usage import split_input_tokens, split_output_tokens
 
 
 # Prompt for LLM-assisted curation
@@ -252,7 +252,8 @@ class QuestionCurator:
                 response = self.openai_client.chat.completions.create(**kwargs)
                 response_text = response.choices[0].message.content
                 
-                prompt_tokens = getattr(response.usage, 'prompt_tokens', 0)
+                # Session 388: split cache hits and (GPT-5.6+) cache writes out of prompt_tokens.
+                prompt_tokens, cached_tokens, write_tokens = split_input_tokens(response.usage)
                 # Split: completion_tokens contains reasoning, and CostTracker
                 # sums output + thinking, so passing both would double-bill.
                 completion_tokens, reason_tokens = split_output_tokens(response.usage)
@@ -261,7 +262,9 @@ class QuestionCurator:
                     model=self.model,
                     input_tokens=prompt_tokens,
                     output_tokens=completion_tokens,
-                    thinking_tokens=reason_tokens
+                    thinking_tokens=reason_tokens,
+                    cache_read_tokens=cached_tokens,
+                    cache_write_tokens=write_tokens,
                 )
             else:
                 # Call Anthropic API with adaptive thinking (streaming required)

@@ -177,7 +177,10 @@ def contamination_scan(fields: dict, psalm_number: int) -> str:
 
 
 def run_one_prompt(agent: SynthesisDiscoveryAgent, prompt: str, tag: str) -> dict:
-    text, in_tok, out_tok, think = agent._stream_call(prompt, tag=tag, retries=4)
+    # Session 388: _stream_call returns a usage dict and bills the tracker itself.
+    text, usage, think = agent._stream_call(prompt, tag=tag, retries=4)
+    in_tok = usage["input"] + usage["cache_read"] + usage["cache_write"]
+    out_tok = usage["output"]
     return {
         "full": text,
         "observations": agent._extract_observations_block(text),

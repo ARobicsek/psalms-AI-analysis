@@ -78,15 +78,22 @@ the report says contradicted, and its system prompt is byte-identical.
 
 ## Known limits
 
-- **Web-search fees are outside CostTracker** (the tokens are in it). `FactCheckResult.search_cost_usd` and the per-stage
-  breakdown in `meta.stages.per_stage` carry them; STEP 5a¾ logs them.
-- **GPT-6 Sol's price after 2026-11-21 is uncertain.** `cost_tracker.py` encodes $2/$10 as a promo over an ASSUMED durable
-  $4/$20 (S384). OpenAI's pricing page read on 2026-09-28 lists $2/$10 as standard with no promo note for gpt-6-sol. If the
-  assumption is right, v5 costs ≈ $3.60 after that date.
+- ~~Web-search fees are outside CostTracker~~ — fixed in Session 387 (`CostTracker.add_charge`); they are in the run total.
+- **GPT-6 Sol's price is settled (Session 388): $2 / $0.20 cached / $10, standard, no expiry.** The "promotional pricing
+  through November 21, 2026" note on OpenAI's page belongs to GPT-5.6 Sol ($4/$20); S384 had pinned it on gpt-6-sol, so the
+  "≈ $3.60 after that date" once written here was wrong. Also from S388: GPT-5.6+ models bill a **cache write at 1.25×
+  input** (`input_tokens_details.cache_write_tokens`), which the tracker now prices; on Ps 77 that was ≈ $0.12 of the fact
+  check the old accounting missed. Ps 77 anatomy (S388): of stage 1's $1.42, uncached input $0.49, visible output $0.40,
+  cached replay $0.28, reasoning $0.25; cache hits were already ~85% of input and the $0 lookups returned only ~86K tokens.
 - **Pages that block scripts or need JavaScript** come back unreadable (33 of 111 sources in v4), so they can support a
   claim but never contradict one. That is deliberate.
-- Verse-number confusion: v6 flagged "v. 7" against the English numbering. The instructions do not yet say that the guide
-  uses Hebrew verse numbers.
+- Verse-number confusion: v6 flagged "v. 7" against the English numbering. Session 388: every chunk now opens with the
+  psalm's own text under a heading that says the guide numbers verses as the Hebrew does.
+- Session 388 added $0 lookups: `search_liturgy` (data/liturgy.db: siddurim, machzorim, selichot, the Haggadah, with each
+  prayer's neighbours), `get_lxx` (Bolls.life: Brenton's English; the Greek there is LEMMAS only), helpful `get_text`
+  failures (Sefaria's own title suggestions), and "no entry" for a commentator who skips a verse. On Ps 77, 29 of 315
+  lookups had failed (13 guessed liturgy refs, 5 Septuagint, 8 works not on Sefaria, 3 absent commentary entries), and
+  four liturgical claims passed as supported with no stated basis. Not yet measured in a paid run.
 - **Not yet tested on essay F** (the Rashi 76:11 probe; Byron, Herodotus 2.141 and Sennacherib's prism must survive), and
   the copy edit with vs without the report has not been compared. `archive/psalm_76_S385_fact_check/run_s385_fact_check.py
   main --source F` does both; it now runs v5 by default.

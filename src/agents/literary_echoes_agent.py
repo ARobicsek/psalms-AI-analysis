@@ -86,7 +86,7 @@ from src.agents.literary_echoes_parser import (
 from src.data_sources.tanakh_database import TanakhDatabase
 from src.utils.cost_tracker import PRICING, CostTracker
 from src.utils.logger import get_logger
-from src.utils.openai_usage import split_output_tokens
+from src.utils.openai_usage import split_input_tokens, split_output_tokens
 
 load_dotenv()
 
@@ -296,6 +296,7 @@ def price_call(
     output_tokens: int,
     thinking_tokens: int = 0,
     cached_input_tokens: int = 0,
+    cache_write_tokens: int = 0,
 ) -> float:
     """Cost of a single call, priced from `cost_tracker.PRICING`.
 
@@ -304,6 +305,7 @@ def price_call(
 
         input_tokens         fresh (uncached) input only
         cached_input_tokens  input served from cache, priced at cache_read
+        cache_write_tokens   input written to the cache (GPT-5.6+ bills 1.25x; S388)
         output_tokens        visible output, EXCLUDING reasoning
         thinking_tokens      reasoning only
 
@@ -328,6 +330,7 @@ def price_call(
     return (
         (max(0, input_tokens) / 1_000_000) * rates.get("input", 0.0)
         + (max(0, cached_input_tokens) / 1_000_000) * rates.get("cache_read", 0.0)
+        + (max(0, cache_write_tokens) / 1_000_000) * rates.get("cache_write", 0.0)
         + (max(0, output_tokens) / 1_000_000) * rates.get("output", 0.0)
         + (max(0, thinking_tokens) / 1_000_000)
         * rates.get("thinking", rates.get("output", 0.0))
@@ -1076,18 +1079,18 @@ class LiteraryEchoesAgent:
                     continue
                 raise
 
-            # OpenAI folds reasoning into output_tokens and cached into
-            # input_tokens; both are split out here so nothing is billed twice.
+            # OpenAI folds reasoning into output_tokens and cache hits AND cache
+            # writes into input_tokens; all are split out so each is billed once,
+            # at its own rate (Session 388: GPT-5.6+ bills a write at 1.25x input).
             usage = response.usage
             visible_output, reasoning = split_output_tokens(usage)
-            in_details = getattr(usage, "input_tokens_details", None)
-            cached = (getattr(in_details, "cached_tokens", 0) or 0) if in_details else 0
-            raw_input = getattr(usage, "input_tokens", 0) or 0
+            fresh, cached, write = split_input_tokens(usage)
             stats = {
-                "input": max(0, raw_input - cached),
+                "input": fresh,
                 "output": visible_output,
                 "thinking": reasoning,
                 "cached": cached,
+                "cache_write": write,
             }
             self._record(
                 "pass_3",
@@ -1096,6 +1099,7 @@ class LiteraryEchoesAgent:
                 stats["output"],
                 stats["thinking"],
                 stats["cached"],
+                stats["cache_write"],
             )
 
             text = response.output_text or ""
@@ -1121,6 +1125,7 @@ class LiteraryEchoesAgent:
         output_tokens: int,
         thinking_tokens: int,
         cached_tokens: int = 0,
+        cache_write_tokens: int = 0,
     ) -> None:
         """Bill one API call to both the shared tracker and this pass's ledger.
 
@@ -1133,7 +1138,8 @@ class LiteraryEchoesAgent:
         successful response alone would under-report exactly the runs that went
         wrong — the ones worth noticing.
         """
-        cost = price_call(model, input_tokens, output_tokens, thinking_tokens, cached_tokens)
+        cost = price_call(model, input_tokens, output_tokens, thinking_tokens, cached_tokens,
+                          cache_write_tokens)
         with self._spend_lock:
             # CostTracker is not thread-safe either — its read-modify-write of
             # usage_by_model runs under this same lock so Pass 3's workers cannot
@@ -1144,6 +1150,7 @@ class LiteraryEchoesAgent:
                 output_tokens=max(0, output_tokens),
                 thinking_tokens=max(0, thinking_tokens),
                 cache_read_tokens=max(0, cached_tokens),
+                cache_write_tokens=max(0, cache_write_tokens),
             )
             self._spend[pass_name] = self._spend.get(pass_name, 0.0) + cost
 

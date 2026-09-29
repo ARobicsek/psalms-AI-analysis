@@ -9,6 +9,103 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 388 (2026-09-29): editor cost work — Sol's price, OpenAI cache writes, an edits-mode copy editor, free lookups, and a dossier cache shared by synthesis discovery and the writer
+
+**The ask.** After reading the Ps 77 editors' report ("EXCELLENT"): can the editors cost less — more caching? why so
+many fact-check tokens? are the lookup errors a concern? Then four items: (1) can synthesis discovery safely share the
+writer's cache, and how fragile is it; (2) optimise the copy editor; (3) improve the free lookups; (4) correct the Sol
+price. Then "1. yes 2. now 3. don't bother" (build the shared cache; make edits mode the default now; don't rebuild the
+Ps 77 report), and finally: document, commit, push, and watch the cache on the next psalm.
+
+**Where the fact check's money goes (Ps 77, measured).** Stage 1 (gpt-6-sol, local) was $1.42 of $1.57: uncached input
+247K tokens ($0.49), visible output 40K ($0.40), cached replay 1.38M ($0.28), reasoning 25K ($0.25). Rounds were
+already batched (4–11 per chunk, ~8 lookups a round). Replaying all 315 lookups at $0 showed they returned only ~86K
+tokens; the uncached input is first-sight text (six opening prompts ~115K + lookups ~86K + fed-back output ~40K), so
+there was no more caching to find inside the fact check. Chunk 1 (the essay) carried all 148 commentator entries
+(92K chars) and was replayed 12 times: 30% of the stage. Measured but not built: scope evidence to the commentators a
+chunk names (~$0.10) and a one-line format for supported records (~$0.08).
+
+**Pricing (item 4).** OpenAI's pricing table lists gpt-6-sol at $2 / $0.20 cached / $10 as STANDARD; its only promo
+footnote reads "GPT-5.6 Sol's promotional pricing is available at least through November 21, 2026" — a different model
+($4/$20). S384 had pinned it on gpt-6-sol, so every "at durable rates" figure since doubled the fact check. Row
+corrected; `INTRO_PRICING` entry removed; `editors_report` now shows a saved promo flag only if the model is still in
+`INTRO_PRICING`. The same table has a **cache writes** column: OpenAI's caching guide says GPT-5.6 and later bill a
+write at 1.25× input, implicit or explicit, reported as `input_tokens_details.cache_write_tokens` (inside
+`input_tokens`). A two-call gpt-6-luna probe confirmed it (first call: 7,466 of 7,469 tokens written). New
+`openai_usage.split_input_tokens(usage) -> (fresh, cached, write)` for both API shapes; wired into the fact checker
+(`_empty_usage` gains `cache_write`; `_price`, `_bill_tracker`, the per-stage table), figurative curator and question
+curator (chat.completions — both had also billed cached input at the full rate), literary echoes pass 3 (`price_call`,
+`_record`), and the copy editor. `cache_write` rows: gpt-5.6-terra $2.50, gpt-6-sol $2.50, gpt-6-luna $0.125
+(`cache_write_1h` the same: OpenAI has one write rate). `price_tokens(cache_write_tokens=)`. Tests: vendor-aware
+multiplier test, GPT-5.6+ rows must bill writes, Sol pinned at $2/$10 after the old expiry, split shapes. On Ps 77 the
+old accounting missed ≈ $0.12 of the fact check. Also seen: `gpt-6.1-sol` now exists at $2 / $0.10 cached / $10.
+
+**Free lookups (item 3).** 29 of 315 Ps 77 lookups had failed: 13 guessed siddur/machzor refs Sefaria rejects (400 on
+non-leaf nodes), 5 asked Sefaria for the Septuagint, 8 named works Sefaria lacks or spells differently, 3 were absent
+commentary entries. Cost was negligible; recall was not — C61 (Ne'ilah placement), C63 (Ta'anit Esther selichah), C65
+(Shir HaYichud), C71 (Shimush Tehillim) passed as supported with no basis, and C50 went to the web and came back
+unverifiable. The prayers were on disk: `data/liturgy.db` (1,123 prayers, 5.4M chars, exact Sefaria refs, service
+order). New in `fact_checker.py`: `search_liturgy` (Hebrew phrase → consonantal match with a ~600-char passage; a name →
+matching prayers, best partial match when no prayer has every word; each hit names the prayers before/after it in its
+service; the AI-written catalogue descriptions are not returned), `lookup_text` answers a liturgy.db ref from disk,
+`_text_not_found` routes a failed ref (Septuagint → get_lxx; liturgy → search_liturgy; else Sefaria's `/api/name`
+completions, texts only), `get_lxx` (Bolls.life: Brenton's English aligned by verse counts + the Greek, which is
+LEMMATIZED — flagged), a 404 commentary entry reads "no entry … he most likely does not comment on this verse", and
+`shared_evidence(psalm=)` puts the psalm's text first in every chunk with a note that the guide numbers verses as the
+Hebrew does (closes S386's verse-number item). Replaying the 28 distinct failures: each now returns the right next step;
+`search_liturgy("אזכרה אלהים ואהמיה")` finds Ps 77:4 in the Ashkenaz Ne'ilah "Sanctification of the Day" beside the
+Thirteen Attributes — exactly C50/C61. Not yet measured in a paid run.
+
+**Copy editor (item 2).** Full mode re-typed the whole guide (~19K of 21K output tokens) to make 29 changes. New
+"edits" mode: `EDIT_LIST_FORMAT` goes LAST in the user message (after the report) and overrides the system prompt's
+output section; the system prompt is byte-identical (its hash test untouched) and full mode's user message is unchanged
+(tested). `apply_edit_list` (pure): FIND must occur once (verbatim, else modulo whitespace and quote/dash style); a
+numbered line inside a FIND is not a new change; anything else is left undone and marked "NOT APPLIED: …" in the
+change's line; the result is handed on as the same "corrected text + ## Changes" a full reply would be, so the structure
+check, reassembly, diff and editors' report are untouched; a reply that returns the full text anyway is used as in full
+mode. Ps 77 with identical inputs: $0.449 vs $0.556, 337 s vs 542 s; output 5,261 vs 21,371 tokens, but reasoning 18,690
+vs 9,728 (N=1); fact-check uptake identical (26/28 contradicted sentences changed, the same two left); 35/35 edits
+applied verbatim. It made three good changes full mode did not (two ungrounded superlatives; "the last word of the first
+half" for וְהַאֲזִין, which is in the second half) and one wrong one: it removed the dagesh in רָאוּךָ מַּיִם (77:17), which
+the Masoretic text has. Hence `pointing_regression`: an edit that changes only Hebrew pointing is refused when the
+original word pair is in tanakh.db (pointed, no cantillation; `masoretic_word_stream`, built once) and the
+replacement's is not; replayed on the saved response it refuses exactly that edit. Default flipped to "edits" at the
+author's word (`CopyEditor.DEFAULT_EDIT_MODE`); `--copy-edit-mode` (pipeline) / `--edit-mode` (run_copy_editor).
+
+**Shared dossier cache (item 1).** Both stages build the psalm text, macro, micro, trimmed bundle and phonetics with the
+same helpers from the same files, and in the same order; only SD's role line and headings differed. Now:
+`forest_writer.shared_dossier` builds the head from `MASTER_WRITER_PROMPT_V4` itself and cuts it at
+`### KEY INSIGHTS TO INCORPORATE` (`split_inputs`); SD sends [head][role text ("Above, under YOUR INPUTS…", derived from
+`INPUTS_HEADER` with one word changed) + computed facts + framework + task]; the writer's first turn is
+[head ⟨breakpoint⟩][tail: insights, SD observations, questions][essay instructions ⟨breakpoint⟩] — same text, cost-neutral
+when nothing was shared. `model_effort.adaptive_thinking` is now the one thinking dict for both (the cache key includes
+it; SD had omitted `display`). With `share_cache_with_writer` (pipeline: `--writer-prompt forest` and SD model ==
+writer model) SD puts a breakpoint on the head and a thread sends `max_tokens=0` keep-alives every 200 s once the stream
+has begun, plus one at the end if the last read is > 120 s old; SD's billing now includes cache fields (`_bill`). The
+writer logs whether its head hashes equal SD's. Verified at $0 on Ps 77: heads byte-identical (349,179 chars), the SD
+observations land in the tail. `scripts/run_synthesis_ab.py` updated to `_stream_call`'s new return.
+
+**The paid test missed.** `EXPERIMENT_s388_shared_cache.py 77`: SD wrote 214,085; the first keep-alive WROTE 214,084;
+the end-of-run keep-alive wrote again; the writer probe wrote 240,192 and read 0 — $5.78 against ≈ $2.5. The one-token
+difference pointed at trailing whitespace; `cache_whitespace_probe.py` ($0.31) confirmed that **the API trims trailing
+whitespace from the last block of a message**: a head ending in "\n\n" sent alone is one token shorter than the same head
+followed by any block (which reads fine), and an rstripped head reads when sent alone. Fixes: `split_inputs` rstrips the
+head (the whitespace opens the tail; the writer's text is unchanged); a keep-alive miss (`cache_creation_input_tokens`
+> 0) stops all further keep-alives, including the end-of-run one that had ignored it. Not yet re-run end to end. The
+dossier-first SD prompt itself: 31 complete observations, finished normally at 65,276 output tokens (S387's run was cut
+at 14 by the old cap), S387's main finds re-found plus new ones — one run, descriptive.
+
+**Code**: 275 tests pass (250 + 25: 13 lookups/edits-mode/guard in `test_fact_checker.py`, 7 shared cache in
+`test_forest_writer.py`, 4 pricing in `test_prompt_caching.py`, plus the adjusted promo-stage test).
+`docs/plans/S386_FACT_CHECK_COST.md` known limits updated. Records in `archive/psalm_77_S388_cost/`.
+**Session spend ≈ $6.54** (copy-edit test $0.45, SD with the failed cache $5.78, whitespace probe $0.31, OpenAI usage
+probe < $0.01).
+
+**Next**: `docs/plans/NEXT_SESSION_PROMPT_session_389.md` — on the next psalm run, read the SD keep-alive and writer
+cache lines; also the edits-mode log line, the free lookups in the editors' report, and the lemmatized-LXX question.
+
+---
+
 ## Session 387 (2026-09-29): Opus 5.5 everywhere, the forest writer in production, Ps 77 end to end with an editors' report
 
 **The ask.** (1) Codify Opus 5.5 in every position that used an older Opus; (2) make the S384–S386 "forest" prompt

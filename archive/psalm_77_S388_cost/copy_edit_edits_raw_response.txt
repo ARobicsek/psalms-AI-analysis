@@ -1,0 +1,251 @@
+## Changes
+1. [FACT-CHECK] [7,9(h)] **Introduction**: Revised the Cowper opening to describe a severe depressive relapse and removed the unsupported “best-known” ranking. The original overstated Cowper’s condition at the time of composition and made a reception claim the guide does not establish.
+<<<FIND
+In 1773, on the edge of one of the worst depressions of his life, William Cowper wrote the hymn that gave English its best-known sentence about providence:
+===
+In 1773, on the edge of a severe depressive relapse, William Cowper wrote the hymn that gave English a famous sentence about providence:
+>>>
+
+2. [FACT-CHECK] [7] **A Night Without Morning**: Corrected הָמָה from “the growl of lions” to “the growl of bears.” The biblical comparison for this root is to bears; the lion parallel uses a different verb.
+<<<FIND
+הָמָה is the growl of lions, the churning of the sea, the rumbling of an empty stomach.
+===
+הָמָה is the growl of bears, the churning of the sea, the rumbling of an empty stomach.
+>>>
+
+3. [FACT-CHECK] [7] **The Same Memory, Turned**: Corrected the summary of Rashi and the Greek translators on v. 11. The original conflated unlike readings, misrepresented Rashi as sheer despair, and gave an English rendering that does not match the Greek.
+<<<FIND
+Rashi and the Greek translators hear despair: "This is my sickness, that the right hand of the Most High has changed." Radak hears the turn: "the years of the Most High's right hand," which he then resolves to remember.
+===
+Rashi hears a frightening summons to return to God. The Greek translators say, "Now I began; this is the change of the right hand of the Most High." Radak hears the turn: "the years of the Most High's right hand," which he then resolves to remember.
+>>>
+
+4. [FACT-CHECK] [7] **The Same Memory, Turned**: Corrected the count of אָשִׂיחָה from its fourth appearance to its third. In Psalm 77 this form appears in vv. 4, 7, and 13.
+<<<FIND
+and אָשִׂיחָה, "I will muse," its fourth appearance.
+===
+and אָשִׂיחָה, "I will muse," its third appearance.
+>>>
+
+5. [FACT-CHECK] [7] **Footprints in the Water**: Corrected the placement of אָנוּ לְיָהּ וְעֵינֵינוּ לְיָהּ within the Ne'ilah lament. The line belongs to the lament’s opening stanza, not its ending.
+<<<FIND
+The liturgy sets the attributes beside the psalm that doubts them, and it ends, אָנוּ לְיָהּ וְעֵינֵינוּ לְיָהּ, "we are Yah's, and our eyes are on Yah."
+===
+The liturgy sets the attributes beside the psalm that doubts them, and its opening stanza says, אָנוּ לְיָהּ וְעֵינֵינוּ לְיָהּ, "we are Yah's, and our eyes are on Yah."
+>>>
+
+6. [FACT-CHECK] [7] **Liturgical — Full psalm**: Corrected the statement about fixed recitation. The whole psalm is not absent from all fixed settings; the source attests recitation with Parshat HaChodesh and on specified days of Sukkot.
+<<<FIND
+The whole psalm is not recited in any fixed place in the daily or festival services.
+===
+The whole psalm is not recited in any fixed place in the daily services, but it is recited with Parshat HaChodesh and on the third through sixth days of Sukkot.
+>>>
+
+7. [FACT-CHECK] [7,9(h)] **Liturgical — Full psalm**: Changed “closest emotional relative” to “a close emotional relative” and corrected “sits beside it” to “appears with it.” The original made an unsupported ranking claim and misstated the order within the Tikkun HaKlali.
+<<<FIND
+Psalm 42, its closest emotional relative in the Psalter, sits beside it in the same set.
+===
+Psalm 42, a close emotional relative in the Psalter, appears with it in the same set.
+>>>
+
+8. [9(h)] **Liturgical — Full psalm**: Removed the unsupported ranking “Few psalms are so full of night.” The point about the psalm’s repeated nighttime language stands without a comparative claim the guide does not show.
+<<<FIND
+Few psalms are so full of night: the hand stretched out לַיְלָה, "at night" (v. 3), the song בַּלַּיְלָה (v. 7), the eyelids held open (v. 5).
+===
+This psalm is full of night: the hand stretched out לַיְלָה, "at night" (v. 3), the song בַּלַּיְלָה (v. 7), the eyelids held open (v. 5).
+>>>
+
+9. [FACT-CHECK] [7] **Verse 1**: Limited the Hannah parallel to Meiri. Both Radak and Meiri equate עַל with לְ here, but only Meiri cites Hannah’s wording.
+<<<FIND
+Radak and Meiri treat the two as the same and point to Hannah: וַתִּתְפַּלֵּל עַל־ה', she "prayed on the Lord," meaning to Him (1 Sam 1:10).
+===
+Radak and Meiri treat the two as the same; Meiri points to Hannah: וַתִּתְפַּלֵּל עַל־ה', she "prayed on the Lord," meaning to Him (1 Sam 1:10).
+>>>
+
+10. [2] **Verse 2**: Corrected the location of the crucial verb from “the first half” to “the second half.” The paragraph immediately discusses וְהַאֲזִין, which appears in the second half of the verse, so the original phrasing contradicted its own analysis.
+<<<FIND
+The last word of the first half carries the weight.
+===
+The key verb in the second half carries the weight.
+>>>
+
+11. [FACT-CHECK] [7] **Verse 2**: Changed “it ends” to “that passage ends” for Psalm 55. The report of being heard ends the cited passage in Ps 55:17–18, not the whole psalm.
+<<<FIND
+Psalm 55 has almost the same set of words, אֲנִי אֶל־אֱלֹקִים אֶקְרָא... אָשִׂיחָה וְאֶהֱמֶה, וַיִּשְׁמַע קוֹלִי, "I call to God… I muse and moan, and He heard my voice" (55:17–18), and it ends with a plain report of being heard.
+===
+Psalm 55 has almost the same set of words, אֲנִי אֶל־אֱלֹקִים אֶקְרָא... אָשִׂיחָה וְאֶהֱמֶה, וַיִּשְׁמַע קוֹלִי, "I call to God… I muse and moan, and He heard my voice" (55:17–18), and that passage ends with a plain report of being heard.
+>>>
+
+12. [FACT-CHECK] [7] **Verse 3**: Corrected the summary of Ibn Ezra’s alternatives. The original misattributed the melted-strength reading to Ibn Ezra and omitted two readings he records.
+<<<FIND
+He himself suggests that the subject of "poured out" is the cry of verse 2, or that the speaker's strength melted as if it had flowed away.
+===
+Others, he says, take יָדִי as strength melting away or supply a missing בְּ; he reads the outpouring as the cry of verse 2 and also suggests that יָדִי means "my place."
+>>>
+
+13. [FACT-CHECK] [7] **Verse 3**: Corrected Malbim’s image so the sore belongs to the speaker, not to God’s hand. Malbim says the speaker’s oozing hand suggests that God’s supporting hand has weakened.
+<<<FIND
+Malbim develops the image: the hand that God had always held has itself become a running sore.
+===
+Malbim develops the image: the speaker's running sore suggests that God's supporting hand has weakened.
+>>>
+
+14. [8,10] **Verse 4**: Recast two technical grammatical labels into plain English. The stem name and the unexplained “cohortative” label added jargon without carrying the paragraph’s interpretive point.
+<<<FIND
+The expected form is אֶהֱמֶה, and Ibn Ezra and Radak point out that וְאֶהֱמָיָה is a "full" form, with the root's last letter kept as yod and a cohortative ending added.
+===
+The expected form is אֶהֱמֶה, and Ibn Ezra and Radak point out that וְאֶהֱמָיָה is a "full" form, with the root's last letter kept as yod and an added ending of resolve.
+>>>
+<<<FIND
+The verb for fainting, the hitpael of עטף, "to wrap oneself up, to go limp," occurs in an exactly contrary text.
+===
+The verb for fainting, from עטף, "to wrap oneself up, to go limp," occurs in an exactly contrary text.
+>>>
+
+15. [FACT-CHECK] [7] **Verse 5**: Changed “the verb belongs to kings disturbed by dreams” to a narrower claim. The verb is also used of Samson, so it is not restricted to dream-troubled kings.
+<<<FIND
+In the Bible the verb belongs to kings disturbed by dreams: וַתִּפָּעֶם רוּחוֹ, "his spirit was troubled," said of Pharaoh (Gen 41:8) and of Nebuchadnezzar, whose "sleep left him" (Dan 2:1).
+===
+In the Bible the verb also describes kings disturbed by dreams: וַתִּפָּעֶם רוּחוֹ, "his spirit was troubled," said of Pharaoh (Gen 41:8) and of Nebuchadnezzar, whose "sleep left him" (Dan 2:1).
+>>>
+
+16. [CITATION FIX] [FACT-CHECK] [7] **Verse 7**: Corrected the summary of Ibn Ezra’s two alternatives and fixed the Psalm 57 quotation to a contiguous fragment actually found in the verse. The original merged Ibn Ezra’s readings into one and quoted הַכָּבוֹד, which is not the biblical wording there.
+<<<FIND
+Ibn Ezra puts the singing itself at night, "as I used to sing in former days to serve God," and compares עוּרָה הַכָּבוֹד... אָעִירָה שָּׁחַר, "I will wake the dawn" (Ps 57:9).
+===
+Ibn Ezra offers two readings: he sang at night, or at night he remembers singing in former days to serve God; he compares אָעִירָה שָּׁחַר, "I will wake the dawn" (Ps 57:9).
+>>>
+
+17. [2] **Verse 7**: Removed the self-contradictory claim that “the translation here” says “their jibes.” The translation given above the paragraph says “my song,” so the original sentence contradicted the text on the page.
+<<<FIND
+The translation here, which says "their jibes," follows that line of thought, but the suffix says "my," not "their."
+===
+That line of thought would yield "their jibes," but the suffix says "my," not "their."
+>>>
+
+18. [FACT-CHECK] [7] **Verse 10**: Corrected the spelling claim about אַף. The shared element is the underlying אַף; the verse’s בְּאַף includes a prefixed preposition and is not “spelled exactly like” the particle.
+<<<FIND
+בְּאַף, "in anger," is spelled exactly like the particle אַף, "yes, even," which will appear twice in the storm: אַף יִרְגְּזוּ תְהֹמוֹת, "yes, the deeps trembled" (v. 17), and אַף־חֲצָצֶיךָ, "yes, Your arrows" (v. 18).
+===
+The אַף in בְּאַף, "in anger," is spelled exactly like the particle אַף, "yes, even," which will appear twice in the storm: אַף יִרְגְּזוּ תְהֹמוֹת, "yes, the deeps trembled" (v. 17), and אַף־חֲצָצֶיךָ, "yes, Your arrows" (v. 18).
+>>>
+
+19. [FACT-CHECK] [7] **Verse 10**: Corrected the Italian quotation from Boito’s *Otello*. The original mis-capitalized *dio*, misplaced accents, and added punctuation not present in the verified wording.
+<<<FIND
+> Credo in un Dio crudel che m'ha creato
+> simile a sè, e che nell'ira io nomo.
+> Dalla viltà d'un germe o d'un atòmo
+> vile son nato.
+> Son scellerato
+> perchè son uomo;
+> e sento il fango originario in me.
+===
+> Credo in un dio crudel che m'ha creato
+> simile a sé e che nell'ira io nomo.
+> Dalla viltà d'un germe o d'un atòmo
+> vile son nato.
+> Son scellerato
+> perché son uomo;
+> e sento il fango originario in me.
+>>>
+
+20. [FACT-CHECK] [7,8,10] **Verse 12**: Corrected the grammatical claim and replaced the unexplained term “cohortative” with plain English. Only the second “I will remember” form has the cohortative ending.
+<<<FIND
+It is chosen, grammatically deliberate ("I will remember," a cohortative, said twice), and it concerns the history of a people, not a private sensation.
+===
+It is chosen, grammatically deliberate ("I will remember," said twice, with the second form adding a volitional ending), and it concerns the history of a people, not a private sensation.
+>>>
+
+21. [FACT-CHECK] [7] **Verse 13**: Corrected the roles of Malbim and the Alshich in distinguishing the verse’s terms. Malbim distinguishes kinds of deeds; the Alshich distinguishes the two meditation verbs.
+<<<FIND
+The two verbs of meditation are distinguished by Malbim and, differently, by the Alshich.
+===
+Malbim distinguishes the kinds of deeds considered; the Alshich, differently, distinguishes the two verbs of meditation.
+>>>
+
+22. [FACT-CHECK] [7] **Verse 14**: Corrected the opening characterization of the commentators. Rashi does not identify a holy place here; he explains holiness as a divine mode of action.
+<<<FIND
+The commentators each choose a different holy place.
+===
+The commentators understand that holiness in different ways.
+>>>
+
+23. [FACT-CHECK] [7] **Verse 16**: Corrected the scope of “Joseph” in the Asaph psalms. In Ps 81 it names the people brought out of Egypt, not specifically the northern tribes.
+<<<FIND
+On the historical level, "Joseph" in the Asaph psalms stands for the northern tribes (Ps 78:67; 80:2; 81:6), and naming both Jacob and Joseph claims the whole people.
+===
+On the historical level, "Joseph" can evoke the northern tribes (Ps 78:67; 80:2), while elsewhere it names the whole people (Ps 81:6); naming both Jacob and Joseph claims the whole people.
+>>>
+
+24. [5] **Verse 17**: Corrected the pointing of מַיִם in a running Hebrew quotation. The original form included an erroneous dagesh in the mem.
+<<<FIND
+רָאוּךָ מַּיִם אֱלֹקִים רָאוּךָ מַּיִם יָחִילוּ, "The waters saw You, O God, the waters saw You and writhed,"
+===
+רָאוּךָ מַיִם אֱלֹקִים רָאוּךָ מַיִם יָחִילוּ, "The waters saw You, O God, the waters saw You and writhed,"
+>>>
+
+25. [FACT-CHECK] [7] **Verse 17**: Corrected the Racine comparison from water seeing to sky seeing. In the quoted passage it is heaven that sees the monster, while the wave recoils.
+<<<FIND
+The personification is the same, with the water seeing, the earth shaking and the wave recoiling in fear.
+===
+The personification is similar, with the sky seeing, the earth shaking and the wave recoiling in fear.
+>>>
+
+26. [FACT-CHECK] [7] **Verse 18**: Changed “hailstones” to “stones.” Radak and Meiri speak of stones or gravel here; the specific claim about hailstones overstates the evidence.
+<<<FIND
+They picture hailstones pelting the Egyptians, and Radak concedes, "even though this is not mentioned in the Torah."
+===
+They picture stones pelting the Egyptians, and Radak concedes, "even though this is not mentioned in the Torah."
+>>>
+
+27. [FACT-CHECK] [7] **Verse 18**: Corrected the Maya creation comparison. The verified tradition has Huracan and Gucumatz speaking the world into being over the waters, not a thunderbolt directly making it.
+<<<FIND
+In the Maya text the thunderbolt makes the world out of the primordial waters.
+===
+In the Maya text Huracan and Gucumatz speak the world into being over the primordial waters.
+>>>
+
+28. [3,8,10] **Verse 18**: Removed an unsupported stem-based claim and the unexplained term “hitpael.” The stately effect comes from the verb’s sense in context, not from naming its stem.
+<<<FIND
+The verb is ceremonial: יִתְהַלָּכוּ, "they walked about," the stately hitpael form of "walk."
+===
+The verb is stately: יִתְהַלָּכוּ, "they walked about."
+>>>
+
+29. [FACT-CHECK] [7] **Verse 19**: Corrected the summary of Meiri and the gloss on גַּלְגַּל. The original promoted Meiri’s secondary chariot-wheel reading to his main one and misdescribed Ps 83:14’s גלגל as the whirlwind itself.
+<<<FIND
+Rashi and Meiri stay by the water.
+===
+Rashi stays by the water. Meiri first describes the air, then offers the chariot wheels as an alternative.
+>>>
+<<<FIND
+Meiri says it was literally in the wheels of the Egyptian chariots, recalling וַיָּסַר אֵת אֹפַן מַרְכְּבֹתָיו, "He took off the wheels of their chariots" (Exod 14:25).
+===
+Alternatively, he places it in the wheels of the Egyptian chariots, recalling וַיָּסַר אֵת אֹפַן מַרְכְּבֹתָיו, "He took off the wheels of their chariots" (Exod 14:25).
+>>>
+<<<FIND
+A third meaning is the whirlwind: אֱלֹקַי שִׁיתֵמוֹ כַגַּלְגַּל, "my God, make them like the whirl of chaff" (Ps 83:14).
+===
+A third image is something whirled by wind: אֱלֹקַי שִׁיתֵמוֹ כַגַּלְגַּל, "my God, make them like windblown thistledown" (Ps 83:14).
+>>>
+
+30. [9(h)] **Verse 20**: Scaled down an unsupported superlative about the Sea crossing. The argument only needs the Sea as a paradigmatic rescue, not a claim that it was Israel’s greatest ever.
+<<<FIND
+But at the greatest rescue Israel ever knew, God's tracks could not be seen either.
+===
+But at the Sea, God's tracks could not be seen either.
+>>>
+
+31. [FACT-CHECK] [7] **Verse 21**: Corrected the description of Rashi’s storm commentary. He comments on each storm verse, not on “almost every word.”
+<<<FIND
+Rashi, who commented on almost every word of the storm, says nothing here.
+===
+Rashi, who commented on each verse of the storm, says nothing here.
+>>>
+
+32. [FACT-CHECK] [7] **Verse 21**: Corrected the description of Ps 78:2. The phrase אַבִּיעָה חִידוֹת מִנִּי־קֶדֶם occurs early in the psalm, but it is not the opening words.
+<<<FIND
+It opens אַבִּיעָה חִידוֹת מִנִּי־קֶדֶם, "I will pour out riddles from of old" (Ps 78:2), reaches וַיַּסַּע כַּצֹּאן עַמּוֹ, "He set His people moving like sheep" (78:52), and ends with David shepherding בִּתְבוּנוֹת כַּפָּיו, "by the skill of his hands" (78:72).
+===
+Early on it says אַבִּיעָה חִידוֹת מִנִּי־קֶדֶם, "I will pour out riddles from of old" (Ps 78:2), reaches וַיַּסַּע כַּצֹּאן עַמּוֹ, "He set His people moving like sheep" (78:52), and ends with David shepherding בִּתְבוּנוֹת כַּפָּיו, "by the skill of his hands" (78:72).
+>>>

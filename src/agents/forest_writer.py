@@ -300,12 +300,53 @@ def verse_instructions(n_verses: int) -> str:
     return text
 
 
+# Session 388: the dossier cache SHARED WITH SYNTHESIS DISCOVERY. The INPUTS block's head
+# (psalm text, structure, verse notes, research bundle, phonetics: ~222K tokens on Ps 77) is
+# built from the same files and helpers for both stages; everything from KEY INSIGHTS on
+# (curated insights, discovery's own observations, reader questions) is the writer's alone.
+# Discovery sends the head first under a cache breakpoint and keeps it warm while it runs, so
+# the writer READS that head instead of writing it again (~$0.7/psalm on Opus 5.5).
+SHARED_DOSSIER_END = "### KEY INSIGHTS TO INCORPORATE"
+
+
+def split_inputs(inputs: str):
+    """(shared head, writer-only tail) of an INPUTS block; ('', inputs) if it has no marker.
+
+    The head ENDS WITHOUT WHITESPACE; the whitespace opens the tail. Measured in Session 388:
+    the API trims trailing whitespace from the LAST block of a message, so a head ending in
+    a blank line is one token shorter when it is sent alone (discovery's keep-alive) than when a
+    block follows it (discovery itself, the writer) -- a different prefix, a cache miss, and on
+    Ps 77 three ~$1.1 cache writes where reads were meant."""
+    i = inputs.find(SHARED_DOSSIER_END)
+    if i <= 0:
+        return "", inputs
+    head = inputs[:i].rstrip()
+    return head, inputs[len(head):]
+
+
+def shared_dossier(v4_template: str, psalm_number: int, psalm_text: str, macro_text: str,
+                   micro_text: str, research_bundle: str, phonetic_section: str) -> str:
+    """The shared head, built exactly as the writer builds its prompt: the V4 template
+    formatted with the same pieces, cut the same way (the writer-only fields are blank and
+    fall after the cut)."""
+    prompt = v4_template.format(psalm_number=psalm_number, psalm_text=psalm_text,
+                                macro_analysis=macro_text, micro_analysis=micro_text,
+                                research_bundle=research_bundle, phonetic_section=phonetic_section,
+                                curated_insights="", reader_questions="")
+    head, _ = split_inputs(extract_inputs_block(prompt))
+    if not head:
+        raise ValueError(f"the writer's INPUTS block has no {SHARED_DOSSIER_END!r} marker")
+    return head
+
+
 def first_turn(inputs: str, essay_instr: str) -> List[Dict]:
-    """The shared first user turn; the cache breakpoint sits on its last block."""
-    return [
-        {"type": "text", "text": inputs},
-        {"type": "text", "text": essay_instr, "cache_control": {"type": "ephemeral"}},
-    ]
+    """The shared first user turn; the cache breakpoint sits on its last block. Session 388:
+    a second breakpoint closes the dossier head that synthesis discovery may already have
+    cached. The text is unchanged, only split into blocks (head + tail == inputs)."""
+    head, tail = split_inputs(inputs)
+    blocks = ([{"type": "text", "text": head, "cache_control": {"type": "ephemeral"}},
+               {"type": "text", "text": tail}] if head else [{"type": "text", "text": inputs}])
+    return blocks + [{"type": "text", "text": essay_instr, "cache_control": {"type": "ephemeral"}}]
 
 
 def replayable(content: List[Dict]) -> List[Dict]:
@@ -378,6 +419,6 @@ def assemble(essay: str, rest: str) -> str:
 
 __all__ = [
     "LIT_MARKER", "KEEPALIVE_AFTER_S", "ESSAY_INSTRUCTIONS", "VERSE_INSTRUCTIONS",
-    "extract_inputs_block", "commentator_names", "essay_instructions", "psalm_verse_numbers",
+    "extract_inputs_block", "split_inputs", "shared_dossier", "SHARED_DOSSIER_END", "commentator_names", "essay_instructions", "psalm_verse_numbers",
     "verse_instructions", "first_turn", "replayable", "check_structure", "check_essay", "assemble",
 ]

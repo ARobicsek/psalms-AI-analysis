@@ -452,3 +452,193 @@ def test_gather_schema_asks_for_sources_not_verdicts():
     item = GATHER_SCHEMA_STRICT["properties"]["claims"]["items"]["properties"]
     assert "verdict" not in item and "sources" in item
     assert "do NOT give verdicts" in GATHER_INSTRUCTIONS
+
+
+# ---------------------------------------------------------------------------
+# Session 388: free lookups (liturgy.db, Septuagint, helpful failures)
+# ---------------------------------------------------------------------------
+
+def _tiny_liturgy_db(tmp_path):
+    import sqlite3
+    db = tmp_path / "liturgy.db"
+    con = sqlite3.connect(db)
+    con.execute("CREATE TABLE prayers (sefaria_ref TEXT, source_text TEXT, nusach TEXT, occasion TEXT, "
+                "service TEXT, section TEXT, prayer_name TEXT, canonical_prayer_name TEXT, "
+                "sequence_order INTEGER, hebrew_text TEXT, english_text TEXT)")
+    rows = [
+        ("Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Ashrei, Ashrei", "Machzor Yom Kippur Ashkenaz",
+         "Ashkenaz", None, "Neilah", None, "Ashrei", "Ashrei", 12, "אַשְׁרֵי יוֹשְׁבֵי בֵיתֶךָ", ""),
+        ("Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Sanctification of the Day, Sanctification of the Day",
+         "Machzor Yom Kippur Ashkenaz", "Ashkenaz", None, "Neilah", None, "Sanctification of the Day",
+         "Sanctification of the Day", 16,
+         "יְהֹוָה יְהֹוָה אֵל רַחוּם וְחַנּוּן. אֶזְכְּרָה אֱלֹהִים וְאֶהֱמָיָה בִּרְאוֹתִי כָּל עִיר", ""),
+        ("Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Avinu Malkenu, Avinu Malkenu",
+         "Machzor Yom Kippur Ashkenaz", "Ashkenaz", None, "Neilah", None, "Avinu Malkenu", "Avinu Malkenu", 18,
+         "אָבִינוּ מַלְכֵּנוּ", ""),
+        ("Siddur Sefard, Fast Days, Selichot for Taanit Esther, Selichot for Taanit Esther", "Siddur Sefard",
+         "Sefard", None, None, None, "Selichot for Taanit Esther", "Fast of Esther Selichot", 3, "סְלַח לָנוּ", ""),
+    ]
+    con.executemany("INSERT INTO prayers VALUES (?,?,?,?,?,?,?,?,?,?,?)", rows)
+    con.commit()
+    con.close()
+    return db
+
+
+def test_search_liturgy_hebrew_phrase_gives_passage_and_neighbours(tmp_path):
+    from src.agents.fact_checker import search_liturgy
+    r = search_liturgy("אזכרה אלהים ואהמיה", _tiny_liturgy_db(tmp_path))   # consonants only, like Ps 77:4
+    assert r["matches"] == 1
+    hit = r["prayers"][0]
+    assert "Sanctification of the Day" in hit["ref"] and "אֶזְכְּרָה" in hit["text"]
+    assert (hit["before"], hit["after"]) == ("Ashrei", "Avinu Malkenu")
+
+
+def test_search_liturgy_by_name_ignores_apostrophes_and_falls_back_to_best_partial(tmp_path):
+    from src.agents.fact_checker import search_liturgy
+    db = _tiny_liturgy_db(tmp_path)
+    assert search_liturgy("Ne'ilah", db)["matches"] == 3
+    r = search_liturgy("Ta'anit Esther", db)
+    assert r["matches"] == 1 and r["prayers"][0]["before"] == ""      # filed under no service
+    part = search_liturgy("Neilah Kaddish", db)                        # no prayer has both
+    assert part["matches"] == 3 and "partial" in part
+
+
+def test_get_text_answers_a_liturgy_ref_from_disk_without_the_network(tmp_path, monkeypatch):
+    from src.agents import fact_checker as fc
+    db = _tiny_liturgy_db(tmp_path)
+    monkeypatch.setattr(fc, "_sefaria_text", lambda *a, **k: pytest.fail("network used"))
+    ref = "Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Avinu Malkenu, Avinu Malkenu"
+    out = fc.lookup_text(ref, liturgy_db=db)
+    assert out["source"].startswith("liturgy.db") and out["hebrew"] == "אָבִינוּ מַלְכֵּנוּ"
+
+
+def test_failed_get_text_says_what_to_do_instead(monkeypatch):
+    from src.agents import fact_checker as fc
+    def boom(*a, **k):
+        raise ValueError("404")
+    monkeypatch.setattr(fc, "_sefaria_text", boom)
+    monkeypatch.setattr(fc, "_liturgy_rows", lambda db=None: [])
+    monkeypatch.setattr(fc, "sefaria_suggestions", lambda name, limit=6: ["Likkutei Tefillot"])
+    assert "get_lxx" in fc.lookup_text("Septuagint Psalms 76:11")["error"]
+    assert "search_liturgy" in fc.lookup_text("Machzor Yom Kippur Ashkenaz, Neilah")["error"]
+    assert "Likkutei Tefillot" in fc.lookup_text("Likkutei Tefilot 1:92")["error"]
+    monkeypatch.setattr(fc, "sefaria_suggestions", lambda name, limit=6: [])
+    assert "needs_web" in fc.lookup_text("The Silver Platter")["error"]
+
+
+def test_a_missing_commentary_entry_reads_as_no_entry(monkeypatch):
+    import requests
+    from src.agents import fact_checker as fc
+    def not_found(*a, **k):
+        raise requests.HTTPError(response=SimpleNamespace(status_code=404))
+    monkeypatch.setattr(fc, "_sefaria_text", not_found)
+    err = fc.lookup_commentary("Rashi", "Psalms 77:21")["error"]
+    assert err.startswith("no entry") and "Rashi" in err
+
+
+def test_lookup_lxx_uses_greek_numbering_and_aligns_brenton(monkeypatch):
+    from src.agents import fact_checker as fc
+    calls = []
+    grk = [{"verse": i, "text": f"g{i}"} for i in range(1, 22)]            # heading = verse 1
+    eng = [{"verse": i, "text": f"e{i}"} for i in range(1, 21)]            # Brenton: heading unnumbered
+    def get(url, timeout=0):
+        calls.append(url)
+        return SimpleNamespace(json=lambda: grk if "/LXX/" in url else eng)
+    monkeypatch.setattr(fc.requests, "get", get)
+    out = fc.lookup_lxx("Psalms 77:11")
+    assert all("/19/76/" in u for u in calls)                              # MT 77 = LXX 76
+    assert (out["greek_lemmas"], out["english_brenton"]) == ("g11", "e10")
+    assert "error" in fc.lookup_lxx("Jeremiah 10:1")                        # chapters differ in the Greek
+
+
+def test_the_new_lookups_are_offered_and_routed():
+    from src.agents.fact_checker import FUNCTION_TOOLS, LOCAL_INSTRUCTIONS, FactChecker
+    names = {t["name"] for t in FUNCTION_TOOLS}
+    assert {"search_liturgy", "get_lxx"} <= names
+    assert "search_liturgy" in LOCAL_INSTRUCTIONS and "get_lxx" in LOCAL_INSTRUCTIONS
+    fcx = FactChecker.__new__(FactChecker)
+    fcx.db_path = None
+    assert "error" in fcx._run_tool("search_liturgy", {"query": ""}, "")
+
+
+def test_shared_evidence_puts_the_psalm_first_when_asked(monkeypatch):
+    from src.agents import fact_checker as fc
+    monkeypatch.setattr(fc, "psalm_text", lambda p, db: "**77:2** קוֹלִי\nMy voice")
+    ev = fc.shared_evidence("No citations here.", "", None, psalm=77)
+    assert ev.startswith("## PSALM 77 ITSELF") and "קוֹלִי" in ev
+    assert "PSALM 77" not in fc.shared_evidence("No citations here.", "", None)
+
+
+# ---------------------------------------------------------------------------
+# Session 388: the copy editor's edits mode
+# ---------------------------------------------------------------------------
+
+_GUIDE = ("## Introduction\nIn 1773, on the edge of despair, Cowper wrote a hymn.\n\n"
+          "**Verse 2**\nThe voice cries “to God” — twice.\n1. A numbered line in the guide.\n")
+
+
+def test_apply_edit_list_applies_verbatim_and_loose_matches_and_reports_failures():
+    resp = ("## Changes\n"
+            "1. [FACT-CHECK] **Introduction**: Cowper was not yet depressed — per the report.\n"
+            "<<<FIND\nIn 1773, on the edge of despair, Cowper wrote a hymn.\n===\n"
+            "In 1773, on the edge of a relapse, Cowper wrote a hymn.\n>>>\n"
+            "2. [7] **Verse 2**: Straight quotes and a hyphen in the FIND still match.\n"
+            "<<<FIND\nThe voice cries \"to God\" - twice.\n===\nThe voice cries “to God” — two times.\n>>>\n"
+            "3. [9] **Verse 2**: A FIND that is not in the text.\n"
+            "<<<FIND\nNothing like this exists.\n===\nx\n>>>\n")
+    text, changes, st = ce.apply_edit_list(_GUIDE, resp)
+    assert "edge of a relapse" in text and "two times" in text
+    assert (st["changes"], st["edits"], st["applied"], st["loose"], st["not_found"]) == (3, 3, 2, 1, 1)
+    assert "<<<FIND" not in changes and changes.startswith("## Changes")
+    assert "3. [9]" in changes and "NOT APPLIED" in changes.split("3. [9]")[1]
+    assert "NOT APPLIED" not in changes.split("3. [9]")[0]
+    assert "1. A numbered line in the guide." in text                    # untouched
+
+
+def test_apply_edit_list_deletion_ambiguity_and_numbered_lines_inside_a_find():
+    doubled = _GUIDE + "The voice cries “to God” — twice.\n"
+    resp = ("## Changes\n1. [9] **Verse 2**: Cut the numbered aside.\n"
+            "<<<FIND\n1. A numbered line in the guide.\n\n===\n>>>\n"
+            "2. [9] **Verse 2**: Ambiguous.\n<<<FIND\nThe voice cries “to God” — twice.\n===\nX\n>>>\n")
+    text, changes, st = ce.apply_edit_list(doubled, resp)
+    assert st["changes"] == 2                                   # the "1." inside the FIND is not a change
+    assert "A numbered line" not in text and st["ambiguous"] == 1
+    assert text.count("twice") == 2
+
+
+def test_apply_edit_list_no_changes():
+    text, changes, st = ce.apply_edit_list(_GUIDE, "## Changes\nNo changes required.")
+    assert text == _GUIDE and "No changes required." in changes and st["changes"] == 0
+
+
+def test_edits_mode_user_message_puts_the_format_last_and_full_mode_is_unchanged():
+    full = ce.CopyEditor.build_user_message("BODY", 77, "REPORT")
+    assert full == ce.CopyEditor.build_user_message("BODY", 77, "REPORT", edit_mode="full")
+    assert "EDIT_LIST" not in full and "<<<FIND" not in full
+    edits = ce.CopyEditor.build_user_message("BODY", 77, "REPORT", edit_mode="edits")
+    assert edits.index("BODY") < edits.index("REPORT") < edits.index("<<<FIND")
+    assert "Do NOT return the corrected text" in edits
+
+
+def test_edits_mode_falls_back_when_the_model_returns_the_full_text():
+    ed = ce.CopyEditor.__new__(ce.CopyEditor)
+    ed.logger = SimpleNamespace(info=lambda *a: None, warning=lambda *a: None)
+    full_reply = _GUIDE.replace("twice", "two times") + "\n## Changes\n1. [9] **Verse 2**: reworded.\n"
+    assert ed._from_edit_list(_GUIDE, full_reply) == full_reply
+    assert ed.last_edit_stats == {"fallback": "full text returned"}
+
+
+def test_pointing_regression_refuses_a_fix_the_masoretic_text_contradicts():
+    # a toy Masoretic stream: 77:17's dehiq dagesh after רָאוּךָ, and ordinary מַיִם elsewhere
+    mt = " " + " ".join(ce._pointed_words("רָ֘א֤וּךָ מַּ֨יִם ׀ אֱֽלֹהִ֗ים | וַיִּקְווּ מַיִם")) + " "
+    find = "רָאוּךָ מַּיִם אֱלֹקִים"
+    assert ce.pointing_regression(find, "רָאוּךָ מַיִם אֱלֹקִים", mt)             # the S388 Ps 77 case
+    assert ce.pointing_regression("רָאוּךָ מַיִם", "רָאוּךָ מַּיִם", mt) is None   # a fix TOWARD the MT
+    assert ce.pointing_regression(find, "the waters saw You", mt) is None          # not a pointing edit
+    assert ce.pointing_regression(find, "רָאוּךָ מַיִם", "") is None               # no database: no opinion
+
+
+def test_apply_edit_list_marks_a_refused_edit():
+    resp = "## Changes\n1. [5] **Verse 2**: Pointing.\n<<<FIND\ntwice\n===\nthrice\n>>>\n"
+    text, changes, st = ce.apply_edit_list(_GUIDE, resp, guard=lambda f, r: "the MT has the original")
+    assert text == _GUIDE and st["refused"] == 1 and "NOT APPLIED: the MT has the original" in changes

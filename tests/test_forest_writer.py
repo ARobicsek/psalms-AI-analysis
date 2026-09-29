@@ -242,17 +242,19 @@ def test_cost_json_shape_is_unchanged_without_charges_or_stages():
 def test_record_stage_is_a_delta_and_flags_promo_prices(monkeypatch):
     import src.utils.cost_tracker as ct
     t = CostTracker()
-    t.add_usage("gpt-6-sol", input_tokens=500_000)
+    # Session 388: gemini-3.8-flash, not gpt-6-sol -- Sol's "promo" was a mix-up with
+    # GPT-5.6 Sol's, and $2/$10 is its standard price.
+    t.add_usage("gemini-3.8-flash", input_tokens=500_000)
     snap = t.snapshot()
-    t.add_usage("gpt-6-sol", input_tokens=1_000_000, output_tokens=100_000)
+    t.add_usage("gemini-3.8-flash", input_tokens=1_000_000, output_tokens=100_000)
     t.add_usage("claude-opus-5-5", output_tokens=1_000_000)
     t.add_charge("web search", 0.05)
     monkeypatch.setattr(ct, "date", SimpleNamespace(today=lambda: date(2026, 10, 1), max=date.max))
     st = t.record_stage("fact check", snap)
-    sol = st["models"]["gpt-6-sol"]
+    sol = st["models"]["gemini-3.8-flash"]
     assert sol["input_tokens"] == 1_000_000 and sol["call_count"] == 1
-    assert sol["cost_usd"] == pytest.approx(2.0 + 1.0)          # promo $2 / $10
-    assert sol["promo_through"] == "2026-11-21"
+    assert sol["cost_usd"] == pytest.approx(0.75 + 0.375)       # promo $0.75 / $3.75
+    assert sol["promo_through"] == "2026-12-31"
     assert sol["cost_usd_at_durable_rates"] > sol["cost_usd"]
     assert "promo_through" not in st["models"]["claude-opus-5-5"]
     assert st["cost_usd"] == pytest.approx(sol["cost_usd"] + st["models"]["claude-opus-5-5"]["cost_usd"] + 0.05)
@@ -408,3 +410,144 @@ def test_change_log_with_two_named_tags():
     entries, _ = parse_change_log("## Changes\n\n14. [CITATION FIX] [FACT-CHECK] [7] **Verse 7**: Rewrote it.\n")
     e = entries[0]
     assert e["fact_check_tagged"] and e["citation_fix"] and e["categories"] == ["7"] and e["location"] == "Verse 7"
+
+
+# ---------------------------------------------------------------------------
+# Session 388: the dossier cache shared by synthesis discovery and the writer
+# ---------------------------------------------------------------------------
+
+def _v4_pieces():
+    psalm_text = "".join(f"### Verse {n}\n**Hebrew:** א\n**English:** e\n\n" for n in (1, 2, 3))
+    return dict(psalm_text=psalm_text, macro_text="M", micro_text="m",
+                research_bundle="### 77:2 — Rashi\nx\n", phonetic_section="P")
+
+
+def test_shared_dossier_is_the_head_of_the_writers_own_inputs_block():
+    from src.agents.master_editor import MASTER_WRITER_PROMPT_V4
+    p = _v4_pieces()
+    head = fw.shared_dossier(MASTER_WRITER_PROMPT_V4, 77, **p)
+    prompt = MASTER_WRITER_PROMPT_V4.format(
+        psalm_number=77, psalm_text=p["psalm_text"], macro_analysis="M", micro_analysis="m",
+        research_bundle=p["research_bundle"], phonetic_section="P", curated_insights="INSIGHTS",
+        reader_questions="Q")
+    inputs = fw.extract_inputs_block(prompt)
+    w_head, w_tail = fw.split_inputs(inputs)
+    assert head == w_head and w_head + w_tail == inputs
+    assert "### PHONETIC TRANSCRIPTIONS" in head and "INSIGHTS" not in head
+    assert w_tail.lstrip().startswith(fw.SHARED_DOSSIER_END)
+    assert head == head.rstrip(), "the head must not end in whitespace (the API trims it on a last block)"
+
+
+def test_first_turn_puts_a_breakpoint_on_the_shared_head_and_keeps_the_text():
+    inputs = "## YOUR INPUTS\nHEAD\n\n" + fw.SHARED_DOSSIER_END + "\nTAIL"
+    t = fw.first_turn(inputs, "ESSAY")
+    assert [b.get("cache_control") for b in t] == [{"type": "ephemeral"}, None, {"type": "ephemeral"}]
+    assert "".join(b["text"] for b in t[:2]) == inputs and t[2]["text"] == "ESSAY"
+    assert len(fw.first_turn("no marker here", "ESSAY")) == 2            # old shape without the marker
+
+
+class _SDStream:
+    def __init__(self, reply, pause=0.0):
+        self.reply, self.pause = reply, pause
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+    def __iter__(self):
+        import time as _t
+        for piece in ("obs ", "more"):
+            _t.sleep(self.pause)
+            yield SimpleNamespace(type="content_block_delta", delta=SimpleNamespace(text=piece))
+
+    def get_final_message(self):
+        return self.reply
+
+
+class _SDClient:
+    def __init__(self, reply, pause=0.0):
+        self.reply, self.pause, self.streams, self.creates = reply, pause, [], []
+        self.messages = self
+
+    def stream(self, **kw):
+        self.streams.append(kw)
+        return _SDStream(self.reply, self.pause)
+
+    def create(self, **kw):
+        self.creates.append(kw)
+        return SimpleNamespace(usage=SimpleNamespace(input_tokens=3, output_tokens=0,
+                                                     cache_read_input_tokens=222000,
+                                                     cache_creation_input_tokens=0))
+
+
+def _sd_agent(monkeypatch, client):
+    import src.agents.synthesis_discovery as sd
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    agent = sd.SynthesisDiscoveryAgent(cost_tracker=CostTracker(), model="claude-opus-5-5")
+    agent.client = client
+    return sd, agent
+
+
+def _sd_reply():
+    return SimpleNamespace(stop_reason="end_turn", usage=SimpleNamespace(
+        input_tokens=9000, output_tokens=60000, cache_read_input_tokens=0,
+        cache_creation_input_tokens=222000))
+
+
+def test_discovery_sends_the_dossier_first_with_the_writers_thinking_and_bills_the_cache(monkeypatch):
+    from src.utils.model_effort import adaptive_thinking
+    client = _SDClient(_sd_reply())
+    sd, agent = _sd_agent(monkeypatch, client)
+    res = agent.discover(77, "PT", "M", "m", "B", "P", "FRAMEWORK", computed_facts="FACTS",
+                         shared_dossier="## YOUR INPUTS\nDOSSIER", cache_shared=True,
+                         thinking=adaptive_thinking("claude-opus-5-5"))
+    kw = client.streams[0]
+    head, tail = kw["messages"][0]["content"]
+    assert head == {"type": "text", "text": "## YOUR INPUTS\nDOSSIER", "cache_control": {"type": "ephemeral"}}
+    assert tail["text"].startswith("\n\nYou are a SYNTHESIS SCHOLAR for Psalm 77.")
+    assert "Above, under YOUR INPUTS" in tail["text"] and "## INPUT DATA" not in tail["text"]
+    assert "FACTS" in tail["text"] and "FRAMEWORK" in tail["text"] and "YOUR TASK: SYNTHESIS DISCOVERY" in tail["text"]
+    assert kw["thinking"] == {"type": "adaptive", "display": "summarized"}
+    assert kw["output_config"] == {"effort": "high"}
+    u = agent.cost_tracker.usage_by_model["claude-opus-5-5"]
+    assert (u.input_tokens, u.cache_write_tokens, u.output_tokens) == (9000, 222000, 60000)
+    assert res["observations_markdown"] == "obs more"
+
+
+def test_discovery_without_sharing_puts_no_breakpoint(monkeypatch):
+    client = _SDClient(_sd_reply())
+    sd, agent = _sd_agent(monkeypatch, client)
+    agent.discover(77, "PT", "M", "m", "B", "P", "F", shared_dossier="DOSSIER", cache_shared=False)
+    assert "cache_control" not in client.streams[0]["messages"][0]["content"][0]
+    assert client.creates == []                                        # no keep-alive either
+
+
+def test_discovery_keeps_the_dossier_cache_warm_while_it_streams(monkeypatch):
+    client = _SDClient(_sd_reply(), pause=0.15)
+    sd, agent = _sd_agent(monkeypatch, client)
+    monkeypatch.setattr(sd, "KEEPALIVE_EVERY_S", 0.05)
+    agent.discover(77, "PT", "M", "m", "B", "P", "F", shared_dossier="DOSSIER", cache_shared=True)
+    assert client.creates, "no keep-alive was sent"
+    ka = client.creates[0]
+    assert ka["max_tokens"] == 0 and "stream" not in ka
+    assert ka["messages"] == [{"role": "user", "content": [
+        {"type": "text", "text": "DOSSIER", "cache_control": {"type": "ephemeral"}}]}]
+    assert ka["thinking"] == client.streams[0]["thinking"] and ka["model"] == "claude-opus-5-5"
+    u = agent.cost_tracker.usage_by_model["claude-opus-5-5"]
+    assert u.cache_read_tokens == 222000 * len(client.creates)
+
+
+def test_a_keepalive_that_writes_stops_all_further_keepalives(monkeypatch):
+    """Session 388, Ps 77: the first keep-alive WROTE (prefix mismatch) and the end-of-run one
+    wrote again, ~$1.1 each. After one miss, no more keep-alives."""
+    client = _SDClient(_sd_reply(), pause=0.15)
+    miss = SimpleNamespace(usage=SimpleNamespace(input_tokens=3, output_tokens=0, cache_read_input_tokens=0,
+                                                 cache_creation_input_tokens=222000))
+    client.create = lambda **kw: (client.creates.append(kw), miss)[1]
+    sd, agent = _sd_agent(monkeypatch, client)
+    monkeypatch.setattr(sd, "KEEPALIVE_EVERY_S", 0.05)
+    monkeypatch.setattr(sd, "FINAL_KEEPALIVE_IF_OLDER_THAN_S", 0.0)
+    agent.discover(77, "PT", "M", "m", "B", "P", "F", shared_dossier="DOSSIER", cache_shared=True)
+    assert len(client.creates) == 1

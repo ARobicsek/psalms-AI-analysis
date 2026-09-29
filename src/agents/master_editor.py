@@ -885,8 +885,16 @@ class MasterEditor(MasterEditorV2):
         output_path: Path,
         skip_if_exists: bool = True,
         model: Optional[str] = None,
+        share_cache_with_writer: bool = False,
     ) -> Path:
         """Run the SynthesisDiscoveryAgent and save observations to disk.
+
+        Session 388: the pass always opens with the writer's own dossier head
+        (forest_writer.shared_dossier). With `share_cache_with_writer` -- the enhanced
+        pipeline sets it when the forest writer runs next on the SAME model -- that head
+        also carries a cache breakpoint and is kept warm, so the writer reads it instead of
+        writing it (~$0.7/psalm on Opus 5.5). A miss costs money, never quality: the writer
+        then writes the entry as before.
 
         Reuses the same input-loading code paths as write_commentary so the
         discovery pass reasons over byte-identical evidence to what the writer
@@ -953,9 +961,20 @@ class MasterEditor(MasterEditorV2):
         except Exception as e:
             self.logger.warning(f"Distributional facts pre-pass failed: {e}")
 
+        from src.agents import forest_writer as fw
+        from src.utils.model_effort import adaptive_thinking
+        sd_model = model or SD_DEFAULT_MODEL
+        shared = fw.shared_dossier(MASTER_WRITER_PROMPT_V4, psalm_number, psalm_text, macro_text,
+                                   micro_text, research_bundle, phonetic_section)
+        import hashlib
+        self._shared_dossier_sha = (hashlib.sha256(shared.encode("utf-8")).hexdigest()
+                                    if share_cache_with_writer else None)
+        self.logger.info(f"[SYNTHESIS DISCOVERY] dossier head {len(shared):,} chars; "
+                         f"cache shared with the writer: {'yes' if share_cache_with_writer else 'no'}")
+
         agent = SynthesisDiscoveryAgent(
             cost_tracker=self.cost_tracker,
-            model=model or SD_DEFAULT_MODEL,
+            model=sd_model,
             logger=self.logger,
         )
         result = agent.discover(
@@ -968,6 +987,9 @@ class MasterEditor(MasterEditorV2):
             analytical_framework=analytical_framework,
             computed_facts=computed_facts,
             debug_dir=Path("output/debug"),
+            shared_dossier=shared,
+            cache_shared=share_cache_with_writer,
+            thinking=adaptive_thinking(sd_model),
         )
 
         observations_md = result["observations_markdown"]
@@ -1369,6 +1391,17 @@ class MasterEditor(MasterEditorV2):
         verse_instr = fw.verse_instructions(len(verses))
         turn1 = fw.first_turn(inputs, essay_instr)
         self._forest_calls: List[Dict] = []
+        # Session 388: did synthesis discovery cache this exact dossier head? A mismatch costs
+        # money only (this call writes the entry itself, as before S388), so say so loudly.
+        sd_sha = getattr(self, "_shared_dossier_sha", None)
+        if sd_sha:
+            head, _ = fw.split_inputs(inputs)
+            if hashlib.sha256(head.encode("utf-8")).hexdigest() == sd_sha:
+                self.logger.info(f"[forest] dossier head ({len(head):,} chars) matches what synthesis "
+                                 "discovery cached; call 1 should read it")
+            else:
+                self.logger.warning("[forest] dossier head DIFFERS from what synthesis discovery cached; "
+                                    "call 1 will write it again (~$1.1 on Opus 5.5)")
 
         out_dir = psalm_output_dir(psalm_number, create=True)
         stem = f"psalm_{psalm_number:03d}"
@@ -1379,11 +1412,9 @@ class MasterEditor(MasterEditorV2):
                          f"verse instructions {len(verse_instr):,}; {len(verses)} verses, "
                          f"{len(fw.commentator_names(inputs))} commentators; sent prompt saved to {sent}")
 
-        thinking_cfg = {"type": "adaptive"}
-        from src.agents.archive.master_editor_v2 import THINKING_DISPLAY_MODELS
-        if any(m in model for m in THINKING_DISPLAY_MODELS):
-            thinking_cfg["display"] = "summarized"
-        base = {"model": model, "max_tokens": 128000, "thinking": thinking_cfg}
+        from src.utils.model_effort import adaptive_thinking
+        # Session 388: the same dict synthesis discovery sends -- part of the shared cache key.
+        base = {"model": model, "max_tokens": 128000, "thinking": adaptive_thinking(model)}
         apply_effort(base, model, self.logger)
 
         # Call 1: the essay (writes the cache entry on the first turn).

@@ -101,4 +101,39 @@ def split_output_tokens(usage: Any) -> Tuple[int, int]:
     return total - reasoning, reasoning
 
 
-__all__ = ["reasoning_tokens", "split_output_tokens"]
+def _int(value: Any) -> int:
+    try:
+        return int(value) if value else 0
+    except (TypeError, ValueError):
+        return 0
+
+
+def split_input_tokens(usage: Any) -> Tuple[int, int, int]:
+    """Split an OpenAI prompt count into (fresh, cached, cache_write). Session 388.
+
+    OpenAI folds BOTH cache hits and cache writes into `input_tokens` /
+    `prompt_tokens`, and reports each under the details key:
+
+        responses.create        -> usage.input_tokens_details.{cached_tokens, cache_write_tokens}
+        chat.completions.create -> usage.prompt_tokens_details.{cached_tokens, cache_write_tokens}
+
+    From GPT-5.6 on, a cache WRITE is billed at 1.25x input ("applies to both implicit
+    and explicit caching", OpenAI's prompt-caching guide, read 2026-09-29), and on a
+    first request nearly the whole prompt is a write -- a live gpt-6-luna probe reported
+    7,466 of 7,469 input tokens as `cache_write_tokens`. Older models report no writes,
+    so for them this returns (input - cached, cached, 0) and nothing changes.
+
+    The three values are disjoint and sum to the raw count, matching CostTracker's
+    `input_tokens` / `cache_read_tokens` / `cache_write_tokens`.
+    """
+    total = _get(usage, "input_tokens")
+    if total is None:
+        total = _get(usage, "prompt_tokens")
+    total = _int(total)
+    details = _get(usage, "input_tokens_details") or _get(usage, "prompt_tokens_details")
+    cached = min(_int(_get(details, "cached_tokens")), total)
+    write = min(_int(_get(details, "cache_write_tokens")), total - cached)
+    return total - cached - write, cached, write
+
+
+__all__ = ["reasoning_tokens", "split_output_tokens", "split_input_tokens"]

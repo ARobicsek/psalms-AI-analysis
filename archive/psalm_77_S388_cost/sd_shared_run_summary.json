@@ -1,0 +1,29 @@
+{
+  "psalm": 77,
+  "sd_seconds": 642,
+  "sd_cost_usd": 4.5742,
+  "sd_usage": {
+    "call_count": 3,
+    "input_tokens": 14348,
+    "output_tokens": 65276,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 642253,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.057392,
+      "output_cost": 1.30552,
+      "thinking_cost": 0.0,
+      "cache_cost": 3.211265,
+      "total_cost": 4.574177000000001
+    }
+  },
+  "writer_probe": {
+    "seconds_after_sd": 0,
+    "input": 4,
+    "cache_read": 0,
+    "cache_write": 240192
+  },
+  "total_cost_usd": 5.7752,
+  "observations_file": "output\\psalm_77\\_s388_sd_shared\\psalm_077_synthesis_discovery.md"
+}

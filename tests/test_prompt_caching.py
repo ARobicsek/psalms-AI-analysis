@@ -47,7 +47,54 @@ def test_anthropic_multipliers_are_1_25x_and_2x():
         if name.startswith("gemini") or row["cache_write"] == 0:
             continue  # non-Anthropic, or caching not applicable
         assert row["cache_write"] == pytest.approx(1.25 * row["input"]), name
-        assert row["cache_write_1h"] == pytest.approx(2.00 * row["input"]), name
+        if name.startswith("gpt-"):
+            # Session 388: OpenAI (GPT-5.6+) has ONE write rate, 1.25x, whatever the retention.
+            assert row["cache_write_1h"] == pytest.approx(row["cache_write"]), name
+        else:
+            assert row["cache_write_1h"] == pytest.approx(2.00 * row["input"]), name
+
+
+# Session 388. OpenAI's prompt-caching guide (read 2026-09-29): "Cache writes cost 1.25x
+# the standard, uncached input-token rate" for GPT-5.6 and later; earlier models carry
+# "no additional cache-write charge". A GPT-5.6+ row with cache_write 0 under-reports
+# nearly every first-sight input token by 20% (a live probe: 7,466 of 7,469 were writes).
+OPENAI_MODELS_BILLING_CACHE_WRITES = ("gpt-5.6-terra", "gpt-6-sol", "gpt-6-luna")
+
+
+def test_openai_5_6_plus_rows_bill_cache_writes_older_rows_do_not():
+    for name in OPENAI_MODELS_BILLING_CACHE_WRITES:
+        assert PRICING[name]["cache_write"] == pytest.approx(1.25 * PRICING[name]["input"]), name
+    for name in ("gpt-5.1", "gpt-5.4"):
+        assert PRICING[name]["cache_write"] == 0.0, name
+
+
+def test_gpt_6_sol_is_priced_at_its_standard_rate():
+    """Session 388, regression. S384 encoded $2/$10 as a promo through 2026-11-21 over an
+    assumed $4/$20; OpenAI's page lists $2/$10 as gpt-6-sol's STANDARD price and the
+    promo note belongs to GPT-5.6 Sol. Pinned after the old expiry date."""
+    r = resolve_pricing("gpt-6-sol", on_date=date(2026, 12, 1))
+    assert (r["input"], r["cache_read"], r["output"]) == (2.00, 0.20, 10.00)
+    assert "gpt-6-sol" not in INTRO_PRICING
+
+
+def test_split_input_tokens_responses_and_chat_shapes():
+    from src.utils.openai_usage import split_input_tokens
+    responses = {"input_tokens": 7469,
+                 "input_tokens_details": {"cached_tokens": 0, "cache_write_tokens": 7466}}
+    assert split_input_tokens(responses) == (3, 0, 7466)
+    hit = {"input_tokens": 7469, "input_tokens_details": {"cached_tokens": 7466, "cache_write_tokens": 0}}
+    assert split_input_tokens(hit) == (3, 7466, 0)
+    chat = {"prompt_tokens": 1000, "prompt_tokens_details": {"cached_tokens": 600}}
+    assert split_input_tokens(chat) == (400, 600, 0)          # older model: no writes field
+    assert split_input_tokens(None) == (0, 0, 0)
+    assert sum(split_input_tokens(responses)) == 7469
+
+
+def test_a_cache_write_is_billed_at_1_25x_on_gpt_6_sol():
+    t = CostTracker()
+    t.add_usage("gpt-6-sol", input_tokens=0, cache_write_tokens=1_000_000)
+    assert t.get_total_cost() == pytest.approx(2.50)
+    assert price_tokens("gpt-6-sol", cache_write_tokens=1_000_000) == pytest.approx(2.50)
 
 
 def test_one_hour_write_is_priced_at_2x_not_1_25x():
@@ -218,10 +265,11 @@ def test_sonnet_5_is_priced_at_its_permanent_rate():
 
 
 def test_intro_rates_keep_the_anthropic_cache_multipliers():
-    """Session 384: vendor-aware. The first non-Anthropic promo (GPT-6 Sol) broke the
-    old assumption that every promo carries Anthropic's 1.25x / 2x write markups --
-    OpenAI does not charge for cache writes at all. The write multipliers are checked
-    on Claude promos only; the 10% cache read on every promo."""
+    """Session 384: vendor-aware. The first non-Anthropic promo broke the old
+    assumption that every promo carries Anthropic's 1.25x / 2x write markups. The
+    write multipliers are checked on Claude promos only; the 10% cache read on every
+    promo. (Session 388: the only non-Anthropic promo left is Gemini's, which bills
+    caching by storage-time, so the cache_write == 0 branch still holds.)"""
     for name, promo in INTRO_PRICING.items():
         r = {**PRICING[name], **promo["rates"]}
         if name.startswith("claude-"):

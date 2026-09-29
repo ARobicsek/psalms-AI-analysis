@@ -542,7 +542,9 @@ def _cost_section(D: Dict, fc_stage: Optional[Dict]) -> List[str]:
                  "web": "stage 2: web"}
         L += _table(["Step", "Model", "Fresh input", "Cached", "Output", "of which reasoning", "Searches",
                      "Lookups", "Cost"],
-                    [[names.get(k, k), v["model"], _k(v["usage"]["input"]), _k(v["usage"]["cached"]),
+                    # "Fresh" = first-sight input: plain + written to cache (1.25x on GPT-5.6+, S388)
+                    [[names.get(k, k), v["model"], _k(v["usage"]["input"] + v["usage"].get("cache_write", 0)),
+                      _k(v["usage"]["cached"]),
                       _k(v["usage"]["output"] + v["usage"]["reasoning"]), _k(v["usage"]["reasoning"]),
                       v["searches"], sum(v.get("tools", {}).values()), _usd(v["cost_usd"])]
                      for k, v in ps.items()])
@@ -557,7 +559,12 @@ def _cost_section(D: Dict, fc_stage: Optional[Dict]) -> List[str]:
               f"tokens as well). Fact check total {_usd(meta.get('cost_usd', 0.0))} in "
               f"{round(meta.get('seconds', 0) / 60)} minutes.", ""]
 
-    promo = [(s["stage"], m, r) for s in stages for m, r in s["models"].items() if r.get("promo_through")]
+    # A promo flag saved at run time is only as good as the price table was then. Session 388:
+    # gpt-6-sol's "promo" turned out to be its standard price, so a flag is shown only while the
+    # model is STILL on introductory pricing in today's table.
+    from src.utils.cost_tracker import INTRO_PRICING
+    promo = [(s["stage"], m, r) for s in stages for m, r in s["models"].items()
+             if r.get("promo_through") and m in INTRO_PRICING]
     if promo:
         now = sum(r["cost_usd"] for _, _, r in promo)
         dur = sum(r.get("cost_usd_at_durable_rates", r["cost_usd"]) for _, _, r in promo)
@@ -567,9 +574,7 @@ def _cost_section(D: Dict, fc_stage: Optional[Dict]) -> List[str]:
         L += _table(["Stage", "Model", "Promo until", "Cost now", "At durable rates"],
                     [[st, m, r["promo_through"], _usd(r["cost_usd"]), _usd(r.get("cost_usd_at_durable_rates", 0))]
                      for st, m, r in promo])
-        L += [f"Run total at durable rates: {_usd(total - now + dur)} (now {_usd(total)}). GPT-6 Sol's durable "
-              "price ($4/$20 per million) is an assumption recorded in Session 384; OpenAI's page read on "
-              "2026-09-28 lists $2/$10 as standard, in which case nothing changes.", ""]
+        L += [f"Run total at durable rates: {_usd(total - now + dur)} (now {_usd(total)}).", ""]
     return L
 
 

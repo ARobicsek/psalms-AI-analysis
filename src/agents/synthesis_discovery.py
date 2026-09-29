@@ -139,6 +139,38 @@ you are surfacing material, not dictating structure.
 """
 
 
+# Session 388: the DOSSIER-FIRST layout, which lets the writer read this pass's prompt cache.
+# The message opens with the writer's own INPUTS head (built by forest_writer.shared_dossier,
+# byte-identical to what the writer sends) under a cache breakpoint; the role statement, the
+# two inputs only this pass sees, and the task follow. The role statement is INPUTS_HEADER's
+# own text with one word changed ("Below" -> "Above"), so the two layouts cannot drift apart.
+_ROLE_END = "═══════════════════════════════════════════════════════════════════════════\n## INPUT DATA"
+_BELOW = "Below is the full research dossier the Master Writer will see when it writes\nthe commentary."
+_ABOVE = ("Above, under YOUR INPUTS, is the full research dossier the Master Writer will\n"
+          "see when it writes the commentary.")
+if _ROLE_END not in INPUTS_HEADER or _BELOW not in INPUTS_HEADER:
+    raise RuntimeError("synthesis_discovery.INPUTS_HEADER changed; re-point the dossier-first layout")
+ROLE_AFTER_DOSSIER = INPUTS_HEADER[:INPUTS_HEADER.index(_ROLE_END)].replace(_BELOW, _ABOVE)
+
+EXTRA_INPUTS = """═══════════════════════════════════════════════════════════════════════════
+## ADDITIONAL INPUT DATA (for this pass only; the writer does not see these)
+═══════════════════════════════════════════════════════════════════════════
+
+### COMPUTED DISTRIBUTIONAL FACTS (deterministic SQL counts over the full-Tanakh concordance)
+{computed_facts}
+
+### ANALYTICAL FRAMEWORK (poetic conventions reference)
+{analytical_framework}
+"""
+
+# A 5-minute cache entry lives from the START of the request that wrote or last read it, and
+# this pass runs ~10 minutes on Opus 5.5 (Ps 77: 637 s). Every this many seconds while it
+# streams, a max_tokens=0 request re-reads the dossier head (0.05x input on Opus 5.5, ~$0.05);
+# one more follows at the end if the last was long enough ago that the writer might miss it.
+KEEPALIVE_EVERY_S = 200
+FINAL_KEEPALIVE_IF_OLDER_THAN_S = 120
+
+
 SYNTHESIS_TASK = """
 ═══════════════════════════════════════════════════════════════════════════
 ## YOUR TASK: SYNTHESIS DISCOVERY (NO PROSE — DO NOT WRITE COMMENTARY)
@@ -466,25 +498,48 @@ class SynthesisDiscoveryAgent:
         computed_facts: str = "",
         debug_dir: Optional[Path] = None,
         retries: int = 4,
+        shared_dossier: Optional[str] = None,
+        cache_shared: bool = False,
+        thinking: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Run the synthesis-discovery pass and return the observations block.
+
+        Session 388: with `shared_dossier` (forest_writer.shared_dossier -- the writer's own
+        INPUTS head) the message opens with that text, and `cache_shared` puts a cache
+        breakpoint on it and keeps the entry warm while this pass runs, so the writer reads
+        it. `thinking` must be the dict the writer sends (model_effort.adaptive_thinking):
+        thinking settings are part of the cache key. Without `shared_dossier`, the original
+        single-block layout (INPUTS_HEADER + SYNTHESIS_TASK) is sent.
 
         Returns a dict with keys:
           - observations_markdown: the contents between the START/END markers
             (or the full response if the markers were not emitted)
           - full_response: the raw Claude response text
-          - input_tokens, output_tokens, thinking_chars
+          - input_tokens, output_tokens, thinking_chars, usage (with cache fields)
         """
-        prompt = INPUTS_HEADER.format(
-            psalm_number=psalm_number,
-            psalm_text=psalm_text,
-            macro_analysis=macro_analysis_text,
-            micro_analysis=micro_analysis_text,
-            research_bundle=research_bundle,
-            phonetic_section=phonetic_section,
-            computed_facts=computed_facts or "[not available for this run]",
-            analytical_framework=analytical_framework,
-        ) + SYNTHESIS_TASK
+        facts = computed_facts or "[not available for this run]"
+        if shared_dossier:
+            # the head ends without whitespace (forest_writer.split_inputs); the break opens the tail
+            tail = ("\n\n" + ROLE_AFTER_DOSSIER.format(psalm_number=psalm_number)
+                    + EXTRA_INPUTS.format(computed_facts=facts, analytical_framework=analytical_framework)
+                    + SYNTHESIS_TASK)
+            head = {"type": "text", "text": shared_dossier}
+            if cache_shared:
+                head["cache_control"] = {"type": "ephemeral"}
+            content = [head, {"type": "text", "text": tail}]
+            prompt = shared_dossier + tail
+        else:
+            prompt = INPUTS_HEADER.format(
+                psalm_number=psalm_number,
+                psalm_text=psalm_text,
+                macro_analysis=macro_analysis_text,
+                micro_analysis=micro_analysis_text,
+                research_bundle=research_bundle,
+                phonetic_section=phonetic_section,
+                computed_facts=facts,
+                analytical_framework=analytical_framework,
+            ) + SYNTHESIS_TASK
+            content = prompt
 
         if debug_dir is not None:
             debug_dir = Path(debug_dir)
@@ -493,8 +548,10 @@ class SynthesisDiscoveryAgent:
                 prompt, encoding="utf-8"
             )
 
-        response_text, input_tokens, output_tokens, thinking_chars = self._stream_call(
-            prompt, tag=f"SYNTHESIS-DISCOVERY psalm {psalm_number}", retries=retries
+        keepalive_head = content[0] if (shared_dossier and cache_shared) else None
+        response_text, usage, thinking_chars = self._stream_call(
+            content, tag=f"SYNTHESIS-DISCOVERY psalm {psalm_number}", retries=retries,
+            thinking=thinking, keepalive_head=keepalive_head,
         )
 
         if debug_dir is not None:
@@ -502,22 +559,44 @@ class SynthesisDiscoveryAgent:
                 response_text, encoding="utf-8"
             )
 
-        self.cost_tracker.add_usage(
-            model=self.model,
-            input_tokens=input_tokens,
-            output_tokens=output_tokens,
-            thinking_tokens=0,
-        )
-
         observations_markdown = self._extract_observations_block(response_text)
 
         return {
             "observations_markdown": observations_markdown,
             "full_response": response_text,
-            "input_tokens": input_tokens,
-            "output_tokens": output_tokens,
+            "input_tokens": usage["input"] + usage["cache_read"] + usage["cache_write"],
+            "output_tokens": usage["output"],
             "thinking_chars": thinking_chars,
+            "usage": usage,
         }
+
+    def _bill(self, u) -> Dict[str, int]:
+        """Bill one response's usage, cache fields included (they are disjoint from
+        input_tokens on the Anthropic API). Before Session 388 only input and output were
+        billed, which was right only while this pass never cached anything."""
+        row = {"input": getattr(u, "input_tokens", 0) or 0,
+               "cache_read": getattr(u, "cache_read_input_tokens", 0) or 0,
+               "cache_write": getattr(u, "cache_creation_input_tokens", 0) or 0,
+               "output": getattr(u, "output_tokens", 0) or 0}
+        self.cost_tracker.add_usage(model=self.model, input_tokens=row["input"],
+                                    output_tokens=row["output"], thinking_tokens=0,
+                                    cache_read_tokens=row["cache_read"],
+                                    cache_write_tokens=row["cache_write"])
+        return row
+
+    def _keepalive(self, kwargs: Dict[str, Any], head: Dict[str, Any], tag: str) -> Optional[Dict[str, int]]:
+        """Re-read the cached dossier head: max_tokens=0 (nothing generated), the same
+        model, thinking and effort as the pass itself, which are part of the cache key."""
+        try:
+            kw = {k: v for k, v in kwargs.items() if k != "messages"}
+            kw.update(max_tokens=0, messages=[{"role": "user", "content": [head]}])
+            row = self._bill(self.client.messages.create(**kw).usage)
+            self.logger.info(f"[{tag}] dossier cache keep-alive: read {row['cache_read']:,}, "
+                             f"wrote {row['cache_write']:,}")
+            return row
+        except Exception as e:  # a failed keep-alive costs at most the writer's cache write
+            self.logger.warning(f"[{tag}] dossier cache keep-alive failed: {str(e)[:160]}")
+            return None
 
     @staticmethod
     def _extract_observations_block(response_text: str) -> str:
@@ -529,12 +608,20 @@ class SynthesisDiscoveryAgent:
             return response_text.strip()
         return response_text[i + len(start_marker):j].strip()
 
-    def _stream_call(self, prompt: str, tag: str, retries: int = 4):
-        """One Opus 4.7 streaming call, mirroring the Master Writer config.
+    def _stream_call(self, content, tag: str, retries: int = 4,
+                     thinking: Optional[Dict[str, Any]] = None,
+                     keepalive_head: Optional[Dict[str, Any]] = None):
+        """One Opus streaming call, mirroring the Master Writer config.
 
         Retries on transient stream drops (the 'incomplete chunked read'
-        family) and on anthropic.* transient errors.
+        family) and on anthropic.* transient errors. Session 388: with
+        `keepalive_head`, a thread re-reads the cached dossier head every
+        KEEPALIVE_EVERY_S seconds once the stream has begun (an entry is
+        readable only then), and once more at the end if the last read is
+        older than FINAL_KEEPALIVE_IF_OLDER_THAN_S. Returns (text, usage, thinking_chars).
         """
+        import threading
+
         for attempt in range(1, retries + 1):
             self.logger.info(
                 f"[{tag}] calling {self.model} (effort={effort_for(self.model) or 'API default'}, adaptive thinking) "
@@ -542,42 +629,66 @@ class SynthesisDiscoveryAgent:
             )
             t0 = time.time()
             text, think_chars = "", 0
-            input_tokens, output_tokens = 0, 0
 
             stream_kwargs = {
                 "model": self.model,
                 # Session 387: 64000 cut Ps 77 off mid-observation on Opus 5.5, which writes
                 # ~75% more than Opus 4.8 did (S383). 128K is Opus 5.5's output ceiling.
                 "max_tokens": 128000,
-                "thinking": {"type": "adaptive"},
-                "messages": [{"role": "user", "content": prompt}],
+                "thinking": dict(thinking) if thinking else {"type": "adaptive"},
+                "messages": [{"role": "user", "content": content}],
             }
             apply_effort(stream_kwargs, self.model, self.logger)
 
+            stop = threading.Event()
+            last_read = [t0]
+            missed = [False]
+
+            def keep_warm():
+                while not stop.wait(KEEPALIVE_EVERY_S):
+                    row = self._keepalive(stream_kwargs, keepalive_head, tag)
+                    if row is None or row["cache_write"]:
+                        # a WRITE means the prefix did not match: pinging again would pay again
+                        missed[0] = True
+                        self.logger.warning(f"[{tag}] keep-alive stopped (no cache hit)")
+                        return
+                    last_read[0] = time.time()
+
+            warm = None
             try:
                 with self.client.messages.stream(**stream_kwargs) as stream:
                     for event in stream:
+                        if keepalive_head is not None and warm is None:
+                            warm = threading.Thread(target=keep_warm, daemon=True)
+                            warm.start()
                         if getattr(event, "type", None) == "content_block_delta":
                             if hasattr(event.delta, "text"):
                                 text += event.delta.text
                             elif hasattr(event.delta, "thinking"):
                                 think_chars += len(event.delta.thinking)
                     final = stream.get_final_message()
-                    input_tokens = final.usage.input_tokens
-                    output_tokens = final.usage.output_tokens
-                    if final.stop_reason == "max_tokens":
-                        self.logger.error(
-                            f"[{tag}] OUTPUT CUT OFF at max_tokens={stream_kwargs['max_tokens']:,}: "
-                            "the last observation is incomplete and any after it are missing")
+                stop.set()
+                usage = self._bill(final.usage)
+                if final.stop_reason == "max_tokens":
+                    self.logger.error(
+                        f"[{tag}] OUTPUT CUT OFF at max_tokens={stream_kwargs['max_tokens']:,}: "
+                        "the last observation is incomplete and any after it are missing")
+                if keepalive_head is not None:
+                    if warm is not None:
+                        warm.join(timeout=60)
+                    if not missed[0] and time.time() - last_read[0] > FINAL_KEEPALIVE_IF_OLDER_THAN_S:
+                        self._keepalive(stream_kwargs, keepalive_head, tag)
 
                 dt = time.time() - t0
                 self.logger.info(
-                    f"[{tag}] done in {dt:.0f}s - in={input_tokens:,} out={output_tokens:,} "
+                    f"[{tag}] done in {dt:.0f}s - in={usage['input']:,} cache read={usage['cache_read']:,} "
+                    f"cache write={usage['cache_write']:,} out={usage['output']:,} "
                     f"(~{think_chars // 4:,} thinking) | response {len(text):,} chars"
                 )
-                return text, input_tokens, output_tokens, think_chars
+                return text, usage, think_chars
 
             except TRANSIENT_ERRORS as e:
+                stop.set()
                 wait = 10 * attempt
                 self.logger.warning(
                     f"[{tag}] transient API error after {time.time()-t0:.0f}s: "
@@ -588,6 +699,7 @@ class SynthesisDiscoveryAgent:
                 self.logger.info(f"[{tag}] retrying in {wait}s")
                 time.sleep(wait)
             except Exception as e:
+                stop.set()
                 msg = str(e)
                 if "incomplete chunked read" in msg or "peer closed connection" in msg:
                     wait = 10 * attempt

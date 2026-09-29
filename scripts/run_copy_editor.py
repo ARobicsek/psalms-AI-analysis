@@ -82,6 +82,14 @@ Examples:
              "'contradicted'. The system prompt is unchanged."
     )
 
+    parser.add_argument(
+        "--edit-mode",
+        choices=("full", "edits"),
+        default=None,
+        help="Session 388: 'edits' (default) returns FIND/REPLACE edits only, applied in Python; 'full' returns "
+             "the whole corrected text (the pre-S388 behaviour)."
+    )
+
     args = parser.parse_args()
     supplementary = None
     if args.fact_check_report:
@@ -96,7 +104,7 @@ Examples:
             return 1
 
     # Initialize editor
-    editor = CopyEditor(model=args.model, logger=logger)
+    editor = CopyEditor(model=args.model, logger=logger, edit_mode=args.edit_mode)
 
     results = []
     errors = []

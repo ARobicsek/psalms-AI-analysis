@@ -66,3 +66,17 @@ def apply_effort(stream_kwargs: dict, model: str, logger=None) -> dict:
 
 
 __all__ = ["effort_for", "apply_effort"]
+
+
+def adaptive_thinking(model: str) -> dict:
+    """The `thinking` parameter the Opus writer stages send (Session 388: ONE definition).
+
+    Adaptive thinking, plus display="summarized" on the models that accept it (pre-4.7
+    models 400 on `display`; see THINKING_DISPLAY_MODELS). Thinking settings are part of
+    the prompt-cache key, so the synthesis-discovery pass and the forest writer must send
+    exactly this dict for the writer to read the dossier cache discovery wrote."""
+    from src.agents.archive.master_editor_v2 import THINKING_DISPLAY_MODELS
+    cfg = {"type": "adaptive"}
+    if model and any(m in model for m in THINKING_DISPLAY_MODELS):
+        cfg["display"] = "summarized"
+    return cfg

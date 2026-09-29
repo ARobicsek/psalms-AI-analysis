@@ -331,6 +331,7 @@ def run_enhanced_pipeline(
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
     fact_check: bool = False,        # Session 385: OFF until the author approves -- see STEP 5a¾
     writer_prompt: str = "forest",   # Session 387: two-call forest writer; "v4" = the old one-call prompt
+    copy_edit_mode: str = None,      # Session 388: None -> CopyEditor.DEFAULT_EDIT_MODE; "edits" = FIND/REPLACE only
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -762,6 +763,11 @@ def run_enhanced_pipeline(
                     # file (writer still receives it), for writer-only reruns.
                     skip_if_exists=reuse_synthesis_discovery,
                     model=sd_model,
+                    # Session 388: the writer reads discovery's dossier cache only if it runs
+                    # next, as the forest writer, on the same model (the cache is model-scoped).
+                    share_cache_with_writer=(writer_prompt == "forest"
+                                             and sd_model == getattr(master_editor, "model", None)
+                                             and not skip_writer),
                 )
                 synthesis_discovery_cost = cost_tracker.get_total_cost() - sd_cost_before
                 _record_stage("synthesis discovery", _snap)
@@ -1027,7 +1033,7 @@ def run_enhanced_pipeline(
         print(f"{'='*80}\n")
         _snap = cost_tracker.snapshot()
         try:
-            copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
+            copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model, edit_mode=copy_edit_mode)
             ce_result = copy_editor.edit_commentary(
                 psalm_number=psalm_number,
                 input_file=print_ready_file,
@@ -1241,6 +1247,10 @@ if __name__ == "__main__":
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-5-5",
                        choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-5-5)")
+    parser.add_argument("--copy-edit-mode", choices=["full", "edits"], default=None,
+                        help="Session 388: 'full' returns the whole corrected guide; 'edits' returns "
+                             "FIND/REPLACE edits only, applied in Python (about half the copy editor's cost). "
+                             "Default: edits (CopyEditor.DEFAULT_EDIT_MODE, S388).")
     parser.add_argument("--writer-prompt", choices=["forest", "v4"], default="forest",
                        help="Session 387: 'forest' (default) = the two-call writer (essay, then liturgy + "
                             "verses) on the S384 forest instructions; 'v4' = the old one-call "
@@ -1393,4 +1403,5 @@ if __name__ == "__main__":
         beta_model=args.beta_model,
         fact_check=args.fact_check,
         writer_prompt=args.writer_prompt,
+        copy_edit_mode=args.copy_edit_mode,
     )
