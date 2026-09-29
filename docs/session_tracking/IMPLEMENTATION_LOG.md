@@ -41,15 +41,19 @@ copy edit. Plan and probe cases: `docs/plans/S385_two_call_writer_and_fact_check
 
 **Orchestration, and why nothing ran**: the author added the keys to the cloud environment. A child session started to
 run the writer could not see `PSALMS_ANTHROPIC_API_KEY` and stopped before any paid call; it was archived. A second
-child session built the fact check. It was then redirected, through a trigger fired into it, to finish as a no-spend
-handoff, and it pushed `src/agents/fact_checker.py`, `scripts/run_fact_checker.py`, the copy-editor
+child session built the fact check, and it DID see `OPENAI_API_KEY`, so cloud environment variables work and the
+Anthropic key was most likely saved under another name. It ran a $0.23 smoke test, which caught the S383 "only other
+plural use" error with Ps 78:48 evidence and marked Herodotus 2.141 supported from Rawlinson. It then made two Probe A
+attempts, one aborted because a bare `pytest` run had left an EMPTY `database/tanakh.db` (fixed: `usable_db`,
+`pytest.ini`). It was then redirected, through a trigger fired into it, to finish with no further spend, and it pushed `src/agents/fact_checker.py`, `scripts/run_fact_checker.py`, the copy-editor
 `supplementary_prompt` path (the prompt is byte-identical with no report, tested), the S383 `_reassemble` split fix,
 `--fact-check` in `run_enhanced_pipeline.py` (default OFF, with the $0 citation re-check after the copy edit) and tests
 (`pytest tests/`: 199 passed, 14 skipped at commit 30646cc, re-run in the parent session), plus `docs/plans/S385_FACT_CHECK_RESULTS.md`. The author continues LOCALLY (VS Code;
 `.env` keys). The writer runner now loads `.env` and reads `PSALMS_ANTHROPIC_API_KEY` first: in a cloud session a plain
 `ANTHROPIC_API_KEY` would also be visible to Claude Code itself.
 
-**Spend**: $0.
+**Spend**: ≈ $1.18 of OpenAI, all by the fact-check child (≈ $0.95 of it estimated, since aborted calls return no usage);
+`archive/psalm_76_S385_fact_check/ledger.json`.
 
 ---
 
