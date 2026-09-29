@@ -5,6 +5,7 @@ Session 385 fact-check test driver (Psalm 76). Experimental; archive-only.
     python archive/psalm_76_S385_fact_check/run_s385_fact_check.py probe-a
     python archive/psalm_76_S385_fact_check/run_s385_fact_check.py main --source F|B383
     python archive/psalm_76_S385_fact_check/run_s385_fact_check.py sol --source F
+    python archive/psalm_76_S385_fact_check/run_s385_fact_check.py compare --source F
     python archive/psalm_76_S385_fact_check/run_s385_fact_check.py docx --source F
     python archive/psalm_76_S385_fact_check/run_s385_fact_check.py spent
 
@@ -17,6 +18,7 @@ container.
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -24,6 +26,11 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+
+from dotenv import load_dotenv  # noqa: E402
+load_dotenv(ROOT / ".env")  # OPENAI_API_KEY (and ANTHROPIC_API_KEY), before any client is created
 
 PSALM = 76
 CAP = 12.0
@@ -166,7 +173,6 @@ def cmd_docx(source: str):
     """Compact reading DOCX of the fact-checked, copy-edited guide, via the
     two-call writer's build_docx (production DocumentGenerator, psalm text stubbed)."""
     from s385_two_call_writer import build_docx
-    sys.path.insert(0, str(ROOT))
     from run_enhanced_pipeline import _extract_sections_from_copy_edited
     base = HERE / f"main_{source}"
     ce = base / "copy_edit_with_report" / "psalm_076_copy_edited.md"
@@ -176,10 +182,12 @@ def cmd_docx(source: str):
     (vdir / "psalm_076_edited_intro.md").write_text(intro, encoding="utf-8")
     (vdir / "psalm_076_edited_verses.md").write_text(verses, encoding="utf-8")
     fc = json.loads((base / "psalm_076_fact_check.json").read_text(encoding="utf-8"))
+    def plain(md: str) -> str:  # the appendix renders paragraphs, not headings
+        return re.sub(r"(?m)^#{1,6}\s+(.+)$", r"**\1**", md)
     parts = [("Fact-check report (gpt-6-sol)",
-              (base / "psalm_076_fact_check.md").read_text(encoding="utf-8")),
+              plain((base / "psalm_076_fact_check.md").read_text(encoding="utf-8"))),
              ("Copy-edit change log (gpt-5.4, with the report)",
-              (base / "copy_edit_with_report" / "psalm_076_copy_edit_changes.md").read_text(encoding="utf-8"))]
+              plain((base / "copy_edit_with_report" / "psalm_076_copy_edit_changes.md").read_text(encoding="utf-8")))]
     note = (f"Psalm 76, guide '{source}', copy-edited by gpt-5.4 with the Session 385 fact-check report. "
             f"Appendix: the fact-check report ({len(fc['claims'])} claims, {fc['meta']['verdicts']}) and "
             f"the copy editor's change log.")
@@ -187,9 +195,69 @@ def cmd_docx(source: str):
     build_docx(vdir, note, parts, out)
 
 
+# Strings that must SURVIVE every copy-edit arm (claims from memory that are true),
+# and the one that must NOT survive the arm given the report (F's Rashi on 76:11).
+MUST_SURVIVE = {
+    "Byron, line 1": "For the Angel of Death spread his wings on the blast",
+    "Byron, line 4": "And their hearts but once heaved, and for ever grew still!",
+    "Byron, 'breath of his pride'": "But through it there roll'd not the breath of his pride.",
+    "Herodotus 2.141 cited": "Herodotus (2.141)",
+    "Herodotus inscription": "ἐς ἐμέ τις ὁρέων εὐσεβὴς ἔστω",
+    "prism: bird in a cage": "like a bird in a cage",
+    "prism: talents": "thirty talents of gold, eight hundred of silver",
+    "prism: daughters": "his own daughters",
+}
+RASHI_ERROR = "Rashi offers two readings"
+
+
+def _arm_stats(arm: Path) -> dict:
+    ch = (arm / "psalm_076_copy_edit_changes.md").read_text(encoding="utf-8")
+    text = (arm / "psalm_076_copy_edited.md").read_text(encoding="utf-8")
+    body, _, unver = ch.partition("### UNVERIFIED")
+    entries = [l for l in body.splitlines() if re.match(r"^\s*\d+\.\s", l)]
+    cats = {}
+    for l in entries:
+        for grp in re.findall(r"\[(\d+(?:,\s*\d+)*)\]", l):
+            for n in grp.split(","):
+                cats[int(n)] = cats.get(int(n), 0) + 1
+    return {
+        "changes": len(entries),
+        "category_7": cats.get(7, 0),
+        "by_category": dict(sorted(cats.items())),
+        "fact_check_tagged": sum("[FACT-CHECK]" in l for l in entries),
+        "unverified_notes": len([l for l in unver.splitlines() if l.strip().startswith(("-", "*")) or re.match(r"^\s*\d+\.", l)]),
+        "survivors": {k: (v in text) for k, v in MUST_SURVIVE.items()},
+        "rashi_two_readings_still_there": RASHI_ERROR in text,
+        "girding_reading_present": bool(re.search(r"gird", text[text.find("Verse 11"):] if "Verse 11" in text else text, re.I)),
+        "category_7_entries": [l.strip() for l in entries if re.search(r"\[[^\]]*\b7\b[^\]]*\]", l)],
+    }
+
+
+def cmd_compare(source: str):
+    """$0. Edit counts and probe survival per copy-edit arm; writes comparison.json."""
+    base = HERE / f"main_{source}"
+    fc = json.loads((base / "psalm_076_fact_check.json").read_text(encoding="utf-8"))
+    out = {"fact_check": fc["meta"]["verdicts"], "arms": {}}
+    rashi = [c for c in fc["claims"] if "Rashi" in c["sentence"] and ("76:11" in c["location"] or "two readings" in c["sentence"])]
+    out["rashi_records"] = [{k: c[k] for k in ("id", "location", "verdict", "claim")} for c in rashi]
+    out["probe_records"] = {k: [{"id": c["id"], "verdict": c["verdict"]} for c in fc["claims"]
+                                if v[:25] in c["sentence"] or v[:25] in c.get("claim", "")]
+                            for k, v in MUST_SURVIVE.items()}
+    for arm in ("copy_edit_control", "copy_edit_with_report", "copy_edit_sol_with_report"):
+        if (base / arm / "psalm_076_copy_edited.md").exists():
+            out["arms"][arm] = _arm_stats(base / arm)
+    (base / "comparison.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    for arm, st in out["arms"].items():
+        lost = [k for k, ok in st["survivors"].items() if not ok]
+        print(f"{arm}: {st['changes']} changes, cat-7 {st['category_7']}, [FACT-CHECK] {st['fact_check_tagged']}, "
+              f"UNVERIFIED notes {st['unverified_notes']}; Rashi error still there: {st['rashi_two_readings_still_there']}; "
+              f"lost probes: {lost or 'none'}")
+    print(f"  → {base / 'comparison.json'}")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["probe-a", "main", "sol", "docx", "spent", "print-ready"])
+    ap.add_argument("cmd", choices=["probe-a", "main", "sol", "docx", "compare", "spent", "print-ready"])
     ap.add_argument("--source", default="F", choices=list(SOURCES))
     a = ap.parse_args()
     if a.cmd == "spent":
@@ -204,6 +272,8 @@ def main():
         cmd_sol(a.source)
     elif a.cmd == "docx":
         cmd_docx(a.source)
+    elif a.cmd == "compare":
+        cmd_compare(a.source)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,13 @@
    "cost_usd": 0.45,
    "estimated": true,
    "note": "no usage returned before the kill; estimate = ~140K uncached + ~150K cached input + ~5K reasoning at gpt-6-sol promo rates, rounded up"
+  },
+  {
+   "step": "Probe A attempt 2, STOPPED during chunk 1 round 3 on the parent session's instruction (no paid runs in the cloud; the author runs the tests locally)",
+   "cost_usd": 0.5,
+   "estimated": true,
+   "web_searches": 5,
+   "note": "no usage returned before the stop; estimate as for attempt 1 plus 5 web searches"
   }
  ]
 }

@@ -49,6 +49,12 @@ import requests
 
 from src.utils.cost_tracker import price_tokens
 
+try:  # the project's .env (OPENAI_API_KEY) wherever the checker is imported from
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+except ImportError:  # pragma: no cover
+    pass
+
 DEFAULT_MODEL = "gpt-6-sol"
 DEFAULT_EFFORT = "high"
 VERDICTS = ("supported", "contradicted", "unverifiable")
@@ -217,7 +223,7 @@ def usable_db(db_path: Optional[Path]) -> bool:
     if not db_path or not Path(db_path).exists():
         return False
     try:
-        con = sqlite3.connect(f"file:{Path(db_path).as_posix()}?mode=ro", uri=True)
+        con = _ro_connect(db_path)
         try:
             return con.execute("SELECT COUNT(*) FROM verses").fetchone()[0] > 0
         finally:
@@ -226,8 +232,13 @@ def usable_db(db_path: Optional[Path]) -> bool:
         return False
 
 
+def _ro_connect(db_path: Path) -> sqlite3.Connection:
+    # as_uri() gives file:///C:/... on Windows and file:///home/... elsewhere.
+    return sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro", uri=True)
+
+
 def _db_rows(db_path: Path, sql: str, params=()) -> list:
-    con = sqlite3.connect(f"file:{Path(db_path).as_posix()}?mode=ro", uri=True)
+    con = _ro_connect(db_path)
     try:
         return con.execute(sql, params).fetchall()
     finally:

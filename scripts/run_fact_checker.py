@@ -17,9 +17,13 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
+
+from dotenv import load_dotenv  # noqa: E402
+load_dotenv(ROOT / ".env")  # OPENAI_API_KEY, before any client is created
 
 from src.agents.fact_checker import (  # noqa: E402
     DEFAULT_EFFORT, DEFAULT_MODEL, FactChecker, checkable_text, split_guide_for_checking,
@@ -45,7 +49,7 @@ def main() -> int:
     ap.add_argument("--prefix", default="", help="filename prefix for the outputs")
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--effort", default=DEFAULT_EFFORT)
-    ap.add_argument("--db-path", type=Path, default=Path("database/tanakh.db"))
+    ap.add_argument("--db-path", type=Path, default=ROOT / "database" / "tanakh.db")
     ap.add_argument("--no-web-search", action="store_true")
     ap.add_argument("--chunk-chars", type=int, default=None)
     ap.add_argument("--dry-run", action="store_true")
