@@ -331,3 +331,22 @@ def test_fact_check_is_off_by_default_in_the_pipeline():
     # Without the flag the copy editor gets exactly the citation report, as before.
     assert "if fact_check else citation_fix_prompt" in src
     assert "if fact_check and not smoke_test and print_ready_file.exists():" in src
+
+
+def test_an_empty_or_missing_db_is_never_used(tmp_path):
+    import sqlite3
+    from src.agents.fact_checker import usable_db, search_tanakh
+    missing = tmp_path / "nope.db"
+    assert not usable_db(missing)
+    assert not missing.exists()          # checking must not create it
+    empty = tmp_path / "empty.db"
+    con = sqlite3.connect(empty)
+    con.execute("CREATE TABLE verses (book_name TEXT, chapter INT, verse INT, hebrew TEXT, english TEXT)")
+    con.commit(); con.close()
+    assert not usable_db(empty)
+    con = sqlite3.connect(empty)
+    con.execute("INSERT INTO verses VALUES ('Psalms', 78, 48, 'וּמִקְנֵיהֶם לָרְשָׁפִים', 'x')")
+    con.commit(); con.close()
+    assert usable_db(empty)
+    r = search_tanakh("לרשפים", empty)
+    assert r["count"] == 1 and r["refs"] == ["Psalms 78:48"]

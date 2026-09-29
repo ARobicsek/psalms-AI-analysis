@@ -1005,7 +1005,8 @@ def run_enhanced_pipeline(
             # verifier on the COPY-EDITED text and report mismatches the copy
             # editor introduced. Nothing checked its own assertions before
             # (COPY_EDITOR_TERRA_FINDINGS.md, "Open"). Report only; no rewrite.
-            if fact_check and Path(db_path).exists():
+            from src.agents.fact_checker import usable_db
+            if fact_check and usable_db(Path(db_path)):
                 from src.utils.scripture_verifier import (
                     verify_citations, new_citation_issues, format_verification_report,
                 )

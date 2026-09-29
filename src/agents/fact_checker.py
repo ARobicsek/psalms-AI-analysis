@@ -209,28 +209,43 @@ def _sefaria_text(tref: str, versions=("hebrew", "english"), timeout: int = 30) 
     return out
 
 
+def usable_db(db_path: Optional[Path]) -> bool:
+    """True only for a tanakh.db that exists AND holds verses. Opened read-only:
+    TanakhDatabase's constructor CREATES an empty schema at a missing path, and
+    an empty db must never answer a count ("zero occurrences") — Session 385
+    lost a run to exactly that when a test collection left one behind."""
+    if not db_path or not Path(db_path).exists():
+        return False
+    try:
+        con = sqlite3.connect(f"file:{Path(db_path).as_posix()}?mode=ro", uri=True)
+        try:
+            return con.execute("SELECT COUNT(*) FROM verses").fetchone()[0] > 0
+        finally:
+            con.close()
+    except sqlite3.Error:
+        return False
+
+
+def _db_rows(db_path: Path, sql: str, params=()) -> list:
+    con = sqlite3.connect(f"file:{Path(db_path).as_posix()}?mode=ro", uri=True)
+    try:
+        return con.execute(sql, params).fetchall()
+    finally:
+        con.close()
+
+
 def lookup_verse(ref: str, db_path: Optional[Path] = None) -> Dict[str, str]:
     parsed = parse_ref(ref)
     if not parsed:
         return {"error": f"could not parse reference {ref!r}; use e.g. 'Psalms 78:48'"}
     book, ch, v, end = parsed
-    verses = range(v, (end or v) + 1)
-    if db_path and Path(db_path).exists():
-        # Never instantiate TanakhDatabase on a missing path: its constructor
-        # creates an empty schema there.
-        from src.data_sources.tanakh_database import TanakhDatabase
-        db = TanakhDatabase(Path(db_path))
-        try:
-            rows = [db.get_verse(book, ch, n) for n in verses]
-        finally:
-            db.close()
-        rows = [r for r in rows if r]
-        if rows:
-            return {"ref": f"{book} {ch}:{v}" + (f"-{end}" if end else ""),
-                    "source": "tanakh.db",
-                    "hebrew": " ".join(r.hebrew for r in rows),
-                    "english": " ".join(r.english for r in rows)}
     tref = f"{book} {ch}:{v}" + (f"-{end}" if end else "")
+    if usable_db(db_path):
+        rows = _db_rows(db_path, "SELECT hebrew, english FROM verses WHERE book_name=? AND chapter=? "
+                        "AND verse BETWEEN ? AND ? ORDER BY verse", (book, ch, v, end or v))
+        if rows:
+            return {"ref": tref, "source": "tanakh.db",
+                    "hebrew": " ".join(r[0] for r in rows), "english": " ".join(r[1] for r in rows)}
     try:
         out = _sefaria_text(tref)
         out["source"] = "Sefaria"
@@ -298,17 +313,11 @@ def search_tanakh(query: str, db_path: Optional[Path] = None, limit: int = 60) -
     q = _consonants(query)
     if not q:
         return {"error": "query must be Hebrew"}
-    if db_path and Path(db_path).exists():
-        con = sqlite3.connect(str(db_path))
-        try:
-            cols = [r[1] for r in con.execute("PRAGMA table_info(verses)")]
-            if "hebrew" in cols:
-                rows = con.execute("SELECT book_name, chapter, verse, hebrew FROM verses").fetchall()
-                hits = [f"{b} {c}:{v}" for b, c, v, h in rows if q in _consonants(h)]
-                return {"query": query, "source": "tanakh.db (consonantal substring)",
-                        "count": len(hits), "refs": hits[:limit]}
-        finally:
-            con.close()
+    if usable_db(db_path):
+        rows = _db_rows(db_path, "SELECT book_name, chapter, verse, hebrew FROM verses")
+        hits = [f"{b} {c}:{v}" for b, c, v, h in rows if q in _consonants(h)]
+        return {"query": query, "source": "tanakh.db (consonantal substring)",
+                "count": len(hits), "refs": hits[:limit]}
     body = {"query": q, "type": "text", "field": "naive_lemmatizer", "filters": ["Tanakh"],
             "filter_fields": ["path"], "size": 200, "source_proj": True, "slop": 0}
     try:
