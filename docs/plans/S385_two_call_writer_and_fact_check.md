@@ -66,8 +66,9 @@ whole guide or into two calls. The author asked for two.
 
 ## How to run (next session)
 
-1. Add `ANTHROPIC_API_KEY` to the cloud environment (environment settings, then Edit, then environment
-   variables). A new session picks it up. On the author's own machine, `.env` already has it.
+1. Add the Anthropic key to the cloud environment as **`PSALMS_ANTHROPIC_API_KEY`** (environment settings, then Edit,
+   then environment variables); the name keeps it out of Claude Code's own view. Add `OPENAI_API_KEY` for later
+   copy-editor work. A new session picks them up. On the author's own machine, `.env`'s `ANTHROPIC_API_KEY` is used.
 2. `pip install anthropic python-docx python-dotenv` if the container lacks them.
 3. `python scripts/s385_two_call_writer.py --dry-run`, then `python scripts/s385_two_call_writer.py`.
    Estimate ≈ $3.1 (call 1 ≈ $1.13; each call 2 ≈ $0.97); the hard cap is $8.

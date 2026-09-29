@@ -10,8 +10,13 @@
   `ANTHROPIC_API_KEY`**. Read `docs/plans/S385_two_call_writer_and_fact_check.md` first.
 
 ## Do this first
-1. Confirm `ANTHROPIC_API_KEY` is set (`python -c "import os; print(bool(os.environ.get('ANTHROPIC_API_KEY')))"`).
-   If not, ask the author to add it in the environment settings. Never ask for the key in chat.
+1. Confirm the keys are set WITHOUT printing them:
+   `python -c "import os; print({k: bool(os.environ.get(k)) for k in ('PSALMS_ANTHROPIC_API_KEY','OPENAI_API_KEY')})"`.
+   In the cloud environment the Anthropic key is stored as **`PSALMS_ANTHROPIC_API_KEY`**, not `ANTHROPIC_API_KEY`, so
+   that Claude Code itself never sees it. `s385_two_call_writer.py` reads it directly. Production scripts expect
+   `ANTHROPIC_API_KEY`, so pass it per command: `ANTHROPIC_API_KEY="$PSALMS_ANTHROPIC_API_KEY" python scripts/...`.
+   Never export it into the session. If the keys are missing, ask the author to add them in the environment settings;
+   never ask for a key in chat.
 2. `pip install anthropic python-docx python-dotenv` if missing.
 3. `python scripts/s385_two_call_writer.py --dry-run`, then `python scripts/s385_two_call_writer.py`
    (≈ $3.1; cap $8).

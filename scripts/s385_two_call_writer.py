@@ -265,10 +265,18 @@ _client = None
 
 
 def client():
+    """PSALMS_ANTHROPIC_API_KEY first: in a Claude Code cloud environment a plain
+    ANTHROPIC_API_KEY would also be visible to Claude Code itself, so the key is stored
+    under a name only this project reads. Falls back to the SDK default (ANTHROPIC_API_KEY,
+    e.g. from the author's local .env)."""
     global _client
     if _client is None:
+        import os
+
         import anthropic
-        _client = anthropic.Anthropic(max_retries=4, timeout=3600.0)
+        key = os.environ.get("PSALMS_ANTHROPIC_API_KEY")
+        kw = {"api_key": key} if key else {}
+        _client = anthropic.Anthropic(max_retries=4, timeout=3600.0, **kw)
     return _client
 
 
