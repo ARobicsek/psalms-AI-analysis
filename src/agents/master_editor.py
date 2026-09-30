@@ -1018,6 +1018,19 @@ class MasterEditor(MasterEditorV2):
 
         lines = [f"## Psalm {psalm_number} Text\n"]
 
+        # Session 390: the Septuagint, per Hebrew verse, from Brenton's inflected Greek. The
+        # prompt's heading always promised "(Hebrew, English, LXX, Phonetic)" but the LXX was
+        # never here; the writer quoted the Greek from memory. SD reads this same text (shared cache).
+        try:
+            from src.data_sources.lxx_brenton import greek_by_mt_verse, lxx_chapters_for_mt
+            greek = greek_by_mt_verse(psalm_number)
+            if greek:
+                lines.append(f"*LXX = the Septuagint in Brenton's Greek text (1851); Greek numbering: Psalm "
+                             f"{' + '.join(str(c) for c in lxx_chapters_for_mt(psalm_number))}.*\n")
+        except Exception as e:
+            self.logger.warning(f"LXX (Brenton) unavailable for the psalm text: {e}")
+            greek = {}
+
         # Get actual Hebrew/English from database
         try:
             db = TanakhDatabase(Path("database/tanakh.db"))
@@ -1035,6 +1048,8 @@ class MasterEditor(MasterEditorV2):
                     lines.append(f"### Verse {v_num}")
                     lines.append(f"**Hebrew:** {verse.hebrew}")
                     lines.append(f"**English:** {verse.english}")
+                    if greek:
+                        lines.append(f"**LXX:** {greek.get(v_num) or '(no equivalent in the Septuagint)'}")
                     phonetic = phonetic_map.get(v_num, '')
                     if phonetic:
                         lines.append(f"**Phonetic:** {phonetic}")

@@ -211,7 +211,7 @@ def test_the_writer_dossier_nests_under_the_bundle_section_and_lists_the_registe
     md = assemble_writer_dossier(77, [e], [{"creator": "Paul Celan", "work": "Psalm", "psalm": 41}])
     assert not any(line.startswith("## ") or line.startswith("# ") for line in md.split("\n"))
     assert "### Far associations (1)" in md and "*The pattern:* seen only against the light" in md
-    assert "- Paul Celan, Psalm" in md and "never quote or cite" in md
+    assert "- Paul Celan, Psalm (used as a whole)" in md and "never repeat these" in md
 
 
 def test_a_reused_bundle_gets_the_new_echoes_and_loses_all_of_the_old():
@@ -223,3 +223,55 @@ def test_a_reused_bundle_gets_the_new_echoes_and_loses_all_of_the_old():
     assert out.startswith("## Deep Web Research")
     without = replace_literary_echoes_section("## A\n\nx\n\n## Research Summary\n\ns\n", "NEW")
     assert without.index("NEW") < without.index("## Research Summary")
+
+
+# --- Session 390: the register is passage-level for texts ----------------------------------------
+
+def test_a_text_is_used_passage_by_passage_and_anything_else_as_a_whole():
+    from src.agents.echoes_v3 import filter_used, same_locus
+    used = [{"creator": "William Shakespeare", "work": "Hamlet", "kind": "text", "passage": "Act 3, Scene 1",
+             "quote": "To be, or not to be, that is the question", "psalm": 39},
+            {"creator": "J. S. Bach", "work": "The Art of Fugue", "kind": "other", "passage": "", "quote": "",
+             "psalm": 77}]
+    pool = [{"id": "C1", "creator": "Shakespeare", "work": "Hamlet", "locus": "3.1.56-88"},
+            {"id": "C2", "creator": "William Shakespeare", "work": "Hamlet", "locus": "Act 5, Scene 2, 219-224"},
+            {"id": "C3", "creator": "Johann Sebastian Bach", "work": "The Art of Fugue", "locus": "Contrapunctus 1"}]
+    kept, removed = filter_used(pool, used)
+    assert [c["id"] for c in kept] == ["C2"] and {c["id"] for c in removed} == {"C1", "C3"}
+    assert same_locus("Canto 3, lines 1-9", "Canto 3") and not same_locus("Book 24", "Book 18")
+    assert not same_locus("", "Act 1") and same_locus("the whole poem", "stanza 2")
+
+
+def test_a_text_with_an_unknown_passage_is_caught_by_its_words_after_retrieval():
+    from src.agents.echoes_v3 import filter_used, repeated_quotation, used_works_block
+    used = [{"creator": "Gerard Manley Hopkins", "work": "I wake and feel the fell of dark", "kind": "text",
+             "passage": "", "quote": "I wake and feel the fell of dark, not day.", "psalm": 43}]
+    c = {"id": "C1", "creator": "G. M. Hopkins", "work": "I wake and feel the fell of dark, not day", "locus": "lines 1-8"}
+    assert filter_used([c], used)[0] == [c]                    # no passage on record: kept for now
+    same = {"candidate": c, "retrieved": {"original": "I wake and feel the fell of dark, not day. What hours, O what black hours"}}
+    other = {"candidate": c, "retrieved": {"original": "I am gall, I am heartburn. God's most deep decree"}}
+    assert repeated_quotation(same, used)["psalm"] == 43 and repeated_quotation(other, used) is None
+    block = used_works_block(used)
+    assert "Hopkins, I wake and feel the fell of dark" in block and "quoted: “I wake and feel" in block
+
+
+def test_same_locus_reads_roman_numerals_and_compares_line_ranges():
+    """Session 390, from real register pairs: 'Act V, scene ii' matched 'Act 4, scene 6' on the
+    word 'scene', and Horace Odes 2.14 lines 5-8 matched lines 25-28 on the top two levels."""
+    from src.agents.echoes_v3 import same_locus
+    cases = [("Act V, scene ii", "Act 4, scene 6", False), ("Act 3, Scene 1, 56-88", "3.1.60", True),
+             ("Canto 3", "Canto III, lines 1-9", True), ("Book 2, Ode 14, lines 25–28", "Book 2, Ode 14, lines 5–8", False),
+             ("Book 24, lines 470-620", "Book 24, 600-650", True), ("Sonnet 29", "Sonnet 30", False),
+             ("KTU 1.5 II", "KTU 1.5, Column I, lines 1–3", False), ("Holy Sonnet XIV", "Holy Sonnet 14", True),
+             ("Canto V, lines 121-123", "Canto I, lines 22–27", False), ("Opening lines", "Epilogue, section II", False)]
+    assert [(a, b) for a, b, want in cases if same_locus(a, b) != want] == []
+
+
+def test_same_work_needs_more_than_one_stray_shared_word():
+    from src.agents.echoes_v3 import same_work
+    assert not same_work({"creator": "Hayim Nahman Bialik", "work": "Metei Midbar (The Dead of the Desert)"},
+                         {"creator": "", "work": "Book of the Dead"})
+    assert same_work({"creator": "", "work": "Laetoli footprints"}, {"creator": "Mary Leakey", "work": "Laetoli"})
+    assert same_work({"creator": "Shakespeare", "work": "Hamlet"}, {"creator": "William Shakespeare", "work": "Hamlet"})
+    assert same_work({"creator": "J. S. Bach", "work": "The Art of Fugue"},
+                     {"creator": "Johann Sebastian Bach", "work": "The Art of Fugue"})

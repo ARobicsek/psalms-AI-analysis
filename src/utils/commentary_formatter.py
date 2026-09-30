@@ -26,12 +26,12 @@ if __name__ == '__main__':
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
     from src.utils.divine_names_modifier import DivineNamesModifier
-    from src.utils.pipeline_summary import concordance_methods_summary
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .logger import get_logger
     from .divine_names_modifier import DivineNamesModifier
-    from .pipeline_summary import concordance_methods_summary
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines
 
 
 def _commentator_label(name: str) -> str:
@@ -276,12 +276,7 @@ class CommentaryFormatter:
                 writer_model = agent_models.get('master_writer') or agent_models.get('master_editor', 'N/A')
                 lines.append(f"**Commentary (Master Writer)**: {writer_model}")
 
-            if 'literary_echoes_pass_1' in agent_models:
-                lines.append(f"**Literary Echoes (Passes 1-2 — Generation)**: {agent_models.get('literary_echoes_pass_1', 'N/A')}")
-            if 'literary_echoes_pass_1b' in agent_models:
-                lines.append(f"**Literary Echoes (Pass 1b — Second Generator)**: {agent_models.get('literary_echoes_pass_1b', 'N/A')}")
-            if 'literary_echoes_pass_3' in agent_models:
-                lines.append(f"**Literary Echoes (Pass 3 — Source Verification)**: {agent_models.get('literary_echoes_pass_3', 'N/A')}")
+            lines.extend(echoes_methods_lines(agent_models))
         else:
             lines.append("Model attribution data not available.")
 

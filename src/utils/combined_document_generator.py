@@ -29,12 +29,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines
 
 
 def add_page_number(paragraph):
@@ -1776,12 +1776,8 @@ Methodological & Bibliographical Summary
                 if 'copy_editor' in model_usage:
                     summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
 
-                if 'literary_echoes_pass_1' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Passes 1-2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}"
-                if 'literary_echoes_pass_1b' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Pass 1b — Second Generator)**: {model_usage.get('literary_echoes_pass_1b', 'N/A')}"
-                if 'literary_echoes_pass_3' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Pass 3 — Source Verification)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}"
+                for echoes_line in echoes_methods_lines(model_usage):
+                    summary_text += f"\n{echoes_line}"
             else:
                 summary_text += "\nModel attribution data not available."
 

@@ -538,6 +538,8 @@ def test_a_missing_commentary_entry_reads_as_no_entry(monkeypatch):
 
 def test_lookup_lxx_uses_greek_numbering_and_aligns_brenton(monkeypatch):
     from src.agents import fact_checker as fc
+    from src.data_sources import lxx_brenton
+    monkeypatch.setattr(lxx_brenton, "chapter", lambda code, ch: {})     # no Brenton Greek: Bolls lemmas
     calls = []
     grk = [{"verse": i, "text": f"g{i}"} for i in range(1, 22)]            # heading = verse 1
     eng = [{"verse": i, "text": f"e{i}"} for i in range(1, 21)]            # Brenton: heading unnumbered
@@ -547,8 +549,26 @@ def test_lookup_lxx_uses_greek_numbering_and_aligns_brenton(monkeypatch):
     monkeypatch.setattr(fc.requests, "get", get)
     out = fc.lookup_lxx("Psalms 77:11")
     assert all("/19/76/" in u for u in calls)                              # MT 77 = LXX 76
-    assert (out["greek_lemmas"], out["english_brenton"]) == ("g11", "e10")
+    assert (out["greek"], out["english_brenton"]) == ("g11", "e10")
+    assert out["greek_form"].startswith("LEMMAS")
     assert "error" in fc.lookup_lxx("Jeremiah 10:1")                        # chapters differ in the Greek
+
+
+def test_lookup_lxx_prefers_brentons_inflected_greek(monkeypatch):
+    """Session 390: Bolls's Greek is lemmas; Brenton's Greek (same numbering) is the real text."""
+    from src.agents import fact_checker as fc
+    from src.data_sources import lxx_brenton
+    monkeypatch.setattr(lxx_brenton, "chapter",
+                        lambda code, ch: {i: f"G{i}" for i in range(1, 22)} if (code, ch) == ("PSA", 76) else {})
+    calls = []
+    eng = [{"verse": i, "text": f"e{i}"} for i in range(1, 21)]
+    def get(url, timeout=0):
+        calls.append(url)
+        return SimpleNamespace(json=lambda: eng)
+    monkeypatch.setattr(fc.requests, "get", get)
+    out = fc.lookup_lxx("Psalms 77:11")
+    assert (out["greek"], out["english_brenton"]) == ("G11", "e10")
+    assert out["greek_form"].startswith("Brenton") and all("/LXXE/" in u for u in calls)
 
 
 def test_the_new_lookups_are_offered_and_routed():

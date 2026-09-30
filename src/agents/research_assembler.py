@@ -1246,8 +1246,17 @@ class ResearchAssembler:
             models_used['figurative_curator'] = self.figurative_curator.active_model
             
         if literary_echoes_content:
-            models_used['literary_echoes_pass_1'] = GEMINI_MODEL
-            models_used['literary_echoes_pass_3'] = GPT_VERIFY_MODEL
+            # Session 390: a v3 dossier (the default since S389) has its own models; stamping the
+            # legacy ones here put "Pass 3: gpt-5.6-terra" on every v3 guide's methods page.
+            try:
+                from .echoes_v3 import is_v3_dossier, methods_models
+            except ImportError:
+                from src.agents.echoes_v3 import is_v3_dossier, methods_models
+            if is_v3_dossier(literary_echoes_content):
+                models_used.update(methods_models())
+            else:
+                models_used['literary_echoes_pass_1'] = GEMINI_MODEL
+                models_used['literary_echoes_pass_3'] = GPT_VERIFY_MODEL
 
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,

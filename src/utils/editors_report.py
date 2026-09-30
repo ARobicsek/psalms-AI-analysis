@@ -261,20 +261,39 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
     n_verified = sum(1 for g in gathered for s in g.get("sources", []) if s.get("verified"))
     total_cost = cost.get("total_cost", 0.0)
     stages = cost.get("stages", [])
-    fc_stage = next((s for s in stages if s["stage"] == "fact check"), None)
-    ce_stage = next((s for s in stages if s["stage"] == "copy editor"), None)
+    # Session 390: a resumed run CONTINUES the cost file (stages carry `attempt`), so the file's
+    # total is every run of this psalm ($13.77 on Ps 77, whose guide run cost $4.11). Report this
+    # run (the latest attempt) and, when there were earlier ones, all runs beside it. The fact
+    # check / copy editor rows take the LATEST such stage, not the first.
+    last_attempt = max([s.get("attempt", 1) for s in stages] or [1])
+    run_cost = sum(s["cost_usd"] for s in stages if s.get("attempt", 1) == last_attempt)
+    has_fc = bool(fc)   # False on a run without --fact-check, or with only a stale one (see _load)
+    fc_stage = next((s for s in reversed(stages) if s["stage"] == "fact check"), None) if has_fc else None
+    ce_stage = next((s for s in reversed(stages) if s["stage"] == "copy editor"), None)
+    ce_model = (D["stats"].get("model_usage") or {}).get("copy_editor") or "gpt-5.4"
 
     L: List[str] = [f"# Psalm {psalm}: What the Editors Did", ""]
-    L += [f"This report follows the guide to Psalm {psalm} from the moment the writer finished it. Three things "
-          "checked or changed it: a **citation verifier** that compares every quoted Bible verse with the "
-          "Masoretic text; a **fact checker** that lists every checkable claim in the guide and rules on each "
-          "with evidence; and a **copy editor** that received both reports and edited the text. The report says "
-          "what each one did. It does not grade them; that is the reader's job. The cost of the whole run comes "
-          "after the summary.", ""]
+    if has_fc:
+        L += [f"This report follows the guide to Psalm {psalm} from the moment the writer finished it. Three "
+              "things checked or changed it: a **citation verifier** that compares every quoted Bible verse with "
+              "the Masoretic text; a **fact checker** that lists every checkable claim in the guide and rules on "
+              "each with evidence; and a **copy editor** that received both reports and edited the text. The "
+              "report says what each one did. It does not grade them; that is the reader's job. The cost of the "
+              "run comes after the summary.", ""]
+    else:
+        L += [f"This report follows the guide to Psalm {psalm} from the moment the writer finished it. Two things "
+              "checked or changed it: a **citation verifier** that compares every quoted Bible verse with the "
+              "Masoretic text, and a **copy editor** that received its report and edited the text. **No fact "
+              "check ran on this version of the guide** (the pipeline's fact check was off)"
+              + (", and the fact check saved beside it belongs to an earlier version, so it is not reported"
+                 if D.get("stale_fact_check") else "")
+              + ". The copy editor therefore had no evidence to correct facts from. The report says what each "
+              "one did. It does not grade them; that is the reader's job. The cost of the run comes after the "
+              "summary.", ""]
 
     # --- at a glance -----------------------------------------------------------
     L += ["## At a glance", ""]
-    rows = [
+    fc_rows = [
         ["Claims the fact checker listed and ruled on", f"{len(records)}"],
         ["… supported / contradicted / unverifiable",
          f"{by_v.get('supported', 0)} / {by_v.get('contradicted', 0)} / {by_v.get('unverifiable', 0)}"],
@@ -283,29 +302,52 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
         ["Contradicted claims the copy editor changed / left word for word",
          f"{len(contra) - n_unchanged} / {n_unchanged}"],
         ["… of the changed ones, matched to a [FACT-CHECK] log entry", f"{n_tagged_match}"],
-        ["Copy-editor changes in all", f"{len(entries)}"],
-        ["… tagged [FACT-CHECK]", f"{len(tagged)}"],
-        ["… factual (category 7 or 9g) but NOT tagged [FACT-CHECK]", f"{len(untagged_fact)}"],
+    ]
+    ce_rows = [["Copy-editor changes in all", f"{len(entries)}"]]
+    if has_fc:
+        ce_rows += [["… tagged [FACT-CHECK]", f"{len(tagged)}"],
+                    ["… factual (category 7 or 9g) but NOT tagged [FACT-CHECK]", f"{len(untagged_fact)}"]]
+    else:
+        ce_rows += [["… factual (category 7 or 9g), made without a fact-check report", f"{len(untagged_fact)}"]]
+    ce_rows += [
         ["UNVERIFIED notes the copy editor left for the author", f"{len(unverified)}"],
         ["Quoted-verse mismatches found before the copy edit (after the false-positive filter)", f"{len(cit_pre)}"],
-        ["Quoted-verse mismatches the copy edit introduced", f"{len(cit_post)}"],
+    ]
+    if has_fc:   # the post-copy-edit re-check runs only with the fact check (STEP 5b½)
+        ce_rows += [["Quoted-verse mismatches the copy edit introduced", f"{len(cit_post)}"]]
+    web_rows = [
         ["Free lookups the fact checker made (verse, commentator, concordance, Sefaria, research)",
          f"{len(lookups)}"],
         ["Web searches", f"{meta.get('web_searches', 0)}"],
         ["Web passages gathered / found on their live page", f"{n_sources} / {n_verified}"],
-        ["Cost of the whole run", _usd(total_cost)],
-        ["… fact check (incl. web-search fees) / copy editor",
-         f"{_usd(fc_stage['cost_usd']) if fc_stage else '–'} / {_usd(ce_stage['cost_usd']) if ce_stage else '–'}"],
     ]
+    if last_attempt > 1:
+        cost_rows = [[f"Cost of this run (run {last_attempt} in this psalm's cost file)", _usd(run_cost)],
+                     [f"… all {last_attempt} recorded runs of this psalm together", _usd(total_cost)]]
+    else:
+        cost_rows = [["Cost of this run", _usd(total_cost)]]
+    ce_usd = _usd(ce_stage["cost_usd"]) if ce_stage else "–"
+    if has_fc:
+        cost_rows += [["… fact check (incl. web-search fees) / copy editor",
+                       f"{_usd(fc_stage['cost_usd']) if fc_stage else '–'} / {ce_usd}"]]
+    else:
+        cost_rows += [["… copy editor", ce_usd]]
+    rows = (fc_rows if has_fc else []) + ce_rows + (web_rows if has_fc else []) + cost_rows
     L += _table(["", "Count"], rows)
 
     # --- who is who -------------------------------------------------------------
     models = tele.get("models", {})
     lm, wm, jm = models.get("local", ["?", "?"]), models.get("web_gather", ["?", "?"]), models.get("web_judge", ["?", "?"])
     L += ["## The editors, and what each could see", ""]
-    L += [f"- **Citation verifier** ($0 SQL check, then a model filter): every Hebrew quotation the guide "
+    L += ["- **Citation verifier** ($0 SQL check, then a model filter): every Hebrew quotation the guide "
           "attributes to a Bible verse is compared with that verse in the Masoretic text; mismatches go to a "
-          "model that throws out false alarms (ellipses, divine-name spellings). Survivors go to the copy editor.",
+          "model that throws out false alarms (ellipses, divine-name spellings). Survivors go to the copy editor."]
+    if not has_fc:
+        L += [f"- **Copy editor** ({ce_model}): gets the guide and the citation report. With no fact-check "
+              "report it has no licence to correct facts; doubts about them go in an UNVERIFIED list for the "
+              "author, not into the text.", ""]
+    else:
+        L += [
           f"- **Fact checker, stage 1** ({lm[0]}, reasoning effort {lm[1]}, no web): reads the guide in "
           f"{len(meta.get('chunks', []))} chunks. Each chunk comes with the commentators' entries on its verses "
           "and the text of every verse it cites, handed over free. It can look things up at no cost: a verse, a "
@@ -316,79 +358,85 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
           "for each handed-on claim, without ruling. Every passage is then fetched from its page by code, free, "
           f"to confirm it is really there. {jm[0]} (effort {jm[1]}) rules from the passages; only a passage "
           "found on its page can contradict the guide.",
-          "- **Copy editor** (gpt-5.4): gets the guide, the citation report and the fact-check report. It may "
-          "correct a fact only where the report says contradicted, tagging the change [FACT-CHECK]; doubts "
+          f"- **Copy editor** ({ce_model}): gets the guide, the citation report and the fact-check report. It "
+          "may correct a fact only where the report says contradicted, tagging the change [FACT-CHECK]; doubts "
           "about anything else go in an UNVERIFIED list for the author, not into the text.", ""]
 
     # --- cost ---------------------------------------------------------------------
     L += _cost_section(D, fc_stage)
 
-    # --- contradicted -----------------------------------------------------------------
-    L += ["## Claims the fact checker contradicted", ""]
-    if not contra:
-        L += ["None.", ""]
-    for r in contra:
-        o = outcomes[r["id"]]
-        L += [f"### {r['id']} · {r.get('location', '')} · {r.get('claim_type', '')}", ""]
-        L += [f"**The guide said:** {r.get('sentence', '')}", "",
-              f"**The claim checked:** {r.get('claim', '')}", "",
-              f"**Finding:** {r.get('explanation', '')}", ""]
-        for e in r.get("evidence", []):
-            src = e.get("source", "") + (f" ({e['url']})" if e.get("url") else "")
-            L += [f"- *Evidence, {src}:* {e.get('quote', '')}"]
-        L += [""]
-        if r.get("suggested_fix"):
-            L += [f"**Suggested fix:** {r['suggested_fix']}", ""]
-        L += [f"**Ruled by:** {r.get('checked_by', '')}" + (" (stage 1 first said contradicted)"
-                                                             if r.get("first_verdict") else ""), "",
-              f"**Copy editor:** {o['status']}.", ""]
-        if o["now_reads"]:
-            L += [f"**The final text now reads:** {o['now_reads']}", ""]
-        if o["log_entry"]:
-            e = o["log_entry"]
-            L += [f"**Its log entry #{e['n']}:** {e['what']}" + (f" *Why:* {e['why']}" if e["why"] else ""), ""]
+    if has_fc:   # Session 390: fact-check sections only when a fact check ran
+        # --- contradicted -----------------------------------------------------------------
+        L += ["## Claims the fact checker contradicted", ""]
+        if not contra:
+            L += ["None.", ""]
+        for r in contra:
+            o = outcomes[r["id"]]
+            L += [f"### {r['id']} · {r.get('location', '')} · {r.get('claim_type', '')}", ""]
+            L += [f"**The guide said:** {r.get('sentence', '')}", "",
+                  f"**The claim checked:** {r.get('claim', '')}", "",
+                  f"**Finding:** {r.get('explanation', '')}", ""]
+            for e in r.get("evidence", []):
+                src = e.get("source", "") + (f" ({e['url']})" if e.get("url") else "")
+                L += [f"- *Evidence, {src}:* {e.get('quote', '')}"]
+            L += [""]
+            if r.get("suggested_fix"):
+                L += [f"**Suggested fix:** {r['suggested_fix']}", ""]
+            L += [f"**Ruled by:** {r.get('checked_by', '')}" + (" (stage 1 first said contradicted)"
+                                                                 if r.get("first_verdict") else ""), "",
+                  f"**Copy editor:** {o['status']}.", ""]
+            if o["now_reads"]:
+                L += [f"**The final text now reads:** {o['now_reads']}", ""]
+            if o["log_entry"]:
+                e = o["log_entry"]
+                L += [f"**Its log entry #{e['n']}:** {e['what']}" + (f" *Why:* {e['why']}" if e["why"] else ""), ""]
 
-    # --- web -------------------------------------------------------------------------
-    # Keyed by claim: the gathered item keeps stage 1's sentence, which may be a six-word stub
-    # while the record's sentence has been expanded.
-    web_recs = {norm(r.get("claim", "")): r for r in records if r.get("stage") == "web"}
-    L += ["## Claims sent to the web", ""]
-    L += [f"Stage 1 handed {len(gathered)} claim(s) on as needing the web. For each: what the gatherer found, "
-          "whether code found the passage on its live page, and the judge's verdict.", ""]
-    for g in gathered:
-        rec = web_recs.get(norm(g.get("claim", "")), {})
-        L += [f"### {rec.get('id', '?')} · {g.get('location', '')} · verdict: {rec.get('verdict', '?')}", "",
-              f"**Claim:** {g.get('claim', '')}", ""]
-        if not g.get("sources"):
-            L += ["- The gatherer returned no passage." + (f" Its note: {g['researcher_note']}"
-                                                          if g.get("researcher_note") else "")]
-        for s in g.get("sources", []):
-            mark = "on its page ✓" if s.get("verified") else f"NOT confirmed ({s.get('check', '')})"
-            L += [f"- *{s.get('title') or s.get('source', '')}* ({s.get('url', '')}), {mark}: "
-                  f"{_clip(s.get('quote', ''), 400)}"]
-        if g.get("sources") and g.get("researcher_note"):
-            L += [f"- Gatherer's note: {g['researcher_note']}"]
-        if rec.get("explanation"):
-            L += ["", f"**Judge:** {rec['explanation']}"]
-        L += [""]
+        # --- web -------------------------------------------------------------------------
+        # Keyed by claim: the gathered item keeps stage 1's sentence, which may be a six-word stub
+        # while the record's sentence has been expanded.
+        web_recs = {norm(r.get("claim", "")): r for r in records if r.get("stage") == "web"}
+        L += ["## Claims sent to the web", ""]
+        L += [f"Stage 1 handed {len(gathered)} claim(s) on as needing the web. For each: what the gatherer found, "
+              "whether code found the passage on its live page, and the judge's verdict.", ""]
+        for g in gathered:
+            rec = web_recs.get(norm(g.get("claim", "")), {})
+            L += [f"### {rec.get('id', '?')} · {g.get('location', '')} · verdict: {rec.get('verdict', '?')}", "",
+                  f"**Claim:** {g.get('claim', '')}", ""]
+            if not g.get("sources"):
+                L += ["- The gatherer returned no passage." + (f" Its note: {g['researcher_note']}"
+                                                              if g.get("researcher_note") else "")]
+            for s in g.get("sources", []):
+                mark = "on its page ✓" if s.get("verified") else f"NOT confirmed ({s.get('check', '')})"
+                L += [f"- *{s.get('title') or s.get('source', '')}* ({s.get('url', '')}), {mark}: "
+                      f"{_clip(s.get('quote', ''), 400)}"]
+            if g.get("sources") and g.get("researcher_note"):
+                L += [f"- Gatherer's note: {g['researcher_note']}"]
+            if rec.get("explanation"):
+                L += ["", f"**Judge:** {rec['explanation']}"]
+            L += [""]
 
-    # --- unverifiable -------------------------------------------------------------------
-    unv = [r for r in records if r["verdict"] == "unverifiable"]
-    L += ["## Claims no evidence could settle (unverifiable)", ""]
-    L += _table(["ID", "Where", "Claim", "Why"],
-                [[r["id"], r.get("location", ""), _clip(r.get("claim", ""), 180),
-                  _clip(r.get("explanation", ""), 200)] for r in unv]) if unv else ["None.", ""]
+        # --- unverifiable -------------------------------------------------------------------
+        unv = [r for r in records if r["verdict"] == "unverifiable"]
+        L += ["## Claims no evidence could settle (unverifiable)", ""]
+        L += _table(["ID", "Where", "Claim", "Why"],
+                    [[r["id"], r.get("location", ""), _clip(r.get("claim", ""), 180),
+                      _clip(r.get("explanation", ""), 200)] for r in unv]) if unv else ["None.", ""]
 
     # --- copy editor ---------------------------------------------------------------------
     L += ["## The copy editor", ""]
     L += [f"{len(entries)} logged change(s). Categories: " + ", ".join(
         f"{CATEGORY_NAMES.get(c.split('(')[0].rstrip('abcdefgh'), c)} ({c}) ×{n}"
         for c, n in Counter(c for e in entries for c in e["categories"]).most_common()) + ".", ""]
-    if untagged_fact:
+    if untagged_fact and not has_fc:
+        L += ["### Factual edits (no fact-check report this run)", "",
+              "These changes are logged under a factual category (7, or 9g). With no fact-check report they rest "
+              "on the copy editor's own knowledge; check each one.", ""]
+    elif untagged_fact:
         L += ["### Factual edits NOT tagged [FACT-CHECK]", "",
               "The fact-check report was meant to be the only licence for factual corrections. These changes are "
               "logged under a factual category (7, or 9g) without the tag; check whether each rests on the report "
               "or on the copy editor's memory.", ""]
+    if untagged_fact:
         for e in untagged_fact:
             L += [f"- **#{e['n']} [{', '.join(e['categories'])}] {e['location']}:** {e['what']}"
                   + (f" *Why:* {e['why']}" if e["why"] else "")]
@@ -404,8 +452,9 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
           "other outputs.", ""]
 
     # --- the same copy edit without the report --------------------------------------------
+    # (S387's one-off comparison; on a run without a fact check it would describe another run)
     cmp_dir = out_dir / "_copy_edit_without_report"
-    if (cmp_dir / f"psalm_{psalm:03d}_copy_edit_changes.md").exists():
+    if has_fc and (cmp_dir / f"psalm_{psalm:03d}_copy_edit_changes.md").exists():
         c_entries, c_unv = parse_change_log(
             (cmp_dir / f"psalm_{psalm:03d}_copy_edit_changes.md").read_text(encoding="utf-8"))
         c_final = (cmp_dir / f"psalm_{psalm:03d}_copy_edited.md").read_text(encoding="utf-8") \
@@ -439,6 +488,10 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
     else:
         L += ["Before the copy edit: every checked quotation matched its verse (or the filter judged the "
               "mismatch harmless).", ""]
+    if not has_fc:
+        L += ["The same check is re-run on the copy-edited text only when the fact check runs, so it did not "
+              "run this time.", ""]
+        return "\n".join(L).rstrip() + "\n"
     L += ["After the copy edit the same check ran again on the edited text: "
           + (f"{len(cit_post)} new mismatch(es) the copy editor introduced:" if cit_post
              else "the copy editor introduced no new mismatch."), ""]
@@ -492,6 +545,7 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
                 q = t.get("query") or ", ".join(t.get("queries") or []) or t.get("url") or t.get("pattern") or ""
                 rows.append([f"web {t.get('type', 'search')}", _clip(q, 120), ""])
         L += _table(["Tool", "Asked for", "Found"], rows)
+
     return "\n".join(L).rstrip() + "\n"
 
 
@@ -504,8 +558,14 @@ def _cost_section(D: Dict, fc_stage: Optional[Dict]) -> List[str]:
           "input billed at the full rate; *cached* is input served from a prompt cache at a fraction of it; "
           "*cache write* is input stored in a cache (Anthropic bills it at 1.25× input); *output* includes the "
           "model's reasoning (for OpenAI models the reasoning share is shown separately).", ""]
+    last_attempt = max([s.get("attempt", 1) for s in stages] or [1])
+    if last_attempt > 1:
+        this_run = sum(s["cost_usd"] for s in stages if s.get("attempt", 1) == last_attempt)
+        L += [f"This psalm's cost file holds {last_attempt} runs (a resumed or partial re-run continues it), and "
+              f"every stage is marked with the attempt it belongs to. **This run (attempt {last_attempt}) cost "
+              f"{_usd(this_run)}**; the total below is all runs together. A stage this run reused from an earlier "
+              "one cost nothing and has no row of its own.", ""]
     rows = []
-    seen = Counter(s["stage"] for s in stages)
     for s in stages:
         ms = s["models"]
         if not ms and not s["charges"]:
@@ -518,7 +578,7 @@ def _cost_section(D: Dict, fc_stage: Optional[Dict]) -> List[str]:
         out = agg["output_tokens"] + agg["thinking_tokens"]
         rsn = f" ({agg['thinking_tokens']:,} reasoning)" if agg["thinking_tokens"] else ""
         fee = sum(c["usd"] for c in s["charges"])
-        name = s["stage"] + (f" (attempt {s.get('attempt', 1)})" if seen[s["stage"]] > 1 else "")
+        name = s["stage"] + (f" (attempt {s.get('attempt', 1)})" if last_attempt > 1 else "")
         rows.append([name, ", ".join(ms) or "–", agg["call_count"], _k(agg["input_tokens"]),
                      _k(agg["cache_read_tokens"]), _k(agg["cache_write_tokens"] + agg["cache_write_1h_tokens"]),
                      _k(out) + rsn, (_usd(fee) if fee else "–"), _usd(s["cost_usd"]),

@@ -58,7 +58,8 @@ def test_s388_echo_targets_are_the_authors():
     text = fw.verse_instructions(20)
     assert "at least 4" in text and "about 10 to 30" in text and "Jewish or Hebrew poem" in text
     essay = fw.essay_instructions(77, "")
-    assert "already used in this collection" in essay and "haunting" in essay
+    assert "this collection has already used" in essay and "another passage of the same work" in essay
+    assert "haunting" in essay
     assert "LITERARY ECHOES" not in essay and "LITERARY ECHOES" not in fw.VERSE_INSTRUCTIONS
 
 

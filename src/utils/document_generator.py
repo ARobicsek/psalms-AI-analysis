@@ -25,12 +25,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines
 
 
 
@@ -1912,8 +1912,14 @@ Methodological & Bibliographical Summary
                 # and "; " separates entries. The parenthesized inline form is unreadable —
                 # the count floats ambiguously between two roots and wraps mid-entry.
                 pairs = re.findall(r'([א-ת][֐-׿  ־׳״\-]*?)\s*\((\d+)\)', value)
-                mnum = re.match(r'\s*\(*\s*([\d,]+)', value)
-                total = mnum.group(1) if mnum else ''
+                # Session 390: the label line keeps the English description before the Hebrew
+                # breakdown ("22 word searches finding 514 matching verses, …" since S384); taking
+                # only the leading number printed a bare "22".
+                mbrk = re.search(r'\s*\((?=\s*[֐-׿])', value)
+                total = value[:mbrk.start()].strip() if mbrk else ''
+                if not total:
+                    mnum = re.match(r'\s*\(*\s*([\d,]+)', value)
+                    total = mnum.group(1) if mnum else ''
 
                 # Label line (LTR): "Label: total"
                 p = self.document.add_paragraph(style='SummaryText')
@@ -2121,12 +2127,8 @@ Methodological & Bibliographical Summary
                 if 'copy_editor' in model_usage:
                     summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
 
-                if 'literary_echoes_pass_1' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Passes 1-2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}"
-                if 'literary_echoes_pass_1b' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Pass 1b — Second Generator)**: {model_usage.get('literary_echoes_pass_1b', 'N/A')}"
-                if 'literary_echoes_pass_3' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Pass 3 — Source Verification)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}"
+                for echoes_line in echoes_methods_lines(model_usage):
+                    summary_text += f"\n{echoes_line}"
             else:
                 summary_text += "\nModel attribution data not available."
 

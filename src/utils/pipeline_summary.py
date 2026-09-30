@@ -772,6 +772,30 @@ if __name__ == '__main__':
     main()
 
 
+def echoes_methods_lines(model_usage: Dict[str, Any]) -> List[str]:
+    """
+    The methods page's echoes lines, as "**Label**: model" strings (Session 390).
+
+    ONE implementation for the three document generators, which each carried the legacy
+    "Passes 1-2 — Generation" / "Pass 3 — Source Verification" labels. Echoes v3 (the default
+    since S389) has no passes: two models propose, gpt-6-luna locates each source, the text is
+    cut from its page, and the writer chooses. When a v3 key is present the legacy keys are
+    ignored, so a stale key from an earlier run of the psalm cannot print beside them.
+    """
+    if model_usage.get('echoes_proposal') or model_usage.get('echoes_locate'):
+        return [f"**Echoes & Resonances (Proposal; the Master Writer selects)**: "
+                f"{model_usage.get('echoes_proposal', 'N/A')}",
+                f"**Echoes & Resonances (Locating Sources)**: {model_usage.get('echoes_locate', 'N/A')}"]
+    lines = []
+    if 'literary_echoes_pass_1' in model_usage:
+        lines.append(f"**Literary Echoes (Passes 1-2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}")
+    if 'literary_echoes_pass_1b' in model_usage:
+        lines.append(f"**Literary Echoes (Pass 1b — Second Generator)**: {model_usage.get('literary_echoes_pass_1b', 'N/A')}")
+    if 'literary_echoes_pass_3' in model_usage:
+        lines.append(f"**Literary Echoes (Pass 3 — Source Verification)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}")
+    return lines
+
+
 def concordance_methods_summary(research_data: Dict[str, Any], modify=None) -> str:
     """
     The guide's methods-section description of the concordance work (Session 384).

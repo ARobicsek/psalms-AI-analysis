@@ -48,6 +48,36 @@ from src.utils.research_trimmer import ResearchTrimmer
 from src.utils.api_guard import halt_on_quota
 
 
+# Session 390: the methods page's echoes lines. The tracker keeps a psalm's earlier
+# `model_usage` keys, and a reused bundle's "Models Used in Research" (or the research
+# assembler's own models_used) re-adds the legacy pass keys whenever echoes exist, so a
+# v3 run printed "Pass 3 — Source Verification: gpt-5.6-terra" from a previous run.
+LEGACY_ECHO_KEYS = ("literary_echoes_pass_1", "literary_echoes_pass_1a", "literary_echoes_pass_1b",
+                    "literary_echoes_pass_2", "literary_echoes_pass_3")
+V3_ECHO_KEYS = ("echoes_proposal", "echoes_locate")
+
+
+def _track_echo_models(tracker, mode) -> None:
+    """Settle the echoes keys in `tracker.model_usage`: mode 'v3', 'legacy', or None (no echoes)."""
+    for k in LEGACY_ECHO_KEYS + V3_ECHO_KEYS:
+        tracker.model_usage.pop(k, None)
+    if mode == "v3":
+        from src.agents.echoes_v3 import methods_models
+        for step, model in methods_models().items():
+            tracker.track_model_for_step(step, model)
+    elif mode == "legacy":
+        tracker.track_model_for_step("literary_echoes_pass_1a", LIT_ECHOES_GEMINI_MODEL)
+        tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
+        tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
+
+
+def _drop_legacy_echo_keys_if_v3(tracker) -> None:
+    """After STEP 2: whatever the research bundle re-added, a v3 run keeps only its own keys."""
+    if "echoes_proposal" in tracker.model_usage:
+        for k in LEGACY_ECHO_KEYS:
+            tracker.model_usage.pop(k, None)
+
+
 def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
     """Parse research statistics from a research bundle markdown file."""
     stats = {
@@ -80,9 +110,21 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
     )
     if concordance_section:
         concordance_result_counts = re.findall(
-            r'^### .+?\((\d+)(?:\s+\w+)? results', concordance_section.group(1), re.MULTILINE
+            r'^### (.+?) \((\d+)(?:\s+\w+)? results', concordance_section.group(1), re.MULTILINE
         )
-        stats['concordance_count'] = sum(int(n) for n in concordance_result_counts)
+        stats['concordance_count'] = sum(int(n) for _, n in concordance_result_counts)
+        # Session 390: per-query counts too, so the methods page can describe the searches
+        # on a --skip-micro run (it printed "Concordance Searches: N/A" from S387 on).
+        stats['concordance_per_query'] = {q.strip(): int(n) for q, n in concordance_result_counts}
+
+    # Session 390: the shared-vocabulary radar's passage count ("Closest single passages").
+    radar_section = re.search(
+        r'## Shared-Vocabulary Parallels \(computed\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL
+    )
+    if radar_section:
+        stats['shared_vocabulary_count'] = len(re.findall(
+            r'^\*\*[^*\n]+ \d+:\d+\*\* — shares ', radar_section.group(1), re.MULTILINE
+        ))
 
     # Count figurative language instances
     curated_section = re.search(r'## Figurative Language Insights \(Curated\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
@@ -551,8 +593,7 @@ def run_enhanced_pipeline(
             fresh_echoes = echoes_result.markdown
             canonical = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
             canonical.write_text(fresh_echoes, encoding="utf-8")
-            tracker.track_model_for_step("literary_echoes_pass_1", " + ".join(WRITER_PROPOSERS))
-            tracker.track_model_for_step("literary_echoes_pass_3", f"{RETRIEVE_MODEL} (locate) + $0 page extraction")
+            _track_echo_models(tracker, "v3")
             lit_echoes_cost = echoes_result.total_usd
             by_lane = {}
             for e in echoes_result.entries:
@@ -585,9 +626,7 @@ def run_enhanced_pipeline(
                 psalm_output_dir=output_path,
                 skip_if_exists=False,   # Default overwrite
             )
-            tracker.track_model_for_step("literary_echoes_pass_1a", LIT_ECHOES_GEMINI_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
+            _track_echo_models(tracker, "legacy")
             lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
@@ -600,12 +639,14 @@ def run_enhanced_pipeline(
         _record_stage("literary echoes", _snap)
     elif skip_lit_echoes:
         logger.info("[STEP 1b] Skipping literary echoes (--skip-lit-echoes)")
-        # If the canonical file exists, assume it was generated with the standard pipeline models
+        # The canonical file, if any, is what the bundle carries: label it by its own shape.
+        from src.agents.echoes_v3 import is_v3_dossier
         lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
         if lit_echoes_file.exists():
-            tracker.track_model_for_step("literary_echoes_pass_1a", LIT_ECHOES_GEMINI_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
+            _track_echo_models(tracker, "v3" if is_v3_dossier(lit_echoes_file.read_text(encoding="utf-8"))
+                               else "legacy")
+        else:
+            _track_echo_models(tracker, None)
 
     # =====================================================================
     # STEP 2: Micro Analysis
@@ -676,7 +717,9 @@ def run_enhanced_pipeline(
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
         tracker.research.lexicon_entries_count = research_stats['lexicon_count']
-        tracker.research.concordance_results = {'total_results': research_stats['concordance_count']}
+        tracker.research.concordance_results = {**research_stats.get('concordance_per_query', {}),
+                                                'total_results': research_stats['concordance_count']}
+        tracker.research.shared_vocabulary_count = research_stats.get('shared_vocabulary_count', 0)
         tracker.research.figurative_results = {'total_instances_used': research_stats['figurative_count']}
         tracker.research.figurative_parallels_reviewed = research_stats.get('figurative_parallels_reviewed', {})
         tracker.research.commentary_counts = research_stats['commentary_counts']
@@ -714,6 +757,8 @@ def run_enhanced_pipeline(
 
         tracker.save_json(str(output_path))
         logger.info(f"Research stats extracted from markdown and saved")
+
+    _drop_legacy_echo_keys_if_v3(tracker)
 
     # =====================================================================
     # STEP 2b: Question Curation
@@ -1039,6 +1084,10 @@ def run_enhanced_pipeline(
     # prompt is untouched. docs/plans/S385_FACT_CHECK_RESULTS.md.
     # =====================================================================
     fact_check_prompt = None
+    if not skip_copy_editor and not smoke_test:
+        # Session 390: a copy edit without a fact check this run must not inherit an earlier
+        # run's "Fact Check: gpt-6-sol" on the methods page. Re-set below if the check succeeds.
+        tracker.model_usage.pop("fact_check", None)
     if fact_check and not smoke_test and print_ready_file.exists():
         logger.info("[STEP 5a¾] Fact check (staged: gpt-6-sol local; gpt-6-luna gathers, pages checked, gpt-6-sol judges)...")
         print(f"\n{'='*80}")

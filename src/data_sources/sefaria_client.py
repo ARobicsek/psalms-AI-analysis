@@ -41,26 +41,15 @@ MAX_RETRIES = 3
 # LXX 118-146 = MT 117-145 (one more)
 # LXX 147 = MT 146-147 (combined)
 def get_lxx_psalm_number(mt_psalm: int) -> int:
-    """Convert Masoretic Text psalm number to LXX psalm number."""
-    if mt_psalm <= 8:
-        return mt_psalm
-    elif mt_psalm == 9:
-        return 9  # MT 9 -> LXX 9 (part 1)
-    elif 10 <= mt_psalm <= 112:
-        return mt_psalm - 1  # Off by one
-    elif 113 <= mt_psalm <= 115:
-        return mt_psalm - 1
-    elif mt_psalm == 116:
-        return 115  # Split in LXX (115+116)
-    elif 117 <= mt_psalm <= 145:
-        return mt_psalm - 1
-    elif mt_psalm == 146:
-        return 146  # MT 146 -> LXX 146 (part 1)
-    elif mt_psalm == 147:
-        return 146  # MT 147 -> LXX 146 (part 2) + LXX 147
-    elif mt_psalm >= 148:
-        return mt_psalm - 1
-    return mt_psalm
+    """The LXX psalm that holds a Masoretic psalm's FIRST verse.
+
+    Session 390: the old table was wrong for MT 10, 114-116 and 146-150 (e.g. MT 148 -> LXX 147,
+    which is MT 147:12-20). The verse-level map is `lxx_brenton.mt_to_lxx`; use it for verses."""
+    try:
+        from src.data_sources.lxx_brenton import mt_to_lxx
+    except ImportError:
+        from .lxx_brenton import mt_to_lxx
+    return mt_to_lxx(mt_psalm, 1)[0]
 
 
 def clean_html_text(text: str) -> str:
@@ -620,7 +609,8 @@ class SefariaClient:
 
     def fetch_lxx_psalm(self, chapter: int) -> List[str]:
         """
-        Fetch Septuagint (Greek) text for a Psalm from Bolls.life API.
+        Fetch Septuagint (Greek) text for a Psalm: Brenton's inflected Greek (eBible.org, cached
+        under data/lxx/), else Bolls.life's lemmatized "LXX".
 
         The LXX uses different numbering than the Masoretic Text (MT).
         This method handles the conversion automatically.
@@ -633,16 +623,33 @@ class SefariaClient:
             Empty list if not available
 
         Note:
-            - Uses Bolls.life API as Sefaria doesn't include LXX
+            - Sefaria doesn't include the LXX
             - Psalm numbering: LXX Psalms 10-146 are typically off by one
               (e.g., MT Psalm 23 = LXX Psalm 22)
             - For analysis purposes, this provides Vorlage comparison
         """
+        # Session 390: Brenton's INFLECTED Greek first (src/data_sources/lxx_brenton.py). Bolls.life's
+        # "LXX" is lemmatized (dictionary forms), so it is only a fallback, and says so in the log.
+        lxx_number = get_lxx_psalm_number(chapter)
         try:
-            # Convert MT psalm number to LXX numbering
-            lxx_number = get_lxx_psalm_number(chapter)
+            try:
+                from src.data_sources.lxx_brenton import greek_by_mt_verse
+            except ImportError:
+                from .lxx_brenton import greek_by_mt_verse
+            # Keyed by the HEBREW verse (S390): MT 10, 115, 116 and 147 sit inside or across Greek
+            # chapters, and the LXX lacks MT 116:14 (left empty here, so later verses stay aligned).
+            by_verse = greek_by_mt_verse(chapter)
+            if by_verse:
+                verses = [by_verse.get(v, "") for v in range(1, max(by_verse) + 1)]
+                logger.info(f"LXX for MT Psalm {chapter} (LXX {lxx_number}): Brenton's Greek, "
+                            f"{len(by_verse)} verses")
+                return verses
+        except Exception as e:
+            logger.warning(f"Brenton's Greek unavailable ({e}); falling back to Bolls.life, whose Greek is "
+                           f"LEMMATIZED (dictionary forms, no case/tense/person)")
 
-            logger.info(f"Fetching LXX Psalm {lxx_number} (MT Psalm {chapter}) from Bolls.life...")
+        try:
+            logger.info(f"Fetching LXX Psalm {lxx_number} (MT Psalm {chapter}) from Bolls.life (lemmas)...")
 
             # Bolls.life API: /get-chapter/LXX/{book_id}/{chapter}/
             # Book ID 19 = Psalms in standard biblical ordering

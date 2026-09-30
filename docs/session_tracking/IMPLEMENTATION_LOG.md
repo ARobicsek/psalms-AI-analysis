@@ -9,6 +9,105 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 390 (2026-09-30): the methods page and the editors' report tell the truth; the pipeline's Septuagint is real Greek
+
+**The ask.** "Continuing this work. Please address the items in the handoff" (`NEXT_SESSION_PROMPT_session_390.md`,
+and S388's still-open `NEXT_SESSION_PROMPT_session_389.md`). Everything done was $0; nothing was run against a paid
+API. The author's read of the new Ps 77 guide (§1), the SD↔writer cache check (needs the next paid psalm run) and
+the author decisions (Opus proposer effort, the work-level register) are carried forward.
+
+**1. The methods page was wrong in four places — all fixed.**
+- *Echoes lines.* The tracker keeps a psalm's earlier `model_usage` keys, and `research_assembler` stamped
+  `literary_echoes_pass_1/_3 = gemini / gpt-5.6-terra` into the bundle's "Models Used in Research" whenever echoes
+  existed; `--skip-micro` copied those back over STEP 1b's keys. Now: `echoes_v3.methods_models()` (one definition)
+  gives `echoes_proposal` / `echoes_locate`; `research_assembler` uses them when the dossier `is_v3_dossier()`
+  (it opens with `DOSSIER_OPENING`); the pipeline's `_track_echo_models(tracker, "v3"|"legacy"|None)` clears every
+  echoes key before setting its own (the `--skip-lit-echoes` branch now labels the canonical file by its shape);
+  `_drop_legacy_echo_keys_if_v3` runs after STEP 2 in case a bundle re-adds them.
+- *Labels.* The three renderers each carried the legacy pass labels; they now share
+  `pipeline_summary.echoes_methods_lines()` (as S384 did for the concordance line). v3: "Echoes & Resonances
+  (Proposal; the Master Writer selects)" and "(Locating Sources)"; legacy labels byte-identical; a v3 key wins.
+- *Fact Check.* Popped from `model_usage` whenever the copy editor runs this run; re-set only if the fact check
+  succeeds.
+- *Concordance Searches: N/A.* `_parse_research_stats_from_markdown` now returns `concordance_per_query` (from the
+  `### query (N external results…)` headings) and `shared_vocabulary_count` (the radar's "Closest single
+  passages"); `--skip-micro` stores both. **Found while checking: the DOCX's summary renderer kept only the leading
+  number of a Hebrew-bearing line**, so since S384 every guide's line read "Concordance Searches: 22" and dropped
+  "word searches finding 514 matching verses, 181 of them quoted to the writer; 20 shared-vocabulary parallels…".
+  Fixed in `document_generator._add_summary_paragraph` (the prose before the Hebrew breakdown is kept).
+- *Ps 77.* Its stats were repaired once with the same helpers (backup `psalm_077_pipeline_stats.pre_S390.json`),
+  the guide re-rendered ($0). Paragraph diff vs the delivered DOCX: exactly the four lines, nothing else.
+  `Documents/…/Psalm 77.docx` replaced; the PDF copy was blocked (file open) — see the handoff.
+
+**2. The editors' report on a run without `--fact-check`.** The intro now says "Two things checked or changed it…
+**No fact check ran on this version of the guide**" (+ "the fact check saved beside it belongs to an earlier
+version" when `_load` found a stale one); every fact-check row and section is dropped (contradicted, web,
+unverifiable, supported, appendix, S387's without-report comparison, the post-copy-edit re-check sentence, which
+only runs with the fact check); factual copy edits are listed as "made without a fact-check report" (Ps 77: 6,
+incl. the Laetoli and grip-strength corrections). **Cost**: a resumed run continues the cost file, so the total is
+every run of the psalm; the table now shows "Cost of this run (run 3…) $4.11" and "all 3 recorded runs $13.77",
+labels every stage row with its attempt, and the copy-editor/fact-check rows take the LATEST stage (they took the
+first: Ps 77 showed attempt 2's $0.555, not attempt 3's $0.535). The copy editor's model comes from the stats.
+Rebuilt `output/psalm_77/psalm_077_editors_report.{md,docx}` (not copied to Documents, per the handoff).
+
+**3. The LXX was lemmas (S389 handoff §3) — replaced with Brenton's inflected Greek.** Bolls.life's "LXX" is
+dictionary forms: Ps 77:2 arrived as "φωνή ἐγώ πρός κύριος κράζω … καί προςἔχω ἐγώ" for "Φωνῇ μου πρὸς Κύριον
+ἐκέκραξα … καὶ προσέσχε μοι". **It did harm**: Ps 77's micro research asks about "the LXX's psalmist-as-listener
+reading" of 77:2 — "προςἔχω ἐγώ" read as "I attend", where the Greek says "He gave heed to me". Bolls has no other
+Greek OT. New `src/data_sources/lxx_brenton.py`: Brenton's 1851 Greek (public domain, eBible.org `grcbrent`),
+downloaded once (~5 MB zip) and cached at `data/lxx/brenton_greek.json` (gitignored; a fresh clone re-downloads on
+first use). **Same numbering as Bolls for all 150 psalms (0 verse-list mismatches, checked live)**, heading = v.1.
+`SefariaClient.fetch_lxx_psalm` uses it first and falls back to Bolls with a LEMMATIZED warning; the fact checker's
+`get_lxx` returns `greek` + `greek_form` (Brenton's Greek for 33 books; Bolls lemmas, labelled, for Song of Songs
+and the few Brenton's file lacks). **Finding, not changed: the WRITER never receives the LXX** —
+`MasterEditor._get_psalm_text` emits Hebrew, English and phonetics only, though its prompt heading says "PSALM TEXT
+(Hebrew, English, LXX, Phonetic)". The guides' inflected Greek (Ps 77: ἐμνήσθην τοῦ θεοῦ καὶ ηὐφράνθην) is the
+writer's memory; lemma-form citations like Ps 57's "rendered the participle εὐεργετέω" (the LXX has τὸν
+εὐεργετήσαντά με) came through the micro analyst. Whether to hand the writer the Greek is the author's call.
+
+**Tests**: 310 pass (298 + 9 in `tests/test_methods_page.py`, + 2 in `tests/test_lxx_brenton.py`, + 1 in
+`test_fact_checker.py`). 
+
+**4. The author's decisions, same session.** "Make sure the writer gets the Greek from Brenton"; "never reuse a
+work ideally would actually be 'never reuse a quotation'… in PRINCIPLE… fine for two psalms to quote Hamlet, from
+different passages"; the Opus proposer stays as is.
+- *The writer's Greek.* `MasterEditor._get_psalm_text` adds `**LXX:**` per verse (plus a one-line note naming the
+  Greek psalm number); synthesis discovery builds its dossier head with the same method, so the SD↔writer cache
+  stays byte-identical. Ps 77 adds ~2.2K chars. **Found: `get_lxx_psalm_number` was wrong for nine psalms** (MT
+  10 → LXX 9 from verse 1; MT 114/115 → 113/114; MT 116 → 115 only; MT 146 → 146; MT 148–150 → 147–149). New
+  `lxx_brenton.mt_to_lxx` / `lxx_to_mt` / `greek_by_mt_verse` map verse by verse (MT 10:1 = LXX 9:22, MT 115:1 =
+  LXX 113:9, MT 116:10 = LXX 115:1, MT 147:12 = LXX 147:1); checked against tanakh.db and Brenton: all 2,526
+  Greek psalm verses land on exactly one Hebrew verse; only MT 116:14 has none (the LXX lacks it; the writer sees
+  "(no equivalent in the Septuagint)"). `fetch_lxx_psalm` (micro analyst) now returns Greek keyed by Hebrew verse;
+  the fact checker's `get_lxx` maps each verse; `get_lxx_psalm_number` returns the chapter of verse 1.
+- *Passage-level register* (`USED_WORKS_VERSION` 3). The extractor now returns `kind` (text / other), `passage`
+  and `quote` (the guide's first 10–15 quoted words) with the WHOLE work's title. A text with a passage or a quote
+  on record is used passage by passage; anything else (and a text only mentioned, e.g. a scientific paper) whole.
+  Before locating, `register_hit` drops a candidate only on the same work at the same passage; `same_locus` was
+  rebuilt after the collection showed its flaws (roman numerals unread: "Act V, scene ii" = "Act 4, scene 6" on
+  'scene'; top-two-levels only: Horace Odes 2.14 lines 5–8 = lines 25–28): levels compared as far as both go,
+  ranges must overlap. After locating, `repeated_quotation` drops a text whose cut passage contains a ≥ 6-word run
+  of the register's quote (accents/case ignored). The proposers and the writer are told the passage rule
+  (`PROPOSE_PROMPT`, the dossier's closing list, `forest_writer.S388_ECHO_EDITS` essay + verse sentences).
+  `same_author` now tolerates name forms; `same_work` no longer matches on one stray shared word when a creator is
+  missing ("Book of the Dead" had blocked Bialik's *Metei Midbar* in Ps 77's pool). **Pre-existing bug fixed**:
+  `used_works` read side folders (`psalm_57_opus48`, `psalm_67_old`, `psalm_19_old`, `psalm_100_old`…) as
+  guides, each overwriting its psalm's register entry; only `output/psalm_N/` counts now.
+- *Register rebuilt*: $0.117 (gpt-6-luna), 363 entries from 46 guides; 320 passage-level, 43 whole. Ps 57 failed
+  three times in the first pass ("incomplete", no output; a later probe completed) and was filled on the second.
+  Over the whole collection the new rules flag exactly 8 real repeats (Gilgamesh XI in Pss 30/50, Sappho fr. 31
+  in 39/55, Celan's "Psalm" 41/44, Szymborska 46/68, Amichai 49/61, Donne HS 14 51/62, Shamlou 54/63, Moses ibn
+  Ezra 65/67) and allow every different-passage pair (Hamlet acts, Lear scenes, Horace odes, Baal Cycle
+  columns, Akhmatova's Requiem sections). Replaying Ps 77's S389 pool at $0: the old filter dropped 3 (Dante
+  *Inferno* V ×2, Bialik); the new one drops none.
+- *Methods label*: "Echoes & Resonances (Locating Sources): gpt-6-luna" (the parenthetical was dropped at the
+  author's request); Ps 77 re-rendered.
+
+**Tests**: 314 pass (298 + 9 `test_methods_page.py`, + 2 `test_lxx_brenton.py`, + 1 `test_fact_checker.py`, + 4
+`test_echoes_v3.py`). **Session spend ≈ $0.12** (register rebuild) + a $0.003 probe.
+
+---
+
 ## Session 389 (2026-09-30): echoes v3 — a better, cheaper literary-echoes stage, resonances beyond literature, a register of used works, and the writer as the selector
 
 **Parallel sessions.** This session ran alongside Session 388 (editor cost work) and started before S388 committed,

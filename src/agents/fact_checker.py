@@ -1012,8 +1012,9 @@ FUNCTION_TOOLS = [
         "their exact refs. Every hit names the prayers before and after it in its service.",
         {"query": {"type": "string"}}, ["query"]),
     _fn("get_lxx", "The Septuagint for a verse, by its HEBREW-Bible reference ('Psalms 77:11'): Brenton's "
-        "English translation, and the Greek as dictionary forms (lemmas) only, so it shows which word the "
-        "translators used but not its case, tense or person. Sefaria holds no Septuagint.",
+        "Greek text and his English translation (1851). For a few books without Brenton's Greek, the Greek "
+        "comes as dictionary forms (lemmas) and the result says so: those show which word the translators "
+        "used but not its case, tense or person. Sefaria holds no Septuagint.",
         {"ref": {"type": "string"}}, ["ref"]),
 ]
 
@@ -1256,7 +1257,8 @@ def summarize_tool_result(name: str, result: Dict, n: int = 240) -> str:
                    if first else ""))
     if name == "get_lxx":
         return (f"ref={result.get('ref')} (LXX ch. {result.get('lxx_chapter')}); Brenton: "
-                f"{_clip(result.get('english_brenton', ''), n)}; Greek lemmas: {_clip(result.get('greek_lemmas', ''), 120)}")
+                f"{_clip(result.get('english_brenton', ''), n)}; Greek ({result.get('greek_form', '')}): "
+                f"{_clip(result.get('greek', ''), 120)}")
     parts = []
     for k in ("ref", "source", "commentator"):
         if result.get(k):
@@ -1408,10 +1410,11 @@ def sefaria_suggestions(name: str, limit: int = 6) -> List[str]:
         return []
 
 
-# Bolls.life, as src/data_sources/sefaria_client.py uses it for the pipeline. Its Greek
-# ("LXX") is LEMMATIZED -- dictionary forms, not the inflected text -- so it settles which
-# WORD the translators used but never a case, tense or person; "LXXE" is Brenton's 1851
-# English translation of the Septuagint. Psalms are numbered by the Greek (MT 77 = LXX 76).
+# Bolls.life's "LXXE" is Brenton's 1851 English translation of the Septuagint. Its Greek
+# ("LXX") is LEMMATIZED -- dictionary forms, not the inflected text -- so since Session 390
+# the Greek comes from Brenton's own Greek text (src/data_sources/lxx_brenton.py; same LXX
+# numbering), with Bolls's lemmas only for books Brenton's file lacks, labelled as such.
+# Psalms are numbered by the Greek (MT 77 = LXX 76).
 BOLLS = "https://bolls.life"
 _BOLLS_BOOK = {"Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5, "Joshua": 6,
                "Judges": 7, "Ruth": 8, "I Samuel": 9, "II Samuel": 10, "I Kings": 11, "II Kings": 12,
@@ -1422,9 +1425,10 @@ _BOLLS_BOOK = {"Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deutero
 
 
 def lookup_lxx(ref: str) -> Dict:
-    """The Septuagint for a verse (MT reference): Brenton's English, and the Greek as LEMMAS.
-    Sefaria holds no Septuagint. For a Psalm the Greek numbering is applied, and Brenton, who
-    leaves the heading unnumbered, is aligned by the two editions' verse counts."""
+    """The Septuagint for a verse (MT reference): Brenton's English and Brenton's Greek (Bolls's
+    lemmas where his Greek is missing). Sefaria holds no Septuagint. A Psalm is mapped to the Greek
+    verse by verse (S390: MT 10, 115, 116, 147 fall inside or across Greek chapters), and Brenton's
+    English, which leaves the heading unnumbered, is aligned by the chapter's last verse number."""
     parsed = parse_ref(ref)
     if not parsed:
         return {"error": f"could not parse reference {ref!r}; use e.g. 'Psalms 77:11'"}
@@ -1432,24 +1436,39 @@ def lookup_lxx(ref: str) -> Dict:
     bid = _BOLLS_BOOK.get(book)
     if bid is None:
         return {"error": f"no Septuagint lookup for {book} (its chapters differ from the Hebrew)"}
-    lch = ch
-    if book == "Psalms":
-        from src.data_sources.sefaria_client import get_lxx_psalm_number
-        lch = get_lxx_psalm_number(ch)
-    try:
-        grk = requests.get(f"{BOLLS}/get-chapter/LXX/{bid}/{lch}/", timeout=20).json()
-        eng = requests.get(f"{BOLLS}/get-chapter/LXXE/{bid}/{lch}/", timeout=20).json()
-    except Exception as e:
-        return {"error": f"Septuagint lookup failed: {e}"}
-    shift = max(0, len(grk) - len(eng)) if book == "Psalms" else 0
-    want = range(v, (end or v) + 1)
-    g = " ".join(x["text"] for x in grk if x.get("verse") in want)
-    e = " ".join(_strip_html(x["text"]) for x in eng if x.get("verse", 0) + shift in want)
+    from src.data_sources import lxx_brenton
+    mt_verses = range(v, (end or v) + 1)
+    targets = ([lxx_brenton.mt_to_lxx(ch, x) for x in mt_verses] if book == "Psalms"
+               else [(ch, x) for x in mt_verses])
+    g_parts, e_parts, forms = [], [], []
+    for lch in dict.fromkeys(c for c, _ in targets):
+        want = {lv for c, lv in targets if c == lch}
+        grk, form = [], "Brenton's Greek text (1851)"
+        try:
+            code = lxx_brenton.BOOK_CODES.get(book)
+            grk = [{"verse": n, "text": t} for n, t in sorted(lxx_brenton.chapter(code, lch).items())] if code else []
+        except Exception:
+            grk = []
+        try:
+            if not grk:
+                form = "LEMMAS only (dictionary forms; no case, tense or person)"
+                grk = requests.get(f"{BOLLS}/get-chapter/LXX/{bid}/{lch}/", timeout=20).json()
+            eng = requests.get(f"{BOLLS}/get-chapter/LXXE/{bid}/{lch}/", timeout=20).json()
+        except Exception as e:
+            return {"error": f"Septuagint lookup failed: {e}"}
+        last = lambda rows: max([x.get("verse", 0) for x in rows] or [0])
+        shift = max(0, last(grk) - last(eng)) if book == "Psalms" else 0
+        g_parts += [x["text"] for x in grk if x.get("verse") in want]
+        e_parts += [_strip_html(x["text"]) for x in eng if x.get("verse", 0) + shift in want]
+        forms.append(form)
+    g, e = " ".join(g_parts), " ".join(e_parts)
     if not (g or e):
         return {"error": f"no Septuagint text found for {ref}"}
-    return {"ref": f"{book} {ch}:{v}" + (f"-{end}" if end else ""), "lxx_chapter": lch,
-            "source": "Bolls.life: Brenton's English Septuagint (1851); Greek LEMMAS only",
-            "english_brenton": e, "greek_lemmas": g}
+    greek_form = " / ".join(dict.fromkeys(forms))
+    return {"ref": f"{book} {ch}:{v}" + (f"-{end}" if end else ""), "lxx_chapter": targets[0][0],
+            "lxx_ref": "; ".join(f"{c}:{lv}" for c, lv in targets),
+            "source": f"Brenton's English Septuagint (1851, via Bolls.life); Greek: {greek_form}",
+            "english_brenton": e, "greek": g, "greek_form": greek_form}
 
 
 def lookup_text(ref: str, liturgy_db: Optional[Path] = None) -> Dict[str, str]:

@@ -103,9 +103,9 @@ The guide's writer is a very widely read model and will think of the most famous
 
 {reading}
 
-## Already used in this series -- do not propose these works
+## Already used in this series -- do not propose these again
 
-These works are already quoted in the guides to other psalms, and the collection must not repeat itself. Do not propose them. Other works by the same authors are welcome.
+The guides to other psalms already used what is listed below, and the collection must not repeat itself. For a poem, play or other text only the PASSAGE shown was used: do not propose that passage again, but another passage of the same work is welcome. Anything marked "used as a whole" (an artwork, music, an artifact, a finding) must not be proposed at all. Other works by the same authors are welcome.
 
 {used_works}
 
@@ -328,7 +328,11 @@ JUDGE_SCHEMA = {
 # Bump when USED_WORKS_PROMPT changes: every cached guide is then read again (~$0.11 for 47 guides).
 # v2 (S388): the psalm's own liturgical settings are not "used works" (they filled v1's register
 # with "Yom Kippur Vidui", "Sefard Siddur" and the like, which the writer was told never to cite).
-USED_WORKS_VERSION = 2
+# v3 (S390): PASSAGE-level for texts. The author: "never reuse a quotation ... it would be fine for
+# two psalms to quote Hamlet, from different passages." Each entry now says whether it is a TEXT
+# (then only its quoted passage is used: `passage` + the guide's first quoted words, `quote`) or
+# something else -- an artwork, music, an artifact, a finding -- which is used as a whole.
+USED_WORKS_VERSION = 3
 
 USED_WORKS_PROMPT = """Below is a study guide on Psalm {psalm}. List every work OUTSIDE the Hebrew Bible and the
 rabbinic/medieval commentary tradition that it QUOTES or holds up as a comparison: poems, songs, hymns,
@@ -338,8 +342,18 @@ Targum, the Septuagint, or commentators (Rashi, Ibn Ezra, Radak, Malbim, Meiri, 
 list the prayers, services, prayer books, rites or customs in which this psalm or its verses are
 recited (the guide's liturgy section reports those, and they are not echoes); DO list a piyyut or
 prayer-poem that the guide quotes as a comparison.
-For each give the creator ('' if none), the work's title as commonly known, and `quoted`: true if the
-guide quotes words from it, false if it only refers to it.
+For each give:
+- `creator` ('' if none) and `work`: the title of the WHOLE work as commonly known ("Hamlet", "Inferno",
+  "In Memoriam A.H.H."), without the part;
+- `kind`: "text" for anything made of words that can be quoted in passages (a poem, play, novel, hymn,
+  piyyut, essay, speech, letter, song lyric, a scripture of another tradition); "other" for everything
+  else (an artwork, a piece of music, a film, an artifact or inscription, an event, a scientific finding);
+- `passage`: for a text, the part the guide quotes or points to, as precisely as the guide allows (act and
+  scene, canto, book and lines, section, stanza, chapter, or the poem's title within a collection); ''
+  if the guide gives no way to tell;
+- `quote`: the first 10-15 words the guide quotes from it, copied exactly as the guide prints them (in
+  the language the guide prints first); '' if it quotes nothing;
+- `quoted`: true if the guide quotes words from it, false if it only refers to it.
 
 ## THE GUIDE
 {guide}
@@ -347,8 +361,10 @@ guide quotes words from it, false if it only refers to it.
 USED_WORKS_SCHEMA = {
     "type": "object", "additionalProperties": False, "required": ["works"],
     "properties": {"works": {"type": "array", "items": {
-        "type": "object", "additionalProperties": False, "required": ["creator", "work", "quoted"],
-        "properties": {"creator": _STR, "work": _STR, "quoted": {"type": "boolean"}}}}},
+        "type": "object", "additionalProperties": False,
+        "required": ["creator", "work", "kind", "passage", "quote", "quoted"],
+        "properties": {"creator": _STR, "work": _STR, "kind": {"type": "string", "enum": ["text", "other"]},
+                       "passage": _STR, "quote": _STR, "quoted": {"type": "boolean"}}}}},
 }
 
 
@@ -457,8 +473,17 @@ def _title_tokens(s: str) -> set:
 
 
 def same_author(a: Dict, b: Dict) -> bool:
-    ka, kb = normalise_author(a.get("creator") or ""), normalise_author(b.get("creator") or "")
-    return bool(ka) and ka == kb
+    """One person however the name is written (S390): identical keys; one name inside the other
+    ('Dante' / 'Dante Alighieri', 'Shakespeare' / 'William Shakespeare'); or the same surname with
+    compatible initials ('J. S. Bach' / 'Johann Sebastian Bach'). The register missed 'Shakespeare'
+    against 'William Shakespeare' before this."""
+    ka = normalise_author(a.get("creator") or "").split()
+    kb = normalise_author(b.get("creator") or "").split()
+    if not ka or not kb:
+        return False
+    if ka == kb or set(ka) <= set(kb) or set(kb) <= set(ka):
+        return True
+    return ka[-1] == kb[-1] and all(x[0] == y[0] for x, y in zip(ka[:-1], kb[:-1]))
 
 
 def same_work(a: Dict, b: Dict) -> bool:
@@ -478,16 +503,95 @@ def same_work(a: Dict, b: Dict) -> bool:
             _norm(wa) == _norm(wb) and bool(_norm(wa))
     if a.get("creator") and b.get("creator"):
         return same_author(a, b) and bool(ta & tb)
-    return len(ta & tb) >= min(2, len(ta), len(tb))
+    if len(ta & tb) >= 2:
+        return True
+    # One shared word is enough only when the shorter title sits whole inside the longer
+    # ("Laetoli" / "Laetoli footprints"). S390: "Book of the Dead" matched Bialik's "Metei Midbar
+    # (The Dead of the Desert)" on 'dead' and blocked it.
+    short, long_ = sorted((wa or "", wb or ""), key=lambda t: len(_norm(t)))
+    return len(ta & tb) >= min(2, len(ta), len(tb)) and bool(_norm(short)) and _norm(short) in _norm(long_)
+
+
+_ROMAN = re.compile(r"^(?=[mdclxvi])m*(c[md]|d?c{0,3})(x[cl]|l?x{0,3})(i[xv]|v?i{0,3})$")
+_LEVEL_WORDS = {"act", "scene", "book", "canto", "part", "chapter", "section", "stanza", "ode", "tablet",
+                "column", "col", "sonnet", "fragment", "psalm", "letter", "movement", "poem", "no", "number"}
+_LOCUS_STOP = _LEVEL_WORDS | {"line", "lines", "verse", "verses", "opening", "closing", "the", "and"}
+
+
+def _roman(tok: str) -> Optional[int]:
+    t = tok.lower()
+    if not t or not _ROMAN.match(t):
+        return None
+    vals = {"i": 1, "v": 5, "x": 10, "l": 50, "c": 100, "d": 500, "m": 1000}
+    n = 0
+    for i, ch in enumerate(t):
+        v = vals[ch]
+        n += -v if i + 1 < len(t) and vals[t[i + 1]] > v else v
+    return n
+
+
+def locus_levels(s: str) -> List[Tuple[int, int]]:
+    """A locus as numbered levels, each a (lo, hi) span: "Book 2, Ode 14, lines 25–28" ->
+    [(2,2), (14,14), (25,28)]; "Act V, scene ii" -> [(5,5), (2,2)]; "3.1.60" -> [(3,3), (1,1), (60,60)].
+    A roman numeral counts after a level word (act, canto, ...) or when it is two letters or more."""
+    toks = re.findall(r"\d+\s*[-–—]\s*\d+|\d+|[A-Za-z]+", s or "")
+    out, prev = [], ""
+    for t in toks:
+        if t[0].isdigit():
+            nums = [int(n) for n in re.findall(r"\d+", t)]
+            out.append((nums[0], nums[-1]))
+        else:
+            r = _roman(t)
+            if r is not None and (prev.lower() in _LEVEL_WORDS or len(t) >= 2):
+                out.append((r, r))
+        prev = t
+    return out
+
+
+def same_locus(a: str, b: str) -> bool:
+    """Do two descriptions of a place in a work point at the same passage? Compared level by level
+    as far as both go: whole numbers must be equal, a range must overlap ("Act 3, Scene 1, 56-88" =
+    "3.1.60"; "Canto 3" = "Canto III, lines 1-9"; Odes 2.14 lines 5-8 != lines 25-28). 'whole' or
+    'entire' covers everything; without numbers, half the distinctive words must be shared (level
+    words like 'scene' do not count). An empty locus matches nothing."""
+    if not (a or "").strip() or not (b or "").strip():
+        return False
+    if re.search(r"\b(whole|entire|complete|full)\b", f"{a} {b}", re.I):
+        return True
+    la, lb = locus_levels(a), locus_levels(b)
+    if la and lb:
+        return all(x[0] <= y[1] and y[0] <= x[1] for x, y in zip(la, lb))
+    ta = {w for w in _title_tokens(a) if w not in _LOCUS_STOP}
+    tb = {w for w in _title_tokens(b) if w not in _LOCUS_STOP}
+    return bool(ta and tb) and len(ta & tb) / min(len(ta), len(tb)) >= 0.5
+
+
+def is_text_entry(u: Dict) -> bool:
+    """A register entry used passage by passage (v3): a text whose passage or quoted words are on
+    record. A text only mentioned, with neither (a scientific paper cited for its finding), is used
+    as a whole, as are non-texts and entries from older register versions (no `kind`)."""
+    return u.get("kind") == "text" and bool((u.get("passage") or "").strip() or (u.get("quote") or "").strip())
+
+
+def register_hit(c: Dict, used: List[Dict]) -> Optional[Dict]:
+    """The register entry a candidate would repeat, judged BEFORE its text is found: the same
+    non-text work, or the same work at the same passage of a text."""
+    for u in used:
+        if not same_work(c, u):
+            continue
+        if not is_text_entry(u) or same_locus(c.get("locus", ""), u.get("passage", "")):
+            return u
+    return None
 
 
 def filter_used(pool: List[Dict], used: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
-    """Drop candidates whose WORK is already quoted in another psalm's guide (the author,
+    """Drop candidates that would repeat something another psalm's guide already used (the author,
     S388: the collection must not repeat a poem -- Celan's 'Psalm' was quoted in the guides to
-    Pss 41, 43 and 44 and chosen again for 77). Authors are not banned."""
+    Pss 41, 43 and 44 and chosen again for 77). S390: a TEXT is used passage by passage, so another
+    passage of Hamlet is welcome; anything else is used as a whole. Authors are not banned."""
     kept, removed = [], []
     for c in pool:
-        hit = next((u for u in used if same_work(c, u)), None)
+        hit = register_hit(c, used)
         if hit:
             removed.append(dict(c, used_in=hit.get("psalm")))
         else:
@@ -495,9 +599,56 @@ def filter_used(pool: List[Dict], used: List[Dict]) -> Tuple[List[Dict], List[Di
     return kept, removed
 
 
+_WORD = re.compile(r"[^\W_]+", re.U)
+
+
+def _words(s: str) -> List[str]:
+    import unicodedata
+    s = unicodedata.normalize("NFD", (s or "").lower())
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    return _WORD.findall(s)
+
+
+def repeats_quote(text: str, quote: str) -> bool:
+    """Does a passage cut from its page contain words a guide already quoted? True when the
+    guide's quote (its first words) appears in the text as a run of at least six words, or
+    whole if it is shorter. Accents, case and punctuation are ignored."""
+    q, t = _words(quote)[:15], _words(text)
+    if len(q) < 3 or not t:
+        return False
+    need = min(6, len(q))
+    from difflib import SequenceMatcher
+    m = SequenceMatcher(None, t, q, autojunk=False).find_longest_match(0, len(t), 0, len(q))
+    return m.size >= need
+
+
+def repeated_quotation(e: Dict, used: List[Dict]) -> Optional[Dict]:
+    """After retrieval: the register entry whose quotation this entry's cut text repeats (S390;
+    the check that catches a passage whose locus was named differently, or not at all)."""
+    r = e.get("retrieved") or {}
+    text = " ".join(r.get(k, "") for k in ("original", "translation", "quote"))
+    if not text.strip():
+        return None
+    for u in used:
+        if is_text_entry(u) and u.get("quote") and same_work(e["candidate"], u) and repeats_quote(text, u["quote"]):
+            return u
+    return None
+
+
 def used_works_block(used: List[Dict]) -> str:
-    rows = sorted({(u.get("creator") or "", u.get("work") or "") for u in used}, key=lambda t: (t[0].lower(), t[1]))
-    return "\n".join(f"- {c + ', ' if c else ''}{w}" for c, w in rows) or "(none yet)"
+    """The register as the proposers and the writer read it: a text with its passage and first
+    quoted words (only that passage is used); anything else by name (used whole)."""
+    rows = set()
+    for u in used:
+        head = f"{u.get('creator') + ', ' if u.get('creator') else ''}{u.get('work') or ''}"
+        if is_text_entry(u):
+            bits = [f"passage: {u['passage']}" if u.get("passage") else "",
+                    f"quoted: \u201c{' '.join((u.get('quote') or '').split()[:12])}\u2026\u201d" if u.get("quote") else ""]
+            bits = [b for b in bits if b]
+            rows.add((head.lower(), f"- {head} \u2014 " + ("; ".join(bits) if bits else "a passage not identified")))
+        else:
+            rows.add((head.lower(), f"- {head} (used as a whole)"))
+    return "\n".join(r for _, r in sorted(rows)) or "(none yet)"
 
 
 UNION_FACTOR = 1.35   # two judges' union may run past one judge's budget; the author accepts longer guides
@@ -933,6 +1084,20 @@ def dedupe_passages(pool: List[Dict]) -> List[Dict]:
 
 WRITER_LANES = (("literature", "Literary echoes"), ("beyond", "Resonances beyond literature"),
                 ("far", "Far associations"))
+DOSSIER_OPENING = "Two readers proposed these independently for this psalm"
+
+
+def is_v3_dossier(text: str) -> bool:
+    """True for a dossier written by `assemble_writer_dossier` (S390: lets a --skip-lit-echoes run
+    label a reused v3 dossier on the methods page instead of assuming the legacy models)."""
+    return text.lstrip().startswith(DOSSIER_OPENING)
+
+
+def methods_models() -> Dict[str, str]:
+    """The v3 echoes stage as the methods page names it (`model_usage` keys -> models). ONE
+    definition, used by the research assembler and the pipeline."""
+    return {"echoes_proposal": " + ".join(WRITER_PROPOSERS),
+            "echoes_locate": RETRIEVE_MODEL}
 
 
 def assemble_writer_dossier(psalm: int, entries: List[Dict], used: List[Dict]) -> str:
@@ -940,7 +1105,7 @@ def assemble_writer_dossier(psalm: int, entries: List[Dict], used: List[Dict]) -
     that two readers proposed these independently."""
     # Headings start at ### : the dossier sits under the bundle's '## Cross-Cultural Literary
     # Echoes' section, and a '## ' inside it would end that section for every reader of the bundle.
-    out = ["Two readers proposed these independently for this psalm, in three kinds: literary echoes, "
+    out = [DOSSIER_OPENING + ", in three kinds: literary echoes, "
            "resonances beyond literature, and far associations (a pattern in the psalm found in a distant "
            "field). Nothing here has been ranked or filtered: there is more than you can use, and some "
            "entries miss. Where a passage or a source is quoted, it was cut from, or found on, the page "
@@ -991,9 +1156,11 @@ def assemble_writer_dossier(psalm: int, entries: List[Dict], used: List[Dict]) -
                     out += [f"*Note:* {r['note']}", ""]
             else:
                 out += [f"*Text not confirmed* — reference: {c.get('locus', '')}.", ""]
-    out += ["### Already used in this collection — never quote or cite these", "",
-            "These works are already quoted or cited in the guides to other psalms, and the collection must "
-            "never repeat one. Do not use them, even from your own knowledge. Other works by the same "
+    out += ["### Already used in this collection — never repeat these", "",
+            "The guides to other psalms already used what is listed here, and the collection must never "
+            "repeat itself, even from your own knowledge. For a poem, play or other text only the passage "
+            "shown was used: never quote that passage again, but another passage of the same work is "
+            "welcome. Anything marked \"used as a whole\" must not be used at all. Other works by the same "
             "authors are fine.", "", used_works_block(used), ""]
     return "\n".join(out).rstrip() + "\n"
 
@@ -1308,7 +1475,9 @@ class EchoesV3Agent:
         guides = []
         for g in sorted(PROJECT_ROOT.glob("output/psalm_*/psalm_*_copy_edited.md")):
             n = int(re.search(r"psalm_(\d+)_copy_edited", g.name).group(1))
-            if n != exclude_psalm:
+            # S390: only the psalm's own folder. Side folders (psalm_57_opus48, psalm_67_old, ...)
+            # also hold guides, and each overwrote its psalm's cache entry with an old guide.
+            if n != exclude_psalm and g.parent.name == f"psalm_{n}":
                 guides.append((n, g))
 
         def read(item):
@@ -1333,8 +1502,9 @@ class EchoesV3Agent:
         with ThreadPoolExecutor(max_workers=parallel) as ex:
             found = list(ex.map(read, guides))
         # The author (S388): "keep a register of used works and never reuse them" -- a work the
-        # guide only CITES as a comparison is used too. The register is the latest guide per
-        # psalm: a regenerated guide replaces its psalm's entry.
+        # guide only CITES as a comparison is used too. S390: for a TEXT that means the passage
+        # (register_hit / repeated_quotation). The register is the latest guide per psalm: a
+        # regenerated guide replaces its psalm's entry.
         return [dict(w, psalm=n) for n, works in found for w in works]
 
     def run_for_writer(self, psalm: int, psalm_text: str, n_verses: int, macro: Optional[Dict] = None,
@@ -1398,6 +1568,19 @@ class EchoesV3Agent:
                 self._retrieve_and_check(psalm, lane, [e for e in failed if e["lane"] == lane])
         for e in entries:
             e.setdefault("status", "not_retrieved")
+        repeats = []
+        for e in entries:
+            hit = repeated_quotation(e, used)
+            if hit:
+                repeats.append(dict(e["candidate"], used_in=hit.get("psalm")))
+        if repeats:
+            ids = {c["id"] for c in repeats}
+            entries = [e for e in entries if e["id"] not in ids]
+            removed = removed + repeats
+            notes.append(f"{len(repeats)} located passage(s) dropped as repeating a quotation already in another "
+                         "guide: " + "; ".join(f"{c.get('creator') or ''} {c.get('work', '')} (Ps {c['used_in']})".strip()
+                                               for c in repeats))
+            self._log(f"[echoes] {len(repeats)} located passage(s) repeat a quotation in another guide; dropped")
         md = assemble_writer_dossier(psalm, entries, used)
         record = {"mode": "writer", "used_works": len(used), "dropped_as_used": removed}
         res = EchoesV3Result(psalm, md, entries, pool, proposals, record, list(self._costs), notes)
