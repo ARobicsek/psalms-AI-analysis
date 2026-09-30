@@ -9,6 +9,94 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 389 (2026-09-30): echoes v3 — a better, cheaper literary-echoes stage, resonances beyond literature, a register of used works, and the writer as the selector
+
+**Parallel sessions.** This session ran alongside Session 388 (editor cost work) and started before S388 committed,
+so its code comments, test names and design doc (`docs/plans/S388_ECHOES_V3.md`) say "Session 388"/"S388". It is
+Session 389.
+
+**The ask.** "Build a better and perhaps less costly literary echoes sub-pipeline… more apt and perhaps more
+interesting and illuminating… we don't need be restricted to the models we use." After v3: author diversity as a
+tie-break only; "I LOVE the idea of resonances outside literature… fine for there to be plenty." After reading the
+v3 annotated report, seven points: (1) could proposers naming different sections of a work confuse retrieval? (2) a
+Gemini judge beside Opus — the items the author liked most were Gemini's and the judge discarded them; (3) wants
+the non-literary items in the guides; (4) "richer and stranger", freer association, any field; (5) ~1 Jewish/Hebrew
+poem of the last 2,000 years; (6) judge for quality, humour, haunting, originality, not only aptness; (7) stop
+reusing the same poem (Celan's "Niemand"). After v3.1 ("wow. I really liked the entries"): get the cost down — only
+Opus 5.5 and Gemini 3.1 Pro proposing, counts proportional to the psalm, retrieve cheaply, hand everything to the
+writer with targets (≥ 1 Jewish/Hebrew, ≥ 1 far per 5 verses, 0.5–1.5 literary-or-beyond per verse, space no
+object); a register of used works, never reused; test on Ps 77 reusing the last run. Finally: is the methods page
+accurate; document, commit, push.
+
+**Diagnosis (the production pipeline, measured).** On Ps 77 the writer's best echoes (Hopkins ×2, Dickinson, on
+vv. 3–7) came from its own memory: both poets are banned from the dossier by the author ledger (Hopkins 6 psalms,
+Dickinson 8), and Dickinson was the generator's "Default bypassed" for 77:3–5. The bans kept apt echoes out of the
+dossier, not the guides. The generator reads only the psalm text (no macro reading) and clusters by topic; the
+writer framed several entries as opposites. Verification repairs quotations recalled from memory: 8–13 of ~20
+entries corrected per psalm, 55–70% of a bill that rose from $0.85–1.05 (to Ps 72) to $1.18–1.41 (Pss 73–77).
+
+**v3 (Pss 76, 77; $3.01).** Opus 5.5 + GPT-6 Sol + Gemini 3.1 Pro each read the psalm and the macro reading, name
+the psalm's MOVES, and propose literature and "beyond literature" candidates with NO quotation (work, locus,
+≤ 10-word anchor); an anonymised, shuffled pool; an Opus judge (aptness first, author ledger as tie-break);
+retrieval. Every held-out answer surfaced unprompted: Byron's *Destruction of Sennacherib* (all three), the Iliad,
+Sennacherib's prism, Herodotus 2.141 for Ps 76; Hopkins (all three), Dickinson, Cowper for Ps 77. Retrieval went
+through three designs: luna COPYING the passage (bug: the fact checker's JSON parser reads the key `claims`, and a
+schema keyed `items` parsed to zero records; then luna returned ONE line of a public-domain Hopkins sonnet — model
+reproduction limits); substring page checks (false negatives on RPO's line-numbered Cowper, JavaScript pages);
+finally **luna LOCATES (≤ 3 URLs + first/last line) and Python CUTS the passage from the page** (`html_to_lines`,
+`extract_passage`, `plausible_passage` guards against page furniture). Ps 76 $1.17 vs production $1.18; Ps 77
+$1.48 vs $1.41. The production dossiers and v3's pools do not overlap (Ps 76: 0 of 18; Ps 77: 4 of 19).
+Weaknesses: the Opus judge kept 14/16 of its own proposals (Ps 77); every Gemini non-literary item the author
+later liked (Chelyabinsk, the Illerup bog, Durkheim, tsunami drawback, the Kelvin wake, the Creation of Adam) was
+discarded. A blind packet and an annotated report went to the author.
+
+**v3.1 (Pss 76, 77; ≈ $5.3 incl. ~$0.5 unrecorded).** A Gemini judge beside Opus, merged deterministically (both
+judges' picks first, then single picks alternating); both judges SCORE every candidate 0–5 on illumination, truth,
+craft, interest, humour, haunting, memorable, originality, thought-provoking, with gates "true or fixable" and
+"illuminates" (a fixable error is corrected, not rejected); a FAR-ASSOCIATIONS lane (abstract the move to a bare
+pattern, find it in a distant field; each proposer gets its own random 15 of 203 fields); ≥ 2 Jewish/Hebrew poems
+per proposer and ≥ 1 in the dossier; one locus per entry (the judge's `retrieve` is authoritative); a WORK-level
+used-works register from the finished guides (luna, $0.11 once; 411 works in 47 guides; it found Hopkins's "I wake
+and feel" already in Ps 43's guide, repeated in Ps 77's). Results the author loved (garden-path sentences, memory
+reconsolidation, model collapse, Bach's mirror fugue, the watermark, the Mechanical Turk, FRE 803(5)), but $2.01 /
+$2.66 a psalm, Ps 77's union reached 55 entries, and one Opus proposal was blocked by Anthropic's output content
+filter (retry passed; the blocked stream never reached the tracker).
+
+**v3.2 = production.** `EchoesV3Agent.run_for_writer`: Opus 5.5 + Gemini 3.1 Pro propose three lanes at
+0.6 / 0.4 / 0.25 per verse each (`budgets_writer`); same-PASSAGE duplicates merge (`same_passage`; another passage
+of the same work stays); the register filters; every candidate is located and cut; one retry; the whole unfiltered
+dossier (`assemble_writer_dossier`, headings from `###`) goes into the research bundle, ending with the register
+as "never quote or cite these". The forest writer's `ECHOES AND RESONANCES` sections carry the author's targets:
+`forest_writer.S388_ECHO_EDITS` holds the (old, new) pairs applied to the approved S384–S386 texts; the pin tests
+apply the same pairs to the archived approved texts and still require a byte-for-byte match. The register
+(`data/literary_echoes/used_works/psalm_NNN.json`) is every work a guide quotes or cites as a comparison, but not the
+psalm's own liturgical settings (v1 had filled it with "Yom Kippur Vidui", "Sefard Siddur"; `USED_WORKS_VERSION` 2);
+382 works in 48 guides. Pipeline: `--echoes v3` (default) / `legacy`; STEP 1b writes the canonical echoes file;
+on `--skip-micro` the reused bundle's echoes section is replaced (`replace_literary_echoes_section`, ending at the
+next `## ` because the old dossier has its own `---` rules); every echoes call goes into the pipeline CostTracker.
+
+**Ps 77 test** (`--skip-macro --skip-micro --reuse-synthesis-discovery`, no fact check; old guide archived to
+`archive/psalm_77_S387_guide/` and kept in Documents as `Psalm 77 (S387).pdf`): **$4.11**. Echoes $1.22 (Opus
+$0.65, Gemini $0.23, locate ~$0.34; 47 candidates 22 / 15 / 10; dropped by the register: Dante's *Inferno* ×2 (Ps
+40), Bialik's *Metei Midbar* (62), Halevi's *Yom le-yabbasha* (51)); texts: literature 17/22, beyond 14/15, far 9/10.
+Writer $2.29 (cache write 251K vs 231K; the bigger dossier ≈ +$0.08); citations $0.07; copy editor $0.54 (edits
+mode, 17/17 applied; 15 changes, one correcting a far-association fact). The guide used ~20 literary-or-beyond items
+(target 11–32), exactly 4 far (floor 4: Laetoli, memory reconsolidation, Bach's Contrapunctus 12, catastrophic
+interference), *Yedid Nefesh*, and no register work (0 Hopkins/Dickinson/Celan/Larkin).
+
+**Editors' report fix.** A run without `--fact-check` left S387's `fact_check.json` in place and the report paired
+its 316 claims with the new copy edit. A fact check older than `print_ready.md` is now ignored (test). Still open:
+the report's intro and cumulative "cost of the whole run" on such a run.
+
+**Methods page (the author asked).** Four lines are wrong on the new Ps 77 guide — echoes "Pass 3: gpt-5.6-terra",
+the legacy pass labels, "Fact Check: gpt-6-sol" with no fact check, "Concordance Searches: N/A" — from stale
+`models_used` keys and the known `--skip-micro` gap. Causes and a fix sketch: `NEXT_SESSION_PROMPT_session_390.md`.
+
+**Tests**: 298 pass (21 in the new `tests/test_echoes_v3.py`; 3 new/updated in `tests/test_forest_writer.py`).
+**Session spend ≈ $12.5.**
+
+---
+
 ## Session 388 (2026-09-29): editor cost work — Sol's price, OpenAI cache writes, an edits-mode copy editor, free lookups, and a dossier cache shared by synthesis discovery and the writer
 
 **The ask.** After reading the Ps 77 editors' report ("EXCELLENT"): can the editors cost less — more caching? why so

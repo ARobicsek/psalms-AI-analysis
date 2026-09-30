@@ -34,15 +34,32 @@ def _script_constant(path: Path, name: str) -> str:
 # ---------------------------------------------------------------------------
 
 def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
+    """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
-    assert fw.essay_instructions(76, inputs) == (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
+    approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
+    assert fw.essay_instructions(76, inputs) == fw._apply_edits(approved, fw.S388_ECHO_EDITS["essay"])
 
 
 def test_verse_instructions_are_the_s386_text_byte_for_byte():
+    """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
-    assert fw.verse_instructions(13) == s385.replace("{n_verses}", "13").replace("{echo_target}", "10")
+    expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
+    for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
+        expected = expected.replace("{" + key + "}", str(value))
+    assert fw.verse_instructions(13) == expected
     assert "READER QUESTIONS" not in fw.VERSE_INSTRUCTIONS.upper().replace("NEVER BEGIN", "")
+
+
+def test_s388_echo_targets_are_the_authors():
+    """At least one far association per 5 verses; 0.5-1.5 literary-or-beyond items per verse;
+    at least one Jewish/Hebrew poem; never a work already used in the collection."""
+    assert fw.echo_targets(20) == {"far_target": 4, "lit_lo": 10, "lit_hi": 30}
+    text = fw.verse_instructions(20)
+    assert "at least 4" in text and "about 10 to 30" in text and "Jewish or Hebrew poem" in text
+    essay = fw.essay_instructions(77, "")
+    assert "already used in this collection" in essay and "haunting" in essay
+    assert "LITERARY ECHOES" not in essay and "LITERARY ECHOES" not in fw.VERSE_INSTRUCTIONS
 
 
 def test_essay_instructions_generalise_to_another_psalm():
@@ -551,3 +568,20 @@ def test_a_keepalive_that_writes_stops_all_further_keepalives(monkeypatch):
     monkeypatch.setattr(sd, "FINAL_KEEPALIVE_IF_OLDER_THAN_S", 0.0)
     agent.discover(77, "PT", "M", "m", "B", "P", "F", shared_dossier="DOSSIER", cache_shared=True)
     assert len(client.creates) == 1
+
+
+def test_editors_report_ignores_a_fact_check_from_an_earlier_guide(tmp_path):
+    """Session 388: a run without --fact-check leaves the previous run's fact_check.json in place;
+    the report must not pair it with this guide's copy edit."""
+    import os
+    import time as _t
+    from src.utils import editors_report as er
+    fc = tmp_path / "psalm_077_fact_check.json"
+    fc.write_text(json.dumps({"claims": [{"verdict": "contradicted", "sentence": "s"}]}), encoding="utf-8")
+    pr = tmp_path / "psalm_077_print_ready.md"
+    pr.write_text("guide", encoding="utf-8")
+    old = _t.time() - 3600
+    os.utime(fc, (old, old))
+    assert er._load(tmp_path, 77)["fc"] == {} and er._load(tmp_path, 77)["stale_fact_check"]
+    os.utime(fc, (_t.time() + 5, _t.time() + 5))
+    assert er._load(tmp_path, 77)["fc"]["claims"]

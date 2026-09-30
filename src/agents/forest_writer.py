@@ -46,8 +46,8 @@ LIT_MARKER = "---LITURGICAL-SECTION-START---"
 # the entry, for about $0.05; a miss would cost call 2 a fresh write (~$0.9).
 KEEPALIVE_AFTER_S = 240
 
-# Echoes per verse across the whole guide (the author's ~0.75; see RULE 12 of V4).
-ECHOES_PER_VERSE = 0.75
+# Echoes per verse: the S384-S386 texts asked for ~0.75 per verse; since Session 388 the targets
+# are echo_targets() below (the author: 0.5-1.5 literary-or-beyond per verse, >= 1 far per 5).
 
 _NUMBER_WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
                  "fourteen fifteen sixteen seventeen eighteen nineteen twenty").split()
@@ -247,6 +247,84 @@ Return exactly this shape, with nothing before the marker:
 
 
 # ---------------------------------------------------------------------------
+# Session 388: echoes v3.2. The author: the writer receives an UNFILTERED dossier of literary
+# echoes, resonances beyond literature and far associations, and chooses -- at least one
+# Jewish/Hebrew poem, at least one far association per 5 verses, 0.5-1.5 literary-or-beyond
+# items per verse, space no object, choosing for illumination AND beauty, humour, haunting,
+# originality -- and never reuses a work already used in the collection.
+#
+# The texts above are the S384-S386 texts the author approved, with exactly these edits
+# (old -> new). tests/test_forest_writer.py applies them to the archived approved texts and
+# requires a byte-for-byte match, so any other drift still fails.
+# ---------------------------------------------------------------------------
+
+_ESSAY_ECHOES_OLD = """## LITERARY ECHOES
+
+The Cross-Cultural Literary Echoes research holds passages from world literature chosen for this psalm. Use the strongest of them where they serve the argument — one to three in the essay is a natural range — and add others you know that fit better. Every quotation in that research was gathered from published, openly available sources, and this guide is a private study text written for one reader's own education; quotation in the service of commentary is its whole purpose. Do not trim a passage below what the comparison needs out of caution: quote the lines that carry the echo — typically 3–8 lines of verse (or 2–4 sentences of prose) — in the original language with English translation; for public-domain works (ancient, medieval, and anything published before about 1930) quote as much as illuminates; for modern works, the passage the dossier supplies is the passage to use. Frame the source for the reader (who, when, under what circumstances), and after quoting, unfold the resonance: what is genuinely parallel, what differs, and what the difference reveals about each.
+"""
+
+_ESSAY_ECHOES_NEW = """## ECHOES AND RESONANCES
+
+The research includes a section of echoes and resonances proposed for this psalm, in three kinds: literary echoes (poems, prose, liturgy, song), resonances beyond literature (history, art, music, science, anthropology and the rest), and far associations (a pattern the psalm makes, found in a distant field). Two readers proposed them independently and nobody has filtered them: there is more than you can use, and some miss. Choosing is your job. Choose by what an item does for THIS psalm — how much it illuminates a line — and by its own force: its beauty, humour, haunting power, originality, its power to make the reader think, how long it will stay with them. An item that is haunting, funny or strange deserves a real boost over one that is merely apt; one that shares only a mood or a theme is decoration. Add items of your own that fit better, but never a work from the list of works already used in this collection, which ends that section: the collection must not repeat itself, even from your memory.
+
+In the essay, use the strongest where they serve the argument — one to four is a natural range, and a far association may open or turn the essay. Every quotation in that research was cut from a published, openly available page, and this guide is a private study text written for one reader's own education; quotation in the service of commentary is its whole purpose. Do not trim a passage below what the comparison needs out of caution: quote the lines that carry the echo — typically 3–8 lines of verse (or 2–4 sentences of prose) — in the original language with English translation; for public-domain works (ancient, medieval, and anything published before about 1930) quote as much as illuminates; for modern works, the passage the research supplies is the passage to use. Where an entry says *text not confirmed*, quote it only if you know the passage exactly. Frame the source for the reader (who, when, under what circumstances), and after quoting, unfold the resonance: what is genuinely parallel, what differs, and what the difference reveals about each. For a resonance beyond literature, state the fact precisely — quote the supplied source where it helps — and say what it shows about the line.
+"""
+
+_VERSE_ECHOES_OLD = """## LITERARY ECHOES ACROSS THE WHOLE GUIDE
+
+Aim for about three echoes for every four verses across the whole guide, counting those already in your essay: for this psalm's {n_verses} verses, about {echo_target} in all. That is a level to reach with good echoes, not a quota. Rank the research's echoes together with any you know that fit better, and spend from the top. An echo earns its place by showing something about THIS line: the same event told by another voice, the same image turned to the opposite use, the same problem solved another way. A poem that shares only a mood is decoration. Do not repeat an echo the essay has used. Quote fully, and set poems lineated, as the essay instructions describe.
+"""
+
+_VERSE_ECHOES_NEW = """## ECHOES AND RESONANCES ACROSS THE WHOLE GUIDE
+
+Across the whole guide, counting what the essay already used, include:
+- **at least one Jewish or Hebrew poem** of the last 2,000 years — piyyut, Andalusian verse, kinot, Yiddish or modern Hebrew poetry, secular or liturgical — beyond whatever the liturgical section quotes;
+- **at least one far association for every five verses**: for this psalm's {n_verses} verses, at least {far_target};
+- **between half and one and a half literary echoes or resonances beyond literature per verse**: for this psalm, about {lit_lo} to {lit_hi} in all.
+
+Do not worry about space: this guide is read slowly and for pleasure, and a good echo is worth the length it adds. Rank the research's items together with any you know that fit better (never a work on the already-used list), and spend from the top, choosing by how much each illuminates its line and by its beauty, humour, haunting force, originality and power to make the reader think. An item earns its place by showing something about THIS line: the same event told by another voice, the same image turned to the opposite use, the same problem solved another way, the same pattern at work in another field. Place each at the verse it illuminates. Do not repeat an item the essay used. Quote fully, set poems lineated, and frame every source, as the essay instructions describe.
+"""
+
+S388_ECHO_EDITS = {
+    "essay": (
+        ("a reception-history report; literary echoes; and a set of cross-verse observations",
+         "a reception-history report; echoes and resonances; and a set of cross-verse observations"),
+        ("- **World literature** — see LITERARY ECHOES below.",
+         "- **World literature, and the rest** — see ECHOES AND RESONANCES below."),
+        (_ESSAY_ECHOES_OLD, _ESSAY_ECHOES_NEW),
+    ),
+    "verse": (
+        ("BRING THE WHOLE LIBRARY and its two tests, COMMENTATORS, LITERARY ECHOES, and WRITING",
+         "BRING THE WHOLE LIBRARY and its two tests, COMMENTATORS, ECHOES AND RESONANCES, and WRITING"),
+        ("- **An echo**: see below.", "- **An echo or a resonance**: see below."),
+        (_VERSE_ECHOES_OLD, _VERSE_ECHOES_NEW),
+    ),
+}
+
+# The writer's targets (the author, S388).
+FAR_PER_VERSES = 5                  # at least one far association per five verses
+LIT_PER_VERSE = (0.5, 1.5)          # literary echoes + resonances beyond literature, per verse
+
+
+def echo_targets(n_verses: int) -> Dict[str, int]:
+    return {"far_target": max(1, n_verses // FAR_PER_VERSES),
+            "lit_lo": max(1, int(n_verses * LIT_PER_VERSE[0] + 0.5)),
+            "lit_hi": max(2, int(n_verses * LIT_PER_VERSE[1] + 0.5))}
+
+
+def _apply_edits(text: str, edits) -> str:
+    for old, new in edits:
+        if text.count(old) != 1:
+            raise AssertionError(f"S388 echo edit does not apply exactly once: {old[:60]!r}")
+        text = text.replace(old, new)
+    return text
+
+
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
+
+
+# ---------------------------------------------------------------------------
 # Prompt assembly (pure)
 # ---------------------------------------------------------------------------
 
@@ -294,8 +372,9 @@ def psalm_verse_numbers(inputs: str) -> List[int]:
 
 
 def verse_instructions(n_verses: int) -> str:
-    text = (VERSE_INSTRUCTIONS.replace("{n_verses}", str(n_verses))
-            .replace("{echo_target}", str(round(n_verses * ECHOES_PER_VERSE))))
+    text = VERSE_INSTRUCTIONS.replace("{n_verses}", str(n_verses))
+    for key, value in echo_targets(n_verses).items():
+        text = text.replace("{" + key + "}", str(value))
     assert "{" not in text, "unfilled placeholder in the verse instructions"
     return text
 

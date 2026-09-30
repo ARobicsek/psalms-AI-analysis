@@ -209,6 +209,19 @@ def _load(out: Path, psalm: int) -> Dict:
     def js(name):
         t = rd(name)
         return json.loads(t) if t.strip() else {}
+
+    # Session 388: a fact check OLDER than this guide's print-ready text belongs to an earlier
+    # version of the guide (a later run without --fact-check leaves the old file in place), and
+    # reporting it would pair another guide's 316 claims with this guide's copy edit. The
+    # print-ready file is written in STEP 5, before any fact check (STEP 5a3/4) of the same run.
+    fc_file, anchor = out / f"{stem}_fact_check.json", out / f"{stem}_print_ready.md"
+    stale = fc_file.exists() and anchor.exists() and fc_file.stat().st_mtime < anchor.stat().st_mtime
+    if stale:
+        return {"fc": {}, "tele": {}, "stale_fact_check": True,
+                "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
+                "cit_pre": rd("citation_verification.md"), "cit_post": rd("post_copy_edit_citations.md"),
+                "cost": js("cost.json"), "writer": js("writer_calls.json"), "stats": js("pipeline_stats.json"),
+                "print_ready": rd("print_ready.md")}
     return {"fc": js("fact_check.json"), "tele": js("fact_check_telemetry.json"),
             "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
             "cit_pre": rd("citation_verification.md"), "cit_post": rd("post_copy_edit_citations.md"),

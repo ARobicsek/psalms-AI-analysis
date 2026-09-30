@@ -247,6 +247,36 @@ def _sample_for_display(results: list, n: int, seed_str: str, pin_text: str = ""
     return sorted(chosen, key=lambda r: (order.get(r.book, 999), r.chapter, r.verse))
 
 
+LITERARY_ECHOES_HEADER = "## Cross-Cultural Literary Echoes"   # the pipeline's stats regex reads this name
+
+
+def literary_echoes_section(content: str) -> str:
+    """The bundle's echoes section. Session 388: the echoes stage now supplies literary echoes,
+    resonances beyond literature and far associations, and the writer chooses among them."""
+    return (f"{LITERARY_ECHOES_HEADER}\n\n"
+            "*Echoes and resonances proposed for this psalm: passages from literature, material from "
+            "beyond literature, and far associations. Quotations were cut from, or found on, the "
+            "published pages named under them.*\n\n"
+            f"{content}\n\n---\n\n")
+
+
+def replace_literary_echoes_section(bundle: str, content: str) -> str:
+    """The bundle with its echoes section replaced by `content` (inserted before the closing
+    summary when the bundle had none). Session 388: lets a --skip-micro run carry fresh echoes
+    without re-running micro analysis and the librarians (~$1.3 on Ps 77)."""
+    new = literary_echoes_section(content)
+    start = bundle.find(LITERARY_ECHOES_HEADER)
+    if start >= 0:
+        # the section runs to the next level-2 heading: the old dossier has its own '---' rules
+        nxt = re.compile(r"^## ", re.M).search(bundle, start + len(LITERARY_ECHOES_HEADER))
+        end = nxt.start() if nxt else len(bundle)
+        return bundle[:start] + new + bundle[end:]
+    summary = bundle.find("## Research Summary")
+    if summary >= 0:
+        return bundle[:summary] + new + bundle[summary:]
+    return bundle.rstrip() + "\n\n" + new
+
+
 @dataclass
 class ResearchRequest:
     """
@@ -739,12 +769,9 @@ class ResearchBundle:
             md += self.deep_research_content
             md += "\n\n---\n\n"
 
-        # Cross-Cultural Literary Echoes section (separate Gemini Deep Research output)
+        # Cross-Cultural Literary Echoes section (the echoes stage's dossier)
         if self.literary_echoes_included and self.literary_echoes_content:
-            md += "## Cross-Cultural Literary Echoes\n\n"
-            md += "*This section contains cross-cultural literary and poetic comparisons assembled via dedicated Gemini Deep Research. Each comparison is anchored to specific verses and includes quotations in the original language.*\n\n"
-            md += self.literary_echoes_content
-            md += "\n\n---\n\n"
+            md += literary_echoes_section(self.literary_echoes_content)
 
         # Summary
         summary = self.to_dict()['summary']

@@ -322,6 +322,7 @@ def run_enhanced_pipeline(
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
+    echoes_mode: str = "v3",         # Session 388: "v3" (propose -> locate -> writer chooses) or "legacy" (Gemini + terra)
     macro_model: str = "claude-opus-5-5",
     question_model: str = "gpt-5.6-terra",
     copy_model: str = "gpt-5.6-terra",
@@ -525,7 +526,46 @@ def run_enhanced_pipeline(
     # Skipped silently if --skip-lit-echoes is passed.
     # Non-fatal on failure — downstream research_assembler tolerates missing file.
     # =====================================================================
-    if not skip_lit_echoes and not smoke_test:
+    fresh_echoes = None   # Session 388: the v3 dossier, spliced into a reused research bundle below
+    if not skip_lit_echoes and not smoke_test and echoes_mode == "v3":
+        # Session 388 (echoes v3.2): Opus 5.5 + Gemini 3.1 Pro propose literary echoes,
+        # resonances beyond literature and far associations (no quotations, no judge);
+        # gpt-6-luna locates every one and the text is cut from its page at $0; works already
+        # used in another guide are excluded (data/literary_echoes/used_works/). The writer
+        # chooses. See docs/plans/S388_ECHOES_V3.md.
+        from src.agents.echoes_v3 import (EchoesV3Agent, WRITER_PROPOSERS, RETRIEVE_MODEL,
+                                          psalm_text_block)
+        logger.info("\n[STEP 1b] Echoes and resonances (v3)...")
+        print(f"\n{'='*80}")
+        print(f"STEP 1b: Echoes and resonances ({' + '.join(WRITER_PROPOSERS)} propose → "
+              f"{RETRIEVE_MODEL} locates → text cut from its page)")
+        print(f"{'='*80}\n")
+        _snap = cost_tracker.snapshot()
+        try:
+            text_block, n_verses = psalm_text_block(psalm_number, db_path)
+            macro_json = json.loads(macro_file.read_text(encoding="utf-8")) if macro_file.exists() else {}
+            echoes_agent = EchoesV3Agent(proposers=WRITER_PROPOSERS, db_path=db_path, logger=logger,
+                                         cost_tracker=cost_tracker)
+            echoes_result = echoes_agent.run_for_writer(psalm_number, text_block, n_verses, macro_json,
+                                                        out_dir=output_path / "echoes")
+            fresh_echoes = echoes_result.markdown
+            canonical = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
+            canonical.write_text(fresh_echoes, encoding="utf-8")
+            tracker.track_model_for_step("literary_echoes_pass_1", " + ".join(WRITER_PROPOSERS))
+            tracker.track_model_for_step("literary_echoes_pass_3", f"{RETRIEVE_MODEL} (locate) + $0 page extraction")
+            lit_echoes_cost = echoes_result.total_usd
+            by_lane = {}
+            for e in echoes_result.entries:
+                by_lane[e["lane"]] = by_lane.get(e["lane"], 0) + 1
+            logger.info(f"[STEP 1b] Echoes complete — ${lit_echoes_cost:.4f}; {by_lane}; "
+                        f"{len(echoes_result.judge.get('dropped_as_used') or [])} dropped as already used")
+            for note in echoes_result.notes:
+                logger.info(f"[STEP 1b] {note}")
+        except Exception as e:
+            halt_on_quota(e, "STEP 1b: Echoes", logger, cost_tracker, output_path, psalm_number)
+            logger.warning(f"[STEP 1b] Echoes failed (non-fatal): {e}", exc_info=True)
+        _record_stage("literary echoes", _snap)
+    elif not skip_lit_echoes and not smoke_test:
         logger.info("\n[STEP 1b] Generating Literary Echoes...")
         print(f"\n{'='*80}")
         print(
@@ -624,6 +664,14 @@ def run_enhanced_pipeline(
         micro_analysis = load_micro_analysis(str(micro_file))
         with open(research_file, 'r', encoding='utf-8') as f:
             research_bundle_content = f.read()
+        if fresh_echoes:
+            # Session 388: this run made a new echoes dossier, but the bundle is reused; swap its
+            # echoes section so the writer (and synthesis discovery, if it runs) sees the new one.
+            from src.agents.research_assembler import replace_literary_echoes_section
+            research_bundle_content = replace_literary_echoes_section(research_bundle_content, fresh_echoes)
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+            logger.info("[STEP 2] Reused research bundle: echoes section replaced with this run's dossier")
         
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
@@ -1277,6 +1325,10 @@ if __name__ == "__main__":
     parser.add_argument("--include-insights", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--skip-copy-editor", action="store_true",
                        help="Skip the copy editor step (runs by default)")
+    parser.add_argument("--echoes", choices=["v3", "legacy"], default="v3",
+                       help="Session 388: v3 = Opus 5.5 + Gemini 3.1 Pro propose literary echoes, resonances "
+                            "beyond literature and far associations; texts cut from their pages; the writer "
+                            "chooses (default). legacy = the Session 374 Gemini + gpt-5.6-terra pipeline")
     parser.add_argument("--skip-lit-echoes", action="store_true",
                        help="Skip the literary echoes generation step (runs by default, regenerating the file on every pipeline run)")
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
@@ -1394,6 +1446,7 @@ if __name__ == "__main__":
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         skip_lit_echoes=args.skip_lit_echoes,
+        echoes_mode=args.echoes,
         macro_model=macro_mdl,
         question_model=question_mdl,
         copy_model=copy_mdl,
