@@ -11,7 +11,6 @@ The measurements behind `docs/plans/S391_SEFARIA_EVALUATION.md`. All $0 (Sefaria
 | `sacks_lit.py` | downloads Rabbi Sacks's siddur / Rosh HaShana / Yom Kippur / haggadah commentary (1.38M chars; NOT kept — Koren CC-BY-NC text) |
 | `sacks_liturgical_alignment.json` | PROTOTYPE alignment of those comments to psalms (incipit match + "Psalm N" mentions); unvetted, has false positives |
 | `hsearch.py` | Hebrew phrase search (`/api/search-wrapper`, `naive_lemmatizer`) across Sacks's works, for quotations Sefaria never linked |
-
 | `fullfetch.py` | full Hebrew + English of every in-scope linked passage for one psalm (Talmud, Mishnah, Tosefta, midrash, Second Temple, Hasidut, Musar, halakhah; anthologies dropped) |
 | `rules.py` | selection prototype v1 (content-scored). Kept as the record of what FAILED: it dropped Sanhedrin 19b, Berakhot 59a and the Hasidic line on 77:11 |
 | `rules2.py` | selection prototype v2 (structural; imports `rules.py`), the one described in the doc §3.1 |
