@@ -1031,6 +1031,18 @@ class MasterEditor(MasterEditorV2):
             self.logger.warning(f"LXX (Brenton) unavailable for the psalm text: {e}")
             greek = {}
 
+        # Session 391 (A/B, OFF unless `include_targum` is set, e.g. the pipeline's --targum): the
+        # Aramaic Targum per Hebrew verse. Off, this method's output is byte-identical to before.
+        targum = {}
+        if getattr(self, "include_targum", False):
+            try:
+                from src.data_sources.targum import targum_by_verse, SOURCE_NOTE
+                targum = targum_by_verse(psalm_number)
+                if targum:
+                    lines.append(SOURCE_NOTE + "\n")
+            except Exception as e:
+                self.logger.warning(f"Targum unavailable for the psalm text: {e}")
+
         # Get actual Hebrew/English from database
         try:
             db = TanakhDatabase(Path("database/tanakh.db"))
@@ -1050,6 +1062,11 @@ class MasterEditor(MasterEditorV2):
                     lines.append(f"**English:** {verse.english}")
                     if greek:
                         lines.append(f"**LXX:** {greek.get(v_num) or '(no equivalent in the Septuagint)'}")
+                    if targum and v_num in targum:
+                        aramaic, english = targum[v_num]
+                        lines.append(f"**Targum:** {aramaic}")
+                        if english:
+                            lines.append(f"**Targum (English):** {english}")
                     phonetic = phonetic_map.get(v_num, '')
                     if phonetic:
                         lines.append(f"**Phonetic:** {phonetic}")

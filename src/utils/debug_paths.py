@@ -18,9 +18,14 @@ otherwise have to get them right independently:
     we create the unpadded form, matching `copy_editor.py` and `beta_reader.py`.
 """
 
+import os
 from pathlib import Path
 
-OUTPUT_ROOT = Path("output")
+# Session 391: PSALMS_OUTPUT_ROOT relocates every per-psalm artifact this module places (the
+# writer's thinking, its saved essay call and telemetry, the copy editor's thinking), which
+# --output-dir alone does not: an A/B arm run without it overwrites the production psalm's files
+# (S383 patched this module by hand for the same reason). Unset = "output", as always.
+OUTPUT_ROOT = Path(os.environ.get("PSALMS_OUTPUT_ROOT") or "output")
 
 
 def psalm_output_dir(psalm_number: int, create: bool = False) -> Path:

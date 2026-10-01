@@ -375,6 +375,8 @@ def run_enhanced_pipeline(
     fact_check: bool = False,        # Session 385: OFF until the author approves -- see STEP 5a¾
     writer_prompt: str = "forest",   # Session 387: two-call forest writer; "v4" = the old one-call prompt
     copy_edit_mode: str = None,      # Session 388: None -> CopyEditor.DEFAULT_EDIT_MODE; "edits" = FIND/REPLACE only
+    reception: bool = False,         # Session 391: add the Sefaria reception section to the bundle (A/B; OFF)
+    targum: bool = False,            # Session 391: a **Targum:** line per verse in the writer's psalm text (A/B; OFF)
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -760,6 +762,22 @@ def run_enhanced_pipeline(
 
     _drop_legacy_echo_keys_if_v3(tracker)
 
+    # Session 391: the rabbinic and later reception of each verse, chosen by fixed rules from
+    # Sefaria's links (src/data_sources/sefaria_reception.py; docs/plans/S391_SEFARIA_EVALUATION.md).
+    # Inserted into the bundle file itself, so synthesis discovery, the writer and the trimmed copy
+    # all read it. $0 (cached under data/sefaria_cache/reception/).
+    if reception and not smoke_test and research_file.exists():
+        from src.data_sources.sefaria_reception import build_section, insert_section
+        try:
+            section, rstats = build_section(psalm_number)
+            research_bundle_content = insert_section(research_file.read_text(encoding="utf-8"), section)
+            research_file.write_text(research_bundle_content, encoding="utf-8")
+            logger.info(f"[STEP 2+] Reception section: {rstats['kept']} passages of {rstats['located']} located, "
+                        f"{rstats['chars']:,} chars, added to {research_file.name}")
+            tracker.model_usage["reception"] = "Sefaria links, fixed rules (no model)"
+        except Exception as e:
+            logger.error(f"[STEP 2+] Reception section FAILED, the bundle goes without it: {e}", exc_info=True)
+
     # =====================================================================
     # STEP 2b: Question Curation
     # =====================================================================
@@ -822,6 +840,7 @@ def run_enhanced_pipeline(
 
         master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker,
                                      writer_mode=writer_prompt)
+        master_editor.include_targum = targum   # Session 391: synthesis discovery and the writer alike
 
         # STEP 3.5 (Session 347): Cross-verse synthesis discovery sidecar.
         # Produces a calibrated observation list that gets spliced into the writer
@@ -1415,6 +1434,11 @@ if __name__ == "__main__":
     parser.add_argument("--beta-model", type=str, default=None,
                        help="Override the beta-reader model (default: claude-sonnet-4-6)")
 
+    parser.add_argument("--reception", action="store_true",
+                        help="Session 391 (A/B, OFF by default): add the Sefaria reception section "
+                             "(Talmud, midrash, later readers; fixed rules, $0) to the research bundle")
+    parser.add_argument("--targum", action="store_true",
+                        help="Session 391 (A/B, OFF by default): a Targum line per verse in the writer's psalm text")
     parser.add_argument("--fact-check", action="store_true",
                         help="Session 385 (experimental, OFF by default): evidence-based fact check "
                              "(gpt-6-sol + web search, ~$2-4) before the copy editor, which then "
@@ -1506,4 +1530,6 @@ if __name__ == "__main__":
         fact_check=args.fact_check,
         writer_prompt=args.writer_prompt,
         copy_edit_mode=args.copy_edit_mode,
+        reception=args.reception,
+        targum=args.targum,
     )

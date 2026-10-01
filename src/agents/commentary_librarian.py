@@ -37,10 +37,12 @@ Usage:
     bundle = librarian.process_requests(requests)
 """
 
+import json
 import requests
 import time
 import re
-from typing import Dict, List, Optional, Any
+from pathlib import Path
+from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from html import unescape
 import logging
@@ -52,7 +54,12 @@ logger = logging.getLogger(__name__)
 # API Configuration
 SEFARIA_API_BASE = "https://www.sefaria.org/api"
 RATE_LIMIT_DELAY = 0.5  # seconds between requests
-REQUEST_TIMEOUT = 10  # seconds
+# Session 391: one request per commentator per PSALM (was one per commentator per VERSE: 231 on
+# Ps 77), each retried. The old 10 s timeout with no retry is how Session 387 silently lost
+# Ibn Ezra on 77:9: a timeout returned None and the entry simply was not in the bundle.
+REQUEST_TIMEOUT = 30  # seconds
+MAX_ATTEMPTS = 4      # backoff 2, 4, 8 s between attempts
+CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "sefaria_cache" / "commentary"
 
 # ---------------------------------------------------------------------------
 # Session 380: per-entry ceiling on a commentary quotation as rendered into the
@@ -156,6 +163,45 @@ COMMENTATORS = {
     "Chomat Anakh": "Chomat Anakh on Psalms",          # Chida — eclectic, kabbalistic-leaning
     "Malbim Beur Hamilot": "Malbim Beur Hamilot on Psalms",  # Malbim on the WORDS; `Malbim` above is on the matter
 }
+
+
+# Session 391: the text VERSIONS, pinned. They are exactly what Sefaria served by default on
+# 2026-10-01, i.e. what every production bundle so far has contained. Unpinned, a change of
+# default on Sefaria's side would change our text silently (it has happened to Psalms itself:
+# the default English is now the 2023 JPS Gender-Sensitive Edition). (Hebrew title, English
+# title or None). If a pinned title disappears, the fetch falls back to Sefaria's default for
+# that language and logs a WARNING naming both.
+# English None = the commentator has no complete English, only PARTIAL translations (community,
+# Feuer's Jerusalem Anthology, a Radak translation) covering scattered verses. The old per-verse
+# request got whichever of them had the verse, and production bundles carry those (Ibn Ezra,
+# Radak and Malbim on Ps 76:3), MERGED comment by comment (Ibn Ezra on 1:1: one comment from
+# Wikisource, six from the community translation). So for these the fetch takes ALL English
+# versions and, comment by comment, the first in Sefaria's order that has it: verified identical
+# to the old output on every verse of Pss 1, 23, 27, 76 and 77 (660 verse-commentator pairs).
+PINNED_VERSIONS: Dict[str, Tuple[str, Optional[str]]] = {
+    "Rashi": ("Sefaria vocalized edition",
+              "The Judaica Press complete Tanach with Rashi, translated by A. J. Rosenberg"),
+    "Ibn Ezra": ("Ibn Ezra on Psalms -- Daat", None),
+    "Radak": ("Derekh Mesilah, Furth 1843", None),
+    "Malbim": ("On Your Way", None),
+    "Meiri": ("Jerusalem, 1936", None),
+    "Torah Temimah": ("On Your Way", None),
+    "Romemot El": ("Romemot El, Warsaw 1875", None),
+    "Minchat Shai": ("Minchat Shai", None),
+    "Metzudat Zion": ("On Your Way", None),
+    "Chomat Anakh": ("Chomat Anakh, Jerusalem 1965", None),
+    "Malbim Beur Hamilot": ("On Your Way - new", None),
+}
+
+
+def _join_segments(x) -> str:
+    """One verse's comments as the librarian has always rendered them: each segment cleaned, empty
+    ones dropped, joined with ' | '. Nested lists are flattened (the old per-verse code raised on
+    them and lost the entry)."""
+    if isinstance(x, list):
+        parts = [_join_segments(i) for i in x]
+        return ' | '.join(p for p in parts if p)
+    return clean_html_text(x) if x else ""
 
 
 # How each source is NAMED in the finished guide's methodological summary.
@@ -270,7 +316,8 @@ class CommentaryLibrarian:
     This agent is NOT an LLM - it's a pure Python script that queries Sefaria API.
     """
 
-    def __init__(self, rate_limit_delay: float = RATE_LIMIT_DELAY):
+    def __init__(self, rate_limit_delay: float = RATE_LIMIT_DELAY,
+                 cache_dir: Optional[Path] = None, use_cache: bool = True):
         """
         Initialize Commentary Librarian.
 
@@ -283,6 +330,9 @@ class CommentaryLibrarian:
         self.session.headers.update({
             'User-Agent': 'Psalms-AI-Commentary/1.0 (Educational Research)'
         })
+        self.cache_dir = Path(cache_dir) if cache_dir else CACHE_DIR
+        self.use_cache = use_cache
+        self._chapters: Dict[Tuple[str, int], Dict[int, CommentaryEntry]] = {}
 
     def _wait_for_rate_limit(self):
         """Enforce rate limiting between requests."""
@@ -291,91 +341,143 @@ class CommentaryLibrarian:
             time.sleep(self.rate_limit_delay - elapsed)
         self.last_request_time = time.time()
 
-    def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Dict:
-        """
-        Make a rate-limited request to Sefaria API.
-
-        Args:
-            endpoint: API endpoint (relative to base URL)
-            params: Query parameters
-
-        Returns:
-            JSON response as dictionary
-        """
+    def _make_request(self, endpoint: str, params=None) -> Optional[Dict]:
+        """A rate-limited GET with retries. Returns None on a 404 (Sefaria has no such text, e.g. a
+        commentator silent on a whole psalm); raises after MAX_ATTEMPTS on anything else."""
         url = f"{SEFARIA_API_BASE}/{endpoint}"
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            self._wait_for_rate_limit()
+            try:
+                response = self.session.get(url, params=params, timeout=REQUEST_TIMEOUT)
+                if response.status_code == 404:
+                    return None
+                response.raise_for_status()
+                return response.json()
+            except (requests.RequestException, ValueError) as e:
+                status = getattr(getattr(e, 'response', None), 'status_code', None)
+                if status is not None and 400 <= status < 500 and status != 429:
+                    raise
+                if attempt == MAX_ATTEMPTS:
+                    raise
+                wait = 2 ** attempt
+                logger.warning(f"Sefaria request failed ({e}); retry {attempt}/{MAX_ATTEMPTS - 1} in {wait}s: {endpoint}")
+                time.sleep(wait)
 
-        self._wait_for_rate_limit()
-        logger.debug(f"Request to {endpoint}")
+    def _cache_file(self, commentator: str, psalm: int) -> Path:
+        return self.cache_dir / f"{commentator.replace(' ', '_')}" / f"psalm_{psalm:03d}.json"
 
-        response = self.session.get(url, params=params, timeout=REQUEST_TIMEOUT)
-        response.raise_for_status()
+    def fetch_chapter(self, psalm: int, commentator: str) -> Dict[int, CommentaryEntry]:
+        """Every entry `commentator` has on `psalm`, keyed by verse: one Sefaria request (pinned
+        versions), cached in memory and on disk. A verse the commentator passes over is simply
+        absent. A fetch that fails after all retries is logged as a WARNING naming the lost
+        commentator and returns {} (the bundle then lacks him, visibly in the log)."""
+        key = (commentator, psalm)
+        if key in self._chapters:
+            return self._chapters[key]
+        index = COMMENTATORS[commentator]
+        he_title, en_title = PINNED_VERSIONS[commentator]
+        cache_file = self._cache_file(commentator, psalm)
+        raw = None
+        if self.use_cache and cache_file.exists():
+            try:
+                cached = json.loads(cache_file.read_text(encoding='utf-8'))
+                if cached.get('pinned') == [he_title, en_title]:
+                    raw = cached
+            except (OSError, ValueError):
+                raw = None
+        if raw is None:
+            raw = self._fetch_chapter_raw(index, psalm, commentator, he_title, en_title)
+            if raw is None:
+                self._chapters[key] = {}
+                return {}
+            if self.use_cache:
+                try:
+                    cache_file.parent.mkdir(parents=True, exist_ok=True)
+                    cache_file.write_text(json.dumps(raw, ensure_ascii=False), encoding='utf-8')
+                except OSError as e:
+                    logger.warning(f"Could not write commentary cache {cache_file}: {e}")
+        he, en = raw.get('he') or [], raw.get('en') or []
+        entries: Dict[int, CommentaryEntry] = {}
+        for i in range(max(len(he), len(en))):
+            hebrew = _join_segments(he[i]) if i < len(he) else ""
+            english = _join_segments(en[i]) if i < len(en) else ""
+            if hebrew or english:
+                entries[i + 1] = CommentaryEntry(commentator=commentator, psalm=psalm, verse=i + 1,
+                                                 hebrew=hebrew, english=english,
+                                                 reference=f"{index} {psalm}:{i + 1}")
+        self._chapters[key] = entries
+        return entries
 
-        return response.json()
+    def _fetch_chapter_raw(self, index: str, psalm: int, commentator: str,
+                           he_title: str, en_title: Optional[str]) -> Optional[Dict]:
+        endpoint = f"v3/texts/{index.replace(' ', '_')}.{psalm}"
+        wanted = [('he', he_title)] + ([('en', en_title)] if en_title else [])
+        try:
+            params = [('version', f"{'hebrew' if l == 'he' else 'english'}|{t}") for l, t in wanted]
+            if not en_title:
+                params.append(('version', 'english|all'))
+            data = self._make_request(endpoint, params=params)
+            if data is None:
+                logger.info(f"Sefaria has no {index} on Psalm {psalm} (404)")
+                return {'pinned': [he_title, en_title], 'he': [], 'en': []}
+            got = {}
+            partial_en = []
+            for v in data.get('versions', []):
+                if v.get('language') == 'en' and not en_title:
+                    partial_en.append(v)
+                elif v.get('language') not in got:
+                    got[v.get('language')] = v
+            for lang, title in wanted:
+                if lang not in got:   # the pinned title is gone: take Sefaria's default, loudly
+                    logger.warning(f"[commentary] pinned {lang} version {title!r} of {index} is unavailable; "
+                                   f"falling back to Sefaria's default {lang} version")
+                    alt = self._make_request(endpoint, params=[('version', 'hebrew' if lang == 'he' else 'english')])
+                    for v in (alt or {}).get('versions', []):
+                        if v.get('language') == lang:
+                            got[lang] = v
+                            logger.warning(f"[commentary] {index} Psalm {psalm}: using {v.get('versionTitle')!r}")
+            en_text = (got.get('en') or {}).get('text') or []
+            en_sources = {}
+            if partial_en:   # comment by comment, the first partial English version that has it
+                def seg(v, i, j):
+                    t = v.get('text') or []
+                    if i >= len(t): return None
+                    verse = t[i] if isinstance(t[i], list) else [t[i]]
+                    return verse[j] if j < len(verse) and _join_segments(verse[j]) else None
+                n = max(len(v.get('text') or []) for v in partial_en)
+                en_text = []
+                for i in range(n):
+                    width = max((len(v['text'][i]) if isinstance(v['text'][i], list) else 1)
+                                for v in partial_en if i < len(v.get('text') or []))
+                    merged, used = [], []
+                    for j in range(width):
+                        pick = next((v for v in partial_en if seg(v, i, j) is not None), None)
+                        merged.append(seg(pick, i, j) if pick else "")
+                        if pick and pick.get('versionTitle') not in used:
+                            used.append(pick.get('versionTitle'))
+                    en_text.append(merged)
+                    if used:
+                        en_sources[str(i + 1)] = used
+            return {'pinned': [he_title, en_title],
+                    'he': (got.get('he') or {}).get('text') or [],
+                    'en': en_text,
+                    'versions': {l: (got.get(l) or {}).get('versionTitle') for l, _ in wanted},
+                    'partial_english_by_verse': en_sources}
+        except Exception as e:
+            logger.warning(f"[commentary] {commentator} on Psalm {psalm}: Sefaria failed after {MAX_ATTEMPTS} "
+                           f"attempts ({e}); {commentator} is MISSING from this bundle")
+            return None
 
     def fetch_commentary(self,
                          psalm: int,
                          verse: int,
                          commentator: str = "Rashi") -> Optional[CommentaryEntry]:
-        """
-        Fetch a single commentary on a specific verse.
-
-        Args:
-            psalm: Psalm number (1-150)
-            verse: Verse number
-            commentator: Commentator name (default: "Rashi")
-
-        Returns:
-            CommentaryEntry if found, None if not available
-        """
+        """One commentator on one verse, from the psalm's cached chapter (see `fetch_chapter`).
+        None when he has nothing on the verse, or his chapter could not be fetched."""
         if commentator not in COMMENTATORS:
             logger.warning(f"Unknown commentator: {commentator}")
             return None
-
-        commentary_text = COMMENTATORS[commentator]
-        ref = f"{commentary_text}.{psalm}.{verse}"
-
-        try:
-            logger.info(f"Fetching {commentator} on Psalms {psalm}:{verse}...")
-
-            data = self._make_request(f"texts/{ref}", params={'context': 0})
-
-            # Extract text (may be nested array)
-            hebrew = data.get('he', [])
-            english = data.get('text', [])
-
-            # Handle nested structure
-            if isinstance(hebrew, list):
-                hebrew = ' | '.join([clean_html_text(h) for h in hebrew if h])
-            else:
-                hebrew = clean_html_text(hebrew)
-
-            if isinstance(english, list):
-                english = ' | '.join([clean_html_text(e) for e in english if e])
-            else:
-                english = clean_html_text(english)
-
-            if not hebrew and not english:
-                logger.info(f"No {commentator} commentary found for Psalms {psalm}:{verse}")
-                return None
-
-            entry = CommentaryEntry(
-                commentator=commentator,
-                psalm=psalm,
-                verse=verse,
-                hebrew=hebrew,
-                english=english,
-                reference=data.get('ref', ref)
-            )
-
-            logger.info(f"Successfully fetched {commentator} commentary ({len(hebrew)} Hebrew chars)")
-            return entry
-
-        except requests.RequestException as e:
-            logger.warning(f"Error fetching {commentator} on Psalms {psalm}:{verse}: {e}")
-            return None
-        except Exception as e:
-            logger.error(f"Unexpected error fetching commentary: {e}")
-            return None
+        return self.fetch_chapter(psalm, commentator).get(verse)
 
     def fetch_commentaries(self,
                           psalm: int,

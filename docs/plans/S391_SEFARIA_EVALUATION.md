@@ -196,6 +196,34 @@ And on **Ps 76:5** (*na'or attah*), where the S385 guide wrote *"The Alshich rep
 
 The runs must happen on the author's machine: `output/` (bundles, SD files) is not in the cloud container.
 
+## 6. BUILT (same session): what exists now, and how to run the Ps 76 A/B
+
+The author: *"yes, go ahead with 1,400"*; Ps 76 only, arm A = today's pipeline (fresh bundle, synthesis, echoes, writer), arm B = the same plus the new Sefaria material, echoes shared.
+
+| What | Where | Default |
+|---|---|---|
+| **Commentary fetch, hardened**: one request per commentator per PSALM (was per verse: 231 on Ps 77), 4 attempts with backoff, 30 s timeout, versions PINNED (`PINNED_VERSIONS`, = Sefaria's defaults on 2026-10-01), disk cache `data/sefaria_cache/commentary/`, a lost commentator logged as a WARNING. Partial English (community / Feuer / a Radak translation) merged comment by comment, exactly as the old per-verse endpoint served it. **Verified identical to the old output on all 660 verse-commentator pairs of Pss 1, 23, 27, 76, 77.** | `src/agents/commentary_librarian.py`; `tests/test_commentary_librarian_fetch.py` (9) | ON (production) |
+| **Reception section** (the §3.1a rules; 1,400 chars/verse, 40K cap) | `src/data_sources/sefaria_reception.py`; pipeline `--reception`; `tests/test_sefaria_reception.py` (14) | OFF |
+| **Targum line** per verse (`**Targum:**`, `**Targum (English):**` where Sefaria has it): all 150 psalms align with the Hebrew verse numbering (0 mismatches) | `src/data_sources/targum.py`; `MasterEditor.include_targum`; pipeline `--targum`; `tests/test_targum.py` (4) | OFF |
+| **`PSALMS_OUTPUT_ROOT`** relocates the writer's thinking, saved essay and telemetry (which `--output-dir` does not) | `src/utils/debug_paths.py` | unset = `output` |
+| **The A/B driver** | `scripts/run_s391_reception_ab.py` | — |
+
+Run it (on the author's machine; the bundles are there):
+```bash
+python scripts/run_s391_reception_ab.py 76 --dry-run     # $0: reception section (19 passages, 20.7K chars), Targum, plan, estimate
+python scripts/run_s391_reception_ab.py 76               # both arms, ~$9-13; results in output/_s391_reception_ab/psalm_76/
+```
+The driver: copies the production macro into arm A; runs arm A as a plain pipeline subprocess (`--skip-macro`); copies A's macro, micro and research bundle (with A's fresh echoes) into arm B, **refuses to run B if its bundle would cross the 350K trim ceiling** (one-sided trimming would be a confound), then runs B with `--skip-macro --skip-micro --skip-lit-echoes --reception --targum`; backs up and restores the production echoes dossier and the `output/debug/*_psalm_76.txt` dumps; writes `README.md` (per-stage cost, both arms) and copies both DOCX/PDF to the folder's top.
+
+### 6a. The 350K trim ceiling (the author asked whether to raise or remove it)
+
+**Recommendation: keep it for now; revisit before Psalm 78.**
+- **Its rationale is obsolete.** It was set for a 200K-token window ("~350K chars ≈ 200K tokens at 1.75:1"). Opus 5.5 has a **1M-token context, 128K output, and a flat $4/$20 with no long-context tier** (checked against the current API reference). Fit is no longer the constraint.
+- **It almost never binds.** Bundles have run ~215–280K (S379, S380: none crossed it), and the S387 writer's whole inputs block for Ps 77 was 349K chars ≈ 231K tokens (≈ 1.5 chars/token, not 1.75). Raising or removing it changes nothing for the psalms done so far.
+- **What it guards is cost and dilution, not fit.** Each extra 100K chars ≈ 66K tokens ≈ $0.33 per psalm in synthesis discovery's cache write plus reads, and S370–S372 measured more material producing *less* focused writing.
+- **Where it will matter**: the long psalms (78 = 72 verses, 89, 104–107, 119 = 176). When it fires it drops Related Psalms first, then trims uncurated figurative material. Before Ps 78, measure those bundles (`$0`) and decide then; a ceiling that scales with verse count is the likely answer.
+- **For this A/B** it must not fire on one arm only; the driver checks.
+
 ## 5. Suggested order and how to test it
 
 | Step | What | Spend |
