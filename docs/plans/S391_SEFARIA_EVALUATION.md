@@ -85,6 +85,32 @@ Across the Ps 76 two-call guides, the whole of rabbinic reception is 2–4 Talmu
 
 **Cost per psalm**: harvest $0 (≈150–300 API requests, 1–2 minutes, cached); curation $0–0.25; writer + synthesis discovery read the extra ~10–20K tokens through the shared cache (Opus 5.5: $5/MTok write, $0.20/MTok read): **≈ $0.10–0.25**.
 
+
+### 3.1a The author's decisions (same session) and the selection rules
+
+**Decisions**: scope = Talmud, classical midrash, the Targum and Philo; Hasidut / Musar / halakhah possible; **no Kabbalah, no Jewish thought**. **No selection model**, because it would overdetermine what the writer writes: programmatic rules, or at most a very simple model. Licensing: **personal use only**, so CC-BY-NC is fine. Tests: **Ps 76 and 77**; re-running synthesis discovery and the writer on Ps 76 with and without the change is approved.
+
+**Rules (prototype `archive/S391_sefaria_probe/rules2.py`, $0, no model).** They select on the KIND of source and its AGE, never on how interesting a passage looks:
+
+1. **Locate or drop.** The verse must be found inside the passage: the longest run of consecutive verse words, matched on consonantal skeletons (matres lectionis removed, up to two prefix letters, common suffixes, the divine-name spellings ה׳ / יי / אלקים). This also removes Sefaria's mis-links (Ps 77 has links to "77:49" and "77:51", which belong to Ps 78).
+2. **One passage, one item.** A passage linked to several verses is one item with a verse range (Eikhah Rabbah 1:23 covers 77:7–11).
+3. **Parallels collapse to the earliest telling.** 4-gram shingle overlap ≥ 0.25 around the quotation; the later versions are named, not printed (Tanchuma / Tanchuma Buber; Shabbat 88a / Avodah Zarah 3a).
+4. **Tier A, always kept:** Talmud, Mishnah and Tosefta with an early known date, plus *Midrash Tehillim* on its own psalm. (Ps 77: 4 items; Ps 76: 7.)
+5. **Tier B, classical midrash and Philo:** per verse, earliest first; drop a bare proof-text (the verse after "שנאמר / דכתיב…", none of its words reused, in a passage of more than 600 characters); at most 2 per verse, filled round-robin so every verse gets its first before any gets its second.
+6. **Tier C, later readers (Hasidut / Musar / halakhah):** a **convergence rule**. When three or more *different* later works return to the same verse, that verse has a reception tradition of its own: keep the earliest telling and name the others. Then a small allowance (one per four verses) for single passages that visibly work the verse.
+7. **Budget**: about 1,100 characters per verse (Ps 77: 23K; Ps 76: 14K, about 6–7% of the dossier), with a Hebrew window of 30 words before and 60 after the quotation plus the English (whole if ≤ 900 characters, else a window). Fill order: A → first B per verse → C convergence leads → second B per verse → C singles.
+8. **Presentation**: neutral, by verse, then date; work, date, ref, the cut text, "parallels:" and "also:" lines. **No summaries and no "why it matters"**, so nothing tells the writer what to make of it.
+
+**What it keeps** (full lists in `selection_ps77.txt` / `selection_ps76.txt`):
+- **Ps 77** (82 located → 77 after parallels → 24 kept): Midrash Tehillim 77, Sanhedrin 19b (v. 16), Berakhot 59a (v. 19), Yerushalmi Berakhot 9:1 (v. 14), the Mekhilta on the Sea (vv. 17–19), Pesikta DeRav Kahana and Eikhah Rabbah on vv. 7–11, and as convergence leads the Hasidic line on **v. 11** (Ben Porat Yosef; also Toldot Yaakov Yosef, Tzofnat Paneach), on v. 16 and on v. 20.
+- **Ps 76** (70 → 66 → 13): Midrash Tehillim 76, Shabbat 88a on v. 9 (the earth "feared, then was still" until Israel accepted the Torah; parallel Avodah Zarah 3a), Bereshit Rabbah 56:10 on Salem = Jerusalem (v. 3), Tosefta Berakhot, Soferim, Yerushalmi Maasrot and Nedarim, and the Mekhilta. Its budget (14K) filled before the v. 9 Shavuot cluster (Sefat Emet ×6, Shem MiShmuel, Likutei Moharan…) was reached; **the per-verse budget is the knob.**
+
+**What failed, and why the rules are structural.** v1 (`rules.py`) ranked by content: verse words reused outside the quotation, plus interpretive and proof-text cue words. It **dropped my three best Ps 77 finds**. Sanhedrin 19b lost to the per-verse cap. In Berakhot 59a the reused word was שבגלגל, two prefixes deep. And the Hasidim on 77:11 paraphrase rather than repeat the verse. Word overlap is good only for dropping obvious proof-texts.
+
+**If a model is ever needed** (e.g. the proof-text filter proves too blunt): a **yes/no classifier** ("does this passage interpret this verse, or cite it as proof for something else?") on Haiku 4.5 or gpt-6-luna, about $0.01/psalm. It filters noise and never ranks or summarizes.
+
+**Known rough edges**: Sefaria's `compDate` is noisy (Tanchuma Buber is dated 150), so "earliest" is sometimes wrong; undated works fall to tier C; the Hebrew window is cut by word count, not sentence.
+
 ### 3.2 The Targum
 
 Sefaria has the Aramaic Targum to Psalms for **all 150 psalms** (Mikraot Gedolot, public domain). It has an English translation for only **35 psalms** (Edward M. Cook's, plus a community translation: Pss 1–18, 24, 68, 83, 90–92, 104, 113–118, 120–123). Opus 5.5 reads Aramaic; Cook's complete translation is published on targum.info if English for all 150 is wanted.
@@ -151,6 +177,24 @@ And on **Ps 76:5** (*na'or attah*), where the S385 guide wrote *"The Alshich rep
 5. **FIXED THIS SESSION: the methods page's Sacks count.** The author noticed Ps 77's guide says *"Rabbi Jonathan Sacks References Reviewed: 4"*, but Ps 77 has no Sacks excerpt (the file has 0 entries, and Sefaria has 0 links and 0 liturgical comments). On a `--skip-micro` run the number comes from `_parse_research_stats_from_markdown`, and that function, copied into five runners, counted **every** "Rabbi Sacks" / "Jonathan Sacks" string anywhere in the bundle once "Rabbi Jonathan Sacks" appeared anywhere: the biography, the Research Summary's own "Rabbi Sacks references: 0" line, an echoes candidate. It was wrong in both directions: 4 for 0 on Ps 77, **9 for 10** on Ps 23. Now `sacks_librarian.count_references_in_bundle` counts the `#### Reference N:` entries inside the `## Rabbi Jonathan Sacks on Psalm N` section, and all five runners call it (3 tests in `tests/test_methods_page.py`). **Ps 77's existing guide is not re-rendered** (its files are on the author's machine): set `research.sacks_references_count` to 0 in `output/psalm_77/psalm_077_pipeline_stats.json`, then `python scripts/run_docx_only.py 77 --pdf`.
 
 ---
+
+## 5a. A fair comparison (the author asked whether historical runs can serve as the baseline)
+
+**No.** Neither psalm's existing guide is a fair baseline:
+
+- **Ps 77**: the current guide (S389) was written from **S387's synthesis discovery, cut off at 14 observations** by the old 64K cap and never re-run (S388's complete 31-observation run was an experiment, not used). Its bundle has **uncurated figurative material** (S387's curator phase 2 timed out), is **missing Ibn Ezra 77:9**, and its micro research carries the **lemma-based false "LXX reading" of 77:2**. Its writer had **no LXX line** (added S390).
+- **Ps 76**: its synthesis discovery (S383, Opus 5.5, 46K tokens) is **complete**, so this is the cleaner one. But its bundle **predates S384's concordance fixes and the shared-vocabulary radar**, its echoes are **legacy**, its writer had **no LXX line**, and its forest-writer guides were essay-prompt trials (K / new / F).
+- Run to run, the writer varies (S372, S386), so any one historical guide is one draw.
+
+**Design: paired fresh arms, everything identical except the new sections.**
+1. Inputs fixed once per psalm: macro reused, echoes reused, research bundle as it stands. (Optionally refresh micro + bundle on today's code first, ≈ $1–2, so the test reflects the current pipeline; both arms share it either way.)
+2. **Arm A**: synthesis discovery + forest writer on those inputs. **Arm B**: the same plus `## Rabbinic Reception` (the rules above) and the `**Targum:**` line per verse, then synthesis discovery + writer. SD runs in both arms because it reads the same dossier and it is where the original finds came from (S383).
+3. Cost per arm ≈ $3.5–4 (Ps 76 measured: SD $1.64, writer $1.93 in S383; the two-call writer $2.25 in S386). **Ps 76 both arms ≈ $7–8**; Ps 77 ≈ $8–9 (21 verses). Copy edit + DOCX +$0.5 per arm if the author wants to read finished guides.
+4. Read-outs: the author's reading; **$0 accuracy check** of every rabbinic / Targum / midrash claim in both arms against the cached Sefaria texts (the Ps 27 / Ps 76 error class); counts of reception material used; and whether SD's observations change.
+5. Side benefit: arm A is also the overdue **SD → writer shared-cache check** (`NEXT_SESSION_PROMPT_session_391.md` §2).
+6. Caveat: B changes two things (reception + Targum). Separating them would take a third arm; the Targum is small and low-risk, so it rides with B.
+
+The runs must happen on the author's machine: `output/` (bundles, SD files) is not in the cloud container.
 
 ## 5. Suggested order and how to test it
 

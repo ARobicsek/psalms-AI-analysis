@@ -1,0 +1,26 @@
+Ps 77: 82 located passages -> 77 after parallels -> kept 24 (22932 chars of 23100)
+  KEEP A v1,3       1050 r1     Midrash Tehillim 77:1
+  KEEP B v3         1200 r6 cue Shemot Rabbah 46:4
+  KEEP B v6,11       150 r1 cue Midrash Tanchuma Buber, Ki Tisa 14:1
+  KEEP B v6,8,9,10,11  1200 r1     Shemot Rabbah 45:2
+  KEEP B v7,9,10     400 r5     Pesikta DeRav Kahana 17:1
+  KEEP B v7,8,9,10,11   500 r3     Eikhah Rabbah 1:23
+  KEEP B v11         150 r2 cue Midrash Tanchuma Buber, Ki Tisa 14:2
+  KEEP B v11         400 r4     Pesikta DeRav Kahana 17:2
+  KEEP C v11        1760 r2     Ben Porat Yosef, Introduction 112  [also: Toldot Yaakov Yosef, Tzofnat Paneach]
+  KEEP B v14         150 r3     Midrash Tanchuma Buber, Bereshit 7:1
+  KEEP B v14         150 r3     Midrash Tanchuma Buber, Kedoshim 4:1  [+1 parallel: Midrash Tanchuma, Kedoshim 4:1]
+  KEEP A v14         375 r3     Jerusalem Talmud Berakhot 9:1:12
+  KEEP B v15         150 r3 cue Midrash Tanchuma Buber, V'Zot HaBerachah 3:1  [+1 parallel: Midrash Tanchuma, V'Zot HaBerachah 4:1]
+  KEEP B v15        1050 r4     Midrash Tehillim 67:1
+  KEEP B v16         150 r4     Midrash Tanchuma Buber, Nasso 34:1  [+1 parallel: Midrash Tanchuma, Nasso 30:1]
+  KEEP A v16         450 r2     Sanhedrin 19b:16
+  KEEP C v16        1801 r2     Agra DeKala, Vayeshev 64  [also: Aggadat Bereshit, Likutei Halakhot, Pele Yoetz, Shem MiShmuel]
+  KEEP B v17,18      200 r5 cue Mekhilta DeRabbi Yishmael, Tractate Vayehi Beshalach 5:19
+  KEEP B v17         200 r4 cue Mekhilta DeRabbi Shimon Ben Yochai 14:19
+  KEEP B v19         200 r4     Mekhilta DeRabbi Shimon Ben Yochai 14:23  [+1 parallel: Mekhilta DeRabbi Yishmael, Tractate Vayehi Beshalach 6:15]
+  KEEP A v19         450 r0     Berakhot 59a:7
+  KEEP B v20         150 r3     Midrash Tanchuma Buber, Vayeshev 11:1
+  KEEP C v20        1760 r3     Ben Porat Yosef, Introduction 141  [also: Me'or Einayim, Midrash Tannaim on Deuteronomy, Shivchei HaRan]
+  KEEP B v21         150 r3     Midrash Tanchuma Buber, Re'eh 2:1
+  dropped: Aggadat Bereshit 82:3(v5,C); Aggadat Bereshit 71:3(v6,C); Pesikta Rabbati 8:1(v7,B); Midrash Tehillim 113:1(v7,B); Shemot Rabbah 18:5(v7,B); Likutei Moharan 54:9:1(v7,C); Shenei Luchot HaBerit, Torah Shebikhtav, Sh'lach, Torah Ohr 9(v9,C); Shev Shmateta, Introduction 36(v10,C); Midrash Tehillim 42:4(v11,B); Ben Porat Yosef, Toldot 179(v11,C); Toldot Yaakov Yosef, Yitro 33(v11,C); Tzofnat Paneach, Vaera 1:136(v11,C); Tzofnat Paneach, Pekudei 1:11(v11,C); Chayyim VaChesed 511:3(v14,C); Midrash Tehillim 149:1(v15,B); Likutei Moharan 30:8:9(v15,C); Mei HaShiloach, Volume I, Talmud, Megillah 11a:1(v15,C); Bereshit Rabbah 84:5(v16,B); Pesikta DeRav Kahana 5:11(v16,B); Vayikra Rabbah 23:2(v16,B); Pesikta Rabbati 15:1(v16,B); Bamidbar Rabbah 13:20(v16,B); Likutei Halakhot, Orach Chaim, Laws of Reading the Torah 3:7:1(v16,C); Pele Yoetz 293:5(v16,C); Shem MiShmuel, Beshalach 10:28(v16,C); Shem MiShmuel, Vayechi 7:16(v16,C); Aggadat Bereshit 68:2(v16,C); Devarim Rabbah 3:8(v17,B); Midrash Tehillim 18:17(v17,B); Midrash Tanchuma, Beshalach 23:2(v19,B); Yismach Moshe, Ha'Azinu 7:9(v19,C); Likutei Moharan 5:3:5(v19,C); Vayikra Rabbah 25:3(v20,B); Midrash Tanchuma, Vayishlach 10:4(v20,B); Pirkei DeRabbi Eliezer 42:5(v20,B); Midrash Tehillim 25:10(v20,B); Shemot Rabbah 25:6(v20,B); Me'or Einayim, Additions 17(v20,C); Me'or Einayim, Additions 19(v20,C); Shivchei HaRan, An Account of His Pilgrimage to the Holy Land 5:2(v20,C); Midrash Tannaim on Deuteronomy 13:5:2(v20,C); Midrash Tanchuma Buber, Vayeshev 21:1(v21,B); Mekhilta DeRabbi Yishmael, Tractate Vayehi Beshalach 1:2(v21,B); Midrash Tanchuma, Shemot 7:2(v21,B); Midrash Tanchuma, Beshalach 1:2(v21,B); Midrash Tanchuma, Masei 2:1(v21,B); Midrash Tanchuma, Re'eh 1:1(v21,B); Shemot Rabbah 2:3(v21,B); Bamidbar Rabbah 23:2(v21,B); Shenei Luchot HaBerit, Aseret HaDibrot, Taanit, Torah Ohr 3:11(v21,C); Shenei Luchot HaBerit, Aseret HaDibrot, Taanit, Torah Ohr 3:26(v21,C); Shenei Luchot HaBerit, Vavei HaAmudim 27:2(v21,C); Likkutei Torah, Masei 1:1(v21,C)

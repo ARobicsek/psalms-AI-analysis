@@ -13,3 +13,7 @@ The measurements behind `docs/plans/S391_SEFARIA_EVALUATION.md`. All $0 (Sefaria
 | `hsearch.py` | Hebrew phrase search (`/api/search-wrapper`, `naive_lemmatizer`) across Sacks's works, for quotations Sefaria never linked |
 
 Notes: `sacks_lit.py` as written misses nodes with no English title (the Siddur's Shabbat section); the session re-fetched those by `key`. The window logic in `harvest.py` falls back to the segment's start when it cannot find a "Psalms N:V" string, so its windows are an upper bound on size, not a production cut.
+| `fullfetch.py` | full Hebrew + English of every in-scope linked passage for one psalm (Talmud, Mishnah, Tosefta, midrash, Second Temple, Hasidut, Musar, halakhah; anthologies dropped) |
+| `rules.py` | selection prototype v1 (content-scored). Kept as the record of what FAILED: it dropped Sanhedrin 19b, Berakhot 59a and the Hasidic line on 77:11 |
+| `rules2.py` | selection prototype v2 (structural; imports `rules.py`), the one described in the doc §3.1 |
+| `selection_ps77.txt`, `selection_ps76.txt` | v2's kept/dropped lists |
