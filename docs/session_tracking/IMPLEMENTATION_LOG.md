@@ -9,6 +9,26 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 391 (2026-10-01): Sefaria evaluated; the methods page's Sacks count fixed
+
+**The ask.** "In this pipeline we use sefaria for various things. Since the project started, sefaria has come a long way … It now contains a lot of new content (including R Jonathan Sacks content) … Our R Sacks approach was also very clunky … can you evaluate how we use sefaria, what if anything is now accessible that might substantially improve our insights or make our content legitimately more interesting/richer (so not just another medieval commentator similar to ones we have), and what we'd need to do to incorporate it?" Mid-session: "FWIW, the methods section of ps 77 says 'Rabbi Jonathan Sacks References Reviewed: 4'."
+
+**What was done.** An evaluation, measured against the live API at $0 (no model calls). The full write-up is `docs/plans/S391_SEFARIA_EVALUATION.md`; the probe scripts and reduced data are in `archive/S391_sefaria_probe/`.
+
+1. **Inventory of today's use.** Psalm text and lexicon via `sefaria_client` (v1, unpinned default versions, baked into `tanakh.db`); 11 commentators via `commentary_librarian` (v1, one request per commentator per verse, 10 s timeout, no retry); the liturgy harvest into `liturgy.db`; the fact checker (the only v3 user); and Sacks from a static 7 MB JSON built in Session 68 (no API).
+2. **The catalogue and the links.** `/api/index` (6,610 works) and `/api/links/Psalms.N` for all 150 psalms (125,838 links). Medians per psalm: midrash 70.5, Hasidut 50.5, Kabbalah 26, thought 19.5, Musar 19, Targum 13, Talmud 11.5, halakhah 10. English share: Talmud 97%, midrash 62%, Kabbalah/thought 47%, Hasidut 24%.
+3. **Ps 77 read in full.** The prototype harvest gives 162 reception passages after dropping the anthologies (85 midrash, 22 Hasidic, 21 Targum, 12 Kabbalah, 10 thought, 6 Musar, 3 halakhah, 3 Talmud). Highlights: Sanhedrin 19b and the Targum on 77:16; Berakhot 59a (Shmuel's thunder) on 77:19; the Rema / Shelah / Toldot Yaakov Yosef / Tzofnat Paneach line on the crux 77:11 ("the change is in the receiver"); Midrash Tehillim's Habakkuk circle.
+4. **Evidence that the writer needs it.** The Ps 27 guide attributes Vayikra Rabbah 21:4 (Rosh Hashanah / Yom Kippur on 27:1) to "later pietistic works". The Ps 76 (S385) guide cites the Targum through the Alshich as דְּחִיל alone, but the Targum reads נְהִיר דְּחִיל, both readings at once.
+5. **The Targum.** Aramaic on Sefaria for all 150 psalms; English for only 35 (Cook / community).
+6. **Sacks.** The links give 286 passages over 67 psalms (181 shared with the file). His siddur, Rosh HaShana / Yom Kippur mahzor and haggadah commentary (1,305 comments, 1.38M chars, CC-BY-NC) was downloaded and prototype-aligned to the psalms by Hebrew incipit and "Psalm N" mentions: about 92 psalms, with false positives. A Hebrew phrase search finds quotations that were never linked. After a rebuild, 105 psalms have something vs 56 today; Ps 77 has nothing.
+7. **Rejected.** Steinsaltz on Psalms (running paraphrase; ©), Topics, sheets, manuscripts, web pages (not in the API), the anthologies.
+
+**The Sacks count (fixed).** On a `--skip-micro` run, `_parse_research_stats_from_markdown` (five identical copies across the runners) set `sacks_count` to the number of "Rabbi Sacks" / "Jonathan Sacks" / "### …Sacks" strings anywhere in the bundle, provided "Rabbi Jonathan Sacks" or "## Rabbi Sacks" appeared anywhere. Ps 77 has no Sacks section, so the mentions came from elsewhere in the bundle (the Research Summary line "Rabbi Sacks references: 0" is one of them), and the result was 4. On Ps 23 the same regex gives 9 for 10 real excerpts. New: `sacks_librarian.count_references_in_bundle(markdown)` counts the `#### Reference N:` entries inside `## Rabbi Jonathan Sacks on Psalm N`; all five runners call it. Tests: `tests/test_methods_page.py` +3 (no section → 0; a real Ps 23 section → 10; every runner uses the shared function and none keeps the regex). Suite: 302 passed, 15 skipped in the cloud container (the skips need `database/tanakh.db` etc.).
+
+**Not done.** No pipeline integration of any new source (the doc's §5 orders the work and lists the author's decisions). Ps 77's guide was not re-rendered, because its files are on the author's machine; the doc's §4.5 gives the two-step repair. **Spend: $0.**
+
+---
+
 ## Session 390 (2026-09-30): the methods page and the editors' report tell the truth; the pipeline's Septuagint is real Greek
 
 **The ask.** "Continuing this work. Please address the items in the handoff" (`NEXT_SESSION_PROMPT_session_390.md`,

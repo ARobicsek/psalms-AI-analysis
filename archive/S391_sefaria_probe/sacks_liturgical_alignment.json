@@ -1,0 +1,2275 @@
+{
+"_note": "Session 391 PROTOTYPE alignment of Sacks's siddur/mahzor/haggadah commentary to psalms ('incipit' = the comment's Hebrew lemma found in the psalm, 'named' = 'Psalm N' in the text). Unvetted: incipit matches include false positives (e.g. Ps 76:8).",
+"by_psalm": {
+"104": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, On Waking",
+"segment": "6",
+"how": "named",
+"verse": 24,
+"chars": 530
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Massekhet Rosh HaShana",
+"segment": "3.3",
+"how": "named",
+"verse": 18,
+"chars": 1025
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Tallit",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 917
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Tallit",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 917
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Shir HaYihud, Friday",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 183
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "19",
+"how": "incipit",
+"verse": 31,
+"chars": 1022
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "375",
+"how": "named",
+"verse": null,
+"chars": 183
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, On Waking",
+"segment": "6",
+"how": "named",
+"verse": 24,
+"chars": 951
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "19",
+"how": "incipit",
+"verse": 31,
+"chars": 632
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "22",
+"how": "incipit",
+"verse": 31,
+"chars": 916
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 873
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 873
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 1034
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 1034
+}
+],
+"119": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Morning Blessings",
+"segment": "2",
+"how": "incipit",
+"verse": 12,
+"chars": 1047
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "63",
+"how": "named",
+"verse": 89,
+"chars": 610
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Second Day, Musaf",
+"segment": "38",
+"how": "incipit",
+"verse": 12,
+"chars": 366
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings over the Torah",
+"segment": "3",
+"how": "incipit",
+"verse": 12,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings of the Shema",
+"segment": "12",
+"how": "named",
+"verse": null,
+"chars": 1092
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Minha for Shabbat and Yom Tov",
+"segment": "118",
+"how": "incipit",
+"verse": 142,
+"chars": 522
+}
+],
+"44": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Accepting the Sovereignty of Heaven",
+"segment": "11",
+"how": "incipit",
+"verse": 5,
+"chars": 386
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Accepting the Sovereignty of Heaven",
+"segment": "12",
+"how": "incipit",
+"verse": 5,
+"chars": 437
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Accepting the Sovereignty of Heaven",
+"segment": "10",
+"how": "incipit",
+"verse": 5,
+"chars": 386
+}
+],
+"102": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Accepting the Sovereignty of Heaven",
+"segment": "11",
+"how": "incipit",
+"verse": 28,
+"chars": 386
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Accepting the Sovereignty of Heaven",
+"segment": "12",
+"how": "incipit",
+"verse": 28,
+"chars": 437
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Accepting the Sovereignty of Heaven",
+"segment": "10",
+"how": "incipit",
+"verse": 28,
+"chars": 386
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Se'uda Shelishit for Shabbat",
+"segment": "4",
+"how": "named",
+"verse": 14,
+"chars": 1048
+}
+],
+"145": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Pesukei DeZimra",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1499
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Minha for Erev Rosh HaShana",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 4150
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Minha for Erev Rosh HaShana",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 4150
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "21",
+"how": "named",
+"verse": null,
+"chars": 1476
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "21",
+"how": "named",
+"verse": null,
+"chars": 1476
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "27",
+"how": "named",
+"verse": null,
+"chars": 690
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Minha",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 754
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "21",
+"how": "named",
+"verse": null,
+"chars": 892
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "89",
+"how": "named",
+"verse": null,
+"chars": 670
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "24",
+"how": "named",
+"verse": null,
+"chars": 1501
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "24",
+"how": "named",
+"verse": null,
+"chars": 1501
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Mincha, Haftara; The Book of Jonah",
+"segment": "5",
+"how": "named",
+"verse": 9,
+"chars": 9025
+}
+],
+"146": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Pesukei DeZimra",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1499
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "24",
+"how": "named",
+"verse": null,
+"chars": 390
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "24",
+"how": "named",
+"verse": null,
+"chars": 283
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "27",
+"how": "named",
+"verse": null,
+"chars": 470
+}
+],
+"100": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Pesukei DeZimra",
+"segment": "12",
+"how": "incipit",
+"verse": 1,
+"chars": 643
+}
+],
+"137": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Amida",
+"segment": "50",
+"how": "named",
+"verse": null,
+"chars": 582
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Tashlikh",
+"segment": "1",
+"how": "named",
+"verse": 1,
+"chars": 1810
+},
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Sheva Berakhot",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 299
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Tashlikh",
+"segment": "2",
+"how": "named",
+"verse": 1,
+"chars": 4882
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Verses of Unity",
+"segment": "21",
+"how": "named",
+"verse": 5,
+"chars": 2765
+},
+{
+"ref": "The Jonathan Sacks Haggadah, Nirtzah, L'Shana HaBaa",
+"segment": "1.1",
+"how": "named",
+"verse": 1,
+"chars": 2577
+}
+],
+"6": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 4491
+}
+],
+"78": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "2",
+"how": "incipit",
+"verse": 38,
+"chars": 366
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Ma'ariv for Weekdays",
+"segment": "2",
+"how": "incipit",
+"verse": 38,
+"chars": 275
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Ma'ariv for Weekdays",
+"segment": "2",
+"how": "named",
+"verse": 38,
+"chars": 275
+}
+],
+"51": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "2",
+"how": "named",
+"verse": 19,
+"chars": 366
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Minha for Weekdays",
+"segment": "12",
+"how": "incipit",
+"verse": 17,
+"chars": 386
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Massekhet Yoma",
+"segment": "8.9",
+"how": "named",
+"verse": 4,
+"chars": 6375
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "7",
+"how": "named",
+"verse": 19,
+"chars": 1419
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Seder HaAvoda",
+"segment": "46",
+"how": "named",
+"verse": 5,
+"chars": 4199
+}
+],
+"80": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "17",
+"how": "incipit",
+"verse": 15,
+"chars": 204
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Prayer for Dew",
+"segment": "11",
+"how": "named",
+"verse": 16,
+"chars": 1056
+}
+],
+"121": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "28",
+"how": "incipit",
+"verse": 4,
+"chars": 609
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Tahanun",
+"segment": "28",
+"how": "named",
+"verse": null,
+"chars": 609
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "4",
+"how": "named",
+"verse": null,
+"chars": 186
+}
+],
+"20": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Conclusion of the Service",
+"segment": "6",
+"how": "named",
+"verse": null,
+"chars": 379
+}
+],
+"22": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Conclusion of the Service",
+"segment": "10",
+"how": "incipit",
+"verse": 4,
+"chars": 305
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, First Day, Leader's Repetition for Shaharit",
+"segment": "45",
+"how": "incipit",
+"verse": 4,
+"chars": 361
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, First Day, Leader's Repetition for Shaharit",
+"segment": "45",
+"how": "named",
+"verse": 4,
+"chars": 361
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Second Day, Musaf",
+"segment": "13",
+"how": "incipit",
+"verse": 4,
+"chars": 462
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "184",
+"how": "named",
+"verse": 4,
+"chars": 346
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "8",
+"how": "incipit",
+"verse": 4,
+"chars": 305
+}
+],
+"24": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "4",
+"how": "named",
+"verse": null,
+"chars": 409
+}
+],
+"48": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "7",
+"how": "named",
+"verse": null,
+"chars": 886
+}
+],
+"82": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "10",
+"how": "named",
+"verse": null,
+"chars": 448
+}
+],
+"94": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 428
+}
+],
+"81": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 251
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "31",
+"how": "incipit",
+"verse": 4,
+"chars": 377
+},
+{
+"ref": "Rabbi Sacks on Siddur, Torah Readings, Shavuot",
+"segment": "6",
+"how": "incipit",
+"verse": 11,
+"chars": 1439
+}
+],
+"93": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "19",
+"how": "named",
+"verse": null,
+"chars": 232
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Birkat Kohanim",
+"segment": "38",
+"how": "incipit",
+"verse": 4,
+"chars": 142
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 1931
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "18",
+"how": "named",
+"verse": null,
+"chars": 495
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "18",
+"how": "named",
+"verse": null,
+"chars": 549
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "11",
+"how": "named",
+"verse": null,
+"chars": 962
+}
+],
+"27": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, The Daily Psalm",
+"segment": "25",
+"how": "named",
+"verse": null,
+"chars": 462
+},
+{
+"ref": "Rabbi Sacks on Siddur, Torah Readings, Hatan Torah and Hatan Bereshit",
+"segment": "17",
+"how": "named",
+"verse": 1,
+"chars": 1829
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "129",
+"how": "named",
+"verse": null,
+"chars": 412
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Second Day, Avinu Malkenu",
+"segment": "2",
+"how": "named",
+"verse": 10,
+"chars": 2575
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Avinu Malkenu",
+"segment": "76",
+"how": "incipit",
+"verse": 1,
+"chars": 1341
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Avinu Malkenu",
+"segment": "76",
+"how": "named",
+"verse": null,
+"chars": 1341
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "2",
+"how": "incipit",
+"verse": 6,
+"chars": 389
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Leader's Repetition for Musaf",
+"segment": "195",
+"how": "named",
+"verse": 10,
+"chars": 9963
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, The Amida",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 6687
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Candle Lighting",
+"segment": "2",
+"how": "named",
+"verse": 1,
+"chars": 538
+}
+],
+"34": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Ma'ariv for Weekdays",
+"segment": "5",
+"how": "named",
+"verse": 4,
+"chars": 213
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": 8,
+"chars": 1388
+},
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Birkat HaMazon; Grace after Meals",
+"segment": "12",
+"how": "named",
+"verse": 4,
+"chars": 690
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "10",
+"how": "named",
+"verse": null,
+"chars": 1080
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "10",
+"how": "named",
+"verse": null,
+"chars": 702
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings of the Shema",
+"segment": "2",
+"how": "named",
+"verse": 4,
+"chars": 346
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1180
+}
+],
+"92": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Ma'ariv for Weekdays",
+"segment": "21",
+"how": "named",
+"verse": null,
+"chars": 288
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "17",
+"how": "named",
+"verse": null,
+"chars": 935
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Blessings of the Shema",
+"segment": "20",
+"how": "named",
+"verse": null,
+"chars": 349
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "17",
+"how": "named",
+"verse": null,
+"chars": 1755
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings of the Shema",
+"segment": "24",
+"how": "named",
+"verse": null,
+"chars": 348
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 2277
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 2277
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "36",
+"how": "incipit",
+"verse": 1,
+"chars": 950
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Blessings of the Shema",
+"segment": "20",
+"how": "named",
+"verse": null,
+"chars": 980
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Se'uda Shelishit for Shabbat",
+"segment": "3",
+"how": "named",
+"verse": 11,
+"chars": 1675
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Eve, Kabbalat Shabbat",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 737
+}
+],
+"89": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Ma'ariv for Weekdays",
+"segment": "28",
+"how": "incipit",
+"verse": 53,
+"chars": 619
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Shir HaYihud, Thursday",
+"segment": "1",
+"how": "incipit",
+"verse": 9,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Selihot",
+"segment": "73",
+"how": "named",
+"verse": 1,
+"chars": 2120
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "298",
+"how": "incipit",
+"verse": 9,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "29",
+"how": "incipit",
+"verse": 53,
+"chars": 243
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Leader's Repetition for Ne'ila",
+"segment": "92",
+"how": "incipit",
+"verse": 19,
+"chars": 1363
+}
+],
+"67": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Counting of the Omer",
+"segment": "56",
+"how": "named",
+"verse": null,
+"chars": 243
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 623
+}
+],
+"91": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1388
+},
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": 11,
+"chars": 1388
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "12",
+"how": "incipit",
+"verse": 1,
+"chars": 472
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "12",
+"how": "named",
+"verse": null,
+"chars": 472
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "12",
+"how": "incipit",
+"verse": 1,
+"chars": 384
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "12",
+"how": "named",
+"verse": null,
+"chars": 384
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "15",
+"how": "incipit",
+"verse": 1,
+"chars": 469
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "15",
+"how": "named",
+"verse": null,
+"chars": 469
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "5",
+"how": "named",
+"verse": null,
+"chars": 874
+}
+],
+"3": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1388
+}
+],
+"128": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1388
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings over the Torah",
+"segment": "4",
+"how": "incipit",
+"verse": 5,
+"chars": 698
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "175",
+"how": "incipit",
+"verse": 6,
+"chars": 200
+}
+],
+"4": [
+{
+"ref": "Rabbi Sacks on Siddur, Weekdays, Shema before Sleep at Night",
+"segment": "1",
+"how": "named",
+"verse": 5,
+"chars": 1388
+}
+],
+"113": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1742
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "3",
+"how": "incipit",
+"verse": 7,
+"chars": 496
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "The Jonathan Sacks Haggadah, Magid, First Half of Hallel",
+"segment": "3.1",
+"how": "named",
+"verse": null,
+"chars": 2003
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+}
+],
+"114": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "4",
+"how": "incipit",
+"verse": 1,
+"chars": 198
+}
+],
+"115": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "6",
+"how": "incipit",
+"verse": 8,
+"chars": 607
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": 4,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": 4,
+"chars": 1461
+}
+],
+"135": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "6",
+"how": "incipit",
+"verse": 18,
+"chars": 607
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 937
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 937
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 937
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+}
+],
+"118": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "15",
+"how": "named",
+"verse": null,
+"chars": 317
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "17",
+"how": "incipit",
+"verse": 22,
+"chars": 361
+},
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Hallel",
+"segment": "26",
+"how": "incipit",
+"verse": 26,
+"chars": 250
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "32",
+"how": "incipit",
+"verse": 26,
+"chars": 201
+}
+],
+"79": [
+{
+"ref": "Rabbi Sacks on Siddur, Festivals, Viduy for Minha of Erev Yom Kippur",
+"segment": "9",
+"how": "incipit",
+"verse": 9,
+"chars": 838
+}
+],
+"37": [
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Birkat HaMazon; Grace after Meals",
+"segment": "70",
+"how": "incipit",
+"verse": 25,
+"chars": 1068
+},
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Birkat HaMazon; Grace after Meals",
+"segment": "70",
+"how": "named",
+"verse": 25,
+"chars": 1068
+},
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Birkat HaMazon; Grace after Meals",
+"segment": "70",
+"how": "named",
+"verse": 25,
+"chars": 1068
+},
+{
+"ref": "The Jonathan Sacks Haggadah, Barech, Birkat Hamazon",
+"segment": "23.1",
+"how": "named",
+"verse": 25,
+"chars": 2516
+}
+],
+"30": [
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Consecration of a House",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1317
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, The Binding of Isaac",
+"segment": "4",
+"how": "incipit",
+"verse": 2,
+"chars": 254
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, A Psalm Before Verses of Praise",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 933
+}
+],
+"15": [
+{
+"ref": "Rabbi Sacks on Siddur, Giving Thanks, Consecration of a House",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 1317
+}
+],
+"49": [
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 547
+},
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 547
+},
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "4",
+"how": "named",
+"verse": null,
+"chars": 255
+}
+],
+"16": [
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "4",
+"how": "incipit",
+"verse": 1,
+"chars": 255
+},
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "4",
+"how": "named",
+"verse": null,
+"chars": 255
+}
+],
+"60": [
+{
+"ref": "Rabbi Sacks on Siddur, The Cycle of Life, Prayer in a House of Mourning",
+"segment": "4",
+"how": "incipit",
+"verse": 1,
+"chars": 255
+}
+],
+"18": [
+{
+"ref": "Rabbi Sacks on Siddur, Torah Readings, Seventh Day of Pesah",
+"segment": "10",
+"how": "named",
+"verse": null,
+"chars": 1245
+},
+{
+"ref": "Rabbi Sacks on Siddur, Torah Readings, Seventh Day of Pesah",
+"segment": "10",
+"how": "named",
+"verse": null,
+"chars": 1245
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Selihot",
+"segment": "21",
+"how": "named",
+"verse": 26,
+"chars": 1209
+}
+],
+"1": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Minha for Erev Rosh HaShana",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 4150
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Minha for Erev Rosh HaShana",
+"segment": "1",
+"how": "named",
+"verse": 1,
+"chars": 4150
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "7",
+"how": "named",
+"verse": 1,
+"chars": 1663
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ethics of the Fathers",
+"segment": "3.3",
+"how": "named",
+"verse": 1,
+"chars": 358
+}
+],
+"72": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "13",
+"how": "incipit",
+"verse": 19,
+"chars": 308
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Ma'ariv for Yom Kippur",
+"segment": "12",
+"how": "incipit",
+"verse": 19,
+"chars": 1823
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Verses of Unity",
+"segment": "4",
+"how": "incipit",
+"verse": 19,
+"chars": 795
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Blessings of the Shema",
+"segment": "39",
+"how": "incipit",
+"verse": 19,
+"chars": 278
+}
+],
+"31": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Ma'ariv for Rosh HaShana",
+"segment": "26",
+"how": "named",
+"verse": 6,
+"chars": 455
+}
+],
+"23": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Massekhet Rosh HaShana",
+"segment": "1.2",
+"how": "named",
+"verse": 1,
+"chars": 3361
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Se'uda Shelishit for Shabbat",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 1675
+}
+],
+"12": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Massekhet Rosh HaShana",
+"segment": "1.5",
+"how": "named",
+"verse": 7,
+"chars": 814
+}
+],
+"35": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Shir HaYihud, Thursday",
+"segment": "1",
+"how": "incipit",
+"verse": 10,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "298",
+"how": "incipit",
+"verse": 10,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Nishmat",
+"segment": "1",
+"how": "named",
+"verse": 10,
+"chars": 724
+}
+],
+"71": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Shir HaYihud, Thursday",
+"segment": "1",
+"how": "incipit",
+"verse": 19,
+"chars": 236
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "298",
+"how": "incipit",
+"verse": 19,
+"chars": 236
+}
+],
+"84": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "1",
+"how": "named",
+"verse": 5,
+"chars": 1223
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Shaharit for Shabbat and Yom Tov",
+"segment": "2",
+"how": "named",
+"verse": 5,
+"chars": 749
+}
+],
+"99": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "7",
+"how": "incipit",
+"verse": 5,
+"chars": 717
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "7",
+"how": "incipit",
+"verse": 9,
+"chars": 717
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "6",
+"how": "named",
+"verse": null,
+"chars": 657
+}
+],
+"120": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 1931
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "11",
+"how": "named",
+"verse": null,
+"chars": 962
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 1134
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 1134
+}
+],
+"19": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 1931
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 1931
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Blessings of the Shema",
+"segment": "32",
+"how": "named",
+"verse": null,
+"chars": 925
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 1462
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "11",
+"how": "named",
+"verse": null,
+"chars": 962
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "12",
+"how": "named",
+"verse": null,
+"chars": 830
+}
+],
+"90": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "11",
+"how": "incipit",
+"verse": 1,
+"chars": 1041
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "11",
+"how": "named",
+"verse": null,
+"chars": 1041
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Tashlikh",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 4882
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "11",
+"how": "incipit",
+"verse": 1,
+"chars": 1216
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "11",
+"how": "named",
+"verse": null,
+"chars": 1216
+},
+{
+"ref": "The Jonathan Sacks Haggadah, Kadesh",
+"segment": "1.1",
+"how": "named",
+"verse": 12,
+"chars": 1300
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "14",
+"how": "incipit",
+"verse": 1,
+"chars": 1077
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "14",
+"how": "named",
+"verse": null,
+"chars": 1077
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "5",
+"how": "incipit",
+"verse": 17,
+"chars": 874
+}
+],
+"136": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 1372
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "15",
+"how": "named",
+"verse": null,
+"chars": 551
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 937
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "15",
+"how": "named",
+"verse": null,
+"chars": 966
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 1461
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "18",
+"how": "named",
+"verse": null,
+"chars": 551
+}
+],
+"33": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 646
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 264
+}
+],
+"95": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "18",
+"how": "named",
+"verse": 5,
+"chars": 495
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "2",
+"how": "incipit",
+"verse": 1,
+"chars": 721
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 721
+}
+],
+"147": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "25",
+"how": "named",
+"verse": null,
+"chars": 745
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "27",
+"how": "named",
+"verse": null,
+"chars": 690
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "25",
+"how": "named",
+"verse": null,
+"chars": 580
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "28",
+"how": "named",
+"verse": null,
+"chars": 532
+}
+],
+"148": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "26",
+"how": "named",
+"verse": null,
+"chars": 941
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Massekhet Yoma",
+"segment": "3.8",
+"how": "named",
+"verse": 13,
+"chars": 7418
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "26",
+"how": "named",
+"verse": null,
+"chars": 188
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "29",
+"how": "named",
+"verse": null,
+"chars": 270
+}
+],
+"149": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "27",
+"how": "named",
+"verse": null,
+"chars": 690
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "27",
+"how": "named",
+"verse": null,
+"chars": 416
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "30",
+"how": "named",
+"verse": null,
+"chars": 447
+}
+],
+"150": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "28",
+"how": "named",
+"verse": null,
+"chars": 888
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "28",
+"how": "named",
+"verse": null,
+"chars": 443
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Pesukei DeZimra",
+"segment": "31",
+"how": "named",
+"verse": null,
+"chars": 442
+}
+],
+"130": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, HaMelekh",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 2146
+},
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Shaharit, HaMelekh",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 2146
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, HaMelekh",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 2034
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Leader's Repetition for Ne'ila",
+"segment": "109",
+"how": "named",
+"verse": 3,
+"chars": 528
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 390
+}
+],
+"47": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, First Day, The Blowing of the Shofar",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 420
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Verses of Unity",
+"segment": "19",
+"how": "named",
+"verse": 6,
+"chars": 2303
+}
+],
+"98": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, First Day, The Blowing of the Shofar",
+"segment": "14",
+"how": "named",
+"verse": 6,
+"chars": 12974
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "5",
+"how": "named",
+"verse": null,
+"chars": 511
+}
+],
+"68": [
+{
+"ref": "Rabbi Sacks on Rosh HaShana Mahzor, Second Day, Leader's Repetition for Shaharit",
+"segment": "25",
+"how": "named",
+"verse": 21,
+"chars": 347
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "175",
+"how": "incipit",
+"verse": 35,
+"chars": 200
+},
+{
+"ref": "Rabbi Sacks on Siddur, Torah Readings, Shavuot",
+"segment": "25",
+"how": "named",
+"verse": 8,
+"chars": 1328
+}
+],
+"97": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Eve, Kol Nidrei",
+"segment": "2",
+"how": "incipit",
+"verse": 11,
+"chars": 2079
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Eve, Kol Nidrei",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 2079
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "4",
+"how": "named",
+"verse": null,
+"chars": 529
+}
+],
+"132": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Ma'ariv for Yom Kippur",
+"segment": "50",
+"how": "named",
+"verse": 17,
+"chars": 681
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "15",
+"how": "named",
+"verse": null,
+"chars": 470
+}
+],
+"65": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Selihot",
+"segment": "13",
+"how": "incipit",
+"verse": 3,
+"chars": 2728
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Selihot",
+"segment": "13",
+"how": "named",
+"verse": 3,
+"chars": 2728
+}
+],
+"57": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "2",
+"how": "incipit",
+"verse": 8,
+"chars": 389
+}
+],
+"108": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Shir HaYichud",
+"segment": "2",
+"how": "incipit",
+"verse": 2,
+"chars": 389
+}
+],
+"106": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Massekhet Yoma",
+"segment": "3.8",
+"how": "named",
+"verse": 6,
+"chars": 7418
+}
+],
+"109": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Yom Kippur Evening, Massekhet Yoma",
+"segment": "8.1",
+"how": "named",
+"verse": 18,
+"chars": 17723
+}
+],
+"134": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Blessings over the Torah",
+"segment": "4",
+"how": "incipit",
+"verse": 3,
+"chars": 698
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "17",
+"how": "named",
+"verse": null,
+"chars": 364
+}
+],
+"96": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Pesukei DeZimra",
+"segment": "6",
+"how": "incipit",
+"verse": 11,
+"chars": 405
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "3",
+"how": "named",
+"verse": null,
+"chars": 771
+}
+],
+"66": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "125",
+"how": "incipit",
+"verse": 3,
+"chars": 1033
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "125",
+"how": "named",
+"verse": 3,
+"chars": 1033
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Leader's Repetition for Musaf",
+"segment": "112",
+"how": "incipit",
+"verse": 3,
+"chars": 469
+}
+],
+"8": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "151",
+"how": "named",
+"verse": 5,
+"chars": 974
+},
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Leader's Repetition for Musaf",
+"segment": "140",
+"how": "named",
+"verse": null,
+"chars": 1007
+}
+],
+"125": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Shaharit, Leader's Repetition for Shaharit",
+"segment": "175",
+"how": "incipit",
+"verse": 5,
+"chars": 200
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "8",
+"how": "named",
+"verse": null,
+"chars": 273
+}
+],
+"139": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Leader's Repetition for Musaf",
+"segment": "33",
+"how": "named",
+"verse": 16,
+"chars": 810
+}
+],
+"42": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Musaf, Eleh Ezkera",
+"segment": "3",
+"how": "incipit",
+"verse": 5,
+"chars": 4950
+}
+],
+"76": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Ne'ila, Leader's Repetition for Ne'ila",
+"segment": "109",
+"how": "incipit",
+"verse": 8,
+"chars": 528
+}
+],
+"50": [
+{
+"ref": "Rabbi Sacks on Yom Kippur Mahzor, Annotated Viduy",
+"segment": "18",
+"how": "named",
+"verse": 20,
+"chars": 248
+}
+],
+"116": [
+{
+"ref": "The Jonathan Sacks Haggadah, Magid, First Half of Hallel",
+"segment": "2.1",
+"how": "named",
+"verse": 13,
+"chars": 1209
+}
+],
+"74": [
+{
+"ref": "The Jonathan Sacks Haggadah, Nirtzah, Ki Lo Na'e",
+"segment": "1.1",
+"how": "named",
+"verse": 16,
+"chars": 1082
+}
+],
+"29": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "1",
+"how": "named",
+"verse": null,
+"chars": 2277
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Kabbalat Shabbat",
+"segment": "8",
+"how": "named",
+"verse": null,
+"chars": 646
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Musaf for Shabbat",
+"segment": "12",
+"how": "named",
+"verse": null,
+"chars": 290
+}
+],
+"144": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Prayer for the Welfare of the Government",
+"segment": "3",
+"how": "incipit",
+"verse": 10,
+"chars": 603
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 313
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ma'ariv for Motza'ei Shabbat",
+"segment": "2",
+"how": "named",
+"verse": null,
+"chars": 313
+}
+],
+"69": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Minha for Shabbat and Yom Tov",
+"segment": "18",
+"how": "named",
+"verse": null,
+"chars": 387
+},
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "13",
+"how": "named",
+"verse": null,
+"chars": 390
+}
+],
+"122": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "5",
+"how": "named",
+"verse": null,
+"chars": 357
+}
+],
+"124": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "7",
+"how": "named",
+"verse": null,
+"chars": 404
+}
+],
+"126": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "9",
+"how": "named",
+"verse": null,
+"chars": 606
+}
+],
+"133": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Barekhi Nafshi",
+"segment": "16",
+"how": "named",
+"verse": null,
+"chars": 441
+}
+],
+"55": [
+{
+"ref": "Rabbi Sacks on Siddur, Shabbat, Ethics of the Fathers",
+"segment": "6.3",
+"how": "named",
+"verse": null,
+"chars": 671
+}
+]
+}
+}

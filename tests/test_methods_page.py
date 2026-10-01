@@ -157,3 +157,40 @@ def test_editors_report_with_a_fact_check_keeps_its_sections(tmp_path):
     md = build_markdown(77, tmp_path)
     assert "Three things checked or changed it" in md
     assert "## Claims the fact checker supported" in md and "Appendix: every lookup" in md
+
+
+# --- Session 391: "Rabbi Jonathan Sacks References Reviewed" -------------------------------------
+
+_RUNNERS = ("run_enhanced_pipeline.py", "run_si_pipeline.py", "run_enhanced_pipeline_TEST.py",
+            "run_enhanced_pipeline_with_synthesis.py", "run_si_pipeline_with_synthesis.py")
+
+
+def test_sacks_count_ignores_mentions_outside_the_sacks_section():
+    """Ps 77 (S390, --skip-micro) printed 4: the old regex counted 'Rabbi Sacks' / 'Jonathan Sacks'
+    anywhere in the bundle, its own Research Summary line included. Ps 77 has no Sacks excerpt."""
+    bundle = (BUNDLE
+              + "\n## Cross-Cultural Literary Echoes\n\n### Rabbi Jonathan Sacks, *Covenant and Conversation*\n"
+                "Rabbi Sacks writes ... as Jonathan Sacks put it ...\n\n"
+                "## Research Summary\n\n- **Rabbi Sacks references**: 0\n")
+    assert _pipeline()._parse_research_stats_from_markdown(bundle)["sacks_count"] == 0
+
+
+def test_sacks_count_is_the_number_of_excerpts_in_a_real_sacks_section():
+    from src.agents.sacks_librarian import SacksLibrarian, count_references_in_bundle
+    lib = SacksLibrarian()
+    refs = lib.get_psalm_references(23)
+    assert refs, "sacks_on_psalms.json should hold Psalm 23 excerpts"
+    bundle = (BUNDLE + "\n" + lib.format_for_research_bundle(refs, 23) + "\n---\n\n"
+              + "## Related Psalms\n\nRabbi Sacks again\n\n## Research Summary\n\n"
+                f"- **Rabbi Sacks references**: {len(refs)}\n")
+    assert count_references_in_bundle(bundle) == len(refs)
+    assert _pipeline()._parse_research_stats_from_markdown(bundle)["sacks_count"] == len(refs)
+    # The old count (name mentions anywhere) was wrong both ways: 4 for 0 on Ps 77, 9 for 10 here.
+    assert len(re.findall(r'### [^#\n]+Sacks|Rabbi Sacks|Jonathan Sacks', bundle)) != len(refs)
+
+
+def test_every_runner_counts_sacks_with_the_shared_function():
+    for name in _RUNNERS:
+        text = (ROOT / "scripts" / name).read_text(encoding="utf-8")
+        assert "count_references_in_bundle(markdown_content)" in text, name
+        assert "Rabbi Sacks|Jonathan Sacks" not in text, name

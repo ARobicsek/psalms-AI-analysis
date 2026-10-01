@@ -24,6 +24,7 @@ Date: 2025-11-06
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
@@ -34,6 +35,21 @@ logger = logging.getLogger(__name__)
 
 # Default path to Sacks data file
 DEFAULT_SACKS_JSON_PATH = Path(__file__).parent.parent.parent / "sacks_on_psalms.json"
+
+# Session 391: the section `format_for_research_bundle` writes, and one `#### Reference N:` per
+# excerpt inside it. The pipeline runners used to count every "Rabbi Sacks" / "Jonathan Sacks"
+# string ANYWHERE in a reused bundle (the biography, the Research Summary's own
+# "Rabbi Sacks references: 0" line, an echoes candidate), so Ps 77's methods page said
+# "Rabbi Jonathan Sacks References Reviewed: 4" for a psalm with no Sacks excerpt at all.
+_BUNDLE_SECTION_RE = re.compile(r"^## Rabbi Jonathan Sacks on Psalm \d+[ \t]*$(.*?)(?=^## |\Z)", re.M | re.S)
+_BUNDLE_ENTRY_RE = re.compile(r"^#### Reference \d+:", re.M)
+
+
+def count_references_in_bundle(markdown: str) -> int:
+    """How many Sacks excerpts a research bundle carries: the `#### Reference N:` entries inside its
+    `## Rabbi Jonathan Sacks on Psalm N` section; 0 when there is no such section."""
+    section = _BUNDLE_SECTION_RE.search(markdown or "")
+    return len(_BUNDLE_ENTRY_RE.findall(section.group(1))) if section else 0
 
 
 @dataclass

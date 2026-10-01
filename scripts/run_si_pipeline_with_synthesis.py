@@ -125,11 +125,10 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         if matches:
             stats['commentary_counts'][name] = len(matches)
 
-    # Check for Rabbi Sacks references
-    if '## Rabbi Sacks' in markdown_content or 'Rabbi Jonathan Sacks' in markdown_content:
-        # Count individual references
-        sacks_matches = re.findall(r'### [^#\n]+Sacks|Rabbi Sacks|Jonathan Sacks', markdown_content)
-        stats['sacks_count'] = max(1, len(sacks_matches))
+    # Rabbi Sacks: the excerpts in the bundle's own Sacks section (Session 391; this used to count
+    # every mention of his name anywhere in the bundle).
+    from src.agents.sacks_librarian import count_references_in_bundle
+    stats['sacks_count'] = count_references_in_bundle(markdown_content)
 
     # Check for Deep Web Research section
     if '## Deep Web Research' in markdown_content:
