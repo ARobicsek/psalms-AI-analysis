@@ -418,6 +418,13 @@ def run_enhanced_pipeline(
 
     tracker = PipelineSummaryTracker(psalm_number=psalm_number, initial_data=initial_data)
     logger.info("Pipeline summary tracking enabled.")
+    # The macro step used to be the only place this was recorded, so a --skip-macro run into a
+    # fresh folder printed "Psalm Verses Analyzed: 0" (and 0 LXX verses, 0 phonetics) on the methods page.
+    if not tracker.analysis.verse_count:
+        from src.data_sources.tanakh_database import TanakhDatabase
+        _psalm = TanakhDatabase(Path(db_path)).get_psalm(psalm_number)
+        if _psalm:
+            tracker.track_verse_count(len(_psalm.verses))
 
     cost_tracker = CostTracker()
     # Session 387: a resumed or partial re-run CONTINUES the psalm's cost file instead of

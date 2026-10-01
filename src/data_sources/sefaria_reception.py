@@ -96,7 +96,9 @@ _SUFFIXES = ("ים", "ות", "יו", "יה", "הם", "כם", "נו", "ה", "ו",
 
 def word_tokens(word: str) -> List[str]:
     """The Hebrew tokens in one whitespace-delimited word (0 for punctuation, 2 across a maqaf)."""
-    w = re.sub(r"[֑-ׇ]", "", word).replace("־", " ").replace("׀", " ")
+    # The maqaf (U+05BE) and paseq (U+05C0) lie INSIDE the niqqud range, so they must become spaces
+    # first: stripped with the vowels, כִּֽי־אֵלֵךְ fused into one token, כיאלך (Session 392).
+    w = re.sub(r"[֑-ׇ]", "", word.replace("־", " ").replace("׀", " "))
     w = re.sub(r"[\"'׳״]", "", w)
     return [t.translate(_FINALS) for t in re.sub(r"[^א-ת ]", " ", w).split()]
 

@@ -1,40 +1,54 @@
 """
-Sacks Librarian Agent
+Sacks Librarian: Rabbi Jonathan Sacks on a psalm, for the research bundle.
 
-Loads and formats Rabbi Jonathan Sacks' references to Psalms from his collected works.
-This agent provides context snippets from Sacks' writings that reference specific psalm verses,
-offering contemporary theological perspectives on the psalms.
+Session 392 rebuild (S391's evaluation, `docs/plans/S391_SEFARIA_EVALUATION.md` §3.3). The data comes
+from `src/data_sources/sacks_index.py` (Sefaria, $0, cached under data/sacks/):
 
-About the Data:
-- Source: Collection of Rabbi Jonathan Sacks' books and essays (1948-2020)
-- Format: JSON array with verse references and context snippets
-- Each entry includes ~1000 characters before and after the psalm reference
-- These are NOT formal commentaries but excerpts showing Sacks' interpretation and usage
+  1. His PRAYER-BOOK COMMENTARY (Koren siddur, Rosh HaShana and Yom Kippur mahzorim, the Haggadah),
+     aligned to the psalm through the prayer-book paragraph each comment sits beside. This is the
+     closest thing to "Sacks on Psalms" that exists, and the old file had none of it.
+  2. Passages of his BOOKS that Sefaria links to the psalm, plus quotations its links miss (a Hebrew
+     phrase search, confirmed in the paragraph).
 
-Usage:
-    from src.agents.sacks_librarian import SacksLibrarian
+What changed from Session 68's `sacks_on_psalms.json`: whole paragraphs (the linked paragraph and
+its neighbours) instead of ±1,000-character windows cut mid-sentence; a one-sentence introduction
+instead of a 2,243-character biography; repeats merged (the same comment printed in the siddur and
+a mahzor, the same essay in two collections); a character budget; and items labelled by where he
+wrote them. Selection is by rules on SOURCE and SCOPE, never by a model or by how a passage reads.
 
+Usage (unchanged):
     librarian = SacksLibrarian()
-    entries = librarian.get_psalm_references(psalm=1)
-    markdown = librarian.format_for_research_bundle(entries, psalm=1)
-
-Author: Claude Code (Session 68)
-Date: 2025-11-06
+    refs = librarian.get_psalm_references(23)
+    markdown = librarian.format_for_research_bundle(refs, 23)
 """
 
-import json
 import logging
 import re
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass
+from typing import Dict, List, Optional
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+from src.data_sources import sacks_index
+from src.data_sources.sefaria_reception import locate, tokens
+
 logger = logging.getLogger(__name__)
 
-# Default path to Sacks data file
-DEFAULT_SACKS_JSON_PATH = Path(__file__).parent.parent.parent / "sacks_on_psalms.json"
+SECTION_MAX_CHARS = 20000   # Ps 145 or 92 could otherwise carry 40K+; most psalms carry far less
+DUPLICATE_OVERLAP = 0.6     # 5-gram overlap at which two items are the same text printed twice
+BOOKS_PER_VERSE = 4         # Ps 23:4 alone has 10: he uses it as a motto, and 10 mottoes teach nothing
+
+INTRO = ("Rabbi Lord Jonathan Sacks (1948–2020), Chief Rabbi of the United Hebrew Congregations of the "
+         "Commonwealth from 1991 to 2013, wrote a running commentary on the prayer book and some forty "
+         "books of Jewish thought. Below are his own words on this psalm, whole paragraphs and not "
+         "summaries: first his prayer-book commentary on the psalm as the liturgy uses it, then passages "
+         "from his books that quote it.")
+
+WORK_LABELS = {
+    "Rabbi Sacks on Siddur": "Koren Siddur",
+    "Rabbi Sacks on Rosh HaShana Mahzor": "Koren Rosh HaShana Mahzor",
+    "Rabbi Sacks on Yom Kippur Mahzor": "Koren Yom Kippur Mahzor",
+    "The Jonathan Sacks Haggadah": "The Jonathan Sacks Haggadah",
+}
 
 # Session 391: the section `format_for_research_bundle` writes, and one `#### Reference N:` per
 # excerpt inside it. The pipeline runners used to count every "Rabbi Sacks" / "Jonathan Sacks"
@@ -54,214 +68,165 @@ def count_references_in_bundle(markdown: str) -> int:
 
 @dataclass
 class SacksReference:
-    """Represents a single reference to a Psalm in Rabbi Sacks' writings."""
-    source_ref: str              # e.g., "Studies in Spirituality; A Weekly Reading..."
-    source_title: str            # Extracted title from ref
-    psalm_ref: str               # e.g., "Psalms.1.1"
-    psalm_chapter: int           # Extracted psalm number
-    psalm_verse: int             # Extracted verse number
-    context_snippet: str         # ~1000 chars before/after the psalm reference
-    version_title: str           # English source version
+    """One Sacks passage on a psalm."""
+    kind: str                     # 'prayer book' | 'book'
+    work: str                     # Sefaria title of the work
+    section: str                  # where in the work (prayer-book rubric, or chapter/essay)
+    ref: str                      # Sefaria ref of the comment / linked paragraph
+    verses: List[int]             # the psalm's verses it is on
+    scope: str                    # 'whole' | 'passage' | 'verse'
+    text: str                     # his words, whole paragraphs
+    source: str = "alignment"     # 'alignment' (prayer book) | 'link' | 'search'
+    lang: str = "en"              # 'he': Sefaria has only the Hebrew translation of this book
+    also: List[str] = field(default_factory=list)   # the same text printed elsewhere
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary for JSON serialization."""
-        return {
-            "source_ref": self.source_ref,
-            "source_title": self.source_title,
-            "psalm_ref": self.psalm_ref,
-            "psalm_chapter": self.psalm_chapter,
-            "psalm_verse": self.psalm_verse,
-            "context_snippet": self.context_snippet,
-            "version_title": self.version_title
-        }
+    def to_dict(self) -> Dict:
+        return asdict(self)
+
+
+def _verse_label(verses: List[int], scope: str) -> str:
+    if scope == "whole":
+        return "on the whole psalm"
+    if not verses:
+        return ""
+    if len(verses) == 1:
+        return f"v. {verses[0]}"
+    runs, start = [], verses[0]
+    for a, b in zip(verses, verses[1:] + [None]):
+        if b != a + 1:
+            runs.append(f"{start}" if start == a else f"{start}–{a}")
+            start = b
+    return "vv. " + ", ".join(runs)
+
+
+def _lemma_in_verse(lemma: str, verse_tokens: List[str]) -> bool:
+    """At least two consecutive words of the comment's Hebrew lemma are in the verse (one word, such
+    as לַמְנַצֵּחַ, is in too many verses to mean anything)."""
+    lt = tokens(lemma)
+    return len(lt) >= 2 and locate(verse_tokens, lt)[0] >= 2
+
+
+def select(data: Dict, psalm_hebrew: List[str], max_chars: int = SECTION_MAX_CHARS) -> List[SacksReference]:
+    """The rules. Prayer-book comments first (his commentary ON the psalm), then book passages by
+    verse, round-robin, at most BOOKS_PER_VERSE per verse, until the budget is spent. A comment whose prayer-book paragraph holds only
+    one verse of the psalm among other texts (a mosaic such as Pesukei DeZimra's Hodu) is about the
+    mosaic, so it is kept only when it names the psalm, or when two words of its Hebrew lemma are in
+    that verse and the paragraph is not some other psalm in full."""
+    psalm = data["psalm"]
+    n = data.get("verses") or len(psalm_hebrew)
+    ptoks = [tokens(h) for h in psalm_hebrew]
+
+    prayer: List[SacksReference] = []
+    for c in data.get("liturgical", []):
+        verses = [v for v in c["verses"] if 0 < v <= n] or c["verses"]
+        scope = sacks_index.classify(verses, n, 0)
+        named = re.search(rf"\bPsalms? {psalm}\b", c["text"])
+        if scope == "verse" and not named:
+            v = verses[0]
+            if c.get("whole_elsewhere") or not (0 < v <= n and _lemma_in_verse(c.get("lemma", ""), ptoks[v - 1])):
+                continue
+        prayer.append(SacksReference("prayer book", c["work"], c["section"], c["ref"], verses, scope,
+                                     c["text"], "alignment"))
+    order = {"whole": 0, "passage": 1, "verse": 2}
+    prayer.sort(key=lambda r: (order[r.scope], r.verses[:1], list(WORK_LABELS).index(r.work)
+                               if r.work in WORK_LABELS else 9))
+
+    books: List[SacksReference] = []
+    for b in sorted(data.get("books", []), key=lambda b: (b["verses"][:1], b.get("lang", "en") != "en",
+                                                         b["source"] != "link", b["ref"])):
+        scope = sacks_index.classify(b["verses"], n, 0)
+        books.append(SacksReference("book", b["work"], b["section"], b["ref"], b["verses"],
+                                    "verse" if scope == "whole" else scope, b["text"], b["source"],
+                                    lang=b.get("lang", "en")))
+
+    def dedupe(items: List[SacksReference]) -> List[SacksReference]:
+        kept: List[SacksReference] = []
+        for it in items:
+            twin = next((k for k in kept if sacks_index.overlap(k.text, it.text) >= DUPLICATE_OVERLAP), None)
+            if twin:
+                twin.also.append(it.ref)
+                twin.verses = sorted(set(twin.verses) | set(it.verses))
+            else:
+                kept.append(it)
+        return kept
+
+    prayer, books = dedupe(prayer), dedupe(books)
+
+    out, used = [], 0
+    for r in prayer:
+        if used + len(r.text) > max_chars and out:
+            continue
+        out.append(r)
+        used += len(r.text)
+    queues: Dict[int, List[SacksReference]] = {}
+    for r in books:            # English before a Hebrew translation, linked before a search find
+        q = queues.setdefault(r.verses[0] if r.verses else 0, [])
+        if len(q) < BOOKS_PER_VERSE:
+            q.append(r)
+    while any(queues.values()):
+        for v in sorted(queues):
+            if queues[v]:
+                r = queues[v].pop(0)
+                if used + len(r.text) <= max_chars:
+                    out.append(r)
+                    used += len(r.text)
+    return out
 
 
 class SacksLibrarian:
-    """
-    Manages access to Rabbi Jonathan Sacks' references to Psalms.
+    """Rabbi Sacks on a psalm, from the Sefaria-built cache (data/sacks/)."""
 
-    This agent loads the sacks_on_psalms.json file and provides methods
-    to retrieve and format references for specific psalms.
-    """
-
-    def __init__(self, json_path: Optional[Path] = None):
-        """
-        Initialize Sacks Librarian.
-
-        Args:
-            json_path: Path to sacks_on_psalms.json (uses default if None)
-        """
-        self.json_path = json_path or DEFAULT_SACKS_JSON_PATH
-        self.entries: List[Dict[str, Any]] = []
-        self._load_data()
-
-    def _load_data(self):
-        """Load the Sacks JSON data file."""
-        if not self.json_path.exists():
-            logger.warning(f"Sacks data file not found at {self.json_path}")
-            return
-
-        try:
-            with open(self.json_path, 'r', encoding='utf-8') as f:
-                self.entries = json.load(f)
-            logger.info(f"Loaded {len(self.entries)} Sacks references from {self.json_path}")
-        except json.JSONDecodeError as e:
-            logger.error(f"Error parsing Sacks JSON file: {e}")
-            self.entries = []
-        except Exception as e:
-            logger.error(f"Error loading Sacks data: {e}")
-            self.entries = []
+    def __init__(self, cache_dir: Optional[Path] = None, db_path: Optional[Path] = None,
+                 max_chars: int = SECTION_MAX_CHARS, search: bool = True):
+        self.cache_dir = Path(cache_dir) if cache_dir else sacks_index.CACHE_DIR
+        self.db_path = Path(db_path) if db_path else sacks_index.DB_PATH
+        self.max_chars = max_chars
+        self.search = search
 
     def get_psalm_references(self, psalm_chapter: int) -> List[SacksReference]:
-        """
-        Get all Sacks references for a specific psalm chapter.
+        try:
+            data = sacks_index.harvest_psalm(psalm_chapter, cache_dir=self.cache_dir, db_path=self.db_path,
+                                             search=self.search)
+            hebrew = sacks_index.load_psalms(self.db_path).get(psalm_chapter, [])
+        except Exception as e:   # a Sefaria outage must not sink the research bundle; it is logged
+            logger.warning(f"[sacks] Psalm {psalm_chapter}: could not build the Sacks section ({e}); omitted")
+            return []
+        refs = select(data, hebrew, self.max_chars)
+        logger.info(f"Sacks: {len(refs)} passage(s) for Psalm {psalm_chapter} "
+                    f"({sum(r.kind == 'prayer book' for r in refs)} prayer book, "
+                    f"{sum(r.kind == 'book' for r in refs)} books; "
+                    f"{len(data.get('liturgical', []))} aligned comments, {len(data.get('books', []))} book passages found)")
+        return refs
 
-        Args:
-            psalm_chapter: Psalm number (1-150)
-
-        Returns:
-            List of SacksReference objects for this psalm
-        """
-        references = []
-
-        for entry in self.entries:
-            source_psalm_ref = entry.get('source_psalm_ref', '')
-            context_snippet = entry.get('context_snippet', '')
-
-            # Skip entries without context snippets
-            if not context_snippet:
-                continue
-
-            # Parse the psalm reference (e.g., "Psalms.1.1" -> chapter=1, verse=1)
-            if not source_psalm_ref.startswith('Psalms.'):
-                continue
-
-            try:
-                parts = source_psalm_ref.split('.')
-                if len(parts) >= 3:
-                    chapter = int(parts[1])
-                    verse = int(parts[2])
-
-                    # Filter by requested chapter
-                    if chapter == psalm_chapter:
-                        # Extract a cleaner source title
-                        source_ref = entry.get('ref', '')
-                        source_title = self._extract_title(source_ref)
-
-                        references.append(SacksReference(
-                            source_ref=source_ref,
-                            source_title=source_title,
-                            psalm_ref=source_psalm_ref,
-                            psalm_chapter=chapter,
-                            psalm_verse=verse,
-                            context_snippet=context_snippet,
-                            version_title=entry.get('versionTitle', 'Unknown')
-                        ))
-            except (ValueError, IndexError) as e:
-                logger.debug(f"Could not parse psalm reference '{source_psalm_ref}': {e}")
-                continue
-
-        logger.info(f"Found {len(references)} Sacks references for Psalm {psalm_chapter}")
-        return references
-
-    def _extract_title(self, source_ref: str) -> str:
-        """
-        Extract a readable title from the full source reference.
-
-        Args:
-            source_ref: Full reference string from the JSON
-
-        Returns:
-            Cleaned title for display
-        """
-        # Example: "Studies in Spirituality; A Weekly Reading of the Jewish Bible, Pekudei; Don't Sit, Walk 4"
-        # We want: "Pekudei: Don't Sit, Walk"
-
-        if ';' in source_ref:
-            # Get the part after the first semicolon
-            parts = source_ref.split(';', 1)
-            if len(parts) > 1:
-                remainder = parts[1].strip()
-                # Remove trailing numbers (paragraph references)
-                remainder = ' '.join([word for word in remainder.split() if not word.isdigit()])
-                return remainder
-
-        # Fallback: return the whole thing
-        return source_ref
+    @staticmethod
+    def _title(r: SacksReference) -> str:
+        where = _verse_label(r.verses, r.scope)
+        if r.kind == "prayer book":
+            rubric = r.section.split(", ")[-1] if r.section else ""
+            head = f"{WORK_LABELS.get(r.work, r.work)}, {rubric}" if rubric else WORK_LABELS.get(r.work, r.work)
+        else:
+            head = f"{r.work.split(';')[0]}" + (f", {r.section}" if r.section else "")
+        return f"{head} ({where})" if where else head
 
     def format_for_research_bundle(self, references: List[SacksReference], psalm_chapter: int) -> str:
-        """
-        Format Sacks references as Markdown for LLM consumption.
-
-        Args:
-            references: List of SacksReference objects
-            psalm_chapter: Psalm number for header
-
-        Returns:
-            Formatted Markdown string
-        """
         if not references:
             return ""
-
-        lines = [
-            f"## Rabbi Jonathan Sacks on Psalm {psalm_chapter}",
-            "",
-            "### About Rabbi Jonathan Sacks",
-            "",
-            "Rabbi Lord Jonathan Sacks (1948–2020) was a British Orthodox rabbi, philosopher, and public theologian who served as the Chief Rabbi of the Commonwealth from 1991 to 2013. A graduate in philosophy from Cambridge, he became one of the world's most prominent public voices for faith, integrating traditional Jewish thought with Western philosophy and science. His vast scholarly corpus includes over 40 books, which fall into two main categories: biblical and liturgical commentary, most famously his *Covenant & Conversation* essays on the weekly Torah portion; and works of public theology, such as *The Great Partnership* and *The Dignity of Difference*.",
-            "",
-            "Rabbi Sacks's philosophy was a 21st-century application of *Torah ve-Hokhma* (Torah and Wisdom). He argued that science and religion are not in conflict but are \"two hemispheres of the brain\": \"Science takes things apart to see how they work. Religion puts things together to see what they mean.\" His exegetical approach is not that of a classical *parshan* (commentator) focused on grammatical or textual puzzles. His method is thematic, philosophical, and ethical. In *Covenant & Conversation*, he uses the Torah portion as a springboard to discuss the most pressing existential and moral concerns of modernity—leadership, family, ethics, and alienation. A typical essay masterfully blends insights from classical commentators like Rashi with Western philosophers, modern psychology, and current events. His work answers a new, modern question. While classical commentators asked, \"What does this verse *mean*?\" Rabbi Sacks, writing for an educated and often secularized world, answers the question, \"Why does this verse *matter*?\" He translated the text's covenantal message into a universal moral framework for the 21st century.",
-            "",
-            "**About this section**: These excerpts are from Rabbi Sacks' writings. They are NOT traditional commentaries on Psalms. Rather, they show how Sacks references and interprets psalm verses in his broader theological and philosophical works. Each entry includes the psalm verse he referenced plus approximately 1000 characters before and after to reveal his thinking about that verse.",
-            ""
-        ]
-
-        # Group by verse for cleaner presentation
-        refs_by_verse: Dict[int, List[SacksReference]] = {}
-        for ref in references:
-            if ref.psalm_verse not in refs_by_verse:
-                refs_by_verse[ref.psalm_verse] = []
-            refs_by_verse[ref.psalm_verse].append(ref)
-
-        # Format each verse group
-        for verse_num in sorted(refs_by_verse.keys()):
-            verse_refs = refs_by_verse[verse_num]
-            lines.append(f"### Verse {verse_num} ({len(verse_refs)} reference{'s' if len(verse_refs) > 1 else ''})")
-            lines.append("")
-
-            for i, ref in enumerate(verse_refs, 1):
-                lines.append(f"#### Reference {i}: {ref.source_title}")
-                lines.append(f"**Source**: {ref.version_title}")
-                lines.append("")
-                lines.append(ref.context_snippet)
-                lines.append("")
-                lines.append("---")
-                lines.append("")
-
-        return "\n".join(lines)
-
-
-def main():
-    """Test the Sacks Librarian with a few psalm chapters."""
-    librarian = SacksLibrarian()
-
-    # Test with Psalm 1
-    print("=" * 80)
-    print("Testing Sacks Librarian with Psalm 1")
-    print("=" * 80)
-    refs = librarian.get_psalm_references(1)
-    print(f"\nFound {len(refs)} references for Psalm 1")
-
-    if refs:
-        print("\nFirst reference:")
-        print(f"  Verse: {refs[0].psalm_verse}")
-        print(f"  Source: {refs[0].source_title}")
-        print(f"  Snippet preview: {refs[0].context_snippet[:150]}...")
-
-        print("\nFormatted markdown (first 500 chars):")
-        markdown = librarian.format_for_research_bundle(refs, 1)
-        print(markdown[:500])
-
-
-if __name__ == '__main__':
-    main()
+        lines = [f"## Rabbi Jonathan Sacks on Psalm {psalm_chapter}", "", INTRO, ""]
+        n = 0
+        for kind, heading in (("prayer book", "### In his prayer-book commentary"), ("book", "### In his books")):
+            group = [r for r in references if r.kind == kind]
+            if not group:
+                continue
+            lines += [heading, ""]
+            for r in group:
+                n += 1
+                note = f"*{r.ref}*"
+                if r.source == "search":
+                    note += " *(a quotation found by phrase search; Sefaria does not link it)*"
+                if r.lang == "he":
+                    note += (" *Hebrew translation (Maggid); Sefaria lacks his English original, so an "
+                             "English rendering of it is not his wording.*")
+                if r.also:
+                    note += f" *Also printed in: {'; '.join(r.also)}.*"
+                lines += [f"#### Reference {n}: {self._title(r)}", note, "", r.text, ""]
+        return "\n".join(lines).rstrip() + "\n"

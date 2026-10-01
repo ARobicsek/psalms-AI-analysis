@@ -354,6 +354,12 @@ def run_enhanced_pipeline(
 
     tracker = PipelineSummaryTracker(psalm_number=psalm_number, initial_data=initial_data)
     logger.info("Pipeline summary tracking enabled.")
+    # Recorded here, not only in the macro step: a --skip-macro run into a fresh folder printed 0 verses.
+    if not tracker.analysis.verse_count:
+        from src.data_sources.tanakh_database import TanakhDatabase
+        _psalm = TanakhDatabase(Path(db_path)).get_psalm(psalm_number)
+        if _psalm:
+            tracker.track_verse_count(len(_psalm.verses))
 
     cost_tracker = CostTracker()
     research_trimmer = ResearchTrimmer(logger=logger)

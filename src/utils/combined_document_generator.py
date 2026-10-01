@@ -1198,7 +1198,8 @@ class CombinedDocumentGenerator:
         """Formats the stats dictionary into a readable string for the document."""
         # --- Analysis & Research Inputs ---
         analysis_data = stats.get('analysis', {}) or {}
-        verse_count = analysis_data.get('verse_count', 'N/A')
+        # A stats file from a --skip-macro run can hold 0: fall back to the psalm's own verses.
+        verse_count = analysis_data.get('verse_count') or getattr(self, '_verse_total', None) or 'N/A'
 
         research_data = stats.get('research', {})
         lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
@@ -1328,6 +1329,7 @@ Methodological & Bibliographical Summary
         if not psalm_data:
             raise FileNotFoundError(f"Psalm {self.psalm_num} not found in database.")
         psalm_text_data = {v.verse: {'hebrew': v.hebrew, 'english': v.english} for v in psalm_data.verses}
+        self._verse_total = len(psalm_data.verses)   # methods-page fallback when the stats hold 0
 
         # 1. Add Title
         self.document.add_heading(f'Commentary on Psalm {self.psalm_num}', level=1)

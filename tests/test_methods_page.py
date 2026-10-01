@@ -176,10 +176,15 @@ def test_sacks_count_ignores_mentions_outside_the_sacks_section():
 
 
 def test_sacks_count_is_the_number_of_excerpts_in_a_real_sacks_section():
-    from src.agents.sacks_librarian import SacksLibrarian, count_references_in_bundle
+    # S392: built offline (the librarian now harvests Sefaria; sacks_on_psalms.json is gone)
+    from src.agents.sacks_librarian import SacksLibrarian, SacksReference, count_references_in_bundle
     lib = SacksLibrarian()
-    refs = lib.get_psalm_references(23)
-    assert refs, "sacks_on_psalms.json should hold Psalm 23 excerpts"
+    refs = [SacksReference("prayer book", "Rabbi Sacks on Siddur", "Shabbat, Se'uda Shelishit for Shabbat",
+                           "Rabbi Sacks on Siddur, Shabbat, Se'uda Shelishit for Shabbat 3", list(range(1, 7)),
+                           "whole", "*Psalm 23:* One of the most sublime passages in all religious literature.")]
+    refs += [SacksReference("book", "Studies in Spirituality", f"Essay {i}", f"Studies in Spirituality, Essay {i} 4",
+                            [4], "verse", f"Rabbi Sacks quotes it ({i}): “You are with me” (Ps. 23:4).", "link")
+             for i in range(1, 10)]
     bundle = (BUNDLE + "\n" + lib.format_for_research_bundle(refs, 23) + "\n---\n\n"
               + "## Related Psalms\n\nRabbi Sacks again\n\n## Research Summary\n\n"
                 f"- **Rabbi Sacks references**: {len(refs)}\n")
@@ -194,3 +199,23 @@ def test_every_runner_counts_sacks_with_the_shared_function():
         text = (ROOT / "scripts" / name).read_text(encoding="utf-8")
         assert "count_references_in_bundle(markdown_content)" in text, name
         assert "Rabbi Sacks|Jonathan Sacks" not in text, name
+
+
+def test_verse_count_falls_back_to_the_psalm_text_when_the_stats_hold_zero():
+    """S392: a --skip-macro run into a fresh folder recorded verse_count 0 (only the macro step set
+    it), so the print-ready methods page said 'Psalm Verses Analyzed: 0' and 0 LXX verses."""
+    from src.utils.commentary_formatter import CommentaryFormatter
+    text = {n: {"hebrew": "א", "english": "a"} for n in range(1, 14)}
+    for stats in ({"analysis": {"verse_count": 0}}, {}):
+        out = CommentaryFormatter()._format_bibliographical_summary(stats, fallback_verse_count=len(text))
+        assert "**Psalm Verses Analyzed**: 13" in out
+        assert "**LXX (Septuagint) Verses Reviewed**: 13" in out
+    kept = CommentaryFormatter()._format_bibliographical_summary({"analysis": {"verse_count": 21}}, 13)
+    assert "**Psalm Verses Analyzed**: 21" in kept
+
+
+def test_both_pipelines_record_the_verse_count_outside_the_macro_step():
+    for runner in ("run_enhanced_pipeline.py", "run_si_pipeline.py"):
+        src = (ROOT / "scripts" / runner).read_text(encoding="utf-8")
+        head, _, _ = src.partition("elif not skip_macro:")
+        assert "if not tracker.analysis.verse_count:" in head, runner

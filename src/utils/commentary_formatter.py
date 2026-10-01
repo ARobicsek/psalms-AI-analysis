@@ -18,7 +18,7 @@ import sys
 import json
 import re
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 # Handle imports
 if __name__ == '__main__':
@@ -90,7 +90,8 @@ class CommentaryFormatter:
         verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_text)}\n"
 
         # 5. Bibliographical Summary
-        biblio_summary_section = self._format_bibliographical_summary(summary_data)
+        biblio_summary_section = self._format_bibliographical_summary(
+            summary_data, fallback_verse_count=len(psalm_text_data) or None)
 
         # Assemble the document
         full_commentary = (
@@ -163,7 +164,8 @@ class CommentaryFormatter:
             lines.append(f"{verse_num}. {modified_hebrew}\u200e\t\t{english}")
         return "\n".join(lines) + "\n\n"
 
-    def _format_bibliographical_summary(self, summary_data: Dict[str, Any]) -> str:
+    def _format_bibliographical_summary(self, summary_data: Dict[str, Any],
+                                        fallback_verse_count: Optional[int] = None) -> str:
         """Formats the methodological and bibliographical summary."""
         self.logger.info("Formatting bibliographical summary.")
         lines = ["## Methodological & Bibliographical Summary"]
@@ -174,7 +176,8 @@ class CommentaryFormatter:
         # --- Research Inputs ---
         lines.append("### Research & Data Inputs")
         analysis_data = stats.get('analysis', {}) or {}
-        verse_count = analysis_data.get('verse_count', 'N/A') 
+        # A stats file from a --skip-macro run can hold 0: the psalm's own text is the fallback.
+        verse_count = analysis_data.get('verse_count') or fallback_verse_count or 'N/A'
         lines.append(f"- **Psalm Verses Analyzed**: {verse_count}")
         lines.append(f"- **LXX (Septuagint) Verses Reviewed**: {verse_count}") # Assumes LXX is reviewed for all verses
         lines.append(f"- **Phonetic Transcriptions Generated**: {verse_count}") # Assumes one per verse
