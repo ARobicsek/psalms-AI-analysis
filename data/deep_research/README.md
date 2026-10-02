@@ -1,30 +1,31 @@
 # Deep Web Research Files
 
-This directory stores Gemini Deep Research outputs for individual psalms.
+Gemini research for individual psalms, and (Session 393) its independent check and the cleaned result.
 
-## Naming Convention
+## Files per psalm (`NNN` = zero-padded psalm number)
 
-Files should be named:
-```
-psalm_NNN_deep_research.txt
-```
+| File | Who writes it | What it is |
+|---|---|---|
+| `psalm_NNN_deep_research.txt` | the author (Gemini chat 1) | the research report |
+| `psalm_NNN_deep_research_check.txt` | the author (Gemini chat 2, a fresh chat) | CONFIRMED / WRONG / NOT CONFIRMED per claim, with corrections; optional `## ADDENDUM` that corrects the check itself |
+| `psalm_NNN_deep_research_clean.txt` | the pipeline (`deep_research_cleaner`) | the report with the check applied: `[corrected by check]`, `[unconfirmed]` |
+| `psalm_NNN_deep_research_clean_log.md` | the pipeline | every edit, applied or not, the model and the cost |
 
-Where `NNN` is the zero-padded psalm number (e.g., `psalm_017_deep_research.txt`).
+## How to create
 
-## How to Create
-
-1. Go to [NotebookLM](https://notebooklm.google.com/) or [Gemini](https://gemini.google.com/)
-2. Select "Deep Research" mode
-3. Use the prompt from `docs/prompts_reference/deep_research_prompt.md` (substitute the psalm number)
-4. Copy the output to a text file with the naming convention above
-5. Save to this directory
+The two prompts are in `docs/prompts_reference/deep_research_prompt.md`. Run the research prompt in one Gemini
+chat, then the checker prompt on its output in a NEW chat, and save both files here.
 
 ## Integration
 
-The pipeline's Research Assembler will automatically:
-- Look for a deep research file for the current psalm
-- Include it in the research bundle if found
-- Remove it if the bundle exceeds character limits
-- Track whether it was used in the pipeline stats
+The research assembler (`_load_deep_research`):
+- cleans the report when a check file is newer than the clean file (Sonnet 5.5, ≤ $0.10, billed to the run;
+  `python scripts/clean_deep_research.py N` does the same ahead of a run, `--dry-run` at $0);
+- uses the clean file when it is current, else the raw report (old label, as before);
+- demotes the file's `#`/`##` headings so they stay inside the bundle's `## Deep Web Research` section;
+- never overwrites a clean file edited by hand after it was written.
 
-The final Word documents will indicate "Deep Web Research: Yes/No" in the Methodological Summary.
+The methods page says "Deep Web Research: Yes (corrected against an independent check)" for a cleaned file.
+A `--skip-micro` run reuses its old research bundle, so a new check only reaches the writer on a full run.
+
+Why all this: `docs/plans/S393_DEEP_RESEARCH.md`.

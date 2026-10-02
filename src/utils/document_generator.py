@@ -25,12 +25,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
 
 
 
@@ -1837,18 +1837,7 @@ class DocumentGenerator:
             prompt_chars_str = f"{prompt_chars} characters"
 
         # Deep Web Research status
-        deep_research_available = research_data.get('deep_research_available', False)
-        deep_research_included = research_data.get('deep_research_included', False)
-        deep_research_removed = research_data.get('deep_research_removed_for_space', False)
-
-        if deep_research_included:
-            deep_research_str = "Yes"
-        elif deep_research_removed:
-            deep_research_str = "No (removed for space)"
-        elif deep_research_available:
-            deep_research_str = "No (available but not included)"
-        else:
-            deep_research_str = "No"
+        deep_research_str = deep_research_methods_value(research_data)
 
         # Literary Echoes Research status
         literary_echoes_included = research_data.get('literary_echoes_included', False)

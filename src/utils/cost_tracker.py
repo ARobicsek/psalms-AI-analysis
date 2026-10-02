@@ -167,6 +167,17 @@ PRICING = {
         "cache_write": 2.50,
         "cache_write_1h": 4.00,
     },
+    # Claude Sonnet 5.5. Session 393: added for the deep-research cleanup trial. Verified on
+    # Anthropic's pricing page 2026-10-02: the same $2 / $10 as Sonnet 5, standard 0.1x cache
+    # read, no promo note.
+    "claude-sonnet-5-5": {
+        "input": 2.00,
+        "output": 10.00,
+        "thinking": 10.00,
+        "cache_read": 0.20,
+        "cache_write": 2.50,
+        "cache_write_1h": 4.00,
+    },
     # Claude Fable 5. NOT USED IN PRODUCTION -- present for the same reason as the
     # Sonnet 5 row: an unpriced model must never report $0.
     "claude-fable-5": {

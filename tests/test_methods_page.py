@@ -219,3 +219,36 @@ def test_both_pipelines_record_the_verse_count_outside_the_macro_step():
         src = (ROOT / "scripts" / runner).read_text(encoding="utf-8")
         head, _, _ = src.partition("elif not skip_macro:")
         assert "if not tracker.analysis.verse_count:" in head, runner
+
+
+# -- Session 393: deep research cleaned against an independent check --------------------------
+
+def test_checked_deep_research_is_detected_and_reported():
+    from src.agents.research_assembler import DEEP_RESEARCH_CHECKED_NOTE
+    from src.agents.deep_research_cleaner import demote_headings
+    from src.utils.pipeline_summary import DEEP_RESEARCH_CHECKED_MARKER, deep_research_methods_value
+    assert DEEP_RESEARCH_CHECKED_MARKER in DEEP_RESEARCH_CHECKED_NOTE
+    body = demote_headings("## TOP FINDINGS\n\n1. one\n\n## 4. JEWISH PRACTICE\n\n* two\n")
+    bundle = ("## Deep Web Research\n\n" + DEEP_RESEARCH_CHECKED_NOTE + body
+              + "\n\n---\n\n## Cross-Cultural Literary Echoes\n\nx\n")
+    for runner in ("run_enhanced_pipeline", "run_si_pipeline"):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        try:
+            mod = importlib.import_module(runner)
+        finally:
+            sys.path.pop(0)
+        rs = mod._parse_research_stats_from_markdown(bundle)
+        assert rs["deep_research_checked"] is True, runner
+        assert rs["deep_research_chars"] > len(DEEP_RESEARCH_CHECKED_NOTE) + 30, runner  # the whole section
+    assert deep_research_methods_value({"deep_research_included": True, "deep_research_checked": True}) \
+        == "Yes (corrected against an independent check)"
+    assert deep_research_methods_value({"deep_research_included": True}) == "Yes"
+    assert deep_research_methods_value({"deep_research_available": True}) == "No (available but not included)"
+
+
+def test_the_three_renderers_share_one_deep_research_implementation():
+    for rel in ("src/utils/commentary_formatter.py", "src/utils/combined_document_generator.py",
+                "src/utils/document_generator.py"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert "deep_research_methods_value(research_data)" in text, rel
+        assert 'deep_research_str = "No (removed for space)"' not in text, rel

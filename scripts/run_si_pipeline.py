@@ -114,6 +114,8 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         deep_match = re.search(r'## Deep Web Research\s*\n(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
         if deep_match:
             stats['deep_research_chars'] = len(deep_match.group(1))
+            from src.utils.pipeline_summary import DEEP_RESEARCH_CHECKED_MARKER
+            stats['deep_research_checked'] = DEEP_RESEARCH_CHECKED_MARKER in deep_match.group(1)
 
     # Check for Literary Echoes
     if '## Cross-Cultural Literary Echoes' in markdown_content:
@@ -592,6 +594,7 @@ def run_enhanced_pipeline(
         tracker.research.deep_research_available = research_stats.get('deep_research_available', False)
         tracker.research.deep_research_included = research_stats.get('deep_research_available', False)
         tracker.research.deep_research_chars = research_stats.get('deep_research_chars', 0)
+        tracker.research.deep_research_checked = research_stats.get('deep_research_checked', False)
         tracker.research.literary_echoes_available = research_stats.get('literary_echoes_available', False)
         tracker.research.literary_echoes_included = research_stats.get('literary_echoes_available', False)
         tracker.research.research_bundle_chars = len(research_bundle_content)

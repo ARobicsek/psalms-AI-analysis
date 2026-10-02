@@ -58,6 +58,18 @@ else:
     from .figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
     from .literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 
+from src.agents.deep_research_cleaner import load_for_bundle as load_deep_research_for_bundle
+
+# Session 393: the label on a deep-research section that has been cleaned against an
+# independent check (deep_research_cleaner). The unchecked label is unchanged.
+DEEP_RESEARCH_CHECKED_NOTE = (
+    "*Web research (Gemini with search), corrected against an independent check. Treat it as "
+    "leads: an item marked [corrected by check] was wrong in the original report and is given "
+    "here in corrected form; an item marked [unconfirmed] could not be verified and must not be "
+    "stated as fact unless another section of this bundle supports it. Page numbers and "
+    "catalogue numbers here were not checked.*\n\n"
+)
+
 
 def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
     """Truncate a BDB lexicon entry to max_chars, preserving complete lines."""
@@ -345,6 +357,7 @@ class ResearchBundle:
     deep_research_content: Optional[str] = None  # Raw content from deep research file
     deep_research_included: bool = False  # Whether deep research was included in final bundle
     deep_research_removed_for_space: bool = False  # Whether it was removed due to character limits
+    deep_research_checked: bool = False  # Session 393: content is the _clean file (an independent check applied)
     # Literary Echoes (separate Gemini Deep Research for cross-cultural comparisons)
     literary_echoes_content: Optional[str] = None  # Raw content from literary echoes file
     literary_echoes_included: bool = False  # Whether literary echoes were included in final bundle
@@ -385,6 +398,7 @@ class ResearchBundle:
                 'deep_research_included': self.deep_research_included,
                 'deep_research_removed_for_space': self.deep_research_removed_for_space,
                 'deep_research_chars': len(self.deep_research_content) if self.deep_research_content else 0,
+                'deep_research_checked': self.deep_research_checked,
                 'literary_echoes_included': self.literary_echoes_included,
                 'literary_echoes_chars': len(self.literary_echoes_content) if self.literary_echoes_content else 0
             },
@@ -765,7 +779,10 @@ class ResearchBundle:
         # Deep Web Research section (Gemini Deep Research output)
         if self.deep_research_included and self.deep_research_content:
             md += "## Deep Web Research\n\n"
-            md += "*This section contains research assembled via Gemini Deep Research, including ancient, medieval, and modern scholarly commentary; ANE parallels; linguistic and philological analysis; reception history; liturgical usage; and literary/cultural influence.*\n\n"
+            if self.deep_research_checked:
+                md += DEEP_RESEARCH_CHECKED_NOTE
+            else:
+                md += "*This section contains research assembled via Gemini Deep Research, including ancient, medieval, and modern scholarly commentary; ANE parallels; linguistic and philological analysis; reception history; liturgical usage; and literary/cultural influence.*\n\n"
             md += self.deep_research_content
             md += "\n\n---\n\n"
 
@@ -949,6 +966,8 @@ class ResearchAssembler:
                                    Requires GEMINI_API_KEY environment variable. Default: True.
         """
         self.logger = logging.getLogger(__name__)
+        self.cost_tracker = cost_tracker
+        self._deep_research_kind = "none"
         self.bdb_librarian = BDBLibrarian()
         self.concordance_librarian = ConcordanceLibrarian(logger=self.logger)
         self.figurative_librarian = FigurativeLibrarian()
@@ -989,18 +1008,20 @@ class ResearchAssembler:
         Returns:
             Deep research content as string, or None if not found
         """
-        filename = f"psalm_{psalm_chapter:03d}_deep_research.txt"
-        filepath = self._deep_research_dir / filename
-
-        if filepath.exists():
-            try:
-                content = filepath.read_text(encoding='utf-8').strip()
-                if content:
-                    self.logger.info(f"Loaded deep research for Psalm {psalm_chapter}: {len(content)} chars")
-                    return content
-            except Exception as e:
-                self.logger.warning(f"Failed to load deep research for Psalm {psalm_chapter}: {e}")
-
+        # Session 393: when an independent check file exists, the report is cleaned against it
+        # first (deep_research_cleaner: Sonnet 5.5, ~7 cents, once; capped at 10) and the clean file is used. Headings are
+        # demoted under the bundle's '## Deep Web Research' either way.
+        self._deep_research_kind = "none"
+        try:
+            content, kind = load_deep_research_for_bundle(
+                psalm_chapter, self._deep_research_dir, cost_tracker=self.cost_tracker)
+        except Exception as e:
+            self.logger.warning(f"Failed to load deep research for Psalm {psalm_chapter}: {e}")
+            return None
+        if content:
+            self._deep_research_kind = kind
+            self.logger.info(f"Loaded deep research for Psalm {psalm_chapter}: {len(content)} chars ({kind})")
+            return content
         return None
 
     def _load_literary_echoes(self, psalm_chapter: int) -> Optional[str]:
@@ -1233,6 +1254,7 @@ class ResearchAssembler:
 
         # Load deep research content (Gemini Deep Research output) if available
         deep_research_content = self._load_deep_research(request.psalm_chapter)
+        deep_research_checked = self._deep_research_kind == "checked"
 
         # Load literary echoes content (separate Gemini Deep Research for cross-cultural comparisons) if available
         literary_echoes_content = self._load_literary_echoes(request.psalm_chapter)
@@ -1277,6 +1299,7 @@ class ResearchAssembler:
             deep_research_content=deep_research_content,
             deep_research_included=bool(deep_research_content),
             deep_research_removed_for_space=False,
+            deep_research_checked=deep_research_checked,
             # Literary echoes - cross-cultural literary comparisons from separate deep research
             literary_echoes_content=literary_echoes_content,
             literary_echoes_included=bool(literary_echoes_content),

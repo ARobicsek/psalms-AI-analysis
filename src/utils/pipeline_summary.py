@@ -92,6 +92,7 @@ class ResearchStats:
     deep_research_included: bool = False  # Was it included in the final bundle?
     deep_research_removed_for_space: bool = False  # Was it removed due to character limits?
     deep_research_chars: int = 0  # Character count of deep research content
+    deep_research_checked: bool = False  # Session 393: cleaned against an independent check
 
     # Literary Echoes (Cross-cultural literary comparisons)
     literary_echoes_available: bool = False  # Was a literary echoes file found?
@@ -692,6 +693,7 @@ class PipelineSummaryTracker:
                 'deep_research_included': self.research.deep_research_included,
                 'deep_research_removed_for_space': self.research.deep_research_removed_for_space,
                 'deep_research_chars': self.research.deep_research_chars,
+                'deep_research_checked': self.research.deep_research_checked,
                 'literary_echoes_available': self.research.literary_echoes_available,
                 'literary_echoes_included': self.research.literary_echoes_included,
                 'literary_echoes_chars': self.research.literary_echoes_chars,
@@ -770,6 +772,25 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# Session 393: the words the research assembler's label carries when the deep research was
+# cleaned against an independent check (research_assembler.DEEP_RESEARCH_CHECKED_NOTE; a test
+# keeps the two in step). The runners find it in the bundle; the methods page reports it.
+DEEP_RESEARCH_CHECKED_MARKER = "corrected against an independent check"
+
+
+def deep_research_methods_value(research_data: Dict[str, Any]) -> str:
+    """The methods page's 'Deep Web Research' value; one implementation for all three renderers."""
+    if research_data.get('deep_research_included', False):
+        if research_data.get('deep_research_checked', False):
+            return "Yes (corrected against an independent check)"
+        return "Yes"
+    if research_data.get('deep_research_removed_for_space', False):
+        return "No (removed for space)"
+    if research_data.get('deep_research_available', False):
+        return "No (available but not included)"
+    return "No"
 
 
 def echoes_methods_lines(model_usage: Dict[str, Any]) -> List[str]:
