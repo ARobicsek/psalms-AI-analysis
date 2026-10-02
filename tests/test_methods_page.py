@@ -161,8 +161,7 @@ def test_editors_report_with_a_fact_check_keeps_its_sections(tmp_path):
 
 # --- Session 391: "Rabbi Jonathan Sacks References Reviewed" -------------------------------------
 
-_RUNNERS = ("run_enhanced_pipeline.py", "run_si_pipeline.py", "run_enhanced_pipeline_TEST.py",
-            "run_enhanced_pipeline_with_synthesis.py", "run_si_pipeline_with_synthesis.py")
+_RUNNERS = ("run_enhanced_pipeline.py", "run_si_pipeline.py")  # S394: the TEST and *_with_synthesis runners were archived
 
 
 def test_sacks_count_ignores_mentions_outside_the_sacks_section():
@@ -252,3 +251,44 @@ def test_the_three_renderers_share_one_deep_research_implementation():
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert "deep_research_methods_value(research_data)" in text, rel
         assert 'deep_research_str = "No (removed for space)"' not in text, rel
+
+
+# --- Session 394: reception + Targum on the methods page; reader questions gone -------------------
+
+def test_reception_and_targum_lines_appear_only_when_the_run_had_them():
+    from src.utils.pipeline_summary import reception_methods_lines
+    assert reception_methods_lines({}) == []          # an older psalm's page is unchanged
+    lines = dict(reception_methods_lines({"reception_passages": 41, "reception_chars": 44201,
+                                          "targum_verses": 72, "targum_english_verses": 0}))
+    assert lines["Rabbinic and Later Reception (Sefaria)"].startswith("41 passages (44,201 characters)")
+    assert lines["Targum (Aramaic)"] == "72 verses given to the writer, Aramaic only"
+    assert dict(reception_methods_lines({"targum_verses": 6, "targum_english_verses": 6})) == \
+        {"Targum (Aramaic)": "6 verses given to the writer, 6 with English"}
+
+
+def test_the_three_renderers_share_one_reception_implementation_and_print_no_questions():
+    for rel in ("src/utils/commentary_formatter.py", "src/utils/combined_document_generator.py",
+                "src/utils/document_generator.py"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert "reception_methods_lines(research_data)" in text, rel
+        assert "Questions for the Reader" not in text and "Question Generator" not in text, rel
+
+
+def test_both_pipelines_record_reception_and_targum_for_the_methods_page():
+    text = (ROOT / "scripts" / "run_enhanced_pipeline.py").read_text(encoding="utf-8")
+    assert "tracker.research.reception_passages = rstats['kept']" in text
+    assert "tracker.research.targum_verses = len(_tv)" in text
+    for runner in ("run_enhanced_pipeline.py", "run_si_pipeline.py"):
+        src = (ROOT / "scripts" / runner).read_text(encoding="utf-8")
+        assert "QuestionCurator" not in src and "reader_questions_file" not in src, runner
+
+
+def test_document_generator_options_are_keyword_only():
+    """S394 removed the 6th positional argument (a reader-questions file); a caller still
+    passing one must fail, not have it read as the appendix."""
+    import inspect
+    from src.utils.document_generator import DocumentGenerator
+    params = inspect.signature(DocumentGenerator.__init__).parameters
+    assert "reader_questions_path" not in params
+    assert params["appendix_parts"].kind is inspect.Parameter.KEYWORD_ONLY
+    assert params["compact"].kind is inspect.Parameter.KEYWORD_ONLY

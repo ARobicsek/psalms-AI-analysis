@@ -18,7 +18,7 @@ Date: 2025-10-19
 import sys
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field, fields
 from datetime import datetime
 
@@ -93,6 +93,11 @@ class ResearchStats:
     deep_research_removed_for_space: bool = False  # Was it removed due to character limits?
     deep_research_chars: int = 0  # Character count of deep research content
     deep_research_checked: bool = False  # Session 393: cleaned against an independent check
+    # Session 394: the Sefaria reception section and the Targum (on by default since S394)
+    reception_passages: int = 0
+    reception_chars: int = 0
+    targum_verses: int = 0
+    targum_english_verses: int = 0
 
     # Literary Echoes (Cross-cultural literary comparisons)
     literary_echoes_available: bool = False  # Was a literary echoes file found?
@@ -694,6 +699,10 @@ class PipelineSummaryTracker:
                 'deep_research_removed_for_space': self.research.deep_research_removed_for_space,
                 'deep_research_chars': self.research.deep_research_chars,
                 'deep_research_checked': self.research.deep_research_checked,
+                'reception_passages': self.research.reception_passages,
+                'reception_chars': self.research.reception_chars,
+                'targum_verses': self.research.targum_verses,
+                'targum_english_verses': self.research.targum_english_verses,
                 'literary_echoes_available': self.research.literary_echoes_available,
                 'literary_echoes_included': self.research.literary_echoes_included,
                 'literary_echoes_chars': self.research.literary_echoes_chars,
@@ -791,6 +800,24 @@ def deep_research_methods_value(research_data: Dict[str, Any]) -> str:
     if research_data.get('deep_research_available', False):
         return "No (available but not included)"
     return "No"
+
+
+def reception_methods_lines(research_data: Dict[str, Any]) -> List[Tuple[str, str]]:
+    """The methods page's reception and Targum lines, as (label, value) pairs; one
+    implementation for the three renderers (Session 394). Empty for a run without them,
+    so an older psalm's page is unchanged."""
+    lines = []
+    n = research_data.get('reception_passages', 0) or 0
+    if n:
+        lines.append(("Rabbinic and Later Reception (Sefaria)",
+                      f"{n} passages ({research_data.get('reception_chars', 0) or 0:,} characters) from the "
+                      f"Talmud, midrash and later readers, chosen by fixed rules"))
+    t = research_data.get('targum_verses', 0) or 0
+    if t:
+        e = research_data.get('targum_english_verses', 0) or 0
+        lines.append(("Targum (Aramaic)",
+                      f"{t} verses given to the writer" + (f", {e} with English" if e else ", Aramaic only")))
+    return lines
 
 
 def echoes_methods_lines(model_usage: Dict[str, Any]) -> List[str]:

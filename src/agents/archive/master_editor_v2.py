@@ -1939,7 +1939,6 @@ class MasterEditorV2:
         research_file: Path,
         insights_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
-        reader_questions_file: Optional[Path] = None
     ) -> Dict[str, str]:
         """
         Generate definitive commentary (Writer Mode).
@@ -1987,25 +1986,7 @@ class MasterEditorV2:
 
         phonetic_section = self._format_phonetic_section(micro_analysis)
 
-        # Load curated reader questions if available, else fall back to raw macro/micro questions
-        reader_questions = "[No reader questions provided]"
-        if reader_questions_file and Path(reader_questions_file).exists():
-            try:
-                with open(reader_questions_file, 'r', encoding='utf-8') as f:
-                    rq_data = json.load(f)
-                questions = rq_data.get('curated_questions', [])
-                if questions:
-                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
-                    self.logger.info(f"  Reader questions: {len(questions)} curated questions loaded")
-            except Exception as e:
-                self.logger.warning(f"Could not load curated reader questions: {e}")
-
-        if reader_questions == "[No reader questions provided]":
-            # Fall back to raw macro/micro questions
-            reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
-            if reader_questions_list:
-                reader_questions = "\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
-
+        # Session 394: reader questions are retired (no curated file, no macro/micro fallback).
         self.logger.info(f"Writing commentary for Psalm {psalm_number}")
 
         # Perform writing
@@ -2018,81 +1999,7 @@ class MasterEditorV2:
             phonetic_section=phonetic_section,
             curated_insights=curated_insights,
             analytical_framework=analytical_framework,
-            reader_questions=reader_questions,
             is_college=False
-        )
-
-    def write_college_commentary(
-        self,
-        macro_file: Path,
-        micro_file: Path,
-        research_file: Path,
-        insights_file: Optional[Path] = None,
-        psalm_number: Optional[int] = None,
-        reader_questions_file: Optional[Path] = None
-    ) -> Dict[str, str]:
-        """
-        Generate college commentary (Writer Mode).
-        """
-        self.logger.info("Starting Master Writer COLLEGE commentary generation")
-
-        # Load inputs
-        macro_analysis = self._load_json_file(macro_file)
-        micro_analysis = self._load_json_file(micro_file)
-        if not psalm_number:
-            psalm_number = macro_analysis.get('psalm_number', 0)
-
-        # Load psalm text (Hebrew, English, phonetic)
-        psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
-
-        research_bundle_raw = self._load_text_file(research_file)
-        research_bundle, _, _ = self.research_trimmer.trim_bundle(research_bundle_raw, max_chars=350000)
-
-        curated_insights = None
-        if insights_file and insights_file.exists():
-            curated_insights = self._load_json_file(insights_file)
-
-        try:
-            from src.agents.rag_manager import RAGManager
-            rag_manager = RAGManager("docs")
-            analytical_framework = rag_manager.load_analytical_framework()
-        except Exception:
-            analytical_framework = "[Analytical framework not available]"
-
-        phonetic_section = self._format_phonetic_section(micro_analysis)
-
-        # Load reader questions if available
-        reader_questions = "[No reader questions provided]"
-        if reader_questions_file and Path(reader_questions_file).exists():
-            try:
-                with open(reader_questions_file, 'r', encoding='utf-8') as f:
-                    rq_data = json.load(f)
-                questions = rq_data.get('curated_questions', [])
-                if questions:
-                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
-                    self.logger.info(f"  Reader questions: {len(questions)} questions loaded for college")
-            except Exception as e:
-                self.logger.warning(f"Could not load reader questions: {e}")
-
-        if reader_questions == "[No reader questions provided]":
-            # Fall back to raw macro/micro questions
-            reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
-            if reader_questions_list:
-                reader_questions = "\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
-
-        self.logger.info(f"Writing COLLEGE commentary for Psalm {psalm_number}")
-
-        return self._perform_writer_synthesis(
-            psalm_number=psalm_number,
-            macro_analysis=macro_analysis,
-            micro_analysis=micro_analysis,
-            research_bundle=research_bundle,
-            psalm_text=psalm_text,
-            phonetic_section=phonetic_section,
-            curated_insights=curated_insights,
-            analytical_framework=analytical_framework,
-            reader_questions=reader_questions,
-            is_college=True
         )
 
     def _perform_writer_synthesis(
@@ -2105,7 +2012,7 @@ class MasterEditorV2:
         phonetic_section: str,
         curated_insights: Dict,
         analytical_framework: str,
-        reader_questions: str,
+        reader_questions: str = "",  # Session 394: retired; only this legacy method formats it
         is_college: bool = False  # Default added for V4 backward compat
     ) -> Dict[str, str]:
         """Execute the writer prompt with appropriate model.
@@ -2362,12 +2269,11 @@ class MasterEditorV2:
         result = {
             'introduction': '',
             'verse_commentary': '',
-            'reader_questions': '',
             'psalm_number': psalm_number
         }
         
         # 2. Verse Commentary
-        # Look for start of verses until Reader Questions (or end)
+        # Look for start of verses until the end
         # Session 378: the heading LEVEL is the model's to choose, and it varies run
         # to run on identical input. `###?` matched only `##`/`###`; Psalm 27 came
         # back with `# INTRODUCTION ESSAY` / `# VERSE COMMENTARY` (H1) and BOTH
@@ -2377,7 +2283,7 @@ class MasterEditorV2:
         # in your message", and THAT reply was written out as the psalm's intro and
         # verses and rendered into the DOCX. The pipeline exited 0. Match any level.
         verse_match = re.search(
-            r'#{1,4}\s*VERSE COMMENTARY\s*\n(.*?)(?=#{1,4}\s*REFINED READER QUESTIONS|$)',
+            r'#{1,4}\s*VERSE COMMENTARY\s*\n(.*)$',
             response_text, re.DOTALL | re.IGNORECASE
         )
         if verse_match:
@@ -2412,15 +2318,6 @@ class MasterEditorV2:
                 "Writer response had no '### INTRODUCTION ESSAY' header; recovered "
                 f"{len(result['introduction']):,} chars preceding 'VERSE COMMENTARY'"
             )
-
-        # 3. Reader Questions
-        # Look for refined reader questions
-        rq_match = re.search(
-            r'#{1,4}\s*REFINED READER QUESTIONS\s*\n(.*?)$',
-            response_text, re.DOTALL | re.IGNORECASE
-        )
-        if rq_match:
-            result['reader_questions'] = rq_match.group(1).strip()
 
         # An empty section here means the guide loses a whole part of itself, so
         # say so loudly rather than letting a 0-byte file reach the copy editor.

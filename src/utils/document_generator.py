@@ -25,12 +25,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 
 
 
@@ -93,8 +93,9 @@ class DocumentGenerator:
     COMPACT_SMALL_PT = 8      # methods summary and appendix
 
     def __init__(self, psalm_num: int, intro_path: Path, verses_path: Path, stats_path: Path, output_path: Path,
-                 reader_questions_path: Optional[Path] = None, appendix_parts: Optional[List[tuple]] = None,
-                 compact: bool = True):
+                 *, appendix_parts: Optional[List[tuple]] = None, compact: bool = True):
+        # Session 394: the reader-questions argument (6th, positional) is gone, and the options
+        # are keyword-only so an old call still passing a questions file fails loudly.
         self.appendix_parts = [(h, x) for h, x in (appendix_parts or []) if x and x.strip()]
         self.compact = compact
         self.psalm_num = psalm_num
@@ -102,7 +103,6 @@ class DocumentGenerator:
         self.verses_path = verses_path
         self.stats_path = stats_path
         self.output_path = output_path
-        self.reader_questions_path = reader_questions_path
         self.document = Document()
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
@@ -1860,6 +1860,10 @@ class DocumentGenerator:
         # --- Models Used --- (This section will be built from the markdown in the generate() method)
         models_used_str = "### Models Used"
 
+        # Session 394: reception + Targum lines, shared with the other two renderers
+        reception_block = "".join(f"**{label}**: {value}\n"
+                                  for label, value in reception_methods_lines(research_data))
+
         summary = f"""
 Methodological & Bibliographical Summary
 
@@ -1872,7 +1876,7 @@ Methodological & Bibliographical Summary
 **Concordance Searches**: {concordance_summary}
 **Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
-**Similar Psalms Analyzed**: {related_psalms_str}
+{reception_block}**Similar Psalms Analyzed**: {related_psalms_str}
 **Deep Web Research**: {deep_research_str}
 **Literary Echoes Research**: {literary_echoes_str}
 **Sections Trimmed for Context**: {sections_trimmed_str}
@@ -2023,31 +2027,6 @@ Methodological & Bibliographical Summary
             self.document.add_paragraph() # Add a paragraph to attach the break to
             self.document.add_page_break()
 
-        # 2b. Add Questions for the Reader (if available)
-        if self.reader_questions_path and self.reader_questions_path.exists():
-            try:
-                questions_data = json.loads(self.reader_questions_path.read_text(encoding='utf-8'))
-                questions = questions_data.get('curated_questions', [])
-                if questions:
-                    self.document.add_heading('Questions for the Reader', level=2)
-                    
-                    # Add introductory italic text
-                    intro_p = self.document.add_paragraph(style='BodySans')
-                    intro_run = intro_p.add_run('Before reading this commentary, consider the following questions:')
-                    intro_run.italic = True
-                    
-                    # Add each question as a numbered paragraph
-                    for i, question in enumerate(questions, 1):
-                        q_p = self.document.add_paragraph(style='BodySans')
-                        q_p.add_run(f"{i}. ").bold = True
-                        self._process_markdown_formatting(q_p, question, set_font=False)
-                    
-                    # Add spacing after questions
-                    self.document.add_paragraph()
-            except Exception as e:
-                # Log but don't fail if questions can't be loaded
-                print(f"Warning: Could not load reader questions: {e}")
-
         # 3. Add Introduction
         self.document.add_heading('Introduction', level=2)
         intro_content = self.intro_path.read_text(encoding='utf-8')
@@ -2093,9 +2072,6 @@ Methodological & Bibliographical Summary
 
                 if 'insight_extractor' in model_usage:
                     summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"
-
-                if 'question_curator' in model_usage:
-                    summary_text += f"\n**Question Generator**: {model_usage.get('question_curator', 'N/A')}"
 
                 if 'synthesis_discovery' in model_usage:
                     summary_text += f"\n**Cross-Verse Synthesis Discovery**: {model_usage.get('synthesis_discovery', 'N/A')}"

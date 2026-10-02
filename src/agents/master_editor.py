@@ -463,9 +463,7 @@ Two, three, four sentences. None of them names a device, cites a source, or reac
 ### KEY INSIGHTS TO INCORPORATE
 {curated_insights}
 
-### READER QUESTIONS (initial questions)
-{reader_questions}
-
+{cross_verse_observations}
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -476,7 +474,7 @@ You will write THREE sections.
 
 ### STAGE 1: INTRODUCTION ESSAY (800-1400 words)
 
-**HOOK FIRST — AND CONNECT TO READER QUESTIONS**: Open with something surprising, counterintuitive, or puzzling about this psalm. Look at the READER QUESTIONS — your hook should set up one or more of these questions. Avoid bland summary openings.
+**HOOK FIRST**: Open with something surprising, counterintuitive, or puzzling about this psalm. Avoid bland summary openings.
 
 **STRUCTURAL MAP (within first 300 words)**: After your hook, give the reader a clear, concise map of how the psalm moves — its sections, its arc, its logic. Think of this as the legend on a museum guide: before the reader enters the detailed rooms, they need to see the floor plan. This should be brief (a short paragraph or a compact list) but decisive — it should make the psalm's architecture visible at a glance. The rest of your essay will then develop the most interesting aspects of this structure.
 
@@ -649,12 +647,6 @@ For EACH verse:
 **3. RELATIONSHIP TO INTRODUCTION:**
    - The essay made your argument. The verse commentary is where you open the toolkit. For each verse, ask: "What can I show the reader here that the essay didn't — and couldn't without losing momentum?" Prioritize: different commentator voices, liturgical deployments, textual variants, philological surprises, concordance patterns, and figurative language parallels not mentioned in the essay. If a verse was central to the essay's argument — if its crux WAS your hinge — do not re-establish what the essay established: point back to it in a single sentence and spend the whole note on what the essay could not use. COVERAGE IS ALREADY DISCHARGED by the translation line, so passing over an argument the reader has just finished reading is not a gap; and a note that arrives at the essay's own conclusion by a second route has written the essay twice, however fresh its wording.
 
-### STAGE 4: REFINED READER QUESTIONS
-
-Based on your writing, generate **4-6 refined "Questions for the Reader"** that will appear BEFORE the commentary.
-- Hook curiosity.
-- Set up insights.
-- Include specifics.
 
 ---
 
@@ -685,11 +677,6 @@ Return your response with these sections:
 
 ...
 
-### REFINED READER QUESTIONS
-1. ...
-2. ...
-3. ...
-4. ...
 """
 
 # Backward-compat aliases — V3 names point to V4 unified prompt
@@ -820,22 +807,17 @@ class MasterEditor(MasterEditorV2):
         research_file: Path,
         insights_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
-        reader_questions_file: Optional[Path] = None,
-        suppress_questions: bool = False,
         synthesis_discovery_file: Optional[Path] = None,
     ) -> Dict[str, str]:
-        """Override V2 to add suppress_questions + synthesis_discovery_file.
+        """Override V2 to add synthesis_discovery_file.
 
-        When suppress_questions=True, all question sections are stripped from
-        the Writer prompt (saving output tokens) and no questions are returned.
+        When synthesis_discovery_file is provided and exists, its contents fill the
+        writer prompt's {cross_verse_observations} INPUT slot as a block labelled
+        "CROSS-VERSE OBSERVATIONS" (Session 347; see _cross_verse_observations_block).
 
-        When synthesis_discovery_file is provided and exists, its contents are
-        spliced into the writer prompt as a new INPUT block labelled
-        "CROSS-VERSE OBSERVATIONS". The writer is instructed to use them where
-        they fit but NOT to structure commentary around them — they are
-        additional input, not overriding instruction. See Session 347 brief.
+        Session 394: reader questions are gone from the pipeline (retired in practice
+        since Session 280); the template no longer has a questions block to strip.
         """
-        self._suppress_questions = suppress_questions
         self._cross_verse_observations = None
         if synthesis_discovery_file is not None:
             sdf = Path(synthesis_discovery_file)
@@ -865,14 +847,9 @@ class MasterEditor(MasterEditorV2):
                 research_file=research_file,
                 insights_file=insights_file,
                 psalm_number=psalm_number,
-                reader_questions_file=reader_questions_file,
             )
         finally:
-            self._suppress_questions = False
             self._cross_verse_observations = None
-
-        if suppress_questions:
-            result.pop('reader_questions', None)
 
         return result
 
@@ -1090,46 +1067,25 @@ class MasterEditor(MasterEditorV2):
 
         return "\n".join(lines)
 
-    def _splice_cross_verse_observations(self, prompt: str, label: str = "writer") -> str:
-        """Splice the Session-347 synthesis-discovery sidecar into a writer prompt.
+    def _cross_verse_observations_block(self, label: str = "writer") -> str:
+        """The Session-347 synthesis-discovery sidecar, as the text of the writer prompt's
+        {cross_verse_observations} INPUT slot; "" when there are no observations.
 
         Shared by MasterEditor and MasterEditorSI. Session 379 hoisted it here after
-        finding that the SI copy had drifted TWICE from this one: it kept the old
-        single splice anchor (the Session-378 blocker) and it still carried the
-        pre-Session-371 guidance that suppressed the best idea in the Ps 71 dossier.
-        The two duplicates were never going to stay in step by hand — the prompt
-        template already avoids this by deriving SI from V4 with a .replace(), and
-        this is the same trick for the code path.
+        finding that the SI copy had drifted TWICE from this one (the old single splice
+        anchor, and the pre-Session-371 guidance that suppressed the best idea in the
+        Ps 71 dossier); one method means one text.
 
-        Only fires when write_commentary received a synthesis_discovery_file pointing
-        at content; otherwise the prompt is returned unchanged, byte-identical.
+        Session 394: a template SLOT replaces the splice ANCHOR. The block used to be
+        inserted before the `### READER QUESTIONS` header, which was then stripped; a
+        missing anchor only logged a warning, so any template edit near it could drop
+        the observations silently (~$1-1.50/psalm of synthesis discovery). A format
+        field cannot go missing: every template must name it or .format() raises. The
+        prompts this produces are byte-identical to the anchor-and-strip ones.
         """
         cross_verse = getattr(self, '_cross_verse_observations', None)
         if not cross_verse:
-            return prompt
-
-        # Session 378: the anchor is a FALLBACK CHAIN. It used to be the ANALYTICAL
-        # FRAMEWORK header alone, and a missing anchor only logged a warning — so any
-        # prompt variant that removed that header silently dropped this whole block
-        # (~$1.50/psalm of synthesis discovery on Ps 27) while looking like it had
-        # only removed the framework. That is a two-variable arm masquerading as one.
-        # Session 379 removed that header from both live templates, so READER QUESTIONS
-        # is now the anchor that actually fires. The framework anchor is kept for the
-        # archived V2/V3 prompts and for any A/B arm built from an older template —
-        # note it is the WRITER-PROMPT header, unrelated to the '## Analytical Framework
-        # for Biblical Poetry' section that ResearchTrimmer strips out of old bundles.
-        anchors = (
-            "### ANALYTICAL FRAMEWORK (poetic conventions reference)",
-            "### READER QUESTIONS (initial questions)",
-        )
-        anchor = next((a for a in anchors if a in prompt), None)
-        if anchor is None:
-            self.logger.warning(
-                f"Found none of the cross-verse splice anchors in the {label} "
-                f"prompt ({', '.join(a[:32] for a in anchors)}) — skipping "
-                "cross-verse observations splice"
-            )
-            return prompt
+            return ""
 
         # Session 371: the two guards below used to read "do NOT structure
         # your commentary around them" and a blanket "CONJECTURE must be
@@ -1184,12 +1140,10 @@ class MasterEditor(MasterEditorV2):
             "still apply with full force.\n\n"
             f"{cross_verse}\n\n"
         )
-        prompt = prompt.replace(anchor, observations_block + anchor)
         self.logger.info(
-            f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
-            f"into {label} prompt before '{anchor}'"
+            f"Cross-verse observations block ({len(cross_verse):,} chars) goes into the {label} prompt"
         )
-        return prompt
+        return observations_block
 
     def _perform_writer_synthesis(
         self,
@@ -1206,15 +1160,10 @@ class MasterEditor(MasterEditorV2):
         # (the inherited caller) still passes it by keyword, and it feeds the V2/V3
         # prompts in src/agents/archive/. Do not read it here.
         analytical_framework: str,
-        reader_questions: str,
         is_college: bool = False  # Kept for backward compat — ignored in V4
     ) -> Dict[str, str]:
         """Override to use unified V4 prompt. The is_college flag is accepted
         for backward compatibility but ignored — V4 uses a single prompt."""
-
-        # Force-suppress questions when suppress_questions flag is set by write_commentary
-        if getattr(self, '_suppress_questions', False):
-            reader_questions = "[No reader questions provided]"
 
         # Format common inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
@@ -1234,57 +1183,8 @@ class MasterEditor(MasterEditorV2):
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
             curated_insights=insights_text,
-            reader_questions=reader_questions
+            cross_verse_observations=self._cross_verse_observations_block(),
         )
-
-        prompt = self._splice_cross_verse_observations(prompt)
-
-        # Strip all question-related sections when no questions are provided
-        if reader_questions == "[No reader questions provided]" or not reader_questions.strip():
-            self.logger.info("No reader questions — stripping question sections from prompt")
-            # 1. Remove the READER QUESTIONS input block
-            prompt = prompt.replace(
-                "### READER QUESTIONS (initial questions)\n[No reader questions provided]\n",
-                ""
-            )
-            # 2. Remove question reference from STAGE 1 hook instruction
-            prompt = prompt.replace(
-                "**HOOK FIRST — AND CONNECT TO READER QUESTIONS**: Open with something surprising, counterintuitive, or puzzling about this psalm. Look at the READER QUESTIONS — your hook should set up one or more of these questions. Avoid bland summary openings.",
-                "**HOOK FIRST**: Open with something surprising, counterintuitive, or puzzling about this psalm. Avoid bland summary openings."
-            )
-            # 3. Remove the VALIDATION CHECK for reader questions
-            prompt = prompt.replace(
-                "### VALIDATION CHECK — Reader Questions:\n"
-                "Before finalizing, review the READER QUESTIONS input:\n"
-                "- Is each question elegantly addressed somewhere in the introduction essay or verse commentary?\n"
-                "- The answer should emerge naturally from the analysis — don't restate the question, let the reader discover the answer.\n"
-                "- If a question isn't addressed, weave relevant material into the appropriate section.\n",
-                ""
-            )
-            # 4. Remove STAGE 4: REFINED READER QUESTIONS
-            prompt = prompt.replace(
-                "### STAGE 4: REFINED READER QUESTIONS\n"
-                "\n"
-                "Based on your writing, generate **4-6 refined \"Questions for the Reader\"** that will appear BEFORE the commentary.\n"
-                "- Hook curiosity.\n"
-                "- Set up insights.\n"
-                "- Include specifics.\n",
-                ""
-            )
-            # 5. Remove REFINED READER QUESTIONS from OUTPUT FORMAT
-            prompt = prompt.replace(
-                "### REFINED READER QUESTIONS\n"
-                "1. ...\n"
-                "2. ...\n"
-                "3. ...\n"
-                "4. ...\n",
-                ""
-            )
-            # 6. Remove reader questions line from FINAL VALIDATION CHECKLIST
-            prompt = prompt.replace(
-                "- READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.\n",
-                ""
-            )
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")

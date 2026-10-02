@@ -54,11 +54,6 @@ def main():
         
     docx_output_file = base_dir / f"psalm_{psalm_number:03d}_commentary.docx"
     
-    refined_q = base_dir / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-    reader_questions_file = base_dir / f"psalm_{psalm_number:03d}_reader_questions.json"
-    
-    q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
-
     print(f"Generating DOCX for Psalm {psalm_number}...")
     try:
         gen = DocumentGenerator(
@@ -66,8 +61,7 @@ def main():
             edited_intro_file, 
             edited_verses_file, 
             summary_json_file, 
-            docx_output_file, 
-            q_file,
+            docx_output_file,
             appendix_parts=None if args.no_appendix else writer_reasoning_parts(psalm_number),
             compact=not args.standard,
         )

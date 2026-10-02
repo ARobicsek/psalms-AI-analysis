@@ -72,7 +72,6 @@ def resolve_file_paths(psalm_number: int) -> dict:
         - edited_intro: Path to edited introduction
         - edited_verses: Path to edited verses
         - insights: Path to insights JSON (optional)
-        - questions: Path to reader questions JSON (optional)
         - edition_name: e.g. "Standard V4", "Special Instruction", or "Legacy"
     """
     # Try both naming conventions (psalm_N and psalm_NNN)
@@ -122,11 +121,8 @@ def resolve_file_paths(psalm_number: int) -> dict:
     research_standard = psalm_dir / f"psalm_{psalm_number:03d}_research_v2.md"
     research_file = research_trimmed if research_trimmed.exists() else research_standard
 
-    # Insights and Questions
+    # Insights
     insights_file = psalm_dir / f"psalm_{psalm_number:03d}_insights.json"
-    questions_refined = psalm_dir / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-    questions_standard = psalm_dir / f"psalm_{psalm_number:03d}_reader_questions.json"
-    questions_file = questions_refined if questions_refined.exists() else questions_standard
 
     # Build paths dict
     paths = {
@@ -137,7 +133,6 @@ def resolve_file_paths(psalm_number: int) -> dict:
         'edited_intro': edited_intro,
         'edited_verses': edited_verses,
         'insights': insights_file,
-        'questions': questions_file,
         'edition_name': edition_name,
     }
 
@@ -247,7 +242,6 @@ def load_all_context(paths: dict, psalm_number: int) -> dict:
             'Macro analysis': (content, char_count),
             'Micro analysis': (content, char_count),
             'Insights (JSON)': (content, char_count),
-            'Reader Questions': (content, char_count),
         },
         'research': {
             'Lexicon': (content, char_count),
@@ -307,22 +301,6 @@ def load_all_context(paths: dict, psalm_number: int) -> dict:
             msg = f"[Could not parse insights JSON: {e}]"
             context['analysis']['Insights'] = (msg, len(msg))
             
-    if 'questions' in paths and paths['questions'].exists():
-        try:
-            with open(paths['questions'], 'r', encoding='utf-8') as f:
-                questions_data = json.load(f)
-                
-            formatted = ["## Reader Questions\n"]
-            if 'curated_questions' in questions_data:
-                for i, q in enumerate(questions_data['curated_questions'], 1):
-                    formatted.append(f"{i}. {q}")
-            
-            content = '\n'.join(formatted)
-            context['analysis']['Reader Questions'] = (content, len(content))
-        except Exception as e:
-            msg = f"[Could not parse questions JSON: {e}]"
-            context['analysis']['Reader Questions'] = (msg, len(msg))
-
     # Load research bundle sections (selectable)
     research_sections = parse_research_bundle(paths['research'])
     for name, content in research_sections.items():

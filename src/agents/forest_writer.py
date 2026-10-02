@@ -406,7 +406,7 @@ def verse_instructions(n_verses: int) -> str:
 # Session 388: the dossier cache SHARED WITH SYNTHESIS DISCOVERY. The INPUTS block's head
 # (psalm text, structure, verse notes, research bundle, phonetics: ~222K tokens on Ps 77) is
 # built from the same files and helpers for both stages; everything from KEY INSIGHTS on
-# (curated insights, discovery's own observations, reader questions) is the writer's alone.
+# (curated insights, discovery's own observations) is the writer's alone.
 # Discovery sends the head first under a cache breakpoint and keeps it warm while it runs, so
 # the writer READS that head instead of writing it again (~$0.7/psalm on Opus 5.5).
 SHARED_DOSSIER_END = "### KEY INSIGHTS TO INCORPORATE"
@@ -435,7 +435,7 @@ def shared_dossier(v4_template: str, psalm_number: int, psalm_text: str, macro_t
     prompt = v4_template.format(psalm_number=psalm_number, psalm_text=psalm_text,
                                 macro_analysis=macro_text, micro_analysis=micro_text,
                                 research_bundle=research_bundle, phonetic_section=phonetic_section,
-                                curated_insights="", reader_questions="")
+                                curated_insights="", cross_verse_observations="")
     head, _ = split_inputs(extract_inputs_block(prompt))
     if not head:
         raise ValueError(f"the writer's INPUTS block has no {SHARED_DOSSIER_END!r} marker")

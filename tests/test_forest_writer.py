@@ -77,7 +77,7 @@ def test_inputs_block_is_the_v4_prompts_inputs_section():
     prompt = MASTER_WRITER_PROMPT_V4.format(
         psalm_number=77, psalm_text="### Verse 1\n**Hebrew:** א\n**English:** a\n", macro_analysis="M",
         micro_analysis="m", research_bundle="R", phonetic_section="P", curated_insights="I",
-        reader_questions="Q")
+        cross_verse_observations="OBS")
     block = fw.extract_inputs_block(prompt)
     assert block.startswith("## ═") and "## YOUR INPUTS" in block and "YOUR TASK" not in block
     assert "GROUND RULES" not in block and block.rstrip().endswith("---")
@@ -181,7 +181,7 @@ def test_forest_writer_two_calls_end_to_end(tmp_path, monkeypatch):
     prompt = MASTER_WRITER_PROMPT_V4.format(
         psalm_number=77, psalm_text=psalm_text, macro_analysis="M", micro_analysis="m",
         research_bundle="### 77:2 — Rashi\nx\n", phonetic_section="P", curated_insights="I",
-        reader_questions="Q")
+        cross_verse_observations="OBS")
     essay = "### INTRODUCTION ESSAY\n\nThe essay."
     fake = _FakeClient([
         _msg(essay, "essay thoughts", dict(input_tokens=10, output_tokens=5000,
@@ -449,7 +449,7 @@ def test_shared_dossier_is_the_head_of_the_writers_own_inputs_block():
     prompt = MASTER_WRITER_PROMPT_V4.format(
         psalm_number=77, psalm_text=p["psalm_text"], macro_analysis="M", micro_analysis="m",
         research_bundle=p["research_bundle"], phonetic_section="P", curated_insights="INSIGHTS",
-        reader_questions="Q")
+        cross_verse_observations="OBS")
     inputs = fw.extract_inputs_block(prompt)
     w_head, w_tail = fw.split_inputs(inputs)
     assert head == w_head and w_head + w_tail == inputs

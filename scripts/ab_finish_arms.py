@@ -223,7 +223,7 @@ def finish_arm(pn: int, model: str, ab_dir: Path, stats_file: Path,
     # arm_stats, not stats_file — DocumentGenerator rebuilds the methodology
     # block from model_usage independently of the formatter (document_generator
     # :1632), so both readers need the arm-corrected copy.
-    gen = DocumentGenerator(pn, intro, verses, arm_stats, docx, None)
+    gen = DocumentGenerator(pn, intro, verses, arm_stats, docx)
     gen.generate()
     logger.info(f"  DOCX: {docx.name} ({docx.stat().st_size:,} bytes)")
 

@@ -112,8 +112,6 @@ def run_arm(psalm: int, arm: str, model: str, files: dict, ab_dir: Path, logger)
         result = editor.write_commentary(
             psalm_number=psalm,
             insights_file=None,
-            reader_questions_file=None,
-            suppress_questions=False,
             **files,
         )
     finally:

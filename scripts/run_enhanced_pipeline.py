@@ -26,7 +26,6 @@ from src.agents.macro_analyst import MacroAnalyst
 from src.agents.micro_analyst import MicroAnalystV2
 # SynthesisWriter REMOVED
 from src.agents.master_editor import MasterEditor
-from src.agents.question_curator import QuestionCurator
 # InsightExtractor REMOVED (Session 374): the agent existed to keep the
 # Synthesis Writer from drowning in research, and the Synthesis Writer was
 # removed in V4. Unused in production since Psalm 30 (2026-03-08); the last 13
@@ -362,13 +361,10 @@ def run_enhanced_pipeline(
     skip_default_commentaries: bool = False,
     master_editor_model: str = "claude-opus-5-5",
     synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 5.5 since S387)
-    skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
-    exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     echoes_mode: str = "v3",         # Session 388: "v3" (propose -> locate -> writer chooses) or "legacy" (Gemini + terra)
     macro_model: str = "claude-opus-5-5",
-    question_model: str = "gpt-5.6-terra",
     copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
@@ -476,7 +472,6 @@ def run_enhanced_pipeline(
     # docx_output_college_file = output_path / f"psalm_{psalm_number:03d}_commentary_college.docx"
     # docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
     
-    reader_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions.json"
 
     # Resume logic
     if resume and not smoke_test:
@@ -776,6 +771,8 @@ def run_enhanced_pipeline(
     # Sefaria's links (src/data_sources/sefaria_reception.py; docs/plans/S391_SEFARIA_EVALUATION.md).
     # Inserted into the bundle file itself, so synthesis discovery, the writer and the trimmed copy
     # all read it. $0 (cached under data/sefaria_cache/reception/).
+    if not reception:   # Session 394: a --no-reception re-run must not keep an earlier run's count
+        tracker.research.reception_passages = tracker.research.reception_chars = 0
     if reception and not smoke_test and research_file.exists():
         from src.data_sources.sefaria_reception import build_section, insert_section
         try:
@@ -785,24 +782,10 @@ def run_enhanced_pipeline(
             logger.info(f"[STEP 2+] Reception section: {rstats['kept']} passages of {rstats['located']} located, "
                         f"{rstats['chars']:,} chars, added to {research_file.name}")
             tracker.model_usage["reception"] = "Sefaria links, fixed rules (no model)"
+            tracker.research.reception_passages = rstats['kept']     # Session 394: the methods page
+            tracker.research.reception_chars = rstats['chars']
         except Exception as e:
             logger.error(f"[STEP 2+] Reception section FAILED, the bundle goes without it: {e}", exc_info=True)
-
-    # =====================================================================
-    # STEP 2b: Question Curation
-    # =====================================================================
-    if skip_questions or exclude_questions:
-        logger.info("[STEP 2b] Skipping question curation")
-    elif not smoke_test and macro_file.exists() and micro_file.exists():
-        logger.info("[STEP 2b] Curating questions...")
-        try:
-            curator = QuestionCurator(cost_tracker=cost_tracker, model=question_model)
-            q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
-            curator.save_questions(q, s, output_path, psalm_number)
-            tracker.track_model_for_step("question_curator", curator.active_model)
-        except Exception as e:
-            halt_on_quota(e, "STEP 2b: Question Curator", logger, cost_tracker, output_path, psalm_number)
-            logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
     # STEP 2c: Research Trimming
@@ -853,6 +836,16 @@ def run_enhanced_pipeline(
         master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker,
                                      writer_mode=writer_prompt)
         master_editor.include_targum = targum   # Session 391: synthesis discovery and the writer alike
+        # Session 394: what the methods page reports about the Targum
+        tracker.research.targum_verses = tracker.research.targum_english_verses = 0
+        if targum:
+            try:
+                from src.data_sources.targum import targum_by_verse
+                _tv = targum_by_verse(psalm_number)
+                tracker.research.targum_verses = len(_tv)
+                tracker.research.targum_english_verses = sum(1 for _, en in _tv.values() if en)
+            except Exception as e:
+                logger.warning(f"Could not count the Targum verses for the methods page: {e}")
 
         # STEP 3.5 (Session 347): Cross-verse synthesis discovery sidecar.
         # Produces a calibrated observation list that gets spliced into the writer
@@ -933,8 +926,6 @@ def run_enhanced_pipeline(
                 # the slot would be an un-A/B'd delta to the arm-E template.
                 insights_file=None,
                 psalm_number=psalm_number,
-                reader_questions_file=None if (exclude_questions or skip_questions) else (reader_questions_file if reader_questions_file.exists() else None),
-                suppress_questions=(exclude_questions or skip_questions),
                 synthesis_discovery_file=synthesis_discovery_file,
             )
             
@@ -947,28 +938,6 @@ def run_enhanced_pipeline(
             with open(edited_verses_file, 'w', encoding='utf-8') as f:
                 f.write(result['verse_commentary'])
                 
-            # Handle reader questions (only save if questions are enabled)
-            if not exclude_questions and not skip_questions and result.get('reader_questions'):
-                refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-                questions_text = result['reader_questions']
-                questions = []
-                for line in questions_text.strip().split('\n'):
-                    line = line.strip()
-                    match = re.match(r'^(\d+)\.\s+(.+)$', line)
-                    if match:
-                        q = match.group(2).strip()
-                        if q and len(q) > 10:
-                            questions.append(q)
-
-                if questions:
-                    with open(refined_q_file, 'w', encoding='utf-8') as f:
-                        json.dump({
-                            'psalm_number': psalm_number,
-                            'curated_questions': questions,
-                            'source': 'master_writer_refined'
-                        }, f, ensure_ascii=False, indent=2)
-                    logger.info(f"Extracted {len(questions)} refined reader questions")
-
             # Track output
             editor_output = result.get('introduction', '') + "\n\n" + result.get('verse_commentary', '')
             tracker.track_step_output("master_editor", editor_output)
@@ -1295,14 +1264,8 @@ def run_enhanced_pipeline(
         from src.utils.document_generator import DocumentGenerator, export_pdf, writer_reasoning_parts
         
         try:
-            if exclude_questions or skip_questions:
-                q_file = None
-            else:
-                refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-                q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
-
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file,
-                                    docx_output_file, q_file,
+                                    docx_output_file,
                                     appendix_parts=writer_reasoning_parts(psalm_number))
             gen.generate()
             # Session 387: a print-ready PDF beside the DOCX (Word via COM; skipped where unavailable)
@@ -1396,14 +1359,11 @@ if __name__ == "__main__":
                        help="Model for the cross-verse synthesis sidecar "
                             "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-5-5). "
                             "Deliberately independent of --master-editor-model.")
-    # Session 280: questions are SKIPPED by default.
-    # --include-* opts back in; --skip-* remains for backward compat.
-    parser.add_argument("--skip-questions", action="store_true",
-                       help="(Default behavior) Skip question curation; use existing file if present")
-    parser.add_argument("--include-questions", action="store_true",
-                       help="Enable question curation (overrides default skip)")
-    parser.add_argument("--exclude-questions", action="store_true",
-                       help="Skip question curation and exclude from writer/doc even if file exists")
+    # Session 394: reader questions are gone (off by default since S280). Accepted so existing
+    # invocations keep working; --include-questions warns, as --include-insights does.
+    parser.add_argument("--skip-questions", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--exclude-questions", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--include-questions", action="store_true", help=argparse.SUPPRESS)
     # Session 374: the Insight Extractor was removed from the pipeline. These are
     # accepted so existing invocations and scripts keep working; --skip/--exclude
     # are now the only behaviour, so they are silent no-ops. --include-insights
@@ -1423,7 +1383,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
     parser.add_argument("--gpt-5-4-macro", action="store_true", help="Use GPT-5.4 for Macro Analyst")
     parser.add_argument("--gpt-5-4-insight", action="store_true", help=argparse.SUPPRESS)  # Session 374: insight extractor removed; accepted, ignored
-    parser.add_argument("--gpt-5-4-question", action="store_true", help="Use GPT-5.4 for Question Curator")
+    parser.add_argument("--gpt-5-4-question", action="store_true", help=argparse.SUPPRESS)  # Session 394: question curator removed; accepted, ignored
     parser.add_argument("--gpt-5-4-copy", action="store_true", help="Use GPT-5.4 for Copy Editor")
     parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
     parser.add_argument("--haiku-filter", action="store_true",
@@ -1475,8 +1435,9 @@ if __name__ == "__main__":
     if not args.output_dir:
         args.output_dir = f"output/psalm_{args.psalm_number}"
 
-    # Resolve include/skip logic: --include-* overrides the default skip
-    effective_skip_questions = not args.include_questions  # default: True (skipped)
+    if args.include_questions:
+        print("WARNING: --include-questions has no effect. Reader questions were removed in "
+              "Session 394 (off by default since Session 280).")
 
     # Session 374: the Insight Extractor is gone. Say so instead of ignoring it.
     if args.include_insights:
@@ -1498,13 +1459,11 @@ if __name__ == "__main__":
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
     print(f"Beta Reader: {'ON' if args.beta_reader else 'OFF (default since S372)'}")
-    print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
     # Session 367: the GPT default moved gpt-5.4 -> gpt-5.6-terra (same tier,
     # same price). The --gpt-5-4-* flags keep their names and now act as
     # "pin back to the pre-367 model" escape hatches.
     macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else MacroAnalyst.DEFAULT_MODEL
-    question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.6-terra"
     # Session 368: the copy editor is the one GPT agent NOT on Terra — Terra
     # overreaches as an editor (docs/plans/COPY_EDITOR_TERRA_FINDINGS.md), so it
     # follows CopyEditor.DEFAULT_MODEL rather than the Terra default above.
@@ -1516,8 +1475,6 @@ if __name__ == "__main__":
         print(f"Override: Master Writer using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_macro:
         print(f"Override: Macro Analyst using GPT-5.4")
-    if args.gpt_5_4_all or args.gpt_5_4_question:
-        print(f"Override: Question Curator using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_copy:
         print(f"Override: Copy Editor using GPT-5.4")
     print()
@@ -1539,13 +1496,10 @@ if __name__ == "__main__":
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
         synthesis_discovery_model=args.synthesis_discovery_model,
-        skip_questions=effective_skip_questions,
-        exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         skip_lit_echoes=args.skip_lit_echoes,
         echoes_mode=args.echoes,
         macro_model=macro_mdl,
-        question_model=question_mdl,
         copy_model=copy_mdl,
         synthesis_discovery=not args.skip_synthesis_discovery,
         reuse_synthesis_discovery=args.reuse_synthesis_discovery,

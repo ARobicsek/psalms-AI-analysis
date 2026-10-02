@@ -7,11 +7,12 @@ would raise on its own:
    just the V4 template plus its directive section. `str.format()` ignores extra
    kwargs, so a half-finished removal is invisible at runtime.
 
-2. The Session-347 cross-verse observations block still splices. Its anchor used to be
-   the framework heading, and a missing anchor only logs a warning — so removing the
-   heading could drop ~$1.50/psalm of synthesis discovery without anything failing.
-   The SI pipeline had its own hand-copied duplicate of the splice, which is exactly
-   how it came to drift; the splice is now inherited, and that is asserted below.
+2. The Session-347 cross-verse observations still reach the writer. Their anchor used to
+   be the framework heading (then, from S379, the reader-questions heading), and a missing
+   anchor only logged a warning, so removing a heading could drop ~$1.50/psalm of synthesis
+   discovery without anything failing. Session 394 replaced the anchor with a template SLOT,
+   {cross_verse_observations}, which .format() cannot skip. The SI pipeline once had its own
+   hand-copied duplicate of the splice; the block is inherited, and that is asserted below.
 """
 
 import re
@@ -22,7 +23,7 @@ from src.utils.research_trimmer import ResearchTrimmer
 
 FRAMEWORK_HEADING = "### ANALYTICAL FRAMEWORK (poetic conventions reference)"
 OBSERVATIONS_HEADING = "### CROSS-VERSE OBSERVATIONS"
-READER_QUESTIONS_ANCHOR = "### READER QUESTIONS (initial questions)"
+SLOT = "{cross_verse_observations}"
 
 
 # ---------------------------------------------------------------------------
@@ -41,10 +42,22 @@ def test_si_template_is_v4_plus_the_directive_only():
     assert len(MASTER_WRITER_PROMPT_SI) == len(MASTER_WRITER_PROMPT_V4) + len(SI_SECTION)
 
 
-def test_reader_questions_anchor_survives_as_the_splice_target():
-    """The fallback anchor must exist in both templates — it is now the live one."""
+def test_both_templates_have_the_observations_slot_and_no_reader_questions():
+    """Session 394: one slot in each template; reader questions are gone from both."""
     for template in (MASTER_WRITER_PROMPT_V4, MASTER_WRITER_PROMPT_SI):
-        assert template.count(READER_QUESTIONS_ANCHOR) == 1
+        assert template.count(SLOT) == 1
+        assert "READER QUESTIONS" not in template.upper()
+        assert "{reader_questions}" not in template
+        assert "Questions for the Reader" not in template
+
+
+def test_a_template_formatted_without_the_slot_fails_loudly():
+    """The point of a slot over an anchor: it cannot go missing in silence."""
+    import pytest
+    with pytest.raises(KeyError):
+        MASTER_WRITER_PROMPT_V4.format(psalm_number=1, psalm_text="", macro_analysis="",
+                                       micro_analysis="", research_bundle="",
+                                       phonetic_section="", curated_insights="")
 
 
 # ---------------------------------------------------------------------------
@@ -67,47 +80,48 @@ class _EditorSI(MasterEditorSI):
         self._cross_verse_observations = None
 
 
-def test_splice_is_shared_not_duplicated():
-    """MasterEditorSI must INHERIT the splice. A second copy is what let the SI
+def test_observations_block_is_shared_not_duplicated():
+    """MasterEditorSI must INHERIT the block. A second copy is what let the SI
     pipeline keep the old anchor and the pre-Session-371 guidance."""
-    assert "_splice_cross_verse_observations" not in vars(MasterEditorSI)
+    assert "_cross_verse_observations_block" not in vars(MasterEditorSI)
     assert (
-        MasterEditorSI._splice_cross_verse_observations
-        is MasterEditor._splice_cross_verse_observations
+        MasterEditorSI._cross_verse_observations_block
+        is MasterEditor._cross_verse_observations_block
     )
 
 
-def test_observations_splice_into_a_prompt_with_no_framework_heading():
-    for editor in (_Editor(), _EditorSI()):
+def _fill(template, block):
+    return template.format(psalm_number=1, psalm_text="TEXT", macro_analysis="MACRO",
+                           micro_analysis="MICRO", research_bundle="BUNDLE", phonetic_section="PHON",
+                           curated_insights="INSIGHTS", cross_verse_observations=block,
+                           special_instruction="SI")
+
+
+def test_observations_fill_the_slot_after_key_insights():
+    for editor, template in ((_Editor(), MASTER_WRITER_PROMPT_V4), (_EditorSI(), MASTER_WRITER_PROMPT_SI)):
         editor._cross_verse_observations = "OBSERVATION ONE\nOBSERVATION TWO"
-        prompt = f"### KEY INSIGHTS\nstuff\n\n{READER_QUESTIONS_ANCHOR}\n1. a question\n"
-        out = editor._splice_cross_verse_observations(prompt)
-        assert OBSERVATIONS_HEADING in out
-        assert "OBSERVATION ONE" in out
-        assert out.index(OBSERVATIONS_HEADING) < out.index(READER_QUESTIONS_ANCHOR)
+        block = editor._cross_verse_observations_block()
+        assert block.startswith(OBSERVATIONS_HEADING) and "OBSERVATION ONE" in block
+        out = _fill(template, block)
+        # The layout the old anchor-and-strip produced, byte for byte (verified on the full
+        # Ps 77 / Ps 78 prompts in Session 394): insights, blank line, block, then the rule.
+        assert "### KEY INSIGHTS TO INCORPORATE\nINSIGHTS\n\n" + block + "\n---\n" in out
 
 
-def test_splice_carries_the_session_371_guidance():
-    """The SI copy still said "do NOT structure your commentary around them", the
+def test_block_carries_the_session_371_guidance():
+    """The SI copy once said "do NOT structure your commentary around them", the
     wording that suppressed the best idea in the Ps 71 dossier under Opus 5."""
     editor = _EditorSI()
     editor._cross_verse_observations = "OBS"
-    out = editor._splice_cross_verse_observations(f"{READER_QUESTIONS_ANCHOR}\n")
+    out = editor._cross_verse_observations_block()
     assert "do NOT structure your commentary around them" not in out
     assert "SHOULD carry your essay" in out
 
 
-def test_no_observations_leaves_the_prompt_byte_identical():
+def test_no_observations_leaves_an_empty_slot():
     editor = _Editor()
-    prompt = f"### KEY INSIGHTS\nstuff\n\n{READER_QUESTIONS_ANCHOR}\n"
-    assert editor._splice_cross_verse_observations(prompt) == prompt
-
-
-def test_missing_anchor_warns_and_returns_the_prompt_unchanged():
-    editor = _Editor()
-    editor._cross_verse_observations = "OBS"
-    prompt = "a prompt with no anchor at all"
-    assert editor._splice_cross_verse_observations(prompt) == prompt
+    assert editor._cross_verse_observations_block() == ""
+    assert "### KEY INSIGHTS TO INCORPORATE\nINSIGHTS\n\n\n---\n" in _fill(MASTER_WRITER_PROMPT_V4, "")
 
 
 # ---------------------------------------------------------------------------

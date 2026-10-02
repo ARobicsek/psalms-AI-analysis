@@ -102,9 +102,7 @@ class MasterEditorSI(MasterEditor):
         research_file: Path,
         insights_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
-        reader_questions_file: Optional[Path] = None,
         special_instruction: str = None,
-        suppress_questions: bool = False,
         synthesis_discovery_file: Optional[Path] = None,
     ) -> Dict[str, str]:
         """
@@ -112,10 +110,9 @@ class MasterEditorSI(MasterEditor):
         Overrides MasterEditor.write_commentary.
 
         When synthesis_discovery_file is provided and exists, its contents are
-        spliced into the writer prompt as a CROSS-VERSE OBSERVATIONS input
-        block (same mechanism as MasterEditor — see Session 347).
+        placed in the writer prompt as a CROSS-VERSE OBSERVATIONS input block
+        (same mechanism as MasterEditor — see Session 347).
         """
-        self._suppress_questions = suppress_questions
         self.special_instruction = special_instruction
         self._cross_verse_observations = None
         if synthesis_discovery_file is not None:
@@ -165,23 +162,6 @@ class MasterEditorSI(MasterEditor):
 
         phonetic_section = self._format_phonetic_section(micro_analysis)
 
-        reader_questions = "[No reader questions provided]"
-        if reader_questions_file and Path(reader_questions_file).exists():
-           try:
-               with open(reader_questions_file, 'r', encoding='utf-8') as f:
-                   import json
-                   rq_data = json.load(f)
-               questions = rq_data.get('curated_questions', [])
-               if questions:
-                   reader_questions = "\\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
-           except Exception as e:
-               self.logger.warning(f"Could not load reader questions: {e}")
-
-        if not suppress_questions and reader_questions == "[No reader questions provided]":
-             reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
-             if reader_questions_list:
-                 reader_questions = "\\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
-
         self.logger.info(f"Writing (SI) commentary for Psalm {psalm_number}")
 
         return self._perform_writer_synthesis(
@@ -195,7 +175,6 @@ class MasterEditorSI(MasterEditor):
             # Session 379: the framework block is gone from the writer prompt and
             # this override ignores the value, so nothing is loaded for it any more.
             analytical_framework="",
-            reader_questions=reader_questions,
             is_college=False
         )
 
@@ -211,9 +190,8 @@ class MasterEditorSI(MasterEditor):
         # Session 379: UNUSED — see MasterEditor._perform_writer_synthesis. The SI
         # prompt is derived from V4 by a .replace() that does not touch the INPUTS,
         # so removing the block from V4 removed it here too. Still accepted because
-        # MasterEditorV2.write_college_commentary passes it by keyword.
+        # write_commentary above passes it by keyword.
         analytical_framework: str,
-        reader_questions: str,
         is_college: bool = False  # Kept for backward compat — ignored in V4
     ) -> Dict[str, str]:
         """Override to use SI V4 prompt with injected special instruction."""
@@ -236,15 +214,10 @@ class MasterEditorSI(MasterEditor):
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
             curated_insights=insights_text,
-            reader_questions=reader_questions,
+            cross_verse_observations=self._cross_verse_observations_block(label="SI writer"),
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
 
-        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar).
-        # Session 379: this used to be a hand-copied duplicate of the MasterEditor
-        # splice and had drifted from it twice — the old single anchor, and the
-        # pre-Session-371 guidance. Now inherited, so one edit covers both pipelines.
-        prompt = self._splice_cross_verse_observations(prompt, label="SI writer")
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")

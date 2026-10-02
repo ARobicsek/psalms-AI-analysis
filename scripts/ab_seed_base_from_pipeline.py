@@ -15,11 +15,10 @@ WHEN IT IS VALID
 ----------------
 Only when the pipeline fed the writer exactly what the harness would. Both pass
 `insights_file=None` unconditionally, and both pass the synthesis-discovery file when
-it exists, so the single divergence is reader questions: the pipeline passes
-`psalm_NNN_reader_questions.json` when present, the harness always passes None. This
-script REFUSES to seed when that file exists, rather than producing an arm that
-differs from its comparators by a second variable. That is the whole failure mode
-this project keeps rediscovering — a comparison with two variables in it.
+it exists. (Until Session 394 reader questions were a divergence: the pipeline
+stripped them and the harness, passing suppress_questions=False, inserted the macro and
+micro questions instead. Session 394 removed reader questions from the pipeline, so that
+divergence is gone with them.)
 
 It also refuses when the saved writer response is older than the dossier, which means
 the response came from a different dossier than the one the other arms will read.
@@ -78,16 +77,7 @@ def main() -> int:
     problems = []
     resp_mtime = response_file.stat().st_mtime
 
-    # Divergence 1: reader questions. See module docstring.
-    rq = out / f"psalm_{pn:03d}_reader_questions.json"
-    if rq.exists():
-        problems.append(
-            f"{rq.name} exists — the pipeline passed it to the writer but "
-            "ab_writer_prompts.py passes reader_questions_file=None, so this arm would "
-            "differ from the others by reader questions AS WELL AS the prompt delta."
-        )
-
-    # Divergence 2: THE DEBUG RESPONSE FILE IS A SINGLE SLOT, overwritten by every
+    # THE DEBUG RESPONSE FILE IS A SINGLE SLOT, overwritten by every
     # writer call including each A/B arm. Seed BEFORE running any arm. Caught in
     # this script's own self-test, where seeding after arm F had run silently filled
     # `base` with arm F's text — an A/B whose two arms are the same arm, which is the

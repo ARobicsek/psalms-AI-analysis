@@ -26,12 +26,12 @@ if __name__ == '__main__':
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
     from src.utils.divine_names_modifier import DivineNamesModifier
-    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .logger import get_logger
     from .divine_names_modifier import DivineNamesModifier
-    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 
 
 def _commentator_label(name: str) -> str:
@@ -207,6 +207,9 @@ class CommentaryFormatter:
         # Rabbi Sacks references
         sacks_count = research_data.get('sacks_references_count', 0)
         lines.append(f"- **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}")
+        # Session 394: reception + Targum (shared with the DOCX renderers)
+        for label, value in reception_methods_lines(research_data):
+            lines.append(f"- **{label}**: {value}")
 
         # Deep Web Research status
         deep_research_str = deep_research_methods_value(research_data)
@@ -256,8 +259,6 @@ class CommentaryFormatter:
                 lines.append(f"**Figurative Curator**: {agent_models.get('figurative_curator')}")
             if agent_models.get('insight_extractor'):
                 lines.append(f"**Insights Extraction**: {agent_models.get('insight_extractor')}")
-            if agent_models.get('question_curator'):
-                lines.append(f"**Question Generator**: {agent_models.get('question_curator')}")
             if agent_models.get('synthesis_discovery'):
                 lines.append(f"**Cross-Verse Synthesis Discovery**: {agent_models.get('synthesis_discovery', 'N/A')}")
 

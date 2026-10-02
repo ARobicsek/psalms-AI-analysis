@@ -29,12 +29,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 
 
 def add_page_number(paragraph):
@@ -78,9 +78,7 @@ class CombinedDocumentGenerator:
     def __init__(self, psalm_num: int,
                  main_intro_path: Path, main_verses_path: Path,
                  college_intro_path: Path, college_verses_path: Path,
-                 stats_path: Path, output_path: Path,
-                 reader_questions_path: Path = None,
-                 college_questions_path: Path = None):
+                 stats_path: Path, output_path: Path):
         self.psalm_num = psalm_num
         self.main_intro_path = main_intro_path
         self.main_verses_path = main_verses_path
@@ -88,8 +86,6 @@ class CombinedDocumentGenerator:
         self.college_verses_path = college_verses_path
         self.stats_path = stats_path
         self.output_path = output_path
-        self.reader_questions_path = reader_questions_path
-        self.college_questions_path = college_questions_path
         self.document = Document()
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
@@ -1261,6 +1257,10 @@ class CombinedDocumentGenerator:
         # --- Models Used --- (This section will be built from the markdown in the generate() method)
         models_used_str = "### Models Used"
 
+        # Session 394: reception + Targum lines, shared with the other two renderers
+        reception_block = "".join(f"**{label}**: {value}\n"
+                                  for label, value in reception_methods_lines(research_data))
+
         summary = f"""
 Methodological & Bibliographical Summary
 
@@ -1273,7 +1273,7 @@ Methodological & Bibliographical Summary
 **Concordance Searches**: {concordance_summary}
 **Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
-**Similar Psalms Analyzed**: {related_psalms_str}
+{reception_block}**Similar Psalms Analyzed**: {related_psalms_str}
 **Deep Web Research**: {deep_research_str}
 **Literary Echoes Research**: {literary_echoes_str}
 **Master Editor Prompt Size**: {prompt_chars_str}
@@ -1333,31 +1333,6 @@ Methodological & Bibliographical Summary
         self.document.add_paragraph() # Add a paragraph to attach the break to
         self.document.add_page_break()
 
-        # 2b. Add Questions for the Reader (if available)
-        if self.reader_questions_path and self.reader_questions_path.exists():
-            try:
-                questions_data = json.loads(self.reader_questions_path.read_text(encoding='utf-8'))
-                questions = questions_data.get('curated_questions', [])
-                if questions:
-                    self.document.add_heading('Questions for the Reader', level=2)
-                    
-                    # Add introductory italic text
-                    intro_p = self.document.add_paragraph(style='BodySans')
-                    intro_run = intro_p.add_run('Before reading this commentary, consider the following questions:')
-                    intro_run.italic = True
-                    
-                    # Add each question as a numbered paragraph
-                    for i, question in enumerate(questions, 1):
-                        q_p = self.document.add_paragraph(style='BodySans')
-                        q_p.add_run(f"{i}. ").bold = True
-                        self._process_markdown_formatting(q_p, question, set_font=False)
-                    
-                    # Add spacing after questions
-                    self.document.add_paragraph()
-            except Exception as e:
-                # Log but don't fail if questions can't be loaded
-                print(f"Warning: Could not load reader questions: {e}")
-
         # 3. Add Main Introduction
         self.document.add_heading('Introduction', level=2)
         main_intro_content = self.main_intro_path.read_text(encoding='utf-8')
@@ -1406,36 +1381,6 @@ Methodological & Bibliographical Summary
                             run.italic = True
                 else:
                     self._add_paragraph_with_markdown(para, style='BodySans')
-
-        # 4. Add College Questions (if available) - before college intro
-        if self.college_questions_path and self.college_questions_path.exists():
-            try:
-                questions_data = json.loads(self.college_questions_path.read_text(encoding='utf-8'))
-                questions = questions_data.get('curated_questions', [])
-                if questions:
-                    # Add college questions heading with green "College" label
-                    q_heading = self.document.add_heading('', level=2)
-                    q_heading.add_run('Questions for the Reader - ')
-                    college_label = q_heading.add_run('College')
-                    college_label.font.color.rgb = RGBColor(0, 128, 0)  # Green color
-                    q_heading.add_run(' version')
-                    
-                    # Add introductory italic text
-                    intro_p = self.document.add_paragraph(style='BodySans')
-                    intro_run = intro_p.add_run('Before reading this commentary, consider the following questions:')
-                    intro_run.italic = True
-                    
-                    # Add each question as a numbered paragraph
-                    for i, question in enumerate(questions, 1):
-                        q_p = self.document.add_paragraph(style='BodySans')
-                        q_p.add_run(f"{i}. ").bold = True
-                        self._process_markdown_formatting(q_p, question, set_font=False)
-                    
-                    # Add spacing after questions
-                    self.document.add_paragraph()
-            except Exception as e:
-                # Log but don't fail if questions can't be loaded
-                print(f"Warning: Could not load college reader questions: {e}")
 
         # 5. Add College Introduction with green "College" in heading
         college_heading = self.document.add_heading('', level=2)
@@ -1748,8 +1693,6 @@ Methodological & Bibliographical Summary
                 if 'figurative_curator' in model_usage:
                     summary_text += f"\n**Figurative Curator**: {model_usage.get('figurative_curator', 'N/A')}"
                 
-                if 'question_curator' in model_usage:
-                    summary_text += f"\n**Question Generator**: {model_usage.get('question_curator', 'N/A')}"
                 
                 if 'insight_extractor' in model_usage:
                     summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"

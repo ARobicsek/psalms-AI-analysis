@@ -90,8 +90,6 @@ def run_arm(psalm: int, model: str, files: dict, ab_dir: Path, logger) -> dict:
     result = editor.write_commentary(
         psalm_number=psalm,
         insights_file=None,
-        reader_questions_file=None,
-        suppress_questions=False,
         **files,
     )
     elapsed = time.time() - t0
