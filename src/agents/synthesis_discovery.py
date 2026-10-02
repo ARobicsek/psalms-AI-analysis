@@ -669,6 +669,11 @@ class SynthesisDiscoveryAgent:
                     final = stream.get_final_message()
                 stop.set()
                 usage = self._bill(final.usage)
+                # Session 394: Ps 78 returned 9,179 output tokens and 0 chars of text, and the
+                # log could not say why. Name the stop reason; a refusal says its category.
+                if final.stop_reason not in ("end_turn", None):
+                    self.logger.warning(f"[{tag}] stop_reason={final.stop_reason} "
+                                        f"stop_details={getattr(final, 'stop_details', None)}")
                 if final.stop_reason == "max_tokens":
                     self.logger.error(
                         f"[{tag}] OUTPUT CUT OFF at max_tokens={stream_kwargs['max_tokens']:,}: "
@@ -683,7 +688,8 @@ class SynthesisDiscoveryAgent:
                 self.logger.info(
                     f"[{tag}] done in {dt:.0f}s - in={usage['input']:,} cache read={usage['cache_read']:,} "
                     f"cache write={usage['cache_write']:,} out={usage['output']:,} "
-                    f"(~{think_chars // 4:,} thinking) | response {len(text):,} chars"
+                    f"(~{think_chars // 4:,} thinking) | response {len(text):,} chars | "
+                    f"stop_reason={final.stop_reason}"
                 )
                 return text, usage, think_chars
 

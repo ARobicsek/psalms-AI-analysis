@@ -907,6 +907,15 @@ def run_enhanced_pipeline(
                     f"Synthesis discovery failed: {e}",
                     exc_info=True,
                 )
+                # Session 394: bill what the failed stage spent and keep the record, so that
+                # --resume continues it (Ps 78 lost ~$7 of earlier stages here).
+                _record_stage("synthesis discovery (failed)", _snap)
+                try:
+                    (output_path / f"psalm_{psalm_number:03d}_cost.json").write_text(
+                        json.dumps(cost_tracker.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8")
+                    logger.info(f"Saved the cost record (${cost_tracker.get_total_cost():.4f}) before exiting")
+                except Exception as save_err:
+                    logger.warning(f"Could not save the cost record: {save_err}")
                 sys.exit(1)
         else:
             logger.info("[STEP 3.5] Skipping Cross-Verse Synthesis Discovery (--skip-synthesis-discovery)")
