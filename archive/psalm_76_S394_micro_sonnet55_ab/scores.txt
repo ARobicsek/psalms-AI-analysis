@@ -1,0 +1,72 @@
+PSALM 76 MICRO ARMS (new ground: 4.6 rows vs the other two 4.6 runs; others vs all three)
+
+                            4.6 Sep17  4.6 Sep24  4.6 Sep30   S5 xhigh     S5 max  S5.5 high S5.5 xhigh
+-------------------------------------------------------------------------------------------------------
+cost $                          0.530      0.656      0.607      0.345      1.208      0.191      0.433
+output tokens                  30,841     38,032     35,726     29,604    114,932     14,395     37,857
+wall clock (min)                    —          —          —          —          —        1.7        5.0
+lexical insights                   29         36         34         43         51         40         46
+lexical notes (chars)          13,328     19,921     17,507      7,823     11,557      7,563     10,745
+chars per insight                 459        553        514        181        226        189        233
+figurative flags                   27         31         31         11         26         24         35
+interesting questions              10         11         10         12         16          8         11
+verse commentary (chars)        4,733      5,471      5,167      3,351      3,945      2,274      3,742
+JSON bytes                     37,045     47,215     41,338     27,523     36,951     24,729     33,056
+new phrase targets                  0          5          0          5         10          1          4
+
+figurative flags per verse:
+  4.6 Sep17  [0, 0, 2, 2, 2, 3, 3, 3, 2, 2, 3, 2, 3]
+  4.6 Sep24  [0, 0, 3, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3]
+  4.6 Sep30  [0, 1, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3]
+  S5 xhigh   [0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1]
+  S5 max     [1, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 1, 2]
+  S5.5 high  [0, 2, 2, 2, 2, 3, 2, 2, 2, 1, 2, 2, 2]
+  S5.5 xhigh [0, 2, 3, 3, 3, 4, 3, 3, 3, 2, 3, 3, 3]
+
+=== S5 xhigh: 5 new phrase targets ===
+  v1: מִזְמוֹר...שִׁיר
+      Double genre-label 'psalm'+'song' co-occurs ~9x in Psalter (30,48,65-68,75,76,83,87,108); possible composite/intensified liturgical genre marker, not mere redundancy.
+  v1: πρός τὸν Ἀσσύριον (LXX)
+      Absent from MT entirely. Later interpretive gloss tying psalm to Sennacherib narrative (2 Kgs 19//Isa 37); demonstrates earliest historicizing reception rather than textual variant.
+  v2: בִּיהוּדָה...בְּיִשְׂרָאֵל
+      Judah//Israel merism = whole covenant people; chiastic arrangement verb-location // adjective-location(reversed) creates envelope structure within single verse.
+  v6: לֹא־מָצְאוּ...יְדֵיהֶם
+      Idiom for utter incapacity/helplessness; 'hands' = agency/instrument motif, victory achieved without human counter-action.
+  v11: חֲמַת...חֵמֹת
+      Polyptoton — same root ח.מ.ה 'heat/wrath' in construct singular then plural — deliberate repetition/intensification device.
+
+=== S5 max: 10 new phrase targets ===
+  v1: מִזְמ֖וֹר...שִֽׁיר
+      Double genre-label mizmor+shir (cf. Pss 65-68,83,87-88,92,108); Asaph-attribution לְאָסָף interposed BETWEEN the two genre terms — same interrupted pattern in Ps 65:1, likely fixed convention not unique disruption
+  v1: πρός τὸν Ἀσσύριον
+      LXX-only plus, no MT counterpart; earliest datable link of Ps 76 to Sennacherib's 701 BCE campaign; possibly reflects variant Vorlage, exegetical gloss, or association via shared lion-den/prey vocabulary w/ Nah 2:12-13's Assyria oracle (see vv.3,5)
+  v2: בִּיהוּדָ֣ה...בְּ֝יִשְׂרָאֵ֗ל
+      Judah named BEFORE Israel (reverses common order) — southern/Zion-centric perspective privileging Judah as revelation-site, broadened to whole-nation merism
+  v3: וַיְהִ֣י
+      Vav-consecutive narrative form (wayyiqtol) — unusual amid hymn's timeless perfects/participles; implies specific 'coming-to-pass,' historicizing tone (echo of Davidic capture of Jebusite Zion, 2 Sam 5, as election-event)
+  v4: סֶֽלָה
+      First of two Selahs (v.4, v.10), structural marker closing opening victory-strophe (vv.2-4)
+  v5: ὄρους αἰωνίου (LXX)
+      Diverges from MT in BOTH lexeme ('prey' vs 'eternal') and number (pl. mountains vs sg. mountain) — possibly reflects Vorlage הַרְרֵי־עַד, or theological smoothing toward Zion-as-eternal-mountain doctrine (cf. Ps 48) over wild predator-terrain
+  v6: וְלֹֽא־מָצְא֖וּ...יְדֵיהֶֽם
+      Idiom for total helplessness, possibly unique phrasing — warriors cannot even locate own hands; contrast general 'hands grow feeble' idiom (Isa 13:7; Ezek 7:17, 21:12)
+  v10: סֶֽלָה
+      Closes second major unit (vv.5-10), paired w/ v.4 Selah (closing vv.2-4) — bipartite liturgical structure
+  v11: ἐγκατάλειμμα ἐνθυμίου ἑορτάσει σοι (LXX)
+      ἑορτάσει implies LXX read תַּחְגֹּר as root חגג (festival) not חגר (gird); ἐνθύμιος ('passionate/feeling,' from θυμός) softens חֵמָה from hostile 'wrath' toward generic intense feeling, defusing paradox of 'wrath that praises'
+  v13: {פ}
+      Masoretic petuchah (open paragraph) marker closing psalm — paratextual scribal sense of major structural closure
+
+=== S5.5 high: 1 new phrase targets ===
+  v1: ᾠδὴ πρὸς τὸν Ἀσσύριον
+      LXX-only addition. Reads the psalm as Sennacherib commentary (2 Kgs 19:35). It shapes reception of v.4 and vv.6-7 as the destruction of the army.
+
+=== S5.5 xhigh: 4 new phrase targets ===
+  v1: ᾠδὴ πρὸς τὸν Ἀσσύριον
+      LXX-only tag, a unique historicizing title linking the psalm to Sennacherib/701 (2 Kgs 19:35). Nahum echoes inside the psalm (v3 me'onah, v5 taref, v6 namu) lend it intertextual support.
+  v3: ויהי
+      Wayyiqtol 'and it became' — narrative of an event or settling, not mere state. Opens the verse as report-form, contrasting hymnic participles in v2. Possible echo of an enthronement/taking-up-residence moment.
+  v4: סלה
+      Selah 1 — closes first strophe (vv2-4). With Selah at v10, psalm divides 3 / 6 / 3 verses (2-4 | 5-10 | 11-13).
+  v10: סלה
+      Selah 2 closes central unit (vv5-10); psalm structure 3-6-3.

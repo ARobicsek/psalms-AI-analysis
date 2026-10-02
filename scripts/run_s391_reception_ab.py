@@ -172,7 +172,8 @@ def main():
             else:
                 fa["macro"].parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(prod_macro, fa["macro"])
-                if run_arm("A", psalm, A, [], args.delay, args.skip_copy_edit) != 0:
+                if run_arm("A", psalm, A, ["--no-reception", "--no-targum", "--no-fact-check"],  # S394: these became defaults
+                           args.delay, args.skip_copy_edit) != 0:
                     sys.exit("Arm A failed; arm B needs its bundle. Fix and re-run.")
                 keep_shared(A)
         if "B" in args.arms:
@@ -200,7 +201,7 @@ def main():
                              "ceiling in both arms first.")
                 if (A / f"psalm_{psalm}" / "echoes").is_dir():
                     shutil.copytree(A / f"psalm_{psalm}" / "echoes", B / f"psalm_{psalm}" / "echoes", dirs_exist_ok=True)
-                code = run_arm("B", psalm, B, ["--skip-micro", "--skip-lit-echoes", "--reception", "--targum"],
+                code = run_arm("B", psalm, B, ["--skip-micro", "--skip-lit-echoes", "--reception", "--targum", "--no-fact-check"],
                                args.delay, args.skip_copy_edit)
                 keep_shared(B)
                 if code != 0:

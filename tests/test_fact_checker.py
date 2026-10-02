@@ -323,12 +323,13 @@ def test_combine_supplementary():
     assert combine_supplementary("\nA", "B") == "A\n\nB"
 
 
-def test_fact_check_is_off_by_default_in_the_pipeline():
-    import inspect
+def test_fact_check_is_on_by_default_in_the_pipeline():
+    """Session 394: the author made the fact check the default (was OFF since S385);
+    --no-fact-check turns it off."""
     src = (Path(__file__).resolve().parent.parent / "scripts" / "run_enhanced_pipeline.py").read_text(encoding="utf-8")
-    assert "fact_check: bool = False" in src
-    assert 'parser.add_argument("--fact-check", action="store_true"' in src
-    # Without the flag the copy editor gets exactly the citation report, as before.
+    assert "fact_check: bool = True" in src
+    assert 'parser.add_argument("--fact-check", action=argparse.BooleanOptionalAction, default=True' in src
+    # Without it (--no-fact-check) the copy editor gets exactly the citation report, as before.
     assert "if fact_check else citation_fix_prompt" in src
     assert "if fact_check and not smoke_test and print_ready_file.exists():" in src
 

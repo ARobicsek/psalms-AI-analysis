@@ -1,0 +1,29 @@
+{
+  "calls": [
+    {
+      "stage": 1,
+      "was": {
+        "type": "enabled",
+        "budget_tokens": 32768
+      },
+      "effort_was": "max",
+      "now": {
+        "type": "adaptive"
+      },
+      "max_tokens": 128000,
+      "effort_now": "high"
+    },
+    {
+      "stage": 2,
+      "was": null,
+      "effort_was": null,
+      "now": {
+        "type": "between_tools"
+      },
+      "max_tokens": 16384,
+      "effort_now": "high"
+    }
+  ],
+  "stage1_seconds": 65,
+  "stage2_seconds": 36
+}

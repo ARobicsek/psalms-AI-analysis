@@ -1962,9 +1962,10 @@ class MasterEditorV2:
         # Load research bundle (with optional trimming)
         research_bundle_raw = self._load_text_file(research_file)
 
-        # Trim research bundle if needed (~350K chars max)
+        # Trim research bundle if needed (Session 394: ceiling scales with verse count)
+        from src.utils.research_trimmer import max_chars_for_psalm
         research_bundle, deep_research_removed, needs_gemini = self.research_trimmer.trim_bundle(
-            research_bundle_raw, max_chars=350000
+            research_bundle_raw, max_chars=max_chars_for_psalm(psalm_number)
         )
         self._deep_research_removed_for_space = deep_research_removed
         self.logger.info(f"Research bundle loaded: {len(research_bundle_raw)} -> {len(research_bundle)} chars")

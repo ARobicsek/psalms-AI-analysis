@@ -1,0 +1,937 @@
+{
+  "psalm_number": 77,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "על־ידותון (not ל־), with ketiv ידיתון / qere ידותון. The three Jeduthun psalms (39, 62, 77) all foreground silence or choked speech: 39:3 נאלמתי דומיה, 62:2 דומיה, 77:5 ולא אדבר. LXX Ἰδιθούν follows the ketiv-type spelling.",
+      "lexical_insights": [
+        {
+          "phrase": "על־ידותון",
+          "variants": [
+            "ידיתון",
+            "לידותון",
+            "ידותון"
+          ],
+          "notes": "Same ketiv/qere pattern in Pss 39:1, 62:1. Ps 39 has ל־, Pss 62 and 77 have על־. Possibilities: tune/mode, or Levitical guild head (1 Chr 16:41-42; 25:1-3). Name possibly from ידה ('praise/confess'), which suits lament-to-praise movement. Ketiv spelling begins ידי- ('my hand'), a possible unmarked echo of ידי (v.3) and the hand motif. Speculative."
+        },
+        {
+          "phrase": "למנצח",
+          "variants": [
+            "למנצחים",
+            "מנצח"
+          ],
+          "notes": "Root נצח carries 'perpetuity/preeminence', and the psalm later asks לנצח (v.9) whether God's hesed is finished. 'For the Leader' and 'forever' share a root, so a faint sound-frame. Possibly accidental."
+        },
+        {
+          "phrase": "לאסף",
+          "variants": [
+            "אסף",
+            "בני אסף"
+          ],
+          "notes": "Asaph collection (50, 73-83). Shares with Ps 73 the verbs אחז (73:23 / 77:5), חשב (73:16 / 77:6), and a היא-clause pivot (73:16 / 77:11)."
+        },
+        {
+          "phrase": "מזמור",
+          "variants": [
+            "מזמורים",
+            "זמרת"
+          ],
+          "notes": "'Psalm' (instrumental song) heads a psalm whose content is the inability to sing. Cf. נגינתי v.7 and Exod 15:2 זמרת יה."
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "",
+      "phonetic_transcription": "lam-nats-TSĒ-aḥ ʿal-yə-dhū-THŪN lə-'ā-SĀF miz-MŌR"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Staircase קולי אל־אלהים ×2. The opening is verbless ('my voice to God'), followed by cohortative ואצעקה, and the second colon turns to God as subject (והאזין). LXX aorist προσέσχε ('and He heeded me') reads the plea as already answered, whereas MT leaves hearing as hope.",
+      "lexical_insights": [
+        {
+          "phrase": "קולי אל־אלהים",
+          "variants": [
+            "קולי אל־אלוהים",
+            "קולו אל־אלהים",
+            "קולי אליך",
+            "בקולי"
+          ],
+          "notes": "Verbless, so the voice itself is the subject, almost detached from the speaker. Anadiplosis builds Ugaritic-style staircase. Frame with vv.18-19: human קול rising ↔ skies' קול נתנו and קול רעמך. Also אל־/אלי sound chain: אל־אלהים, אל־אלהים, אלי."
+        },
+        {
+          "phrase": "ואצעקה",
+          "variants": [
+            "אצעק",
+            "צעקתי",
+            "ויצעק",
+            "צעקתי אל־יהוה"
+          ],
+          "notes": "Cohortative of צעק, the cry of the oppressed (Exod 2:23; 14:10, an Exodus cry-word). The psalmist's cry mimics Israel's pre-redemption cry. LXX has the aorist ἐκέκραξα and 'Lord' (Κύριον) in the first colon."
+        },
+        {
+          "phrase": "והאזין אלי",
+          "variants": [
+            "האזינה",
+            "האזין",
+            "הַאֲזֵן",
+            "יאזין",
+            "האזנתי"
+          ],
+          "notes": "Pointing וְהַאֲזִין (patah) is not the regular weqatal 3ms (וְהֶאֱזִין); it looks imperative- or infinitive-like. NJPS 'that He may give ear'. Hiphil אזן takes אל־ ('toward me') rather than ל. Ps 80:2 has האזינה, answered structurally by the קול of vv.18-19."
+        }
+      ],
+      "figurative_analysis": [
+        "voice as autonomous agent travelling 'to' God",
+        "audition metaphor: God's ear as the object of petition"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "qō-LIY 'el-'e-lō-HIYM wə-'ets-ʿĀ-qāh qō-LIY 'el-'e-lō-HIYM wə-ha-'a-ZIYN 'ē-LĀY"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Tricolon with a grammatical crux: the subject of נִגְּרָה is ידי ('my hand was poured out'), which is odd. Lam 3:49 has עיני נגרה ולא תדמה מאין הפגות, so NJPS supplies '[my eyes]'. LXX (ταῖς χερσί μου νυκτὸς ἐναντίον αὐτοῦ) reads נגד ('before Him'). The closing מאנה הנחם is the exact Jer 31:15 idiom for Rachel's refusal.",
+      "lexical_insights": [
+        {
+          "phrase": "ביום צרתי",
+          "variants": [
+            "ביום צרה",
+            "ביום צר־לי",
+            "יום צרתי"
+          ],
+          "notes": "Standard distress formula (Pss 50:15 [Asaph], 86:7, 20:2). Here the response is דרשתי ('sought'), not קראתי ('called'). Day/night (ביום ... לילה) = merism of continuousness."
+        },
+        {
+          "phrase": "אדני דרשתי",
+          "variants": [
+            "דרשתי",
+            "אדרש",
+            "דרשו",
+            "דרש"
+          ],
+          "notes": "Divine name אדני; YHWH absent from entire psalm (Elohistic Psalter). דרש is deliberate cultic 'seeking'. LXX ἐξεζήτησα."
+        },
+        {
+          "phrase": "ידי",
+          "variants": [
+            "ידי",
+            "ידיך",
+            "ידו",
+            "ידינו"
+          ],
+          "notes": "Pointing separates ידי by a strong disjunctive from לילה (reading 'my hand' as the topic). Either the hand is stretched out in prayer (cf. Ps 88:10; 143:6) or the hand 'runs/flows'. Inaugurates the hand motif: ידי → ימין עליון (v.11) → זרוע (v.16) → ביד־משה ואהרן (v.21)."
+        },
+        {
+          "phrase": "נגרה",
+          "variants": [
+            "נגרו",
+            "נגר",
+            "הנגרים",
+            "ויגירהו"
+          ],
+          "notes": "Niphal נגר 'be poured out/flow' (2 Sam 14:14; Mic 1:4; Ps 63:11). Lam 3:49 pairs עיני נגרה with פוג-derived הפגות; cf. Lam 2:18 פוגת. Ps 77:3 shares both נגרה and פוג, suggesting dependence or a shared lament-formula. 'Hand' as subject may be a scribal or semantic displacement."
+        },
+        {
+          "phrase": "ולא תפוג",
+          "variants": [
+            "לא תפוג",
+            "ולא יפוג",
+            "הפגות",
+            "פוגת"
+          ],
+          "notes": "פוג = grow numb/slack/cease (Gen 45:26 ויפג לבו). Imperfect: continues without respite. LXX καὶ οὐκ ἠπατήθην ('I was not deceived') appears to misparse the verb."
+        },
+        {
+          "phrase": "מאנה הנחם נפשי",
+          "variants": [
+            "מאנה להנחם",
+            "מאן להתנחם",
+            "וימאן להתנחם",
+            "מאנו",
+            "נחמני"
+          ],
+          "notes": "Jer 31:15 מאנה להנחם על־בניה (Rachel/Ephraim); Gen 37:35 וימאן להתנחם (Jacob/Joseph). Ps 77 omits ל־ before the Niphal infinitive. The psalmist's mourning is voiced in the idiom of Jacob-for-Joseph, resolved at v.16 'sons of Jacob and Joseph'. LXX ἀπηνῄνατο παρακληθῆναι. נפשי here is the subject of refusal (volitional)."
+        }
+      ],
+      "figurative_analysis": [
+        "outpouring hand or eyes (tears as liquid)",
+        "soul as agent refusing comfort"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "bə-YŌM tsā-rā-THIY 'a-dhō-NĀY dā-RĀ-shət-tiy yā-DHIY LAY-lāh nig-gə-RĀH wə-LŌ' thā-FŪGH mē-'a-NĀH hin-nā-ḤĒM naf-SHIY"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Remembering God (אזכרה אלהים) produces ואהמיה, with God as direct object rather than His deeds. LXX εὐφράνθην ('I rejoiced') reverses the sense. Three cohortatives of will end in a non-volitional ותתעטף רוחי, so spirit collapses against intention. Jonah 2:8 has the reverse order: spirit fails (בהתעטף עלי נפשי) → את־יהוה זכרתי → prayer reaches the temple.",
+      "lexical_insights": [
+        {
+          "phrase": "אזכרה אלהים",
+          "variants": [
+            "זכרתי אלהים",
+            "אזכור",
+            "אזכרך",
+            "אזכרה",
+            "זכרו אלהים"
+          ],
+          "notes": "Direct object אלהים, not deeds (contrast vv.12-13 where object = מעללי־יה/פלאך). Leitwort זכר: vv.4, 7, 12 ×2. Remembering God as bare presence = pain; remembering His actions = cure. Antonym שכח in v.10 (God 'forgetting' while the psalmist 'remembers')."
+        },
+        {
+          "phrase": "ואהמיה",
+          "variants": [
+            "אהמה",
+            "ותהמי",
+            "המו",
+            "יהמיון",
+            "נהמה"
+          ],
+          "notes": "המה = growl/moan/murmur/roar (dove: Isa 59:11 נהמה כיונים; Ps 42:6, 12 ותהמי עלי; Ps 55:18 אשיחה ואהמה). Cohortative with ה-ending (אהמיה, not אהמה) is rare in form. LXX εὐφράνθην, apparently reading it as 'noisy joy/tumult' (cf. Isa 22:2). Near-anagram with הגה (v.13: והגיתי); Isa 59:11 pairs נהמה + נהגה, so v.13 is the redeemed counterpart."
+        },
+        {
+          "phrase": "אשיחה",
+          "variants": [
+            "אשוחחה",
+            "שיחי",
+            "שיחה",
+            "אשיח",
+            "ישיחו"
+          ],
+          "notes": "שיח = muse/complain/speak aloud. Three occurrences (vv.4, 7, 13), all cohortative. Here absolute, in v.7 עם־לבבי, in v.13 ב־עלילותיך. LXX consistently ἀδολεσχέω ('babble/ruminate')."
+        },
+        {
+          "phrase": "ותתעטף רוחי",
+          "variants": [
+            "בהתעטף רוחי",
+            "בהתעטף עלי רוחי",
+            "בהתעטף נפשי",
+            "התעטפו",
+            "יתעטף"
+          ],
+          "notes": "Hithpael עטף = grow faint, be enveloped (Pss 107:5; 142:4; 143:4; Lam 2:12; Jon 2:8). רוחי is the subject, fem. verb here but masc. in v.7 (ויחפש). Same clause-final רוחי closes vv.4 and 7. Selah follows, so the first movement ends on spirit failing."
+        }
+      ],
+      "figurative_analysis": [
+        "spirit as garment wrapping itself or faint-heartedness",
+        "moaning like dove or animal"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'ez-kə-RĀH 'e-lō-HIYM wə-'e-he-MĀ-yāh 'ā-SIY-ḥāh wə-thith-ʿat-TĒF rū-ḤIY SE-lāh"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Abrupt shift to direct accusation: God as the one who 'seized' the eyelids, with the same verb and 2ms form as Asaph's Ps 73:23 אחזת ביד ימיני (God holds the hand in comfort). Here He holds the eyes in torment. The caller of v.2 now cannot speak.",
+      "lexical_insights": [
+        {
+          "phrase": "אחזת שמרות עיני",
+          "variants": [
+            "אחז שמרות",
+            "אחזתי",
+            "שמורות",
+            "אחזת ביד־ימיני",
+            "אחזוני"
+          ],
+          "notes": "שמרות is a hapax: 'guards/watches of my eyes' = eyelids (Rashi-type) or night-watches (LXX φυλακάς; cf. אשמרות Ps 119:148 קדמו עיני אשמרות; 63:7; 90:4). LXX reads עיני as אֹיבַי ('all my enemies seized the watches'). Ps 73:23 אחזת gives antithesis. Exod 15:14 חיל אחז, which Ps 77:17 echoes with יחילו and ירגזו."
+        },
+        {
+          "phrase": "נפעמתי",
+          "variants": [
+            "ותפעם",
+            "לפעמו",
+            "נפעמה",
+            "פעמים"
+          ],
+          "notes": "Niphal פעם = be agitated/stirred (Gen 41:8 ותפעם רוחו; Dan 2:3; Judg 13:25 לפעמו). Fear/trouble state that drives sleeplessness. LXX ἐταράχθην."
+        },
+        {
+          "phrase": "ולא אדבר",
+          "variants": [
+            "לא אדבר",
+            "ולא דברתי",
+            "ולא ידבר",
+            "דברתי"
+          ],
+          "notes": "Speechlessness after loud crying (v.2). Fits the Jeduthun-psalm silence theme (Pss 39, 62). v.11 ואמר breaks the silence."
+        }
+      ],
+      "figurative_analysis": [
+        "God as a jailer or guard holding eyelids open",
+        "eyelids as sentries (שמרות)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'ā-ḤAZ-tā shə-mu-RŌTH ʿēy-NĀY nif-ʿAM-tiy wə-LŌ' 'a-dhab-BĒR"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "A very short bicolon whose terms (ימים מקדם, שנות עולמים) are the memory-content for Deut 32:7 (זכר ימות עולם ... שנות דר ודר). Ps 143:5 shares זכרתי ימים מקדם and הגיתי בכל־פעלך, compressing vv.6 and 12-13. Past that is pain here becomes comfort in v.12 (מקדם פלאך).",
+      "lexical_insights": [
+        {
+          "phrase": "חשבתי ימים מקדם",
+          "variants": [
+            "אחשבה",
+            "חשבת",
+            "חשב",
+            "זכרתי ימים מקדם",
+            "ימי קדם"
+          ],
+          "notes": "Piel חשב = reckon/ponder (Ps 73:16 ואחשבה לדעת זאת, Asaph; Ps 119:59). Perfect tense, calmer than the cohortatives. LXX Διελογισάμην. מקדם returns in v.12 מקדם פלאך, so same word, reversed valence. Ps 143:5 and Deut 32:7 are probable intertexts."
+        },
+        {
+          "phrase": "שנות עולמים",
+          "variants": [
+            "שנות עולם",
+            "שני עולמים",
+            "שנות דר ודר",
+            "ימות עולם"
+          ],
+          "notes": "שנות here = 'years' (pointing identical to v.11 שנות). Deut 32:7 שנות דר ודר supports 'years' in v.11 and links to לדר ודר (v.9). עולמים is retrospective here, prospective in v.8 לעולמים: one word spans past and future. LXX ἔτη αἰώνια, attaches v.6 to v.7 (ἐμνήσθην begins v.7)."
+        }
+      ],
+      "figurative_analysis": [
+        "time as a depth the mind descends into"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "ḥish-SHAV-tiy yā-MIYM miq-QE-dhem shə-NŌTH ʿō-lā-MIYM"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "נגינתי is a textual-semantic crux: 'my songs in the night' (Job 35:10; Ps 42:9; 119:54-55) versus 'their taunt-songs' (Lam 3:14, 63; Job 30:9). NJPS 'their jibes' follows Lam, but the suffix here is -י. The wayyiqtol ויחפש leaves the 'search' with no stated object, and vv.8-10 supply the content.",
+      "lexical_insights": [
+        {
+          "phrase": "נגינתי",
+          "variants": [
+            "נגינתם",
+            "נגינתו",
+            "נגינות",
+            "נגינותי",
+            "נגינת"
+          ],
+          "notes": "Reading A: former joyful string-song, now remembered as lost (contrast v.1 מזמור). Reading B: taunt-song (Lam 3:14 נגינתם כל־היום; 5:14; Job 30:9), which requires emendation to -ם or reading the -י as objective. LXX turns it into a verb (ἐμελέτησα, 'I meditated'), apparently dropping the noun, which affects v.6/7 division. Nuance: night-singing is the thing remembered that cannot now be sung."
+        },
+        {
+          "phrase": "בלילה עם־לבבי",
+          "variants": [
+            "בלילות",
+            "לילה",
+            "בלבבי",
+            "עם־לבי",
+            "בלב"
+          ],
+          "notes": "Alliteration ל-ל-ב-ל-ב. Night motif vv.3, 7 (and 'night watches' v.5). לבב (long form) = inner self; the dialogue is intra-psychic, no addressee. Contrast: v.13 object is God's deeds."
+        },
+        {
+          "phrase": "ויחפש רוחי",
+          "variants": [
+            "אחפש",
+            "ויחפשו",
+            "חפשתי",
+            "נחפשה",
+            "חפש"
+          ],
+          "notes": "Piel חפש = search thoroughly (Zeph 1:12; Prov 20:27; Lam 3:40 נחפשה דרכינו). Wayyiqtol after cohortatives; רוחי masc. here (v.4 fem.). LXX ἔσκαλλον ('I dug/hoed'). The questions of vv.8-10 are what the spirit 'finds' by self-search, with no divine answer."
+        }
+      ],
+      "figurative_analysis": [
+        "spirit as investigator or searcher",
+        "night-song as ghostly memory"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'ez-kə-RĀH nə-ghiy-nā-THIY bal-LĀ-yə-lāh ʿim-lə-vā-VIY 'ā-SIY-ḥāh way-ḥap-PĒS rū-ḤIY"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "The first of six rhetorical questions (vv.8-10) is nearly identical to Lam 3:31 (כי לא יזנח לעולם אדני) but interrogative. The poem poses what Lam asserts. עולמים here points to the future, vs the retrospective עולמים of v.6.",
+      "lexical_insights": [
+        {
+          "phrase": "הלעולמים יזנח אדני",
+          "variants": [
+            "לעולם",
+            "זנחת",
+            "תזנח",
+            "לא יזנח",
+            "זנחתנו",
+            "זנחת לנצח"
+          ],
+          "notes": "זנח = cast off/reject (Pss 44:10, 24; 60:3, 12; 74:1 למה זנחת לנצח, Asaph; 89:39). Lam 3:31 reorders the same words as an affirmation of faith. Plural עולמים is emphatic ('for ages upon ages'), cf. Ps 145:13. Divine name אדני (vv.3, 8)."
+        },
+        {
+          "phrase": "ולא־יסיף לרצות עוד",
+          "variants": [
+            "לא יוסיף",
+            "לא אוסיף",
+            "רצית",
+            "ירצה",
+            "לרצון",
+            "ונרצה"
+          ],
+          "notes": "לא יסיף + infinitive = 'never again' idiom; עוד is redundant (an emphatic double of 'again'). רצה = cultic 'accept/be pleased with' (Lev 1:4; Ps 85:2 רצית ארצך). The question is whether the relation is cultic and covenantal and finished."
+        }
+      ],
+      "figurative_analysis": [
+        "rhetorical question with expected 'no' answer",
+        "God's favor as something that can be 'added' or withheld"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "hal-ʿō-lā-MIYM yiz-NAḤ 'a-dhō-NĀY wə-lō'-yō-SIYF lir-TSŌTH ʿŌDH"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Two questions on hesed and the divine 'word' (אמר). אֹמֶר is rare and its mapping is unclear: promise/decree. It could stand where Exod 34:6 has אמת, and it is a noun that is picked up by the verb ואמר in v.11 (God's saying ended? / my saying). Both verbs (אפס, גמר) mean 'come to an end', the second also used of חסיד in Ps 12:2.",
+      "lexical_insights": [
+        {
+          "phrase": "האפס לנצח חסדו",
+          "variants": [
+            "אפס",
+            "אפסו",
+            "חסדך",
+            "חסדי",
+            "נצח",
+            "חסדי יהוה"
+          ],
+          "notes": "Qal אפס = cease/come to an end (Gen 47:15-16; Isa 16:4 אפס המץ). Covenant hesed (Exod 34:6 ורב־חסד) under audit. Time word לנצח echoes למנצח (v.1), Ps 74:1 (Asaph). Note: the questions invert Exod 34:6 only loosely: terms hesed, hannun, rahum appear but אמת does not."
+        },
+        {
+          "phrase": "גמר אמר",
+          "variants": [
+            "גמר",
+            "יגמר",
+            "גמרו",
+            "אמרו",
+            "אמרה",
+            "אמר"
+          ],
+          "notes": "גמר = complete/finish (Ps 12:2 כי־גמר חסיד; Ps 7:10). אֹמֶר = 'utterance/promise' (Ps 68:12; Job 20:29). Sound chain אפס, גמר, אמר. Possible echo of Exod 34:6's אמת (resh/tav). LXX omits גמר אמר (ἀποκόψει τὸ ἔλεος 'cut off'). Verb ואמר v.11 plays against the noun here: God's word may be finished; I speak."
+        },
+        {
+          "phrase": "לדר ודר",
+          "variants": [
+            "לדור ודור",
+            "דר ודר",
+            "דור דור",
+            "שנות דר ודר"
+          ],
+          "notes": "Deut 32:7 שנות דר ודר ('years of generations') links to שנות in vv.6, 11. Generational scale (as in Ps 78) so the crisis is national, not private. LXX ἀπὸ γενεᾶς καὶ γενεᾶς."
+        }
+      ],
+      "figurative_analysis": [
+        "hesed as a substance that can run out",
+        "personified divine speech that can be 'finished'"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "he-'ā-FĒS lā-NE-tsaḥ ḥas-DŌ GĀ-mar 'Ō-mer lə-DHŌR wā-DHŌR"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "חַנּוֹת (hapax infinitive form) is followed in the next verse by חַלּוֹתִי, same pattern (ḥa-C-ôt). The hinge turns on a near-rhyme between God's 'being gracious' and the psalmist's 'ailment'. The interrogative series shifts from covenant terms to memory (שכח, antonym of זכר) and to the closed fist or womb image (קפץ רחמיו).",
+      "lexical_insights": [
+        {
+          "phrase": "השכח חנות אל",
+          "variants": [
+            "שכחת",
+            "תשכח",
+            "שכחתי",
+            "חנון",
+            "חנני",
+            "חנות",
+            "שכח אל"
+          ],
+          "notes": "שכח = antonym of זכר (vv.4, 7, 12). Ps 74:19, 23; 13:2; 42:10 (שכחתני) lament-forgetting. Deut 32:18 reverses the accusation: ותשכח אל מחללך (Israel forgets God). חנות: hapax verbal-noun form of חנן (expected חנן/חננו); pairs with חלותי (v.11) sonically. Exod 33:19 and 34:6 join חנן and רחם, and Ps 103:8 has רחום וחנון; here reversed (חנות then רחמים). אל (v.10) vs אלהים (vv.2, 4)."
+        },
+        {
+          "phrase": "אם־קפץ באף רחמיו",
+          "variants": [
+            "תקפץ",
+            "יקפץ",
+            "קפצו",
+            "באפו",
+            "ברחמיו",
+            "רחמיך",
+            "ארך אפים"
+          ],
+          "notes": "קפץ = shut/clench (Deut 15:7 לא תקפץ את־ידך; Isa 52:15 יקפצו מלכים פיהם; Job 5:16). Hand motif; רחמים from רחם (womb), so compassion 'shut' like hand or womb. באף anger contrasts Exod 34:6 ארך אפים. אם = 'or' in second member of double question. Hab 3:2 ברגז רחם תזכור (memory + anger + compassion), a text whose theophany (Hab 3:10-15) Ps 77:17-20 echoes. Selah #2."
+        }
+      ],
+      "figurative_analysis": [
+        "compassion as womb or fist closed by anger",
+        "forgetting as divine action"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "ha-shā-KHAḤ ḥan-NŌTH 'ĒL 'im-qā-FATS bə-'AF ra-ḥa-MĀYW SE-lāh"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "The hinge: חלותי is a hapax and שנות is ambiguous ('years' vs 'to change'). Jer 10:19 ואני אמרתי אך זה חלי supports 'my sickness/affliction'; Deut 32:7-8 (שנות דר ודר, then עליון) supports 'years of the Most High'. The verse's ambiguity is the turn. LXX νῦν ἠρξάμην (from חלל 'begin') + ἀλλοίωσις takes the opposite path from NJPS 'my fault ... has changed'.",
+      "lexical_insights": [
+        {
+          "phrase": "ואמר חלותי היא",
+          "variants": [
+            "ואמרתי",
+            "חליי",
+            "חלי",
+            "חלותו",
+            "אמרתי חלותי",
+            "ואני אמרתי"
+          ],
+          "notes": "Options: (a) חלה 'be sick' (Jer 10:19 זה חלי, 'this is my affliction, I must bear it'); (b) piel חלה 'entreat'; (c) חלל 'begin' (LXX) or 'wound/pierce' (Ps 109:22). Dagesh in lamed and form ḥa-C-ôt match חנות (v.10). Wayyiqtol ואמר = narrative: 'and I said', the first quoted speech after speechlessness (v.5). היא = 'it/this is', pivot of Ps 73:16 עמל היא בעיני. Noun אמר in v.9 vs verb ואמר here."
+        },
+        {
+          "phrase": "שנות ימין עליון",
+          "variants": [
+            "שנות ימינך",
+            "שני ימין",
+            "שנות עליון",
+            "ימין עליון",
+            "ימין יהוה",
+            "שנות עולמים"
+          ],
+          "notes": "שנות pointed identically to v.6 ('years'). 'Change' reading needs infinitive of שנה: 'that the right hand of the Most High has changed' (LXX ἀλλοίωσις; NJPS). 'Years' reading: 'the years of the Most High's right hand' (object of recall, cf. v.12). Deut 32:7-8 shares שנות + עליון. עליון = Asaph name (73:11; 78:17, 35, 56; 82:6; 83:19). ימין = hand motif (v.3 ידי, v.16 זרוע, v.21 יד), also Ps 73:23."
+        }
+      ],
+      "figurative_analysis": [
+        "God's right hand as agent of change or of past deeds",
+        "illness metaphor (חלי)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "wā-'ō-MAR ḥal-LŌ-thiy HIY' shə-NŌTH yə-MIYN ʿel-YŌN"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "Pronoun shift from 3rd to 2nd mid-verse (מעללי־יה → פלאך). Ketiv אזכיר (Hiphil 'proclaim', cf. Isa 63:7) vs qere אזכור (Qal). יה, the only YHWH-form in an otherwise Elohistic/Adonai psalm, is the Exod 15:2 short name. מקדם reuses v.6 with reversed valence.",
+      "lexical_insights": [
+        {
+          "phrase": "אזכיר",
+          "variants": [
+            "אזכור",
+            "אזכרה",
+            "זכרתי",
+            "נזכיר",
+            "הזכיר",
+            "אזכיר חסדי"
+          ],
+          "notes": "Ketiv hiphil אזכיר = proclaim/mention (Isa 63:7 חסדי יהוה אזכיר; Ps 20:8; 45:18; 71:16), cultic/public. Qere אזכור (with מעללי־יה) = private recollection. The text-tradition itself holds the private/liturgical tension that the psalm resolves. LXX Ἐμνήσθην."
+        },
+        {
+          "phrase": "מעללי־יה",
+          "variants": [
+            "מעלליו",
+            "מעלליך",
+            "מעללים",
+            "מעלליהם"
+          ],
+          "notes": "מעלל usually human deeds, often evil (Jer 4:4; Ps 28:4); with God as subject, here only. Cognate עלילות (v.13). יה = Exod 15:2 עזי וזמרת יה; only YHWH-form in psalm. Four different 'deed' words in vv.12-13 (מעללי, פלאך, פעלך, עלילותיך) vs the verbal-psychological terms of vv.4-7."
+        },
+        {
+          "phrase": "כי־אזכרה מקדם פלאך",
+          "variants": [
+            "כי אזכרה",
+            "פלאיך",
+            "נפלאותיך",
+            "פלאו",
+            "ימים מקדם",
+            "זכרתי ימים מקדם"
+          ],
+          "notes": "כי = 'yes/indeed' emphatic or causal. פלאך singular collective ('your wonder'), cf. עשה פלא (v.15; Exod 15:11). מקדם was v.6's source of anguish. Cohortative resumed with a new object. Ps 143:5 as parallel."
+        }
+      ],
+      "figurative_analysis": [
+        "memory as redirected gaze, direction changing the content"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'ez-KŌR ma-ʿal-lēy-YĀH kiy-'ez-kə-RĀH miq-QE-dhem pil-'E-khā"
+    },
+    {
+      "verse_number": 13,
+      "commentary": "Weqatal והגיתי after cohortatives marks resolve. הגה is the 'moan' verb (Isa 38:14; 59:11) repurposed as 'recite/meditate', a near-anagram of המה (v.4). אשיחה returns for the third time with a new complement (ב־עלילותיך).",
+      "lexical_insights": [
+        {
+          "phrase": "והגיתי בכל־פעלך",
+          "variants": [
+            "הגיתי",
+            "אהגה",
+            "יהגה",
+            "ויהגה",
+            "בכל־פעלו",
+            "בכל־מעשיך",
+            "הגיתי בכל־פעלך"
+          ],
+          "notes": "Ps 143:5 הגיתי בכל־פעלך (verbatim, with זכרתי ימים מקדם). הגה = murmur/meditate (Ps 1:2; 63:7); also dove-moan (Isa 38:14; 59:11), the same sound-domain as ואהמיה. The same murmuring faculty is inverted in object. פעלך pointed פָּעֳלֶךָ (hataf-qamets). Exod 15:17 פעלת. LXX μελετήσω."
+        },
+        {
+          "phrase": "ובעלילותיך אשיחה",
+          "variants": [
+            "עלילותיו",
+            "עלילות",
+            "עלילה",
+            "אשוחחה",
+            "אשיחה בחקיך"
+          ],
+          "notes": "עלילה = deed, used of God (Pss 9:12; 66:5; 78:11 'forgot His deeds'; 105:1). שיח + ב־ = 'speak/muse about' (Ps 119:15, 23, 27). Third אשיחה (vv.4, 7, 13). Last first-person verb of the psalm; the 'I' vanishes afterwards. LXX ἀδολεσχήσω."
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "",
+      "phonetic_transcription": "wə-hā-GHIY-thiy və-khol-po-ʿo-LE-khā ū-va-ʿa-liy-lō-THEY-khā 'ā-SIY-ḥāh"
+    },
+    {
+      "verse_number": 14,
+      "commentary": "אלהים בקדש דרכך, with the 'way' located in the holy (place) here and in the sea in v.20, so one road runs through both sanctuary and chaos. מי־אל גדול כאלהים is odd ('what great god is like God?'), probably Elohistic revision of מי ... כיהוה (cf. Exod 15:11 מי־כמכה באלם יהוה). LXX adds ἡμῶν ('our God').",
+      "lexical_insights": [
+        {
+          "phrase": "בקדש דרכך",
+          "variants": [
+            "בקדשו",
+            "במקדש",
+            "בקדש",
+            "בקדש דרכי",
+            "דרכו",
+            "בקדש חזיתיך"
+          ],
+          "notes": "Nominal clause; בקדש = 'in holiness' / 'in the sanctuary' / 'in heaven' (Pss 63:3; 68:25; 73:17 מקדשי־אל, Asaph turn; Exod 15:11 נאדר בקדש). With article, probably place. דרך may also be 'treading' (Hab 3:15 דרכת בים סוסיך), so v.20 'your treading in the sea'. LXX ἐν τῷ ἁγίῳ."
+        },
+        {
+          "phrase": "מי־אל גדול כאלהים",
+          "variants": [
+            "מי כיהוה",
+            "מי כמכה",
+            "אל גדול",
+            "מי כאלהינו",
+            "מי־כמוך"
+          ],
+          "notes": "Incomparability formula (Exod 15:11; Pss 35:10; 71:19; 113:5 מי כיהוה אלהינו). Ps 77 has no YHWH, hence 'כאלהים'. Four divine names in this verse and next (אלהים, אל, אלהים, האל). Pronoun ךָ appears again (דרכך) after the long 3rd-person stretch."
+        }
+      ],
+      "figurative_analysis": [
+        "God's 'way' as physical road, in sanctuary or beyond"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'e-lō-HIYM baq-QŌ-dhesh dar-KE-khā miy-'ĒL gā-DHŌL kē'-lō-HIYM"
+    },
+    {
+      "verse_number": 15,
+      "commentary": "Exod 15:11 עשה פלא and 15:2/13 עז quoted, yet the nations are the audience (בעמים), which also recalls Exod 15:14 שמעו עמים ירגזון. Participle עשה ('doing') versus perfect הודעת, and הודעת (made known) sets up the paradox of v.20 לא נדעו.",
+      "lexical_insights": [
+        {
+          "phrase": "אתה האל עשה פלא",
+          "variants": [
+            "עשה פלאות",
+            "עשה נפלאות",
+            "עשית פלא",
+            "עושה נפלאות לבדו",
+            "אתה האלהים"
+          ],
+          "notes": "Emphatic אתה + definite האל, the first explicit 'You' as grammatical subject of a nominal clause. Exod 15:11 עשה פלא. Ps 78:12 נגד אבותם עשה פלא (Exodus wonders), Ps 88:11, 13 (asking for wonders for the dead). Participle = continuing attribute (the answer to vv.8-10 'for ever?')."
+        },
+        {
+          "phrase": "הודעת בעמים עזך",
+          "variants": [
+            "הודיע",
+            "אודיע",
+            "הודעתי",
+            "בגוים",
+            "עזו",
+            "בעזך",
+            "עזי"
+          ],
+          "notes": "Hiphil ידע 'make known' (public, Exodus revelation to nations) vs Niphal לא נדעו (v.20). עז = Exod 15:2, 13 (בעזך). Exod 15:14 עמים ירגזון anticipates v.17 ירגזו (nations → waters). 'Among the peoples' contrasts the psalmist's private isolation."
+        }
+      ],
+      "figurative_analysis": [
+        "God's strength as public display (revelation to nations)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'at-TĀH hā-'ĒL ʿŌ-sēh FE-le' hō-DHAʿ-tā vā-ʿam-MIYM ʿuz-ZE-khā"
+    },
+    {
+      "verse_number": 16,
+      "commentary": "גאלת bi-zeroa' packs Exod 15:13 (גאלת) and 15:16 (זרוע) and Exod 6:6 (וגאלתי ... בזרוע נטויה). 'Sons of Jacob and Joseph' foregrounds Joseph, absent from Exod 15, answering the Jacob-mourns-Joseph subtext of v.3. עקב (heel/track) connects יעקב to עקבותיך (v.20).",
+      "lexical_insights": [
+        {
+          "phrase": "גאלת בזרוע עמך",
+          "variants": [
+            "גאל",
+            "גאלתי",
+            "גואל",
+            "גאולים",
+            "בזרוע נטויה",
+            "זרועך",
+            "בזרועו"
+          ],
+          "notes": "גאל = kin-redeem (Exod 6:6; 15:13). בזרוע without suffix (the arm is God's, but the noun is bare) as in Exod 6:6. עמך placed after the instrument ('by arm — Your people'), a compressed word order. The arm continues the hand motif: v.3 ידי → v.11 ימין → v.16 זרוע → v.21 יד. LXX ἐλυτρώσω."
+        },
+        {
+          "phrase": "בני־יעקב ויוסף",
+          "variants": [
+            "בני יעקב",
+            "בני ישראל",
+            "בית יעקב ויוסף",
+            "יעקב ויוסף",
+            "ביתו יוסף"
+          ],
+          "notes": "Joseph as northern tribes (Pss 78:67; 80:2; 81:6) or as the figure Jacob mourned (Gen 37:35; v.3 echo). 'Sons of ... Joseph' is odd (Joseph is himself a son of Jacob). Exod 13:19 Joseph's bones carried at Exodus. Jacob (יעקב, from עקב 'heel') ↔ עקבותיך (v.20): a name that means 'heel' following the divine heel-prints. Selah #3."
+        }
+      ],
+      "figurative_analysis": [
+        "redemption by divine arm (anthropomorphism)",
+        "tribal-name metonymy (Jacob/Joseph for people)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "gā-'AL-tā biz-RŌ-aʿ ʿam-ME-khā bə-nēy-ya-ʿa-QŌV wə-yō-SĒF SE-lāh"
+    },
+    {
+      "verse_number": 17,
+      "commentary": "Staircase ראוך מים אלהים / ראוך מים יחילו / אף ירגזו תהמות parallels Hab 3:10 (ראוך יחילו הרים ... זרם מים ... נתן תהום קולו) and Ps 97:4 (ראתה ותחל הארץ), but with the waters rather than the mountains as terrified witness. The psalmist's 'eyes' (v.5) never 'see' in the psalm; only the waters 'see'. Exod 15:14 pairs רגז and חיל (nations), which here are reassigned to cosmic water.",
+      "lexical_insights": [
+        {
+          "phrase": "ראוך מים",
+          "variants": [
+            "ראתך",
+            "ראה",
+            "ראוהו",
+            "ראוך הרים",
+            "יראוך",
+            "ראוך מים אלהים"
+          ],
+          "notes": "Verb + suffix + subject (marked order), object-before-subject then vocative אלהים. Unique dagesh in מַּיִם after ראוך. Sight vocabulary: waters 'see' (v.17), arrows 'go about' (v.18), tracks not 'known' (v.20). LXX Εἴδοσάν σε. מים ×4 in vv.17-20 plus ים, תהמות; the section is saturated with water."
+        },
+        {
+          "phrase": "יחילו",
+          "variants": [
+            "יחיל",
+            "תחל",
+            "חילה",
+            "חלו",
+            "חולי",
+            "יחילו הרים"
+          ],
+          "notes": "חיל = writhe/whirl/labour (Ps 29:8 יחיל מדבר; 114:7 חולי ארץ; 97:4). Birth-pang overtone (Deut 32:18 מחללך, 'who writhed to bear you') in a psalm of Jacob/Joseph 'children' (בני). LXX ἐφοβήθησαν 'feared'."
+        },
+        {
+          "phrase": "ירגזו תהמות",
+          "variants": [
+            "רגזה",
+            "ירגז",
+            "ירגזון",
+            "תהום",
+            "תהמת",
+            "תהומות"
+          ],
+          "notes": "רגז = quake/tremble (Exod 15:14; Hab 3:7). 'Also' (אף) intensifier: the deeps join. תהמות plural echoes Exod 15:5, 8 (תהמת). Inclusio with v.19 רגזה הארץ: deep and earth frame the storm. אף here is adverb, unlike אף 'anger' (v.10 באף) and v.18."
+        }
+      ],
+      "figurative_analysis": [
+        "waters personified as eyewitnesses and as writhing in labour",
+        "deep personified as quaking"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "rā-'Ū-khā MA-yim 'e-lō-HIYM rā-'Ū-khā MA-yim yā-ḤIY-lū 'AF yir-gə-ZŪ thə-hō-MŌTH"
+    },
+    {
+      "verse_number": 18,
+      "commentary": "זרמו is a verb-hapax (elsewhere זרם is a noun 'downpour': Isa 4:6; Hab 3:10). Object-before-subject word order in 'קול נתנו שחקים' and 'זרמו מים עבות'. Hab 3:10-11 parallels: נתן תהום קולו and לאור חציך יהלכו; here the skies, not the deep, give voice, and the arrows 'walk about'.",
+      "lexical_insights": [
+        {
+          "phrase": "זרמו מים עבות",
+          "variants": [
+            "זרם מים",
+            "זרם",
+            "זרמו",
+            "עב",
+            "עבים",
+            "זרם מים עבר"
+          ],
+          "notes": "Verb hapax; subject עבות ('thick clouds') after its object מים. LXX reads a noun (πλῆθος ἤχους ὑδάτων 'multitude of sound of waters'). Storm is not in Exod 14-15 narrative; cf. Judg 5:4; Ps 68:9."
+        },
+        {
+          "phrase": "קול נתנו שחקים",
+          "variants": [
+            "נתן קולו",
+            "נתן תהום קולו",
+            "קולו",
+            "קולות",
+            "קול יהוה"
+          ],
+          "notes": "Skies 'give voice' as the psalmist did (קולי v.2, with קול 3×/vv.2, 18, 19). שחקים = fine clouds/sky (Job 37:18; Ps 89:7, 38). Skies, not God, speak: 'voice' here is thunder (Ps 29). Prayer for hearing answered by cosmic voice."
+        },
+        {
+          "phrase": "חצציך יתהלכו",
+          "variants": [
+            "חציך",
+            "חציו",
+            "יהלכו",
+            "יתהלך",
+            "מתהלך",
+            "חצים"
+          ],
+          "notes": "חצצים = poetic plural of חצים (Hab 3:11 לאור חציך יהלכו; Ps 18:15), lightning arrows. Hithpael = back-and-forth motion (Zech 1:10; Job 1:7; Gen 3:8 God walking). Visible walking of arrows vs invisible עקבות (v.20). אף־ again (v.17, 18) intensifies."
+        }
+      ],
+      "figurative_analysis": [
+        "lightning as arrows",
+        "clouds as pouring jars or sources",
+        "skies as voice-givers"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "ZŌ-rə-mū MA-yim ʿā-VŌTH QŌL nā-thə-NŪ shə-ḥā-QIYM 'af-ḥa-tsā-TSEY-khā yith-hal-LĀ-khū"
+    },
+    {
+      "verse_number": 19,
+      "commentary": "Close parallel to Ps 97:4 (האירו ברקיו תבל ראתה ותחל הארץ), here rewritten as הֵאִירוּ בְרָקִים תֵּבֵל רָגְזָה וַתִּרְעַשׁ הָאָרֶץ. קול רעמך occurs verbatim in Ps 104:7 (Creation flood). בגלגל is open: wheel / whirlwind / vault, or even place-name Gilgal (Josh 4:19-24, sea-crossing memorial).",
+      "lexical_insights": [
+        {
+          "phrase": "קול רעמך בגלגל",
+          "variants": [
+            "רעמו",
+            "רעם",
+            "גלגלו",
+            "הגלגל",
+            "כגלגל",
+            "בגלגלים",
+            "בסתר רעם"
+          ],
+          "notes": "גלגל: wheel (Isa 28:28; Ezek 10:13 'whirling', הגלגל), whirlwind or tumbleweed (Ps 83:14 כגלגל לפני־רוח, Asaph), possibly chariot-wheel as storm-god image. LXX ἐν τῷ τροχῷ. Ps 104:7 קול רעמך. רעמך ↔ ותרעש (sound link). Possible pun on Gilgal, where the Jordan-crossing was memorialized (Josh 4:23-24), speculative."
+        },
+        {
+          "phrase": "האירו ברקים תבל",
+          "variants": [
+            "האירו ברקיו",
+            "האיר",
+            "ברקיך",
+            "תבל",
+            "בתבל",
+            "האירו ברקיו תבל"
+          ],
+          "notes": "Verb-subject-object order. תבל = poetic 'inhabited world' (Ps 97:4; 18:16). Ps 97:4 conflates ראה (v.17 ראוך) and חיל (v.17 יחילו) into one verse (ראתה ותחל), suggesting a shared theophany tradition or direct dependence."
+        },
+        {
+          "phrase": "רגזה ותרעש הארץ",
+          "variants": [
+            "ירגז",
+            "תרגז",
+            "רעשה",
+            "תרעש",
+            "ותגעש",
+            "ארץ רעשה"
+          ],
+          "notes": "Perfect-then-wayyiqtol. Ps 18:8 ותגעש ותרעש הארץ; Ps 68:9 ארץ רעשה. LXX ἐσαλεύθη καὶ ἔντρομος ἐγενήθη. רגזה echoes v.17 ירגזו (inclusio deep → earth). Three-tier sweep: waters/deep, skies, earth."
+        }
+      ],
+      "figurative_analysis": [
+        "thunder as chariot wheels/whirlwind",
+        "lightning illuminating the world",
+        "earth as trembling body"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "QŌL ra-ʿam-KHĀ bag-gal-GAL hē-'IY-rū və-rā-QIYM tē-VĒL rā-ghə-ZĀH wat-tir-ʿASH hā-'Ā-rets"
+    },
+    {
+      "verse_number": 20,
+      "commentary": "Climactic paradox: God's way was in the sea, but his footprints (עקבותיך) 'were not known'. Parallel to Isa 43:16 (נותן בים דרך ובמים עזים נתיבה) and Hab 3:15 (דרכת בים ... חמר מים רבים). מים רבים (v.20) is followed immediately by משה (v.21), and in Ps 18:17 ימשני ממים רבים (Exod 2:10 etymology).",
+      "lexical_insights": [
+        {
+          "phrase": "בים דרכך",
+          "variants": [
+            "דרכך בים",
+            "בים דרך",
+            "דרכו",
+            "דרכיך",
+            "דרכת בים",
+            "בקדש דרכך"
+          ],
+          "notes": "Ring with v.14 בקדש דרכך: same 'way' in sanctuary and sea. 'Sea' (ים) in the singular, not 'Reed Sea' (ים סוף) by name. דרך may be 'treading' (Hab 3:15 דרכת בים סוסיך) to suit עקבות. LXX ἡ ὁδός σου."
+        },
+        {
+          "phrase": "ושבילך",
+          "variants": [
+            "ושביליך",
+            "שביל",
+            "שבילים",
+            "נתיבה"
+          ],
+          "notes": "Ketiv ושביליך (plural 'paths', LXX τρίβοι plural supports ketiv) vs qere ושבילך (singular). שביל is very rare (Jer 18:15 'paths' only). Chiastic bicolon with דרכך: 'in sea your way // in many waters your path'."
+        },
+        {
+          "phrase": "במים רבים",
+          "variants": [
+            "ממים רבים",
+            "מים רבים",
+            "מי רבים",
+            "במים עזים",
+            "מים רבים אדירים"
+          ],
+          "notes": "Chaos-waters formula (Pss 18:17; 29:3; 93:4; 144:7; Hab 3:15; Isa 43:16, 51:10). Here the waters are medium and witness, not combatant. Juxtaposition with משה (v.21) echoes Exod 2:10 מן־המים משיתהו; Ps 18:17 ימשני ממים רבים."
+        },
+        {
+          "phrase": "ועקבותיך לא נדעו",
+          "variants": [
+            "עקבות",
+            "עקבותיו",
+            "לא נודעו",
+            "לא נדע",
+            "לא ידעו",
+            "הודעת",
+            "עקבות משיחך"
+          ],
+          "notes": "עקבות: only Ps 77:20 and 89:52 (עקבות משיחך 'footprints of your anointed'), cf. Song 1:8 עקבי הצאן (tracks of the flock), which links to v.21's flock. Sound/root: עקב ↔ יעקב (v.16). Niphal 'not known/discerned' vs Hiphil הודעת (v.15). LXX future οὐ γνωσθήσονται. Divine absence → hiddenness (Isa 45:15; Job 9:11). Footprints on water vanish: the crossing leaves no trace."
+        }
+      ],
+      "figurative_analysis": [
+        "God as walker whose tracks cannot be traced",
+        "sea as road",
+        "footprints as evidence that is missing"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "bay-YĀM dar-KE-khā ū-shə-viy-lə-KHĀ bə-MA-yim rab-BIYM wə-ʿiq-qə-vō-THEY-khā LŌ' nō-DHĀ-ʿū"
+    },
+    {
+      "verse_number": 21,
+      "commentary": "Quiet closing bicolon after storm: נחית (Exod 15:13 נחית בחסדך) with the key word בחסדך left out, answering v.9 האפס חסדו by omission. Ps 80:2 compresses האזינה (v.2 והאזין), נהג כצאן (v.21) and יוסף (v.16). The psalm ends with two names, no 'I', no vow.",
+      "lexical_insights": [
+        {
+          "phrase": "נחית כצאן עמך",
+          "variants": [
+            "נחיתי",
+            "נחה",
+            "תנחה",
+            "ינחם",
+            "נהג כצאן",
+            "כצאן עמו",
+            "כעדר",
+            "נהלת"
+          ],
+          "notes": "נחה = guide (Exod 15:13; 32:34; Ps 78:53 וינחם לבטח). Simile כצאן (Pss 78:52; 80:2; Isa 63:11 רעה צאנו). Song 1:8 עקבי הצאן 'tracks of flock' adds echo with עקבות (v.20). Elided בחסדך: the expected 'with your hesed' is the hidden answer to v.9. LXX ὡδήγησας ὡς πρόβατα."
+        },
+        {
+          "phrase": "ביד־משה ואהרן",
+          "variants": [
+            "ביד משה",
+            "ביד־אהרן",
+            "בידך",
+            "ביד־משה",
+            "משה ואהרן"
+          ],
+          "notes": "Exact phrase Num 33:1; cf. Ps 105:26; 99:6. Hand motif closes: ידי (v.3) → ימין (v.11) → זרוע (v.16) → ביד (v.21). Only four personal names in psalm: Jacob, Joseph, Moses, Aaron. Aaron, the priest, closes a Levitical (Asaph) psalm. Mediated visibility: God's tracks unseen, human hands visible. No David, no Zion. פ (petuha) closes. LXX ἐν χειρί."
+        }
+      ],
+      "figurative_analysis": [
+        "people as flock, God as shepherd",
+        "human leaders as God's 'hand' (metonymy)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "nā-ḤIY-thā khats-TSŌ'N ʿam-ME-khā bə-yadh-mō-SHEH wə-'a-ha-RŌN"
+    }
+  ],
+  "thematic_threads": [],
+  "interesting_questions": [
+    "Why does 'remembering God' (אזכרה אלהים, v.4) produce moaning, while remembering מעללי־יה (v.12) heals? Does the object (God as presence vs God's deeds) or the grammar (ketiv אזכיר, public/liturgical Hiphil) cause the reversal, and how does LXX εὐφράνθην ('I rejoiced', v.4) or Jonah 2:8 (faint → remember → prayer reaches temple) complicate it?",
+    "חַנּוֹת (v.10) and חַלּוֹתִי (v.11) share a rare ḥa-C-ôt pattern at the hinge. Is the poet deliberately contrasting God's 'graciousness' with the speaker's 'ailment' (Jer 10:19 ואני אמרתי אך זה חלי), and which of חלה / חלל / piel-חלה with שנות 'years' vs 'change' (supported by Deut 32:7-8 שנות ... עליון) best fits ואמר?",
+    "Why is v.3 (ידי נגרה) syntactically odd, with 'hand' as subject of 'flow', while Lam 3:49 has 'my eye' with the same verbs נגרה and פוג? Is the hand a deliberate displacement, anticipating the hand motif (ימין v.11, זרוע v.16, ביד v.21), or textual damage that NJPS repairs?",
+    "How does Jacob/Joseph function: v.3 (מאנה הנחם, Gen 37:35/Jer 31:15) → v.16 (בני־יעקב ויוסף) → v.20 (עקבותיך, a possible pun on יעקב 'heel') → v.21 (Ps 80:2 נהג כצאן יוסף)? Is Joseph the northern tribes, the lost son, or the one whose bones left Egypt (Exod 13:19)?",
+    "Why does only the water 'see' God (ראוך ×2, v.17), after the psalmist's own eyes were held awake (v.5) and the footprints 'could not be seen' (v.20)? What is the relation between seeing, knowing (הודעת v.15 / נדעו v.20) and the sleepless-eye motif?",
+    "Does the poet echo Hab 3:10 (ראוך יחילו ... נתן תהום קולו) and Ps 97:4 (האירו ברקיו תבל ראתה ותחל הארץ) directly? Why replace mountains with waters, and add storm elements absent from Exod 14-15 to the sea-crossing, so that Exodus is retold as theophany?",
+    "Why the omission of בחסדך at v.21 (Exod 15:13 נחית בחסדך), after the questions of vv.8-9? Does omission turn a silence into an answer, or does it leave the covenant audit unresolved?",
+    "What is the function of the Elohistic setting (no YHWH, only אדני, אל, אלהים, עליון, and a single יה at v.12) in Exod 15:11 allusions (מי־אל גדול כאלהים, v.14 seems to presuppose כיהוה)? Why does יה (Exod 15:2) appear exactly at the turn from private to public memory?",
+    "Is בקדש דרכך (v.14) reconciled with בים דרכך (v.20) — a way in sanctuary and a way in sea — and does דרך as 'treading' (Hab 3:15 דרכת) explain the link to עקבותיך (footprints)?",
+    "What is בגלגל (v.19): chariot wheel, whirlwind (Ps 83:14), heavenly vault (LXX τροχός), or Gilgal (Josh 4:19-24, commemorating the Jordan crossing)? How does each reading affect the Baal-storm and Exodus-memorial overtones?",
+    "Why does the psalm end on Moses and Aaron ('hand') with no return to the first person, no vow, no doxology? Is the lament dissolved into the people's story, or is the hiddenness of God (v.20) left standing, with the flock following human leaders instead of visible tracks?",
+    "Does the ketiv-qere pairing of v.1 (ידיתון/ידותון), v.12 (אזכיר/אזכור) and v.20 (ושביליך/ושבילך) reflect a pattern of textual instability at the points where the psalm moves between private/public, singular/plural, and silence/speech (the Jeduthun silence theme)?"
+  ],
+  "synthesis_notes": "",
+  "model_used": "claude-sonnet-5-5",
+  "_ab_effort": "xhigh"
+}

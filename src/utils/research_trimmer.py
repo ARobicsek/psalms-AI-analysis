@@ -11,8 +11,35 @@ Date: 2026-01-26
 """
 
 import re
+from functools import lru_cache
+from pathlib import Path
 from typing import Tuple, List, Optional
 from src.utils.logger import get_logger
+
+# Session 394: the writer-side ceiling scales with the psalm's length (the author's decision before
+# Ps 78). Its old 200K-token rationale is gone (Opus 5.5: 1M context, flat price); what it still
+# guards is cost and dilution (S391 §6a). A flat 350K would have cut Related Psalms from every
+# long psalm: Ps 77 (21 verses) already filled ~349K.
+BASE_MAX_CHARS = 350_000
+SCALE_FROM_VERSES = 30          # psalms up to this length keep the old ceiling
+PER_VERSE_CHARS = 5_000         # Ps 78 (72 verses) -> 560K; Ps 119 (176) -> 1.08M
+
+
+def max_chars_for_verses(verse_count: int) -> int:
+    return BASE_MAX_CHARS + PER_VERSE_CHARS * max(0, verse_count - SCALE_FROM_VERSES)
+
+
+@lru_cache(maxsize=None)
+def max_chars_for_psalm(psalm_number: int) -> int:
+    """The writer-side trim ceiling for a psalm. Synthesis discovery and the writer must both
+    use THIS (their shared prompt cache needs byte-identical bundles); falls back to the base
+    ceiling if the verse count cannot be read."""
+    try:
+        from src.data_sources.tanakh_database import TanakhDatabase
+        psalm = TanakhDatabase(Path("database/tanakh.db")).get_psalm(int(psalm_number))
+        return max_chars_for_verses(len(psalm.verses)) if psalm else BASE_MAX_CHARS
+    except Exception:
+        return BASE_MAX_CHARS
 
 class ResearchTrimmer:
     """

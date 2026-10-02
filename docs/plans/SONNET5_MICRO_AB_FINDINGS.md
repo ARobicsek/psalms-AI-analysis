@@ -1,5 +1,13 @@
 # Sonnet 5 vs Sonnet 4.6 for the Micro Agent — A/B Findings (SHELVED)
 
+> ## Session 394 (2026-10-02) — SUPERSEDED: SONNET 5.5 AT `xhigh` IS ADOPTED
+>
+> Sonnet 5.5 (same $2/$10, recalibrated effort levels) was tested on Ps 76 (three 4.6 runs as the noise floor)
+> and Ps 77: at `xhigh`, as many or more insights and figurative flags than 4.6, sharper cross-references and
+> questions, about half the prose per item, ~25–30% cheaper, ~2x faster. At `max` it wrote nothing (all 128K
+> tokens spent thinking). Record: `archive/psalm_76_S394_micro_sonnet55_ab/README.md`. What follows is the
+> Sonnet 5 history.
+
 **Session 362 (2026-07-01).** Status: **investigated, tested on Ps 65, NOT adopted.** All code
 was reverted; `MicroAnalystV2.DEFAULT_MODEL` remains `claude-sonnet-4-6`. This doc preserves the
 data so the decision doesn't have to be re-derived.

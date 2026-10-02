@@ -42,9 +42,11 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
 
 
 def test_verse_instructions_are_the_s386_text_byte_for_byte():
-    """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)."""
+    """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS) and
+    the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
+    expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -586,3 +588,13 @@ def test_editors_report_ignores_a_fact_check_from_an_earlier_guide(tmp_path):
     assert er._load(tmp_path, 77)["fc"] == {} and er._load(tmp_path, 77)["stale_fact_check"]
     os.utime(fc, (_t.time() + 5, _t.time() + 5))
     assert er._load(tmp_path, 77)["fc"]["claims"]
+
+
+def test_s394_thread_and_grouping_are_in_the_verse_instructions():
+    """The author (S394): notes that prepare the reader for the verses to come, and grouping
+    small runs of verses, freely in long psalms."""
+    text = fw.verse_instructions(72)
+    assert "## THE THREAD BETWEEN THE NOTES" in text
+    assert text.index("## THE THREAD BETWEEN THE NOTES") < text.index("## WHAT A NOTE CAN HOLD")
+    assert "In a long psalm, do this freely" in text
+    assert "`**Verses 5–6**`" in text

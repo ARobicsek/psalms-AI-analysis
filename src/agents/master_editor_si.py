@@ -155,7 +155,9 @@ class MasterEditorSI(MasterEditor):
         psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
 
         research_bundle_raw = self._load_text_file(research_file)
-        research_bundle, _, _ = self.research_trimmer.trim_bundle(research_bundle_raw, max_chars=350000)
+        from src.utils.research_trimmer import max_chars_for_psalm  # Session 394: verse-scaled
+        research_bundle, _, _ = self.research_trimmer.trim_bundle(
+            research_bundle_raw, max_chars=max_chars_for_psalm(psalm_number))
 
         curated_insights = None
         if insights_file and insights_file.exists():

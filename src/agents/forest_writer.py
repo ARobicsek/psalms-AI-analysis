@@ -320,8 +320,32 @@ def _apply_edits(text: str, edits) -> str:
     return text
 
 
+# ---------------------------------------------------------------------------
+# Session 394: the author, before Ps 78: "I like it when in the verse commentary, the commentary
+# for verse a is aware that verse b is coming and sometimes prepares the reader for it - it
+# creates a sense of continuity between verses so it's not just one-damn-thing-after-another.
+# also - the writer should know that (esp in long psalms) it can group together small numbers of
+# verses in the commentary when relevant." Applied after the S388 edits; the pin tests apply both.
+# ---------------------------------------------------------------------------
+
+_VERSE_THREAD_SECTION = """## THE THREAD BETWEEN THE NOTES
+
+The notes are read in order, and they should read as one walk through the poem, not one thing after another. As you write each note, know what the verses after it will do. Where a coming verse turns on something in this one (a word it will take up, a question it will answer, an image it will reverse), let this note prepare the reader for it: a sentence that tells them what to listen for, or a question left open for a later note to close. When a note arrives at what an earlier note prepared, let the reader feel the connection close, in a phrase. Do this where the poem itself carries the thread; do not bolt a bridge onto every note, and never summarize the verse to come.
+
+## WHAT A NOTE CAN HOLD (a menu, not a checklist)
+"""
+
+S394_VERSE_EDITS = (
+    ("2. **Walk the poem.** For each verse, before you consult the research: what would a careful listener stumble on here? What does this line do that prose would not?",
+     "2. **Walk the poem.** For each verse, before you consult the research: what would a careful listener stumble on here? What does this line do that prose would not? What does it hand on to the verses after it, and where does the poem move in units larger than a verse?"),
+    ("## WHAT A NOTE CAN HOLD (a menu, not a checklist)\n", _VERSE_THREAD_SECTION),
+    ("1. A header on its own line: `**Verse N**`. You may group two to four closely linked verses under one header (`**Verses 5–6**`), but each verse still gets its own Hebrew line and its own translation, and all of them come before the shared note.",
+     "1. A header on its own line: `**Verse N**`. Group two to four verses under one header (`**Verses 5–6**`) wherever they make one movement and one note will serve them better than several: a sentence that runs across verses, a list or catalogue, a stretch of narrative, a pair whose point is the pairing. In a long psalm, do this freely, so that the commentary moves at the pace of the poem rather than stopping at every verse. Each verse in a group still gets its own Hebrew line and its own translation, and all of them come before the shared note."),
+)
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 
 
 # ---------------------------------------------------------------------------

@@ -28,7 +28,8 @@ Stage 3: Assemble Research Bundle
     - Call Research Assembler with requests
     - Return MicroAnalysis (discovery notes) + ResearchBundle
 
-Model: Claude Sonnet 4.6 with adaptive thinking (effort=max)
+Model: Claude Sonnet 5.5, adaptive thinking at effort xhigh (Session 394; was Sonnet 4.6,
+budgeted thinking at effort max). A/B: archive/psalm_76_S394_micro_sonnet55_ab/README.md
 Input: MacroAnalysis + Psalm text (Hebrew/English/LXX) + RAG context
 Output: MicroAnalysis (discovery notes) + ResearchBundle
 
@@ -392,7 +393,20 @@ class MicroAnalystV2:
     """
 
     # Class-level constant for the default model (single source of truth)
-    DEFAULT_MODEL = "claude-sonnet-4-6"
+    # Session 394: Sonnet 5.5 at xhigh replaced Sonnet 4.6 (Ps 76 + Ps 77 A/B: as many or more
+    # insights and figurative flags, sharper cross-references, ~half the prose per item,
+    # ~25-30% cheaper, ~2x faster). At effort max it thought through all 128K tokens and
+    # wrote nothing (Ps 76), so the ladder below never goes above xhigh.
+    DEFAULT_MODEL = "claude-sonnet-5-5"
+
+    # Models that still accept thinking={"type": "enabled", "budget_tokens": N}. Every newer
+    # model 400s on it and runs adaptive thinking, whose depth is set only by effort.
+    BUDGETED_THINKING_MODELS = ("claude-sonnet-4-6", "claude-sonnet-4-5", "claude-opus-4-6")
+    # Stage 1 effort for adaptive-only models, then the step-downs used when an attempt
+    # comes back empty or cut off at max_tokens. Retrying at the same effort would only
+    # repeat the failure (thinking cannot be capped on these models).
+    ADAPTIVE_EFFORT_LADDER = ("xhigh", "high", "medium")
+    ADAPTIVE_MAX_TOKENS = 128000
 
     def __init__(
         self,
@@ -546,9 +560,23 @@ class MicroAnalystV2:
 
         # Anthropics adaptive thinking can consume the entire budget, leaving nothing for JSON.
         # Session 294 Fix: Apply budgeted thinking universally for all psalm lengths to prevent token exhaustion.
-        use_budgeted_thinking = True
+        # Session 394: only the models that still accept budget_tokens; the rest run adaptive
+        # thinking down ADAPTIVE_EFFORT_LADDER (see _step_down_effort).
+        use_budgeted_thinking = self.model in self.BUDGETED_THINKING_MODELS
+        effort_index = 0
         if use_budgeted_thinking:
             self.logger.info(f"  Starting with budgeted thinking (50% cap) to prevent token exhaustion")
+        else:
+            current_max_tokens = self.ADAPTIVE_MAX_TOKENS
+            self.logger.info(f"  Adaptive thinking at effort {self.ADAPTIVE_EFFORT_LADDER[0]}, "
+                             f"max_tokens {current_max_tokens}")
+
+        def _step_down_effort(reason: str) -> None:
+            nonlocal effort_index
+            if not use_budgeted_thinking and effort_index < len(self.ADAPTIVE_EFFORT_LADDER) - 1:
+                effort_index += 1
+                self.logger.warning(f"  {reason}: retrying at effort "
+                                    f"{self.ADAPTIVE_EFFORT_LADDER[effort_index]}")
 
         for attempt in range(max_retries):
             try:
@@ -566,8 +594,10 @@ class MicroAnalystV2:
                     thinking_budget = int(current_max_tokens * 0.5)  # Reserve 50% for text output
                     thinking_config = {"type": "enabled", "budget_tokens": thinking_budget}
                     self.logger.info(f"  Using budgeted thinking: {thinking_budget} tokens (50% reserved for text)")
+                    effort = "max"  # Maximum effort for deep discovery (Sonnet 4.6)
                 else:
                     thinking_config = {"type": "adaptive"}
+                    effort = self.ADAPTIVE_EFFORT_LADDER[effort_index]
 
                 # Use streaming to avoid 10-minute timeout for large token requests
                 stream = self.client.messages.stream(
@@ -575,7 +605,7 @@ class MicroAnalystV2:
                     max_tokens=current_max_tokens,
                     thinking=thinking_config,
                     output_config={
-                        "effort": "max"  # Maximum effort for deep discovery
+                        "effort": effort
                     },
                     messages=[{
                         "role": "user",
@@ -614,6 +644,17 @@ class MicroAnalystV2:
                 self.logger.info(f"  Response collected: {len(response_text)} chars")
                 self.logger.debug(f"Response text preview: {response_text[:500] if response_text else 'EMPTY'}")
 
+                stop_reason = getattr(final_message, 'stop_reason', None)
+                if stop_reason == 'refusal':
+                    # Not retried: the same prompt would be declined again. (Server-side
+                    # fallback re-runs only cyber / frontier_llm declines, which this is not.)
+                    details = getattr(final_message, 'stop_details', None)
+                    raise RuntimeError(f"{self.model} declined the discovery pass "
+                                       f"(stop_reason=refusal, details={details})")
+                if stop_reason == 'max_tokens':
+                    self.logger.warning(f"  ⚠ Discovery pass cut off at max_tokens ({current_max_tokens})")
+                    _step_down_effort("Output cut off at max_tokens")
+
                 # Strip leading/trailing whitespace before processing
                 response_text = response_text.strip()
 
@@ -640,10 +681,11 @@ class MicroAnalystV2:
                     self.logger.error(f"Model: {self.model}")
                     self.logger.error(f"Thinking text length: {len(thinking_text)}")
                     if attempt < max_retries - 1:
-                        # Adaptive thinking consumed all tokens — switch to budgeted mode to reserve space for text
-                        use_budgeted_thinking = True
-                        current_max_tokens = 65536  # Keep at max; thinking budget will be capped at 70%
-                        self.logger.warning("Adaptive thinking consumed all tokens. Retrying with budgeted thinking (70% cap)...")
+                        if use_budgeted_thinking:
+                            current_max_tokens = 65536  # Keep at max; thinking budget stays capped at 50%
+                            self.logger.warning("Thinking consumed all tokens. Retrying with budgeted thinking...")
+                        elif stop_reason != 'max_tokens':  # a cut-off already stepped down above
+                            _step_down_effort("Empty response")
                         continue
                     else:
                         raise ValueError("MicroAnalyst returned empty text block. This may be due to adaptive thinking mode allocating all tokens to thinking.")
@@ -774,13 +816,23 @@ class MicroAnalystV2:
 
                 # Use streaming to avoid potential timeout
                 # Psalm 18 (51 verses) requires ~26K chars of JSON output, so we need high max_tokens
+                # Session 394: Stage 2 runs WITHOUT thinking, as it always has. Sonnet 4.x does that
+                # when `thinking` is omitted; on Sonnet 5.5 omitting it means adaptive ON and
+                # {"type": "disabled"} is a 400 -- its thinking-off setting is "between_tools",
+                # allowed only at effort high or below.
+                stage2_kwargs = {}
+                if "sonnet-5-5" in self.model:  # between_tools is a 400 on every other model
+                    stage2_kwargs = {"thinking": {"type": "between_tools"},
+                                     "output_config": {"effort": "high"}}
                 stream = self.client.messages.stream(
                     model=self.model,
-                    max_tokens=16384,  # Increased from 8K to handle long psalms like Psalm 18 (51 verses)
+                    # 16K handled Ps 18 (51 verses, ~26K chars of JSON); 32K for Ps 78/89/119
+                    max_tokens=32768,
                     messages=[{
                         "role": "user",
                         "content": prompt
-                    }]
+                    }],
+                    **stage2_kwargs
                 )
 
                 # Collect response chunks

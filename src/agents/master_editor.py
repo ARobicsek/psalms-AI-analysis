@@ -923,8 +923,10 @@ class MasterEditor(MasterEditorV2):
         macro_analysis = self._load_json_file(Path(macro_file))
         micro_analysis = self._load_json_file(Path(micro_file))
         research_bundle_raw = self._load_text_file(Path(research_file))
+        # Session 394: the same verse-scaled ceiling as the writer (the shared cache needs it)
+        from src.utils.research_trimmer import max_chars_for_psalm
         research_bundle, _, _ = self.research_trimmer.trim_bundle(
-            research_bundle_raw, max_chars=350000
+            research_bundle_raw, max_chars=max_chars_for_psalm(psalm_number)
         )
         psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
         phonetic_section = self._format_phonetic_section(micro_analysis)

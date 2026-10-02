@@ -374,11 +374,11 @@ def run_enhanced_pipeline(
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
     skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
-    fact_check: bool = False,        # Session 385: OFF until the author approves -- see STEP 5a¾
+    fact_check: bool = True,         # Session 385 built it; Session 394: ON by default (the author)
     writer_prompt: str = "forest",   # Session 387: two-call forest writer; "v4" = the old one-call prompt
     copy_edit_mode: str = None,      # Session 388: None -> CopyEditor.DEFAULT_EDIT_MODE; "edits" = FIND/REPLACE only
-    reception: bool = False,         # Session 391: add the Sefaria reception section to the bundle (A/B; OFF)
-    targum: bool = False,            # Session 391: a **Targum:** line per verse in the writer's psalm text (A/B; OFF)
+    reception: bool = True,          # Session 391: the Sefaria reception section in the bundle (S394: ON by default)
+    targum: bool = True,             # Session 391: a **Targum:** line per verse in the writer's psalm text (S394: ON)
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -822,7 +822,9 @@ def run_enhanced_pipeline(
                 research_bundle_content = ""
 
         if research_bundle_content:
-            trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+            from src.utils.research_trimmer import max_chars_for_psalm  # Session 394: verse-scaled
+            trimmed, _, _ = research_trimmer.trim_bundle(
+                research_bundle_content, max_chars=max(400000, max_chars_for_psalm(psalm_number)))
             trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
             with open(trimmed_research_file, 'w', encoding='utf-8') as f:
                 f.write(trimmed)
@@ -1444,14 +1446,17 @@ if __name__ == "__main__":
     parser.add_argument("--beta-model", type=str, default=None,
                        help="Override the beta-reader model (default: claude-sonnet-4-6)")
 
-    parser.add_argument("--reception", action="store_true",
-                        help="Session 391 (A/B, OFF by default): add the Sefaria reception section "
+    # Session 394: the author made all three the default; --no-reception / --no-targum /
+    # --no-fact-check turn them off (e.g. for an A/B arm that must match an older run).
+    parser.add_argument("--reception", action=argparse.BooleanOptionalAction, default=True,
+                        help="Session 391 (ON by default since S394): add the Sefaria reception section "
                              "(Talmud, midrash, later readers; fixed rules, $0) to the research bundle")
-    parser.add_argument("--targum", action="store_true",
-                        help="Session 391 (A/B, OFF by default): a Targum line per verse in the writer's psalm text")
-    parser.add_argument("--fact-check", action="store_true",
-                        help="Session 385 (experimental, OFF by default): evidence-based fact check "
-                             "(gpt-6-sol + web search, ~$2-4) before the copy editor, which then "
+    parser.add_argument("--targum", action=argparse.BooleanOptionalAction, default=True,
+                        help="Session 391 (ON by default since S394): a Targum line per verse in the "
+                             "writer's psalm text")
+    parser.add_argument("--fact-check", action=argparse.BooleanOptionalAction, default=True,
+                        help="Session 385 (ON by default since S394): evidence-based fact check "
+                             "(gpt-6-sol + web search, ~$1.6 for Ps 77) before the copy editor, which then "
                              "corrects facts only from its report; plus a $0 citation re-check "
                              "of the copy-edited text where tanakh.db exists")
 

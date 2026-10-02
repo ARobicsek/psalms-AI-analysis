@@ -645,7 +645,9 @@ def run_enhanced_pipeline(
                 research_bundle_content = ""
 
         if research_bundle_content:
-            trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+            from src.utils.research_trimmer import max_chars_for_psalm  # Session 394: verse-scaled
+            trimmed, _, _ = research_trimmer.trim_bundle(
+                research_bundle_content, max_chars=max(400000, max_chars_for_psalm(psalm_number)))
             trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
             with open(trimmed_research_file, 'w', encoding='utf-8') as f:
                 f.write(trimmed)

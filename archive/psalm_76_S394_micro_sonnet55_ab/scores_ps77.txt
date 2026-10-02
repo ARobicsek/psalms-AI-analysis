@@ -1,0 +1,29 @@
+PSALM 77 MICRO ARMS (new ground: 4.6 rows vs the other two 4.6 runs; others vs all three)
+
+                             4.6 prod S5.5 xhigh
+------------------------------------------------
+cost $                              —      0.687
+output tokens                       —     60,463
+wall clock (min)                    —        7.8
+lexical insights                   53         60
+lexical notes (chars)          24,883     15,255
+chars per insight                 469        254
+figurative flags                   32         37
+interesting questions              12         12
+verse commentary (chars)        7,779      6,009
+JSON bytes                     64,847     53,091
+new phrase targets                  0          4
+
+figurative flags per verse:
+  4.6 prod   [0, 1, 2, 2, 2, 1, 2, 1, 2, 3, 2, 0, 0, 1, 0, 1, 3, 2, 2, 2, 3]
+  S5.5 xhigh [0, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 0, 1, 1, 2, 2, 3, 3, 3, 2]
+
+=== S5.5 xhigh: 4 new phrase targets ===
+  v1: לאסף
+      Asaph collection (50, 73-83). Shares with Ps 73 the verbs אחז (73:23 / 77:5), חשב (73:16 / 77:6), and a היא-clause pivot (73:16 / 77:11).
+  v3: ביום צרתי
+      Standard distress formula (Pss 50:15 [Asaph], 86:7, 20:2). Here the response is דרשתי ('sought'), not קראתי ('called'). Day/night (ביום ... לילה) = merism of continuousness.
+  v4: אשיחה
+      שיח = muse/complain/speak aloud. Three occurrences (vv.4, 7, 13), all cohortative. Here absolute, in v.7 עם־לבבי, in v.13 ב־עלילותיך. LXX consistently ἀδολεσχέω ('babble/ruminate').
+  v12: אזכיר
+      Ketiv hiphil אזכיר = proclaim/mention (Isa 63:7 חסדי יהוה אזכיר; Ps 20:8; 45:18; 71:16), cultic/public. Qere אזכור (with מעללי־יה) = private recollection. The text-tradition itself holds the private/liturgical tension that the psalm resolves. LXX Ἐμνήσθην.
