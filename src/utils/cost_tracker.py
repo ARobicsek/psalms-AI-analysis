@@ -370,6 +370,27 @@ PRICING = {
         "cache_write": 0.125,  # 1.25x input (GPT-5.6+), Session 388
         "cache_write_1h": 0.125,
     },
+    # OpenAI FLEX tier (Session 397). Not models: price rows for a response whose
+    # `service_tier` came back "flex" (fact_checker.billing_model). OpenAI's pricing table
+    # (read 2026-10-04) lists Flex = Batch = half of standard on every token class:
+    # gpt-6-sol $1.00 / $0.10 cached / $1.25 cache writes / $5.00; gpt-6-luna $0.05 /
+    # $0.005 / $0.0625 / $0.25. Web-search fees are per call and unchanged.
+    "gpt-6-sol@flex": {
+        "input": 1.00,
+        "output": 5.00,
+        "thinking": 5.00,
+        "cache_read": 0.10,
+        "cache_write": 1.25,
+        "cache_write_1h": 1.25,
+    },
+    "gpt-6-luna@flex": {
+        "input": 0.05,
+        "output": 0.25,
+        "thinking": 0.25,
+        "cache_read": 0.005,
+        "cache_write": 0.0625,
+        "cache_write_1h": 0.0625,
+    },
     # Gemini 3.8 Flash (Google). Session 386: the fact checker's web-evidence gatherer.
     # Verified on Google's pricing page 2026-09-28: "$0.75 through December 31, 2026.
     # $1.50 starting January 1, 2027" input, "$3.75 ... $7.50" output (thinking included),

@@ -55,6 +55,8 @@ def main() -> int:
     ap.add_argument("--db-path", type=Path, default=ROOT / "database" / "tanakh.db")
     ap.add_argument("--no-web-search", action="store_true")
     ap.add_argument("--chunk-chars", type=int, default=None)
+    ap.add_argument("--service-tier", default="flex",
+                    help="OpenAI tier: 'flex' (Session 397 default, half price, slower) or 'default' (standard)")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
@@ -80,7 +82,8 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     fc = FactChecker(model=a.model, effort=a.effort, db_path=a.db_path, web_search=not a.no_web_search,
                      web_model=a.web_model,
-                     review_model=None if a.review_model.lower() == "none" else a.review_model, **kw)
+                     review_model=None if (a.review_model or "none").lower() == "none" else a.review_model,
+                     service_tier=None if a.service_tier == "default" else a.service_tier, **kw)
     res = fc.check(guide, a.psalm, bundle, thinking_out=out_dir / f"{a.prefix}psalm_{a.psalm:03d}_fact_check_thinking.txt")
     paths = write_outputs(res, a.psalm, out_dir, a.prefix)
     m = res.meta(a.psalm)

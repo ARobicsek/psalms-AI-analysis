@@ -26,6 +26,33 @@ rabbinic Ḥizkiya, Shabbat 88a); v5 found three errors no other run did (Meiri'
 Resh Lakish does not name the sixth of Sivan; the seventh day of creation also has the article). Judge one run, not the
 best-of.
 
+## Session 397: $2.76 → $1.22 on Ps 79, same model, same effort
+
+By Ps 79 (13 verses, the first guide with the S395 liturgy section) the check had grown to **$2.76**, $2.60 of it stage 1.
+Its anatomy: cache **writes** 511K tokens × $2.50 = $1.28, cached reads 3.2M × $0.20 = $0.64, output + reasoning $0.68.
+The cache was working (writes ≈ the unique context; nothing missed); **79% of the written tokens were lookup results**,
+and `search_liturgy` + `get_text` were 87% of those (liturgy searches up to 11K chars each, half of it `every_ref`).
+Rounds were already batched (~8 lookups a round, ~10 rounds a chunk). Two changes, both shipped:
+
+1. **OpenAI Flex** (`DEFAULT_SERVICE_TIER = "flex"`): the same model at Batch prices, **half** of standard on every token
+   class (gpt-6-sol $1 / $0.10 / $1.25 write / $5), slower and occasionally `429 Resource Unavailable` (not billed;
+   `_create` waits, and on the third try asks for the standard tier). Each response is billed by the tier the API
+   REPORTS (`billing_model` → the `gpt-6-sol@flex` / `gpt-6-luna@flex` rows in `cost_tracker.PRICING`), so a fallback
+   costs standard and the cost file shows which. `run_fact_checker.py --service-tier default` for the old tier.
+2. **Compacted lookups, nothing a check needs removed**: liturgy passages and `get_text` Hebrew go out **unpointed**
+   (cut first, so the same span; a verse's pointing stays in `get_verse` and the evidence block); `every_ref` grouped
+   by book (`group_refs`; `get_text` takes the shortened 'book, place'); a passage reprinted word for word **between
+   the same neighbouring prayers** is shown once with `also_in` (neighbours are in the key: order is what liturgical
+   claims get wrong). Replayed at $0: Ps 79's lookups 406K → 225K tokens, Ps 78's 390K → 265K.
+
+Validated on Ps 79's own pre-copy-edit guide (`archive/psalm_79_S397_fact_check_cost/README.md`): **$1.22**, 25
+contradicted vs 29; every disagreement read: ~11 real catches each side the other missed, one false alarm each side —
+the S386 run-to-run spread, not a loss. Flex did not slow it down (stage-1 chunks 79–168 s vs 95–156 s).
+
+Not done: compacting the supported records (≈ $0.08 at flex prices, a schema change); the per-verse liturgy catalogue as
+a lookup (would replace many `search_liturgy` calls, but changes what the checker sees — needs its own A/B). With the
+check at half price, **two independent passes merged** (~$2.4) is now affordable if recall ever matters more than cost.
+
 ## The design (v5)
 
 1. **Stage 1, local — gpt-6-sol, effort `high`, no web.** Each chunk (≈13K chars of the guide, section-aligned) starts with

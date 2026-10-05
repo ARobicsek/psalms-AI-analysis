@@ -490,7 +490,7 @@ def test_search_liturgy_hebrew_phrase_gives_passage_and_neighbours(tmp_path):
     r = search_liturgy("אזכרה אלהים ואהמיה", _tiny_liturgy_db(tmp_path))   # consonants only, like Ps 77:4
     assert r["matches"] == 1
     hit = r["prayers"][0]
-    assert "Sanctification of the Day" in hit["ref"] and "אֶזְכְּרָה" in hit["text"]
+    assert "Sanctification of the Day" in hit["ref"] and "אזכרה" in hit["text"]   # S397: unpointed
     assert (hit["before"], hit["after"]) == ("Ashrei", "Avinu Malkenu")
 
 
@@ -510,7 +510,11 @@ def test_get_text_answers_a_liturgy_ref_from_disk_without_the_network(tmp_path, 
     monkeypatch.setattr(fc, "_sefaria_text", lambda *a, **k: pytest.fail("network used"))
     ref = "Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Avinu Malkenu, Avinu Malkenu"
     out = fc.lookup_text(ref, liturgy_db=db)
-    assert out["source"].startswith("liturgy.db") and out["hebrew"] == "אָבִינוּ מַלְכֵּנוּ"
+    assert out["source"].startswith("liturgy.db") and out["hebrew"] == "אבינו מלכנו"   # S397: unpointed
+    assert "get_verse" in out["hebrew_pointing"]
+    # Session 397: every_ref's shortened 'book, place' form finds the same prayer.
+    short = fc.lookup_text("Machzor Yom Kippur Ashkenaz, Neilah; Concluding Service, Avinu Malkenu", liturgy_db=db)
+    assert short["ref"] == ref and short["hebrew"] == "אבינו מלכנו"
 
 
 def test_failed_get_text_says_what_to_do_instead(monkeypatch):
@@ -670,5 +674,72 @@ def test_search_liturgy_lists_every_ref_when_hits_exceed_the_shown_passages(tmp_
     from src.agents.fact_checker import search_liturgy
     db = _tiny_liturgy_db(tmp_path)
     r = search_liturgy("Ne'ilah", db, max_hits=2)
-    assert r["matches"] == 3 and len(r["prayers"]) == 2 and len(r["every_ref"]) == 3
+    assert r["matches"] == 3 and len(r["prayers"]) == 2
+    # Session 397: grouped by book, the repeated last segment dropped; still every match.
+    assert r["every_ref"] == {"Machzor Yom Kippur Ashkenaz": [
+        "Neilah; Concluding Service, Ashrei", "Neilah; Concluding Service, Sanctification of the Day",
+        "Neilah; Concluding Service, Avinu Malkenu"]}
     assert "every_ref" not in search_liturgy("Ne'ilah", db)
+
+
+def test_search_liturgy_shows_a_reprint_once_only_between_the_same_neighbours(tmp_path, monkeypatch):
+    # Session 397: the same words between the same prayers in two books = one shown passage
+    # (also_in); the same words between DIFFERENT prayers stay separate (order errors).
+    from src.agents import fact_checker as fc
+    def place(d):
+        return {"book": d["book"], "service": "S", "before": d["before"], "after": "Z"}
+    rows = [{"sefaria_ref": f"{b}, S, X, X", "book": b, "before": bf, "hebrew_text": "שְׁפֹךְ חֲמָתְךָ אֶל הַגּוֹיִם"}
+            for b, bf in (("Book A", "Hallel"), ("Book B", "Hallel"), ("Book C", "Grace"))]
+    monkeypatch.setattr(fc, "_liturgy_rows", lambda db=None: rows)
+    monkeypatch.setattr(fc, "_prayer_place", lambda rs, d: place(d))
+    r = fc.search_liturgy("שפך חמתך", max_hits=6)
+    assert r["matches"] == 3 and len(r["prayers"]) == 2
+    assert r["prayers"][0]["also_in"] == ["Book B, S, X"] and "also_in" not in r["prayers"][1]
+    assert r["prayers"][0]["text"] == "שפך חמתך אל הגוים"
+
+
+def test_unpoint_keeps_letters_and_punctuation():
+    from src.agents.fact_checker import unpoint, short_ref
+    assert unpoint("כִּי־אֵלֵךְ׃ וַיֹּ֣אמֶר") == "כי־אלך׃ ויאמר"     # maqaf and sof pasuq stay
+    assert short_ref("Siddur Ashkenaz, Weekday, Shacharit, Amidah, Amidah") == "Siddur Ashkenaz, Weekday, Shacharit, Amidah"
+    assert short_ref("Book, Amidah") == "Book, Amidah"
+
+
+def test_flex_responses_are_billed_on_the_flex_row_and_fallbacks_on_standard():
+    # Session 397: the tier comes from the RESPONSE; a standard-tier fallback costs standard.
+    from src.agents.fact_checker import billing_model
+    from src.utils.cost_tracker import price_tokens
+    assert billing_model("gpt-6-sol", "flex") == "gpt-6-sol@flex"
+    assert billing_model("gpt-6-sol", "default") == "gpt-6-sol"
+    assert billing_model("gpt-6-sol", None) == "gpt-6-sol"
+    assert billing_model("gemini-3.1-pro-preview", "flex") == "gemini-3.1-pro-preview"   # no flex row
+    kw = dict(input_tokens=1000, cached_input_tokens=50000, cache_write_tokens=20000,
+              output_tokens=3000, thinking_tokens=2000)
+    assert price_tokens("gpt-6-sol@flex", **kw) == pytest.approx(price_tokens("gpt-6-sol", **kw) / 2)
+    assert price_tokens("gpt-6-luna@flex", **kw) == pytest.approx(price_tokens("gpt-6-luna", **kw) / 2)
+
+
+def test_flex_unavailable_falls_back_to_the_standard_tier(monkeypatch):
+    from src.agents import fact_checker as fc
+
+    class Busy(Exception):
+        status_code = 429
+
+    seen = []
+
+    class Resp:
+        status, output_text, output = "completed", "{}", []
+
+    class Client:
+        class responses:
+            @staticmethod
+            def create(**kw):
+                seen.append(kw.get("service_tier"))
+                if kw.get("service_tier") == "flex":
+                    raise Busy("Resource Unavailable")
+                return Resp()
+
+    monkeypatch.setattr(fc.time, "sleep", lambda s: None)
+    checker = fc.FactChecker(db_path=None, client=Client(), logger=None)
+    assert isinstance(checker._create(model="gpt-6-sol", service_tier="flex"), Resp)
+    assert seen == ["flex", "flex", "default"]

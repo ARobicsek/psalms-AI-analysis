@@ -1,0 +1,468 @@
+
+FACT-CHECK REPORT (evidence-based — this governs every factual correction you make):
+
+A separate fact-check pass listed the checkable claims in this guide and verified each
+one against sources: the research materials, the biblical text, the commentators' own
+texts, and web search. For FACTUAL claims, follow these rules instead of your own memory:
+
+1. Correct a factual claim ONLY where an item below is marked CONTRADICTED, and only as
+   far as its quoted evidence supports. Make the smallest change that makes the sentence
+   true; keep the author's wording, figures and argument around it. The suggested fix is
+   a starting point, not a script. Prefix each such change-log entry with [FACT-CHECK].
+2. Do NOT correct any other factual claim from memory. If you doubt a claim that is not
+   listed as contradicted, leave the text unchanged and list the doubt at the end of your
+   ## Changes section under a line reading `### UNVERIFIED` (one line each: location,
+   the claim, why you doubt it). Those lines are notes for the author, not edits.
+3. Leave claims marked SUPPORTED or UNVERIFIABLE alone as matters of fact.
+
+Your other categories (style of argument, clarity, Hebrew script, glosses, banned phrases)
+are unaffected.
+
+CONTRADICTED (25):
+1. Blood left uncovered: "When the sixty Hasideans were murdered in 161 BCE, 1 Maccabees 7:17 quoted the psalm as fulfilled scripture, but only from its second half: "the flesh of Your *ḥăsîdîm*.""
+   Claim: The author quotes only the flesh phrase.
+   Finding: The quotation continues through Psalm 79:3, including the blood and the absence of burial.
+   Evidence — The Book of Maccabees I 7:16–17 (https://www.sefaria.org/The_Book_of_Maccabees_I_7:16-17): "ככתוב בשר חסידיך לחיתו ארץ, שפכו דמם כמים סביבות ירושלים ואין קובר."
+   Suggested fix: Change “but only from its second half: ‘the flesh of Your ḥăsîdîm’” to “beginning with ‘the flesh of Your ḥăsîdîm’ and continuing through verse 3.”
+
+2. The bargain at the center: "The rabbis explained the question with Lamentations 4:11, כִּלָּה ה׳ אֶת־חֲמָתוֹ, "the Lord has spent His fury," which goes on to say He poured out His anger and kindled a fire in Zion."
+   Claim: Rabbis used Lamentations to explain verse 5’s question.
+   Finding: The rabbinic question is why the heading says “psalm” rather than “lament,” not the “How long?” of verse 5.
+   Evidence — Lamentations Rabbah 4:14 (https://www.sefaria.org/Lamentations_Rabbah_4:14): "לא הוה קרא צריך למימר אלא בכי לאסף, נהי לאסף, קינה לאסף, ומה אומר מזמור לאסף ... מזמר אני ששפך הקדוש ברוך הוא חמתו על העצים ועל האבנים"
+   Suggested fix: Change “The rabbis explained the question” to “The rabbis answered a different question about the psalm’s heading.”
+
+3. The psalm in other mouths: "The psalm is full of the Exodus: "inheritance" and "pasture" come from the Song of the Sea, and so does "the greatness of Your arm.""
+   Claim: The Song of the Sea supplies “pasture.”
+   Finding: The Song has inheritance and the greatness of God’s arm, but not the psalm’s pasture term or flock-of-pasture image.
+   Evidence — Exodus 15:13, 16–17: "נֵהַ֥לְתָּ בְעׇזְּךָ֖ אֶל־נְוֵ֥ה קׇדְשֶֽׁךָ ... בִּגְדֹ֥ל זְרוֹעֲךָ֖ יִדְּמ֣וּ כָּאָ֑בֶן ... בְּהַ֣ר נַחֲלָֽתְךָ֔"
+   Evidence — Psalms 79:13: "וְצֹ֥אן מַרְעִיתֶךָ֮"
+   Suggested fix: Change “ ‘inheritance’ and ‘pasture’ come from the Song of the Sea, and so does ‘the greatness of Your arm’” to “ ‘inheritance’ and ‘the greatness of Your arm’ recall the Song of the Sea.”
+
+4. Key verses: "The same pair ends every day of the Lithuanian and Polish Ashkenaz selichot and the Edot HaMizrach selichot."
+   Claim: Pair ends Edot HaMizrach selichot.
+   Finding: Unlike the Lithuanian and Polish texts, the Edot HaMizrach text continues with Shomer Yisrael after verse 9.
+   Evidence — Selichot Edot HaMizrach (https://www.sefaria.org/Selichot_Edot_HaMizrach): "עזרנו אלהי ישענו על דבר כבוד שמך. והצילנו וכפר על חטאתינו למען שמך: שומר ישראל. שמר שארית ישראל. ואל יאבד ישראל"
+   Suggested fix: The same pair ends every day of the Lithuanian and Polish Ashkenaz selichot; the Edot HaMizrach selichot also include it, but continue afterward.
+
+5. Key verses: "On Yom Kippur it stands in the run of verses after the Thirteen Attributes."
+   Claim: Both verses occur together in Yom Kippur run.
+   Finding: The antecedent is the pair, vv. 8–9. This Yom Kippur sequence has verse 8, followed by another verse rather than verse 9.
+   Evidence — Machzor Yom Kippur Ashkenaz, Maariv Service for Yom Kippur Eve, Yaaleh (https://www.sefaria.org/Machzor_Yom_Kippur_Ashkenaz,_Maariv_Service_for_Yom_Kippur_Eve,_Yaaleh): "זכר רחמיך יהוה וחסדיך כי מעולם המה: אל תזכר לנו עו‍נות ראשונים. מהר יקדמונו רחמיך כי דלונו מאד: זכרנו יהוה ברצון עמך פקדנו בישועתך:"
+   Suggested fix: On Yom Kippur v. 8 also stands in a run of verses after the Thirteen Attributes.
+
+6. Key verses: "Weekday Maariv in Ashkenaz and Sefard closes its sequence of verses beginning *Baruch Hashem le'olam* with וַאֲנַחְנוּ עַמְּךָ וְצֹאן מַרְעִיתֶךָ נוֹדֶה לְּךָ לְעוֹלָם, "And we, Your people and the flock of Your pasture, will thank You forever.""
+   Claim: Psalm 79:13 closes Maariv verse sequence.
+   Finding: The verse occurs within the sequence; further verses follow it.
+   Evidence — Siddur Ashkenaz, Weekday, Maariv, Blessings of the Shema, Third Blessing after Shema (https://www.sefaria.org/Siddur_Ashkenaz,_Weekday,_Maariv,_Blessings_of_the_Shema,_Third_Blessing_after_Shema): "ואנחנו עמך וצאן מרעיתך נודה לך לעולם לדור ודור נספר תהלתך: ברוך יהוה ביום ברוך יהוה בלילה ברוך יהוה בשכבנו ברוך יהוה בקומנו: כי בידך נפשות החיים והמתים"
+   Suggested fix: Weekday Maariv in Ashkenaz and Sefard includes וַאֲנַחְנוּ עַמְּךָ וְצֹאן מַרְעִיתֶךָ נוֹדֶה לְּךָ לְעוֹלָם in its sequence of verses beginning *Baruch Hashem le'olam*.
+
+7. Verse 1: "In the selichot for the Tenth of Tevet (Ashkenaz), for Asara B'Tevet and 20 Sivan (Sefard), and on the fourth of the Ten Days in the Lithuanian rite, it begins a run of "O God" pleas after the Thirteen Attributes: "For You, Lord, are good and forgiving… O God, nations have come into Your inheritance… O God, arrogant men have risen against us.""
+   Claim: All named settings next say “O God, arrogant.”
+   Finding: The Lithuanian fourth-day sequence does contain Psalm 79:1, but does not follow it with the quoted “O God, arrogant men” plea.
+   Evidence — Selichot Nusach Ashkenaz Lita, Fourth Day of the Ten Days of Penitence (https://www.sefaria.org/Selichot_Nusach_Ashkenaz_Lita,_Fourth_Day_of_the_Ten_Days_of_Penitence): "כי אתה אדני טוב וסלח ורב חסד לכל קראיך: א‍להים באו גוים בנחלתך טמאו את היכל קדשך שמו את ירושל‍ם לעיים: שפך־עליהם זעמך, וחרון אפך ישיגם: הנשא שפט הארץ"
+   Suggested fix: In those selichot it appears among pleas after the Thirteen Attributes; on the Tenth of Tevet it is followed by “O God, arrogant men have risen against us.”
+
+8. Verse 2: "After David handed over Saul's grandsons to be impaled, their mother Rizpah spread sackcloth on the rock "from the beginning of the harvest until water fell on them from heaven, and she did not let the birds of the sky rest on them by day, nor the beasts of the field by night" (2 Sam 21:10)."
+   Claim: Those handed over were Saul’s grandsons.
+   Finding: Two of the seven were Saul’s sons, borne by Rizpah; the other five were his grandsons. Rizpah was not the mother of all seven.
+   Evidence — II Samuel 21:8–9 (https://www.sefaria.org/II_Samuel.21.8-9): "וַיִּקַּ֣ח הַמֶּ֡לֶךְ אֶת־שְׁ֠נֵ֠י בְּנֵ֨י רִצְפָּ֤ה בַת־אַיָּה֙ אֲשֶׁ֣ר יָלְדָ֣ה לְשָׁא֔וּל ... וְאֶת־חֲמֵ֗שֶׁת בְּנֵי֙ מִיכַ֣ל בַּת־שָׁא֔וּל ... וַֽיִּתְּנֵ֞ם בְּיַ֣ד הַגִּבְעֹנִ֗ים וַיֹּקִיעֻ֤ם בָּהָר֙"
+   Suggested fix: After David handed over two of Saul’s sons and five of his grandsons to be impaled, Rizpah, the two sons’ mother, spread sackcloth on the rock
+
+9. Verse 3: "Say the first half aloud: `shā-fə-KHŪ dhā-MĀM kam-MA-yim sə-viy-VŌTH yə-rū-shā-LĀM`."
+   Claim: Jerusalem is pronounced yə-rū-shā-LĀM
+   Finding: The vocalized name is pronounced Yerushalayim, not Yerushalam; the transliteration drops its final -yim syllable.
+   Evidence — Psalm 79:3, Masoretic text: "סְֽבִ֘יב֤וֹת יְֽרוּשָׁלָ֗͏ִם"
+   Suggested fix: Change `yə-rū-shā-LĀM` to `yə-rū-shā-LĀ-yim`.
+
+10. Verse 3: "A strophe of the Edot HaMizrach kinah for Tisha B'Av night, whose refrain is עֵינִי עֵינִי יוֹרְדָה מַּיִם, "my eye, my eye runs down with water," reads:"
+   Claim: Quoted strophe has the tears refrain
+   Finding: The tears refrain belongs to the preceding kinah. The quoted strophe begins another lament, which repeats “סביבות סביבות ירושלים.”
+   Evidence — Seder Tisha B'Av (Edot HaMizrach), Tisha B'Av Night (https://www.sefaria.org/Seder_Tisha_B'Av_(Edot_HaMizrach),_Tisha_B'Av_Night): "מרה הלילה הזה ארים. ויהי לבכי ליל שמורים. ואותי החרים. אל מוציאם ממצרים: לירושלים. עיני עיני יורדה מים: (יבקע אורי יה כשחר. על רשעים צור אפו יחר. ובעמו יבחר. הבוחר בירושלים:) זכור יהוה ליהודה ואפרים. אשר שפך דמם כמים. סביבות סביבות ירושלים: זכור יהוה למשיח הנקרא. אשר עשו את גופו ככברה. ולא נותר חץ אשר בו לא ירה. לכן עליו אבכה בנפש מרה. לשבר זה רפו כל ידים. סביבות סביבות ירושלים:"
+   Suggested fix: Replace “whose refrain is עֵינִי עֵינִי יוֹרְדָה מַּיִם, ‘my eye, my eye runs down with water,’” with “whose refrain is סְבִיבוֹת סְבִיבוֹת יְרוּשָׁלַיִם.”
+
+11. Verse 3: "סְבִיבוֹת יְרוּשָׁלַיִם."
+   Claim: Kinah’s quoted line says סביבות once
+   Finding: The line repeats סביבות.
+   Evidence — Seder Tisha B'Av (Edot HaMizrach), Tisha B'Av Night (https://www.sefaria.org/Seder_Tisha_B'Av_(Edot_HaMizrach),_Tisha_B'Av_Night): "זכור יהוה ליהודה ואפרים. אשר שפך דמם כמים. סביבות סביבות ירושלים:"
+   Suggested fix: Quote “סְבִיבוֹת סְבִיבוֹת יְרוּשָׁלַיִם.”
+
+12. Verse 4: "In later Hebrew a word spelled the same way, קִלּוּס, came to mean the opposite: praise, laudation."
+   Claim: קֶלֶס and קִלּוּס are spelled identically
+   Finding: קלס and קילוס differ in written vowel letters. Here spelling itself, rather than merely their shared consonantal root, is the claim.
+   Evidence — Psalm 79:4, Masoretic text: "לַ֥עַג וָ֝קֶ֗לֶס"
+   Evidence — Klein Dictionary, entries on קלס: "Derivatives: קֶלֶס ᴵᴵ, קִלּוּס ᴵᴵ"
+   Suggested fix: Change “a word spelled the same way” to “a similarly spelled word.”
+
+13. Verse 5: "Radak and Meiri hear the "how long" against the Babylonian exile, which was promised to last only seventy years and still felt endless."
+   Claim: Meiri reads only the Babylonian exile
+   Finding: Meiri first proposes the long exile; he offers the first exile’s seeming length as an alternative. The guide presents his alternative as his sole reading.
+   Evidence — Meiri on Psalm 79:5: "נראה שרמז על הגלות הארוך או שמא אף הראשון היה ארוך בעיניו וכמו שמצינו שאמ׳ על אותו הגלות ג״כ עד מתי אתה לא תרחם את ירושלם"
+   Suggested fix: Change the opening to “Radak hears the ‘how long’ against the Babylonian exile; Meiri first suggests the long exile, or alternatively that even the Babylonian exile felt endless.”
+
+14. Verses 6–7: "Rabbi Yossi ben Dormaskit reads it as "I will make Him a נָוֶה, a dwelling," that is, a Temple, and his proof is this verse: וְאֶת־נָוֵהוּ הֵשַׁמּוּ, "and they have laid waste His dwelling.""
+   Claim: Rabbi Yossi says “make Him a dwelling”
+   Finding: His stated wording is that he will make a beautiful Temple before God, not that he will make God a dwelling. He also adduces Isaiah 33:20 alongside the psalm.
+   Evidence — Mekhilta DeRabbi Yishmael, Tractate Shirah 3:12 (https://www.sefaria.org/Mekhilta_DeRabbi_Yishmael,_Tractate_Shirah_3:12): "רבי יוסה בן דרמסקית אומר: אעשה לפניו בית מקדש נאה. ואין 'נאה' אלא בית המקדש, שנאמר: (תהלים עט,י) "ואת נוהו השמו." (ישעיה לג,כ) "חזה ציון קרית מועדנו, עיניך תראינה ירושלם, נוה שאנן"."
+   Suggested fix: Rabbi Yossi ben Dormaskit reads it as “I will make a beautiful Temple before Him,” citing this verse and Isaiah 33:20 as proofs.
+
+15. Verses 6–7: "The Lithuanian selichot for Erev Rosh Hashanah, and a kinah of Edot HaMizrach for Tisha B'Av day, end on the verse about devouring Jacob."
+   Claim: Lithuanian selichot end on Psalm 79:7
+   Finding: The Lithuanian passage continues after the Jacob verse and changes אָכַל to the plural אכלו.
+   Evidence — Selichot Nusach Ashkenaz Lita, Erev Rosh Hashana (https://www.sefaria.org/Selichot_Nusach_Ashkenaz_Lita,_Erev_Rosh_Hashana): "אל תבא במשפט עמנו כי לא יצדק לפניך כל חי: כי אכלו את־יעקב ואת־נוהו השמו׃ אהלי אדום וישמעאלים מואב והגרים׃ כי־שבעה ברעות נפשנו וחיינו לשאול הגיעו׃"
+   Suggested fix: The Lithuanian selichot for Erev Rosh Hashanah include a pluralized version of the verse about devouring Jacob; a kinah of Edot HaMizrach for Tisha B’Av day closes a stanza with its singular form.
+
+16. Verse 8: "Ibn Ezra notes that most interpreters read it as an adjective and then disagrees: "the right reading in my eyes" is that the iniquities belong to אָבוֹת רִאשֹׁנִים, "the first fathers.""
+   Claim: Ibn Ezra says most interpreters agree
+   Finding: רבים means “many,” not necessarily “most.” His preferred ancestral reading is accurately reported.
+   Evidence — Ibn Ezra on Psalms 79:8: "מפרשים רבים אמרו: כי ראשונים תאר לעוונות. והנכון בעיני: כי עוונות סמוך לאבות ראשונים"
+   Suggested fix: Ibn Ezra notes that many interpreters read it as an adjective and then disagrees: “the right reading in my eyes” is that the iniquities belong to אָבוֹת רִאשֹׁנִים, “the first fathers.”
+
+17. Verse 8: "The debt is not cancelled, and the file still exists."
+   Claim: Affected credit file necessarily still exists
+   Finding: The CFPB says the information may remain on file, not that it necessarily does.
+   Evidence — Consumer Financial Protection Bureau, How long does information stay on my credit report? (https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/): "Even though credit reporting companies usually won’t report this negative information after these limits they still may keep your information on file."
+   Suggested fix: The debt is not cancelled, and the file may still exist.
+
+18. Verse 8: "The verse, with v. 9, closes Tachanun daily (see the liturgical section)."
+   Claim: Verses 8–9 directly close daily Tachanun
+   Finding: The verses occur in a closing portion of Ashkenaz Tachanun, but other petitions separate them; this section is also followed by another prayer.
+   Evidence — Siddur Ashkenaz, Weekday, Shacharit, Post Amidah, Tachanun, Shomer Yisrael (https://www.sefaria.org/Siddur_Ashkenaz,_Weekday,_Shacharit,_Post_Amidah,_Tachanun,_Shomer_Yisrael,_Shomer_Yisrael): "אל תזכר לנו עונות ראשונים מהר יקדמונו רחמיך כי דלונו מאד: חננו יהוה חננו כי־רב שבענו בוז: ברגז רחם תזכור: כי הוא ידע יצרנו זכור כי עפר אנחנו: עזרנו אלהי ישענו על־דבר כבוד־שמך והצילנו וכפר על־חטאתינו למען שמך:"
+   Suggested fix: The verse and v. 9 appear in the closing portion of weekday Tachanun (see the liturgical section).
+
+19. Verse 9: "At their father's tomb in Aeschylus' *Libation Bearers* (458 BCE), Agamemnon's children make the same bargain with Zeus:"
+   Claim: Both children make the quoted plea
+   Finding: The quoted appeal is spoken by Orestes: he refers to Electra as another person, rather than both children delivering that plea together.
+   Evidence — Aeschylus, Libation Bearers — Theoi Classical Texts Library (https://www.theoi.com/Text/AeschylusLibation.html): "O Zeus, O Zeus, regard our cause! Behold the orphaned brood ... So you see both me and poor Electra here"
+   Evidence — Aeschylus, Libation Bearers — Vancouver Island University e-text (https://web.viu.ca/johnstoi/aeschylus/libationbearers.htm): "O Zeus, let me avenge my father’s death. Support me as my ally in this fight."
+   Suggested fix: At their father's tomb in Aeschylus' *Libation Bearers* (458 BCE), Orestes makes the same bargain with Zeus:
+
+20. Verse 9: "In the Monday and Thursday Tachanun, the line just before this verse is וּבְכָל־זֹאת שִׁמְךָ לֹא שָׁכַחְנוּ, נָא אַל תִּשְׁכָּחֵנוּ, "and despite all this we have not forgotten Your name; please do not forget us.""
+   Claim: Quoted line immediately precedes Psalm 79:9
+   Finding: A repeated refrain intervenes between the quoted line and Psalm 79:9.
+   Evidence — Siddur Ashkenaz, Weekday, Shacharit, Post Amidah, Tachanun, God of Israel (https://www.sefaria.org/Siddur_Ashkenaz,_Weekday,_Shacharit,_Post_Amidah,_Tachanun,_God_of_Israel,_God_of_Israel): "ובכל־זאת שמך לא שכחנו נא אל תשכחנו: יהוה אלהי ישראל שוב מחרון אפך והנחם על־הרעה לעמך: עזרנו אלהי ישענו על־דבר כבוד־שמך"
+   Suggested fix: In the Monday and Thursday Tachanun, a line shortly before this verse is וּבְכָל־זֹאת שִׁמְךָ לֹא שָׁכַחְנוּ, נָא אַל תִּשְׁכָּחֵנוּ, "and despite all this we have not forgotten Your name; please do not forget us."
+
+21. Verse 9: "The verse's phrase became a fixed formula of piety, used in the prayers after Tashlich, in the Rosh Hashanah annulment of vows (הַמָּקוֹם בְּרַחֲמָיו יַעְזְרֵנוּ עַל דְּבַר כְּבוֹד שְׁמוֹ), and even in the Lag BaOmer songs of the Sefard siddur, where עָזְרֵנוּ אֱלֹקֵי יִשְׁעֵנוּ opens lines that end "by the merit of Bar Yochai's celebration.""
+   Claim: Phrase opens multiple Lag BaOmer song lines
+   Finding: The indexed Sefard Lag BaOmer songs have one occurrence of עזרנו אלהי ישענו, in one line of Ashreinu Ma Tov, not lines in multiple songs.
+   Evidence — Siddur Sefard, Lag BaOmer Songs, Ashreinu Ma Tov; liturgy phrase search (https://www.sefaria.org/Siddur_Sefard,_Lag_BaOmer_Songs,_Ashreinu_Ma_Tov,_Ashreinu_Ma_Tov): "עזרנו אלהי ישענו על דבר כבוד שמך, בזכות הלולא דבר יוחאי: אשרנו מה טוב חלקנו בהלולא דבר יוחאי:"
+   Suggested fix: The verse's phrase became a fixed formula of piety, used in the prayers after Tashlich, in the Rosh Hashanah annulment of vows (הַמָּקוֹם בְּרַחֲמָיו יַעְזְרֵנוּ עַל דְּבַר כְּבוֹד שְׁמוֹ), and even in a Lag BaOmer song of the Sefard siddur, where עָזְרֵנוּ אֱלֹקֵי יִשְׁעֵנוּ opens a line that ends "by the merit of Bar Yochai's celebration."
+
+22. Verse 11: "The verse is also said in the Lithuanian selichot (the first day, the Fast of Gedaliah, the fourth of the Ten Days), in the Polish selichot (the first and third days, and the third and fifth of the Ten Days), and in the Sefard selichot for the "First Monday.""
+   Claim: Polish ordinary third day contains verse
+   Finding: The index's complete list of Polish-rite matches does not include the ordinary Third Day; it does include the third day of the Ten Days.
+   Evidence — Liturgy phrase index, תבוא לפניך אנקת אסיר: "Selichot Nusach Polin: First Day; Third Day of the Ten Days of Penitence; Fifth Day of the Ten Days of Penitence"
+   Suggested fix: The verse is also said in the Lithuanian selichot (the first day, the Fast of Gedaliah, the fourth of the Ten Days), in the Polish selichot (the first day, and the third and fifth of the Ten Days), and in the Sefard selichot for the "First Monday."
+
+23. Verse 12: "In Tanchuma Buber (Ki Teitzei), Rabbi Judan bar Gadya says the neighbor Amalek mutilated the circumcised and threw the flesh skyward, saying "Here, take what You chose.""
+   Claim: Judan is the speaker describing Amalek’s mutilation
+   Finding: Judan connects “bosom” with circumcision. The account of Amalek’s mutilation is then cited from other rabbis speaking in Rabbi Yohanan’s name.
+   Evidence — Midrash Tanchuma Buber, Ki Teitzei 10:1 (https://www.sefaria.org/Midrash_Tanchuma_Buber,_Ki_Teitzei_10:1): "ר' יודן בר גדיא אמר יזכר מה שעשה לנו במילה, שהיא נתונה בחיקו של אדם, ואתיא כי האי דאמר ר' חנינא בר שלקא ור' יהושע דסכנין ור' לוי בשם ר' יוחנן, מה היו עושין בני ביתו של עמלק לישראל, היו מחתכין מילותיהן, והיו זורקין כלפי למעלה, ואומרין הא לך מה שבחרת."
+   Suggested fix: In Tanchuma Buber (Ki Teitzei), Rabbi Judan bar Gadya reads the bosom as the site of circumcision; the midrash then cites an account of Amalek mutilating the circumcised and throwing the flesh skyward, saying “Here, take what You chose.”
+
+24. Verse 13: "That single verse contains both ends of our psalm: "anger forever," which Psalm 79 sets at verse 5, and "the flock of Your pasture," which it saves for the last line."
+   Claim: Psalm 74:1 says “anger forever”
+   Finding: In Psalm 74:1, “forever” modifies God’s rejection; the verse separately describes His anger at the flock.
+   Evidence — Psalms 74:1: "לָמָ֣ה אֱ֭לֹהִים זָנַ֣חְתָּ לָנֶ֑צַח יֶעְשַׁ֥ן אַ֝פְּךָ֗ בְּצֹ֣אן מַרְעִיתֶֽךָ׃"
+   Suggested fix: That single verse contains both ends of our psalm: rejection “forever” and anger at the flock, which Psalm 79 brings together in verse 5, and “the flock of Your pasture,” which it saves for the last line.
+
+25. Verse 13: "The psalm two places earlier promised to pass the story on, and this verse promises it again."
+   Claim: Psalm 78 is two psalms before Psalm 79
+   Finding: Psalm 78 immediately precedes Psalm 79.
+   Evidence — Psalms 78:4 and 79:13: "Ps 78:4: לְד֥וֹר אַחֲר֗וֹן מְֽ֭סַפְּרִים תְּהִלּ֣וֹת יְהֹוָ֑ה; Ps 79:13: לְד֥וֹר וָדֹ֑ר נְ֝סַפֵּ֗ר תְּהִלָּתֶֽךָ׃"
+   Suggested fix: The preceding psalm promised to pass the story on, and this verse promises it again.
+
+SUPPORTED (283) — verified; do not change these facts:
+- Introduction: Plate 18 belongs to Goya’s series.
+- Introduction: Plate 18 bears this Spanish title.
+- Introduction: Exactly two survivors appear in the plate.
+- Introduction: The phrase closes Psalm 79:3.
+- Introduction: Both verses mention the neighbors’ reproach.
+- Introduction: The two verses use these words.
+- A God with no past: The listed completed actions have hostile subjects.
+- A God with no past: Two completed verbs describe the community’s condition.
+- A God with no past: No past-tense verb has God as subject.
+- A God with no past: The psalm contains no verbal confession.
+- A God with no past: Sin is named without “we sinned.”
+- A God with no past: Psalm 74:13–14 recounts these divine deeds.
+- A God with no past: Psalm 80:9 describes that vine.
+- A God with no past: Psalm 44:2 mentions fathers recounting deeds.
+- A God with no past: The Song mentions arm, nations, and stone.
+- A God with no past: Psalm 79:4 changes Psalm 44:14’s opening.
+- A God with no past: Psalm 44:12 has that wording.
+- A God with no past: Psalm 79:2 assigns giving to “they.”
+- A God with no past: God’s name is addressed possessively three times.
+- Blood left uncovered: Treaty dates to 672 BCE.
+- Blood left uncovered: Deuteronomy threatens corpses exposed to scavengers.
+- Blood left uncovered: Sanhedrin 47a distinguishes faithful from servants.
+- Blood left uncovered: The account identifies sixty slain Hasideans.
+- Blood left uncovered: The massacre occurred in 161 BCE.
+- Blood left uncovered: The Maccabean quotation omits “servants.”
+- Blood left uncovered: Leviticus 17:13 commands covering hunted animals’ blood.
+- Blood left uncovered: Ibn Ezra says killers expected no blood-claimant.
+- Blood left uncovered: Ezekiel connects uncovered blood and vengeance.
+- The bargain at the center: Rashi explains the heading using Lamentations 4:11.
+- The bargain at the center: This is Rashi’s explanation of the song.
+- The bargain at the center: Malbim argues spent anger should cease.
+- The bargain at the center: Lamentations 4:22 contrasts Zion and Edom.
+- The bargain at the center: Psalm 89:50–51 contains these requests.
+- The bargain at the center: Psalm 79:8 uses “do not remember.”
+- The bargain at the center: Both passages use a form of “former.”
+- The bargain at the center: The two verses use these bosom phrases.
+- The bargain at the center: Both reproach passages address God as Adonai.
+- The bargain at the center: Psalm 18:6 uses the corresponding verb.
+- The psalm in other mouths: The bull required this precise Mass observance.
+- The psalm in other mouths: Av HaRachamim includes Psalm 79:10.
+- The psalm in other mouths: The Haggadah includes verses 6–7 at the door-opening.
+- The psalm in other mouths: Byrd published this Psalm 79 setting in 1589.
+- The psalm in other mouths: Campion was executed at Tyburn in 1581.
+- The psalm in other mouths: The setting is widely identified with Campion.
+- The psalm in other mouths: Malbim reads “flesh” as dismembered bodies.
+- The psalm in other mouths: Exodus repeatedly says Egypt shall know.
+- The psalm in other mouths: Pharaoh says this in Exodus 5:2.
+- From the gravedigger to the teller: קובר is a participle closing verse 3.
+- From the gravedigger to the teller: The listed forms occur at those verses.
+- From the gravedigger to the teller: נספר is the psalm’s last verb.
+- From the gravedigger to the teller: Psalm 102:21 shares the prisoner-and-condemned wording.
+- From the gravedigger to the teller: הותר can mean leave or keep alive.
+- From the gravedigger to the teller: Psalm 79:13 begins “and we,” not “then.”
+- From the gravedigger to the teller: Psalm 44 has food-sheep; Psalm 79 pasture-flock.
+- From the gravedigger to the teller: Ashkenaz and Sefard weekday Maariv include verse 13.
+- Full psalm: Whole psalm appears twice in siddur.
+- Full psalm: First occurrence is in Tikkun Rachel.
+- Full psalm: Psalm 79 immediately follows Psalm 137.
+- Full psalm: Lamentations 5 follows Psalm 79.
+- Full psalm: Shacharit rubric assigns psalm to Seventeenth Tammuz.
+- Full psalm: Fast commemorates breach of Jerusalem’s walls.
+- Full psalm: Soferim assigns both psalms to Ninth Av.
+- Full psalm: Ma’avar Yabbok prescribes both after meals.
+- Key verses: Both verses occur near weekday Tachanun’s close.
+- Key verses: Verse 9 immediately precedes Kaddish.
+- Key verses: Pair ends Lithuanian and Polish selichot.
+- Key verses: Av HaRachamim quotes entire verse after earlier proofs.
+- Key verses: Avinu Malkeinu includes quoted petition.
+- Key verses: Aseh lema’an includes blood-of-servants petition.
+- Key verses: Haggadah places verses at door-opening rubric.
+- Key verses: Searched Haggadot use Psalm’s variant wording.
+- Key verses: Ashkenaz and Sefard print verse after Yom Kippur.
+- Key verses: Edot Shacharit places verse after Hannah’s Prayer.
+- Practical Kabbalah: Manual first printed Sabbioneta in 1551.
+- Practical Kabbalah: Verses 6, 10, 12 contain stated requests.
+- Verse 1: Psalm bears the heading mizmor.
+- Verse 1: Meiri explains mizmor through musical instruments.
+- Verse 1: Meiri quotes musician’s instruction to pupil.
+- Verse 1: Alshich questions mention of nations’ entry.
+- Verse 1: Alshich invokes the Pesikta.
+- Verse 1: Alshich denies Babylonians independent power over Temple.
+- Verse 1: Alshich recounts angel’s breach and proclamation.
+- Verse 1: Alshich describes four angels setting fire.
+- Verse 1: Verb returns ten verses later, in verse 11.
+- Verse 1: Related heaps noun belongs to Micah oracle.
+- Verse 1: Micah 3:12 writes עִיִּין.
+- Verse 1: Psalm and Jeremiah use עִיִּים.
+- Verse 1: Jeremiah 26 quotes Micah during Jeremiah’s trial.
+- Verse 1: Elders cite Micah in Jeremiah’s defense.
+- Verse 1: Greek Psalm and Isaiah share ὀπωροφυλάκιον.
+- Verse 1: Ibn Ezra offers hidden-treasure explanation.
+- Verse 1: Trojan Women opens with Poseidon at ruined Troy.
+- Verse 1: Trojan Women dates to 415 BCE.
+- Verse 1: Quoted English lines are Coleridge’s translation.
+- Verse 1: Verse appears on named selichot days.
+- Verse 2: Animal-carcass laws use נִבְלָה.
+- Verse 2: נִבְלַת is singular construct.
+- Verse 2: Deuteronomy 28:26 uses בֶהֱמַת הָאָרֶץ.
+- Verse 2: Genesis 1:24 and Psalm 104 use חַיְתוֹ.
+- Verse 2: Malbim distinguishes these from field animals.
+- Verse 2: Malbim describes cut flesh fed to animals.
+- Verse 2: Radak attributes explanation to his father.
+- Verse 2: Radak names four pious exiles.
+- Verse 2: Radak describes faithful hiding indoors.
+- Verse 2: Radak distinguishes survivors from those killed.
+- Verse 2: Seventh-day selichot quote entire verse 2.
+- Verse 2: Gedaliah selichah contains quoted Hebrew line.
+- Verse 3: The closing words contain no m
+- Verse 3: Verse 4 repeats סביבות for those around
+- Verse 3: Alshich says would-be buriers risked death
+- Verse 3: Lucan wrote the civil-war epic in the 60s
+- Verse 3: Lucan depicts Caesar denying the dead cremation
+- Verse 3: Latin quotation is Lucan, Pharsalia 7.818–819
+- Verse 3: Du Fu wrote Ballad of the Army Carts around 750
+- Verse 3: These are the poem’s closing Chinese lines
+- Verse 3: English lines are attributed to David Lunde
+- Verse 3: 無人收 means no one gathers
+- Verse 3: Sefard prayer combines both biblical water phrases
+- Verse 4: Verse 4 first uses first-person plural
+- Verse 4: קֶלֶס is a rare biblical noun
+- Verse 4: II Kings 2:23 uses ויתקלסו for Elisha’s mockers
+- Verse 4: Ezekiel 22:5 also uses this verb
+- Verse 4: Later Hebrew קִלּוּס can mean praise
+- Verse 4: Some lexicographers propose a stamping root
+- Verse 4: Rashi explains קלס as disparaging talk
+- Verse 4: Rashi cites Deuteronomy’s למָשָׁל
+- Verse 4: Alshich distinguishes nearby neighbors’ disgrace
+- Verse 4: Alshich assigns laughter to farther neighbors
+- Verse 4: Owen’s poem dates to 1917
+- Verse 4: Owen’s opening stanza is quoted accurately
+- Verse 4: Owen writes “as cattle”
+- Verse 4: Psalm 79:2 calls the dead נבלה
+- Verse 5: Psalm 79 uses the Tetragrammaton once
+- Verse 5: Psalm 79 belongs to the Elohistic Psalter
+- Verse 5: Psalm 89:47 closely parallels this line
+- Verse 5: Psalm 89:47 uses תסתר
+- Verse 5: תאנף derives from אף, nose
+- Verse 5: Parallel verses use חמה and קנאה
+- Verse 5: Ibn Ezra attributes jealousy to idolatry
+- Verse 5: Ibn Ezra asks why not against strangers
+- Verse 5: Radak reads the first exile as prolonged
+- Verse 5: A return was promised after Babylon’s seventy years
+- Verse 5: Both commentators cite Zechariah 1:12
+- Verse 5: Zechariah’s angel is told to proclaim
+- Verse 5: Zechariah 1:14–15 names jealousy and anger
+- Verses 6–7: חֵמָה has these meanings
+- Verses 6–7: Verses 6–7 closely parallel Jeremiah 10:25
+- Verses 6–7: Jeremiah uses מִשְׁפָּחוֹת
+- Verses 6–7: Psalm 79 uses מַמְלָכוֹת
+- Verses 6–7: Radak explains kingdoms through Judah’s fall
+- Verses 6–7: Jeremiah includes both additional verbs
+- Verses 6–7: Psalm omits Jeremiah’s further devouring verbs
+- Verses 6–7: Psalm lacks וַיְכַלֻּהוּ
+- Verses 6–7: Midrash says Jacob’s children were not destroyed
+- Verses 6–7: Verse 11 asks for lives spared
+- Verses 6–7: Verse 7 shifts singular to plural
+- Verses 6–7: Greek has plural devoured
+- Verses 6–7: Meiri distinguishes king from people
+- Verses 6–7: Radak distinguishes general from particular
+- Verses 6–7: Alshich offers an Esau-and-descendants reading
+- Verses 6–7: Mekhilta comments on Exodus 15:2
+- Verses 6–7: Tchernichovsky wrote “Baruch of Mainz” in 1902
+- Verses 6–7: Poem addresses a woman with feminine imperatives
+- Verses 6–7: Quoted Hebrew passage attributed to Tchernichovsky
+- Verses 6–7: שִׁמְמוֹת and הֵשַׁמּוּ share a root
+- Verses 6–7: Caernarvon levee dynamited in April 1927
+- Verses 6–7: Caernarvon was fourteen miles below New Orleans
+- Verses 6–7: Breaching flooded St. Bernard and Plaquemines
+- Verses 6–7: Tanchuma contrasts the nations’ and Israel’s responses
+- Verses 6–7: Edot HaMizrach petition has quoted antithesis
+- Verses 6–7: Petition occurs in listed services and fasts
+- Verses 6–7: Jeremiah also says “nations who do not know You”
+- Verses 6–7: Polish sixth-day selichot include both verses
+- Verses 6–7: Edot HaMizrach kinah retains singular אָכַל
+- Verse 8: Commentators give both readings of רִאשֹׁנִים
+- Verse 8: Radak reads sins of youth
+- Verse 8: Ibn Ezra pairs יְקַדְּמוּנוּ with רִאשֹׁנִים
+- Verse 8: Malbim says guilt prevents pity
+- Verse 8: Malbim puts mercy before remembering sins
+- Verse 8: Malbim places atonement after mercy
+- Verse 8: Isaiah 43:18 uses the quoted phrase
+- Verse 8: Shemot Rabbah links both verses through debt
+- Verse 8: Midrash’s borrower returns to acknowledge debt
+- Verse 8: Lender says first debt left his heart
+- Verse 8: Midrash applies Isaiah’s words to repentant people
+- Verse 8: 1970 Act contains quoted seven-year provision
+- Verse 8: Credit-reporting restriction leaves debt uncancelled
+- Verse 8: Psalm 79:12 says sevenfold
+- Verse 8: Judges 6:6 uses the related form וַיִּדַּל
+- Verse 8: Septuagint uses ἐπτωχεύσαμεν
+- Verse 8: Alshich invokes two initial judgment questions
+- Verse 8: Alshich uses poverty to answer both questions
+- Verse 8: Alshich gives both flour and bread arguments
+- Verse 8: Chomat Anakh compares exiles to prayer-exempt drunkards
+- Verse 8: Vehu Rachum contains quoted adapted petition
+- Verse 8: Yom Kippur Shacharit piyyut cites Psalm 79:8
+- Verse 8: Attributed Baal Shem Tov passage includes quoted plea
+- Verse 9: Malbim ranks help below salvation
+- Verse 9: Malbim distinguishes saving from helping
+- Verse 9: Malbim invokes God's past salvation
+- Verse 9: Leviticus 16 connects atonement with offering blood
+- Verse 9: God is subject of verse's atonement request
+- Verse 9: Psalm 78 precedes 79 and recounts wilderness
+- Verse 9: Psalm 79 requests Psalm 78's atonement
+- Verse 9: Vehu Rachum opens weekday evening prayer
+- Verse 9: Psalm 79:9 closes a Tachanun passage
+- Verse 9: Alshich favors a martyrdom reading
+- Verse 9: Alshich invokes Hananiah Mishael and Azariah
+- Verse 9: Alshich next requests rescue like theirs
+- Verse 9: Alshich treats willingness as grounds for atonement
+- Verse 9: Avinu Malkeinu places martyrdom before blood vengeance
+- Verse 9: Four Chabad passages end with that phrase
+- Verse 9: Chida invokes Zohar's burdened Shekhinah
+- Verse 9: Chida cites that rabbinic saying
+- Verse 9: Chida explains reciprocal forgiveness through Shekhinah
+- Verse 9: Play and date correctly identified
+- Verse 9: Quoted translation is Swanwick's
+- Verse 9: Psalm 44:18 protests continuing fidelity
+- Verse 9: Psalms 44 and 79 share shame wording
+- Verse 9: Psalm 79 confesses sin unlike Psalm 44
+- Verse 9: Phrase occurs in post-Tashlich prayers
+- Verse 9: Annulment of vows uses quoted formula
+- Verse 10: Psalm 115:2 repeats nations' taunt
+- Verse 10: Joel 2:17 gives priests that plea
+- Verse 10: Response occurs in Psalm 115:3
+- Verse 10: Psalm 79:10 adds before our eyes
+- Verse 10: Ibn Ezra wants witnesses alive
+- Verse 10: Septuagint opens verse with μή ποτε
+- Verse 10: Ketiv בגיים has qere בגוים
+- Verse 10: Minchat Shai records the ketiv-qere
+- Verse 10: Earlier הגוים contains expected waw
+- Verse 10: Midrash 149:4 cites both psalms
+- Verse 10: 1655 Savoyard massacre targeted Piedmont Waldensians
+- Verse 10: Quoted sonnet is Milton's Waldensian sonnet
+- Verse 10: Psalm 79:12 requests sevenfold repayment
+- Verse 10: Sonnet invokes blood sown hundredfold
+- Verse 10: Maoz Tzur ends with quoted stanza
+- Verse 10: Hymn invokes servants' blood and arm
+- Verse 10: Ashkenaz kinot contain quoted wording
+- Verse 10: Sefard El Maleh juxtaposes burned scroll and taunt
+- Verse 11: Psalm 79:1 uses באו of nations
+- Verse 11: Psalm 79:11 uses תבוא of groan
+- Verse 11: Psalm 12:6 pairs needy groaning and divine rising
+- Verse 11: Exact phrase occurs elsewhere only Psalm 102:21
+- Verse 11: Most supplied commentators read imminent death
+- Verse 11: Rashi reads children of slain woman
+- Verse 11: Rashi adduces dying-animal usage in Kiddushin
+- Verse 11: Septuagint reads sons of slain people
+- Verse 11: Alshich supplies a further prisoner reading
+- Verse 11: Alshich identifies prisoner with Messiah
+- Verse 11: Sanhedrin describes Messiah tending wounds at Rome
+- Verse 11: Dostoevsky underwent December 1849 mock execution
+- Verse 11: First three prisoners were tied to stakes
+- Verse 11: Advance-arranged pardon interrupted mock execution
+- Verse 11: הותר admits keep-alive remnant reading
+- Verse 11: Polish first-day selichot pair these pleas
+- Verse 11: Listed Lithuanian occasions contain verse
+- Verse 11: Sefard First Monday selichot include verse
+- Verse 12: Cain is avenged sevenfold
+- Verse 12: Lamech claims seventy-sevenfold vengeance
+- Verse 12: Leviticus repeats sevenfold punishment three more times
+- Verse 12: Malbim rejects equal repayment for divine reproach
+- Verse 12: Malbim reads sevenfold as numberless repayment
+- Verse 12: חֵיק can mean a garment fold
+- Verse 12: Jeremiah 32:18 places ancestral guilt in children’s bosoms
+- Verse 12: Jeremiah and Psalm 79 both use אֶל
+- Verse 12: Isaiah 65:6–7 threatens repayment into bosoms
+- Verse 12: Chryses prays to Apollo after Agamemnon dishonors him
+- Verse 12: Polish fourth-day selichot include Psalm 79:12
+- Verse 12: Ashkenazi Tisha B’Av kinah uses both phrases
+- Verse 13: ידה can mean thank and confess
+- Verse 13: הוֹדָה can express confession and thanks
+- Verse 13: Verses 8–9 have sin nouns, no confession verb
+- Verse 13: Exact phrase צאן מרעיתך occurs elsewhere only in Psalm 74:1
+- Verse 13: Psalm 80:2 opens by addressing Israel’s shepherd
+- Verse 13: Malbim calls לעולם continuous lifetime thanks
+- Verse 13: Malbim assigns intergenerational praise to לדור ודור
+- Verse 13: Radak promises thanks during and after exile
+- Verse 13: “You have chosen us” is a prayer-book phrase
+- Verse 13: Midrash Tehillim 106:2 juxtaposes Psalms 78:4 and 79:13
+- Verse 13: Sefard hakafot place Psalm 79:13 immediately before 80:2
+- Verse 13: Both Musaf repetitions include the cited plea
+- Verse 13: Polish fifth-day selichot place these phrases consecutively
+
+UNVERIFIABLE (8) — no evidence either way; do not change on factual grounds:
+- Blood left uncovered: The treaty attributes this precise curse to Ninurta.
+- Blood left uncovered: The pun works only in Hebrew.
+- Blood left uncovered: Lamentations Rabbah juxtaposes Leviticus 17:13 and Psalm 79.
+- Practical Kabbalah: Manual prescribes Psalm 79 against enemies.
+- Verses 6–7: Some Hebrew manuscripts have plural devoured
+- Verses 6–7: Poem specifies the character’s baptism and circumstances
+- Verse 12: This is Western literature’s oldest such prayer
+- Verse 13: Alterman wrote the poem in summer 1942

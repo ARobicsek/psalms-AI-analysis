@@ -71,6 +71,11 @@ DEFAULT_WEB_JUDGE_MODEL = "gpt-6-sol"    # stage 2b: judges the claims from the 
 DEFAULT_REVIEW_MODEL = None           # stage 3: only when stage 1 runs on a weaker model (luna)
 DEFAULT_REVIEW_EFFORT = "high"
 WEB_CONTEXT_SIZE = "low"              # search content is ~all of the web stage's input tokens
+# Session 397: OpenAI's Flex tier is the SAME model at Batch prices, half of standard on every
+# token class (gpt-6-sol: $1 / $0.10 cached / $1.25 cache write / $5), for slower answers and
+# an occasional 429 "Resource Unavailable" that is not billed (`_create` retries, then falls
+# back to the standard tier). A pipeline step does not need the speed. None = standard.
+DEFAULT_SERVICE_TIER = "flex"
 WEB_BATCH = 8
 REVIEW_BATCH = 12
 VERDICTS = ("supported", "contradicted", "unverifiable")
@@ -1346,6 +1351,38 @@ def _flat_consonants(text: str):
     return "".join(flat), idx
 
 
+# Session 397: what a lookup hands the checker is written into the prompt cache at 1.25x and
+# re-read on every later round, and on Ps 79 the liturgy and get_text results were 87% of it.
+# Vowels and accents roughly double a Hebrew passage's tokens and settle nothing a liturgical or
+# rabbinic claim turns on, so those passages go out unpointed (a verse's pointing: get_verse).
+# The maqaf, paseq, sof pasuq and nun hafukha stay: they are punctuation, not pointing.
+_POINTING = re.compile("[֑-ׇֽֿׁׂׅׄ]")
+
+
+def unpoint(text: str) -> str:
+    """Hebrew without niqqud or cantillation (pure)."""
+    return _POINTING.sub("", unicodedata.normalize("NFC", text or ""))
+
+
+def short_ref(ref: str) -> str:
+    """A liturgy ref without the place repeated at its end: Sefaria's siddur refs end
+    'Amidah, Amidah' (section, then the prayer of the same name). Pure."""
+    parts = [p.strip() for p in (ref or "").split(",")]
+    while len(parts) > 2 and parts[-1] == parts[-2]:
+        parts.pop()
+    return ", ".join(parts)
+
+
+def group_refs(refs: List[str]) -> Dict[str, List[str]]:
+    """{book: [place, ...]} in first-seen order, places shortened by short_ref: the same list
+    without the book's name repeated on every line (Ps 79: 6K chars -> under half). Pure."""
+    out: Dict[str, List[str]] = {}
+    for r in refs:
+        book, _, place = short_ref(r).partition(", ")
+        out.setdefault(book, []).append(place or "(the whole book)")
+    return out
+
+
 def _prayer_place(rows: List[Dict], d: Dict) -> Dict:
     """Where a prayer sits: its rite and service, and the prayers before and after it there.
     A prayer filed under no service gets no neighbours: the rest of that pile is unrelated."""
@@ -1385,7 +1422,8 @@ def search_liturgy(query: str, db_path: Optional[Path] = None, max_hits: int = 6
             a, b = max(0, st - window // 2), min(len(d["hebrew_text"]), st + window // 2)
             hits.append({"ref": d["sefaria_ref"], **_prayer_place(rows, d),
                          "occurrences": flat.count(qc),
-                         "text": ("…" if a else "") + d["hebrew_text"][a:b] + ("…" if b < len(d["hebrew_text"]) else "")})
+                         "text": unpoint(("…" if a else "") + d["hebrew_text"][a:b]
+                                         + ("…" if b < len(d["hebrew_text"]) else ""))})
     else:
         # Every word must match; failing that, the prayers matching the most words ("Neilah
         # selichot": the Ashkenaz selichot of Ne'ilah sit inside a block titled otherwise).
@@ -1396,13 +1434,28 @@ def search_liturgy(query: str, db_path: Optional[Path] = None, max_hits: int = 6
         for sc, d in scored:
             if best and sc == best:
                 hits.append({"ref": d["sefaria_ref"], **_prayer_place(rows, d),
-                             "opening": _clip(_norm_ws(d["hebrew_text"] or d["english_text"] or ""), 200)})
+                             "opening": _clip(_norm_ws(unpoint(d["hebrew_text"] or d["english_text"] or "")), 200)})
     partial = locals().get("partial", False)
     # Session 395: every hit's ref, not just the first max_hits: a claim that a verse is said ONLY
     # in one rite or service is a claim about where it is not, and needs the whole list.
-    every = {"every_ref": [h["ref"] for h in hits][:150]} if len(hits) > max_hits else {}
+    # Session 397: grouped by book (group_refs), the same refs in half the tokens.
+    every = ({"every_ref": group_refs([h["ref"] for h in hits][:150]),
+              "every_ref_note": "every match, grouped by book; get_text takes 'book, place'"}
+             if len(hits) > max_hits else {})
+    # Session 397: a passage reprinted word for word BETWEEN THE SAME NEIGHBOURS (the Rosh Hashanah
+    # Amidah of each service, both days) is shown once, its other places under also_in; the slots
+    # it would have taken go to passages that differ. Neighbours are part of the key: the order of
+    # prayers is what most liturgical errors get wrong (Ps 79: 12 of 78 claims, mostly sequence).
+    shown: Dict[str, Dict] = {}
+    for h in hits:
+        key = "|".join((_consonants(h.get("text") or h.get("opening") or "") or h["ref"],
+                        h.get("before", ""), h.get("after", "")))
+        if key in shown:
+            shown[key].setdefault("also_in", []).append(short_ref(h["ref"]))
+        elif len(shown) < max_hits:
+            shown[key] = dict(h)
     return {"query": q, "source": "liturgy.db (siddurim, machzorim, selichot, kinnot harvested from Sefaria)",
-            "matches": len(hits), "prayers": hits[:max_hits], **every,
+            "matches": len(hits), "prayers": list(shown.values()), **every,
             **({"partial": "no prayer matches every word; these match the most"} if partial else {}),
             **({"note": f"{len(hits) - max_hits} more; narrow the query"} if len(hits) > max_hits else {})}
 
@@ -1482,9 +1535,13 @@ def lookup_lxx(ref: str) -> Dict:
 
 def lookup_text(ref: str, liturgy_db: Optional[Path] = None) -> Dict[str, str]:
     r = (ref or "").strip()
-    # A ref from search_liturgy: answer it from disk, with no network call.
-    local = next((d for d in _liturgy_rows(liturgy_db) if d["sefaria_ref"] == r), None)
+    # A ref from search_liturgy: answer it from disk, with no network call. Session 397: also in
+    # the shortened 'book, place' form every_ref lists.
+    rows = _liturgy_rows(liturgy_db)
+    local = (next((d for d in rows if d["sefaria_ref"] == r), None)
+             or next((d for d in rows if short_ref(d["sefaria_ref"]) == short_ref(r)), None))
     if local:
+        r = local["sefaria_ref"]
         out = {"ref": r, "source": "liturgy.db (harvested from Sefaria)", "url": f"{SEFARIA}/{r.replace(' ', '_')}",
                **{k: v for k, v in _prayer_place(_liturgy_rows(liturgy_db), local).items()},
                "hebrew": local["hebrew_text"] or "", "english": local["english_text"] or ""}
@@ -1499,6 +1556,10 @@ def lookup_text(ref: str, liturgy_db: Optional[Path] = None) -> Dict[str, str]:
     for k in ("hebrew", "english"):
         if len(out.get(k, "")) > 2500:
             out[k] = out[k][:2500] + " […truncated; for a passage inside a prayer, use search_liturgy]"
+    # Session 397: unpointed AFTER the cut, so the passage is the same span as before, in fewer tokens.
+    if re.search("[֑-ׇ]", out.get("hebrew", "")):
+        out["hebrew"] = unpoint(out["hebrew"])
+        out["hebrew_pointing"] = "removed; for a biblical verse's vowels and accents use get_verse"
     return out
 
 
@@ -1549,6 +1610,28 @@ class FactCheckResult:
                 "stages": self.stages, "verdicts": verdict_counts(self.records)}
 
 
+def billing_model(model: str, service_tier: Optional[str]) -> str:
+    """The cost_tracker.PRICING row a response is billed under: `<model>@flex` when the API
+    says it ran on flex and that row exists, else the model's own (standard) row. Read from
+    the RESPONSE, not the request: a call that fell back to the standard tier is billed as one."""
+    if service_tier == "flex":
+        from src.utils.cost_tracker import PRICING
+        if f"{model}@flex" in PRICING:
+            return f"{model}@flex"
+    return model
+
+
+def is_flex_unavailable(err: Exception) -> bool:
+    """A 429 meaning flex has no capacity now (not billed), not a rate limit of ours."""
+    s = str(err).lower()
+    return getattr(err, "status_code", None) == 429 and ("resource" in s or "unavailable" in s or "flex" in s)
+
+
+def _billed(run: Dict) -> Dict[str, Dict]:
+    """A run's usage per price row; a run without the split (Gemini) is billed on its model."""
+    return run.get("billed") or {run["model"]: run["usage"]}
+
+
 def _empty_usage() -> Dict[str, int]:
     # cache_write (Session 388): GPT-5.6+ bills a cache write at 1.25x input.
     return {"input": 0, "cached": 0, "cache_write": 0, "output": 0, "reasoning": 0}
@@ -1565,7 +1648,8 @@ class FactChecker:
                  review_model: Optional[str] = DEFAULT_REVIEW_MODEL,
                  review_effort: str = DEFAULT_REVIEW_EFFORT,
                  web_batch: int = WEB_BATCH, review_batch: int = REVIEW_BATCH,
-                 bundle_in_context: bool = False):
+                 bundle_in_context: bool = False,
+                 service_tier: Optional[str] = DEFAULT_SERVICE_TIER):
         for m in (model, review_model, web_judge_model):
             if m and not m.startswith("gpt-"):
                 raise ValueError("stages 1 and 3 run on the OpenAI Responses API; use gpt-* models")
@@ -1576,6 +1660,7 @@ class FactChecker:
         self.web_judge_model, self.web_judge_effort = web_judge_model, web_judge_effort
         self.review_model, self.review_effort = review_model, review_effort
         self.web_batch, self.review_batch = max(1, web_batch), max(1, review_batch)
+        self.service_tier = service_tier
         # Session 386: OFF. Replaying the ~130K-token bundle on every tool round was most of
         # Session 385's $4.87; the model now pulls what it needs through the tools.
         self.bundle_in_context = bundle_in_context
@@ -1627,7 +1712,10 @@ class FactChecker:
                       text={"format": {"type": "json_schema", "name": "fact_check",
                                        "schema": schema, "strict": True}},
                       max_output_tokens=64000, prompt_cache_key=cache_key)
+        if self.service_tier:
+            common["service_tier"] = self.service_tier
         usage = _empty_usage()
+        billed: Dict[str, Dict[str, int]] = {}   # per price row (model, or model@flex): what it costs
         searches = fcalls = 0
         tool_counts: Dict[str, int] = {}
         summaries: List[str] = []
@@ -1640,6 +1728,10 @@ class FactChecker:
             step = {"input": fresh, "cached": cached, "cache_write": write, "output": out, "reasoning": rsn}
             for k in usage:
                 usage[k] += step[k]
+            row = billing_model(model, getattr(resp, "service_tier", None))
+            b = billed.setdefault(row, _empty_usage())
+            for k in b:
+                b[k] += step[k]
             calls = []
             step_searches = 0
             for it in resp.output:
@@ -1653,7 +1745,7 @@ class FactChecker:
                 elif it.type == "reasoning":
                     summaries += [s.text for s in (it.summary or [])]
             searches += step_searches
-            self._account(model, step, step_searches)
+            self._account(row, step, step_searches)
             if not calls:
                 break
             fcalls += len(calls)
@@ -1685,7 +1777,7 @@ class FactChecker:
             truncated = True
         self._log(f"  {label}: {len(records)} records, {searches} searches, {fcalls} lookups, "
                   f"{time.time() - t0:.0f}s, status={status}")
-        return {"records": records, "usage": usage, "searches": searches, "fcalls": fcalls,
+        return {"records": records, "usage": usage, "billed": billed, "searches": searches, "fcalls": fcalls,
                 "tool_counts": tool_counts, "status": status, "thinking": "\n\n".join(summaries),
                 "label": label, "model": model, "effort": effort, "seconds": round(time.time() - t0),
                 "truncated": truncated}
@@ -1710,8 +1802,20 @@ class FactChecker:
             except Exception as e:  # overload / network / empty incomplete (seen in S384)
                 last = e
                 self._log(f"  attempt {attempt + 1} failed: {str(e)[:200]}")
+                # Session 397: flex has no capacity right now (429, not billed). Wait longer; on
+                # the last try ask for the standard tier, so a busy hour costs money, not the check.
+                if kw.get("service_tier") == "flex" and is_flex_unavailable(e):
+                    if attempt == 1:
+                        self._log("  flex unavailable twice; this call goes to the standard tier")
+                        kw = {**kw, "service_tier": "default"}
+                    time.sleep(30 * (attempt + 1))
+                    continue
                 time.sleep(10 * (attempt + 1))
         raise RuntimeError(f"fact-check call failed: {last}")
+
+    def _cost_of(self, billed: Dict[str, Dict], searches: int) -> float:
+        """A run's (or stage's) cost from its usage per price row, plus its search fees."""
+        return sum(self._price(row, u, 0) for row, u in billed.items()) +             self._price(next(iter(billed), self.model), _empty_usage(), searches)
 
     @staticmethod
     def _price(model: str, usage: Dict, searches: int) -> float:
@@ -1987,14 +2091,18 @@ class FactChecker:
         per_stage: Dict[str, Dict] = {}
         for r in runs:
             st = per_stage.setdefault(r["label"].split()[0], {"model": r["model"], "usage": _empty_usage(),
-                                                               "searches": 0, "tools": {}})
+                                                               "billed": {}, "searches": 0, "tools": {}})
             for k in st["usage"]:
                 st["usage"][k] += r["usage"].get(k, 0)
+            for row, u in _billed(r).items():
+                b = st["billed"].setdefault(row, _empty_usage())
+                for k in b:
+                    b[k] += u.get(k, 0)
             st["searches"] += r["searches"]
             for name, c in r.get("tool_counts", {}).items():
                 st["tools"][name] = st["tools"].get(name, 0) + c
         for st in per_stage.values():
-            st["cost_usd"] = round(self._price(st["model"], st["usage"], st["searches"]), 4)
+            st["cost_usd"] = round(self._cost_of(st["billed"], st["searches"]), 4)
         stages = {
             "local": {"claims": len(local_recs), "needs_web": len(need_web), "contradicted": len(contra)},
             "per_stage": per_stage,
@@ -2012,7 +2120,8 @@ class FactChecker:
             "runs": [{k: r.get(k) for k in ("label", "model", "effort", "seconds", "status", "usage",
                                              "searches", "fcalls", "tool_counts", "truncated", "superseded")}
                      | {"records": len(r["records"]),
-                        "cost_usd": round(self._price(r["model"], r["usage"], r["searches"]), 4)}
+                        "billed_as": sorted(_billed(r)),
+                        "cost_usd": round(self._cost_of(_billed(r), r["searches"]), 4)}
                      for r in runs],
             "trace": self._trace,
             "gathered": self._gathered,

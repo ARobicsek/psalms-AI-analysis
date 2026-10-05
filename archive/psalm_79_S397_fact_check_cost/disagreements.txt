@@ -1,0 +1,205 @@
+
+######## ORIGINAL (A) contradicted, new run (B) did not
+
+* [Blood left uncovered] Lamentations Rabbah sets that verse beside this psalm.
+  CLAIM: Lamentations Rabbah juxtaposes Leviticus and Psalm 79.
+  WHY: The midrash sets Leviticus 17:13 beside Ezekiel 24:7, discussing Zechariah’s blood; it does not set it beside Psalm 79.
+  EVID: Lamentations Rabbah 4:16: תַּמָּן כְּתִיב (ויקרא יז, יג) ... וְכִסָּהוּ בֶּעָפָר, בְּרַם הָכָא כְּתִיב (יחזקאל כד, ז): כִּי דָמָהּ בְּתוֹכָהּ הָיָה
+  FIX: Lamentations Rabbah sets that verse beside Ezekiel’s account of blood left uncovered.
+  OTHER RUN: unverifiable: The supplied commentary attributes a similar blood-covering comparison to unnamed rabbis. The located Midrash Tehillim 79:3 instead cites Deuteronomy 12:24; neither establishes the asserted Lamentatio
+
+* [Key verses] Then comes עָזְרֵנוּ אֱלֹקֵי יִשְׁעֵנוּ, "Help us, God of our salvation," and the reader begins Kaddish.
+  CLAIM: Verse 9 immediately follows verse 8.
+  WHY: Several other pleas intervene in this Tachanun; the two psalm verses are not consecutive there.
+  EVID: Siddur Ashkenaz, weekday Shacharit, Tachanun, Shomer Yisrael: אַל תִּזְכָּר לָֽנוּ עֲוֹנוֹת רִאשׁוֹנִים ... חָנֵּֽנוּ יְהֹוָה חָנֵּֽנוּ ... בְּרֺֽגֶז רַחֵם תִּזְכּוֹר: כִּי הוּא יָדַע יִצְרֵֽנוּ ... עָזְרֵֽנוּ אֱלֺהֵי יִשְׁעֵֽנוּ
+  FIX: After several other pleas comes עָזְרֵנוּ אֱלֹקֵי יִשְׁעֵנוּ, "Help us, God of our salvation."
+  OTHER RUN: supported: 
+
+* [Key verses] *Avinu Malkeinu* condenses it: אָבִינוּ מַלְכֵּנוּ נְקוֹם לְעֵינֵינוּ נִקְמַת דַּם־עֲבָדֶיךָ הַשָּׁפוּךְ, "Our Father, our King, avenge before our eyes the poured-out blood of Your servants."
+  CLAIM: Quoted Avinu Malkeinu line includes לעינינו.
+  WHY: The quoted litany omits לעינינו, which belongs to the psalm verse, not this Avinu Malkeinu line.
+  EVID: Machzor Rosh Hashanah Ashkenaz, Mincha, Avinu Malkenu: אָבִֽינוּ מַלְכֵּֽנוּ נְקוֹם נִקְמַת דַּם עֲבָדֶֽיךָ הַשָּׁפוּךְ | Machzor Rosh Hashanah Sefard, Mincha, Avinu Malkenu: אָבִינוּ מַלְכֵּנוּ נְקֹם נִקְמַת דַּם עֲבָדֶיךָ הַשָּׁפוּךְ
+  FIX: *Avinu Malkeinu* condenses it: אָבִינוּ מַלְכֵּנוּ נְקוֹם נִקְמַת דַּם־עֲבָדֶיךָ הַשָּׁפוּךְ, "Our Father, our King, avenge the poured-out blood of Your servants."
+  OTHER RUN: supported: 
+
+* [Verse 1] On this reading "they came" is the whole of what the nations accomplished: they walked in through a door already opened.
+  CLAIM: Alshich credits nations with entry alone.
+  WHY: Alshich also credits the nations with defiling the sanctuary and making Jerusalem ruins; he denies them the Temple fire, not every act beyond entry.
+  EVID: Romemot El on Psalms 79:1, supplied full entry: ולא עשו יותר כי אם מה שבאו כי טמאו את היכל קדשך ... ומזולת טומאה אין רעה שולחו ידם בהיכל ... אך את ירושלם שמו לעיים
+  FIX: On this reading "they came" names what the nations accomplished at the Temple besides defiling it: they walked in through an opening made for them, but did not set it afire.
+  OTHER RUN: (no record)
+
+* [Verse 1] The last word, לְעִיִּים, "into heaps," appears elsewhere only in Micah's oracle of doom: צִיּוֹן שָׂדֶה תֵחָרֵשׁ וִירוּשָׁלַםִ עִיִּין תִּהְיֶה, "Zion shall be plowed as a field, and Jerusalem shall become heaps" (Mic 3:12).
+  CLAIM: The form לְעִיִּים appears only in Micah.
+  WHY: The common noun's Micah form is עִיִּין; the psalm's עִיִּים form recurs in Jeremiah's quotation of that oracle. Other search hits for עיים in Numbers 33:45 and Joshua 15:29 are place names.
+  EVID: Micah 3:12, supplied Masoretic text: וִירוּשָׁלַ֙͏ִם֙ עִיִּ֣ין תִּֽהְיֶ֔ה | Jeremiah 26:18, supplied Masoretic text: וִירוּשָׁלַ֙יִם֙ עִיִּ֣ים תִּֽהְיֶ֔ה
+  FIX: The last word, לְעִיִּים, "into heaps," recalls Micah's oracle of doom, also quoted in Jeremiah 26:18: צִיּוֹן שָׂדֶה תֵחָרֵשׁ וִירוּשָׁלַםִ עִיִּין תִּהְיֶה, "Zion shall be plowed as a field, and Jerusalem shall become heaps" (Mic 3:12).
+  OTHER RUN: supported: The exact form לְעִיִּים occurs only in Psalm 79:1. The related common noun occurs in Micah 3:12 and its quotation in Jeremiah 26:18; other matches for עיים are place names.
+
+* [Verse 2] A selichah for the Fast of Gedaliah turns it into a lament: טָמוּם וְעָמוּם וּבָלָה בְּשַׂר חֲסִידֶיךָ, "they hid them and darkened them, and the flesh of Your faithful wasted away."
+  CLAIM: Poem says people hid the faithful.
+  WHY: The singular expressions describe the flesh of the faithful; the line does not say that unnamed people hid or darkened them.
+  EVID: Selichot Nusach Ashkenaz Lita, Fast of Gedaliah: טָמוּם וְעָמוּם וּבָלָה בְּשַֹר חֲסִידֶיךָ
+  FIX: A selichah for the Fast of Gedaliah turns it into a lament: טָמוּם וְעָמוּם וּבָלָה בְּשַׂר חֲסִידֶיךָ, "the flesh of Your faithful lay hidden, grew dim, and wasted away."
+  OTHER RUN: supported: 
+
+* [Verse 3] The Sefard El Maleh for fast days blends the phrase with 2 Samuel 14:14 into "their blood was poured out like water poured on the ground," which cannot be gathered up again.
+  CLAIM: Quoted El Maleh mentions ground
+  WHY: The prayer borrows ‘flowing water’ but does not say ‘on the ground’ or ‘cannot be gathered up’; those details belong to Samuel's verse.
+  EVID: Siddur Sefard, Fast Days, El Maleh Prayer: אֲשֶׁר נִשְׁפַּךְ דָּמָם כַּמַּיִם הַנִּגָּרִים | II Samuel 14:14: וְכַמַּיִם הַנִּגָּרִים אַ֔רְצָה אֲשֶׁ֖ר לֹ֣א יֵאָסֵ֑פוּ
+  FIX: Say that El Maleh calls it ‘blood poured out like flowing water,’ recalling the water poured on the ground that cannot be gathered up in 2 Samuel 14:14.
+  OTHER RUN: supported: 
+
+* [Verses 6–7] Jeremiah's version also has a double verb, אֲכָלֻהוּ וַיְכַלֻּהוּ, "they devoured him and finished him off."
+  CLAIM: Jeremiah has two devouring verbs, not three
+  WHY: Jeremiah has אָכְלוּ before the two verbs quoted: three verbs in this sequence, against the psalm’s one.
+  EVID: Jeremiah 10:25: כִּֽי־אָכְל֣וּ אֶֽת־יַעֲקֹ֗ב וַאֲכָלֻ֙הוּ֙ וַיְכַלֻּ֔הוּ
+  FIX: Jeremiah's version adds two verbs after אָכְלוּ: אֲכָלֻהוּ וַיְכַלֻּהוּ, "they devoured him and finished him off."
+  OTHER RUN: supported: 
+
+* [Verses 6–7] The Alshich hears Esau, a single ancestor, who "devoured Jacob" by stripping him of his wealth, and his sons who then destroyed the Temple.
+  CLAIM: Esau reading represents Alshich’s account
+  WHY: Alshich first offers a different explanation involving God’s name and dwelling; he introduces the Esau explanation with או יאמר, as an alternative.
+  EVID: Romemot El on Psalm 79:7: ומה שהיה להם לקרוא בשמך הוא לומר כי שמך הנזכר אכל את יעקב ... ואת נוהו של שמך הנזכר השמו ... או יאמר ... עשו הוא אדום אכל את יעקב ... וז״א בלשון יחיד כי אכל את יעקב שהוא על עשו ואחר כך בניו את נוהו יתברך השמו
+  FIX: In an alternative reading, the Alshich hears Esau, a single ancestor, who "devoured Jacob" by stripping him of his wealth, and his sons who then destroyed the Temple.
+  OTHER RUN: supported: 
+
+* [Verses 6–7] The last word reaches back to Exodus.
+  CLAIM: The Exodus-linked נָוֵהוּ is the last word
+  WHY: נָוֵהוּ is penultimate; הֵשַׁמּוּ ends the verse.
+  EVID: Psalm 79:7: כִּ֭י אָכַ֣ל אֶֽת־יַעֲקֹ֑ב וְֽאֶת־נָוֵ֥הוּ הֵשַֽׁמּוּ׃
+  FIX: The penultimate word reaches back to Exodus.
+  OTHER RUN: (no record)
+
+* [Verse 8] The Alshich builds a defense on that word.
+  CLAIM: Alshich’s presented defense is his sole reading
+  WHY: His entry first distinguishes the sins associated with the two Temples, then introduces the two-judgment-questions defense as another reading. The ensuing account gives only that alternative.
+  EVID: Romemot El on Psalm 79:8: הנה בית ראשון נחרב על ע״א ג״ע ש״ד ובית שני על מדות רעות ... כי הלא דלונו מאד ועניות לא הניח מדה טובה לישראל. או יהיה ... עונות ראשומם ... שהם קבעת עתים לתורה נשאת ונתת באמונה
+  FIX: In an alternative reading, the Alshich builds a defense on that word.
+  OTHER RUN: (no record)
+
+* [Verse 9] וְכַפֵּר, "and atone," is the vocabulary of the priesthood (the high priest "atones" with the blood of the purification offering, Lev 16), but here God is the subject, there is no priest, and the altar has been defiled.
+  CLAIM: Psalm 79 explicitly describes a defiled altar.
+  WHY: The psalm says the holy temple was defiled; it does not mention an altar.
+  EVID: Psalms 79:1: טִ֭מְּאוּ אֶת־הֵיכַ֣ל קׇדְשֶׁ֑ךָ
+  FIX: Replace “the altar has been defiled” with “the temple has been defiled.”
+  OTHER RUN: supported: ; supported: 
+
+* [Verse 9] He takes עַל־דְּבַר כְּבוֹד־שְׁמֶךָ not as "for the sake of Your name's glory" but as "on the matter of Your name's glory," a death undertaken to sanctify the Name.
+  CLAIM: Alshich offers martyrdom instead of conventional reading.
+  WHY: Alshich first gives a reading about repairing the desecration of God's name. He then introduces the martyrdom reading as an alternative, which he calls the correct one—not as a replacement for his only reading.
+  EVID: Romemot El on Psalms 79:9: על כן אמר עזרנו אלהי ישענו על דבר כבוד שמך לשוב לתקן עותתנו בדבר הזה ואחר כך והצילנו וכפר על חטאתינו למען שמך. או יאמר והוא הנכון אם בגלות נצטרך למות על קדוש שמך
+  FIX: Write: “After a reading about repairing the desecration of God's name, he offers what he calls the correct reading: a death undertaken to sanctify the Name.”
+  OTHER RUN: supported: 
+
+* [Verse 11] The "prisoner" is the Messiah, who, as the Talmud tells (Sanhedrin 98a), sits bound among the sick at the gate of Rome, binding and unbinding his wounds one at a time so that he will be ready the moment he is called.
+  CLAIM: Talmud says Messiah himself sits bound.
+  WHY: The Talmud describes the Messiah among sick poor people, untying and tying bandages. It does not say he is himself bound as a prisoner; that is Alshich's elaboration.
+  EVID: Sanhedrin 98a:16–17: יָתֵיב בֵּינֵי עַנְיֵי סוֹבְלֵי חֳלָאִים, וְכוּלָּן שָׁרוּ וְאָסְירִי בְּחַד זִימְנָא, אִיהוּ שָׁרֵי חַד וְאָסַיר חַד
+  FIX: Write: “The ‘prisoner’ is the Messiah: Alshich pictures him as bound, drawing on the Talmud's account of his tending wounds among the sick at the gate of Rome.”
+  OTHER RUN: supported: ; supported: 
+
+* [Verse 12] Malbim finds a less vindictive logic in the number.
+  CLAIM: Malbim's sevenfold reading is less vindictive
+  WHY: Malbim argues that repayment matching the insult is insufficient: the offenders merit sevenfold repayment, which he explains as times without number.
+  EVID: Malbim on Psalms 79:12: אין די אם תשיב להם כפי חרפתם ... וראוי שיקבלו שבעתים, ר״ל פעמים אין מספר
+  FIX: Malbim finds a more exacting logic in the number.
+  OTHER RUN: (no record)
+
+######## NEW (B) contradicted, original (A) did not
+
+* [Blood left uncovered] When the sixty Hasideans were murdered in 161 BCE, 1 Maccabees 7:17 quoted the psalm as fulfilled scripture, but only from its second half: "the flesh of Your *ḥăsîdîm*."
+  CLAIM: The author quotes only the flesh phrase.
+  WHY: The quotation continues through Psalm 79:3, including the blood and the absence of burial.
+  EVID: The Book of Maccabees I 7:16–17: ככתוב בשר חסידיך לחיתו ארץ, שפכו דמם כמים סביבות ירושלים ואין קובר.
+  FIX: Change “but only from its second half: ‘the flesh of Your ḥăsîdîm’” to “beginning with ‘the flesh of Your ḥăsîdîm’ and continuing through verse 3.”
+  OTHER RUN: supported: ; supported: known; supported: 
+
+* [The bargain at the center] The rabbis explained the question with Lamentations 4:11, כִּלָּה ה׳ אֶת־חֲמָתוֹ, "the Lord has spent His fury," which goes on to say He poured out His anger and kindled a fire in Zion.
+  CLAIM: Rabbis used Lamentations to explain verse 5’s question.
+  WHY: The rabbinic question is why the heading says “psalm” rather than “lament,” not the “How long?” of verse 5.
+  EVID: Lamentations Rabbah 4:14: לא הוה קרא צריך למימר אלא בכי לאסף, נהי לאסף, קינה לאסף, ומה אומר מזמור לאסף ... מזמר אני ששפך הקדוש ברוך הוא חמתו על העצים ועל האבנים
+  FIX: Change “The rabbis explained the question” to “The rabbis answered a different question about the psalm’s heading.”
+  OTHER RUN: supported: 
+
+* [Key verses] On Yom Kippur it stands in the run of verses after the Thirteen Attributes.
+  CLAIM: Both verses occur together in Yom Kippur run.
+  WHY: The antecedent is the pair, vv. 8–9. This Yom Kippur sequence has verse 8, followed by another verse rather than verse 9.
+  EVID: Machzor Yom Kippur Ashkenaz, Maariv Service for Yom Kippur Eve, Yaaleh: זכר רחמיך יהוה וחסדיך כי מעולם המה: אל תזכר לנו עו‍נות ראשונים. מהר יקדמונו רחמיך כי דלונו מאד: זכרנו יהוה ברצון עמך פקדנו בישועתך:
+  FIX: On Yom Kippur v. 8 also stands in a run of verses after the Thirteen Attributes.
+  OTHER RUN: supported: 
+
+* [Key verses] Weekday Maariv in Ashkenaz and Sefard closes its sequence of verses beginning *Baruch Hashem le'olam* with וַאֲנַחְנוּ עַמְּךָ וְצֹאן מַרְעִיתֶךָ נוֹדֶה לְּךָ לְעוֹלָם, "And we, Your people and the flock of Your pasture, will thank You forever."
+  CLAIM: Psalm 79:13 closes Maariv verse sequence.
+  WHY: The verse occurs within the sequence; further verses follow it.
+  EVID: Siddur Ashkenaz, Weekday, Maariv, Blessings of the Shema, Third Blessing after Shema: ואנחנו עמך וצאן מרעיתך נודה לך לעולם לדור ודור נספר תהלתך: ברוך יהוה ביום ברוך יהוה בלילה ברוך יהוה בשכבנו ברוך יהוה בקומנו: כי בידך נפשות החיים והמתים
+  FIX: Weekday Maariv in Ashkenaz and Sefard includes וַאֲנַחְנוּ עַמְּךָ וְצֹאן מַרְעִיתֶךָ נוֹדֶה לְּךָ לְעוֹלָם in its sequence of verses beginning *Baruch Hashem le'olam*.
+  OTHER RUN: supported: 
+
+* [Verse 3] Say the first half aloud: `shā-fə-KHŪ dhā-MĀM kam-MA-yim sə-viy-VŌTH yə-rū-shā-LĀM`.
+  CLAIM: Jerusalem is pronounced yə-rū-shā-LĀM
+  WHY: The vocalized name is pronounced Yerushalayim, not Yerushalam; the transliteration drops its final -yim syllable.
+  EVID: Psalm 79:3, Masoretic text: סְֽבִ֘יב֤וֹת יְֽרוּשָׁלָ֗͏ִם
+  FIX: Change `yə-rū-shā-LĀM` to `yə-rū-shā-LĀ-yim`.
+  OTHER RUN: (no record)
+
+* [Verse 3] A strophe of the Edot HaMizrach kinah for Tisha B'Av night, whose refrain is עֵינִי עֵינִי יוֹרְדָה מַּיִם, "my eye, my eye runs down with water," reads:
+  CLAIM: Quoted strophe has the tears refrain
+  WHY: The tears refrain belongs to the preceding kinah. The quoted strophe begins another lament, which repeats “סביבות סביבות ירושלים.”
+  EVID: Seder Tisha B'Av (Edot HaMizrach), Tisha B'Av Night: מרה הלילה הזה ארים. ויהי לבכי ליל שמורים. ואותי החרים. אל מוציאם ממצרים: לירושלים. עיני עיני יורדה מים:
+(יבקע אורי יה כשחר. על רשעים צור אפו יחר. ובעמו יבחר. הבוחר בירושלים:)
+זכור יהוה ליהודה ואפרים. אשר שפך דמם כמים.
+סביבות סביבות ירושלים:
+זכור יהוה
+  FIX: Replace “whose refrain is עֵינִי עֵינִי יוֹרְדָה מַּיִם, ‘my eye, my eye runs down with water,’” with “whose refrain is סְבִיבוֹת סְבִיבוֹת יְרוּשָׁלַיִם.”
+  OTHER RUN: supported: ; supported: 
+
+* [Verse 3] סְבִיבוֹת יְרוּשָׁלַיִם.
+  CLAIM: Kinah’s quoted line says סביבות once
+  WHY: The line repeats סביבות.
+  EVID: Seder Tisha B'Av (Edot HaMizrach), Tisha B'Av Night: זכור יהוה ליהודה ואפרים. אשר שפך דמם כמים.
+סביבות סביבות ירושלים:
+  FIX: Quote “סְבִיבוֹת סְבִיבוֹת יְרוּשָׁלַיִם.”
+  OTHER RUN: (no record)
+
+* [Verses 6–7] The Lithuanian selichot for Erev Rosh Hashanah, and a kinah of Edot HaMizrach for Tisha B'Av day, end on the verse about devouring Jacob.
+  CLAIM: Lithuanian selichot end on Psalm 79:7
+  WHY: The Lithuanian passage continues after the Jacob verse and changes אָכַל to the plural אכלו.
+  EVID: Selichot Nusach Ashkenaz Lita, Erev Rosh Hashana: אל תבא במשפט עמנו כי לא יצדק לפניך כל חי: כי אכלו את־יעקב ואת־נוהו השמו׃ אהלי אדום וישמעאלים מואב והגרים׃ כי־שבעה ברעות נפשנו וחיינו לשאול הגיעו׃
+  FIX: The Lithuanian selichot for Erev Rosh Hashanah include a pluralized version of the verse about devouring Jacob; a kinah of Edot HaMizrach for Tisha B’Av day closes a stanza with its singular form.
+  OTHER RUN: supported: 
+
+* [Verse 8] Ibn Ezra notes that most interpreters read it as an adjective and then disagrees: "the right reading in my eyes" is that the iniquities belong to אָבוֹת רִאשֹׁנִים, "the first fathers."
+  CLAIM: Ibn Ezra says most interpreters agree
+  WHY: רבים means “many,” not necessarily “most.” His preferred ancestral reading is accurately reported.
+  EVID: Ibn Ezra on Psalms 79:8: מפרשים רבים אמרו: כי ראשונים תאר לעוונות. והנכון בעיני: כי עוונות סמוך לאבות ראשונים
+  FIX: Ibn Ezra notes that many interpreters read it as an adjective and then disagrees: “the right reading in my eyes” is that the iniquities belong to אָבוֹת רִאשֹׁנִים, “the first fathers.”
+  OTHER RUN: supported: 
+
+* [Verse 8] The debt is not cancelled, and the file still exists.
+  CLAIM: Affected credit file necessarily still exists
+  WHY: The CFPB says the information may remain on file, not that it necessarily does.
+  EVID: Consumer Financial Protection Bureau, How long does information stay on my credit report?: Even though credit reporting companies usually won’t report this negative information after these limits they still may keep your information on file.
+  FIX: The debt is not cancelled, and the file may still exist.
+  OTHER RUN: (no record)
+
+* [Verse 8] The verse, with v. 9, closes Tachanun daily (see the liturgical section).
+  CLAIM: Verses 8–9 directly close daily Tachanun
+  WHY: The verses occur in a closing portion of Ashkenaz Tachanun, but other petitions separate them; this section is also followed by another prayer.
+  EVID: Siddur Ashkenaz, Weekday, Shacharit, Post Amidah, Tachanun, Shomer Yisrael: אל תזכר לנו עונות ראשונים מהר יקדמונו רחמיך כי דלונו מאד: חננו יהוה חננו כי־רב שבענו בוז: ברגז רחם תזכור: כי הוא ידע יצרנו זכור כי עפר אנחנו: עזרנו אלהי ישענו על־דבר כבוד־שמך והצילנו וכפר על־חטאתינו למען שמך:
+  FIX: The verse and v. 9 appear in the closing portion of weekday Tachanun (see the liturgical section).
+  OTHER RUN: supported: 
+
+* [Verse 9] At their father's tomb in Aeschylus' *Libation Bearers* (458 BCE), Agamemnon's children make the same bargain with Zeus:
+  CLAIM: Both children make the quoted plea
+  WHY: The quoted appeal is spoken by Orestes: he refers to Electra as another person, rather than both children delivering that plea together.
+  EVID: Aeschylus, Libation Bearers — Theoi Classical Texts Library: O Zeus, O Zeus, regard our cause! Behold the orphaned brood ... So you see both me and poor Electra here | Aeschylus, Libation Bearers — Vancouver Island University e-text: O Zeus, let me avenge my father’s death. Support me as my ally in this fight.
+  FIX: At their father's tomb in Aeschylus' *Libation Bearers* (458 BCE), Orestes makes the same bargain with Zeus:
+  OTHER RUN: supported: known
+
+* [Verse 9] The verse's phrase became a fixed formula of piety, used in the prayers after Tashlich, in the Rosh Hashanah annulment of vows (הַמָּקוֹם בְּרַחֲמָיו יַעְזְרֵנוּ עַל דְּבַר כְּבוֹד שְׁמוֹ), and even in the Lag BaOmer songs of the Sefard siddur, where עָזְרֵנוּ אֱלֹקֵי יִשְׁעֵנוּ opens lines that end
+  CLAIM: Phrase opens multiple Lag BaOmer song lines
+  WHY: The indexed Sefard Lag BaOmer songs have one occurrence of עזרנו אלהי ישענו, in one line of Ashreinu Ma Tov, not lines in multiple songs.
+  EVID: Siddur Sefard, Lag BaOmer Songs, Ashreinu Ma Tov; liturgy phrase search: עזרנו אלהי ישענו על דבר כבוד שמך, בזכות הלולא דבר יוחאי: אשרנו מה טוב חלקנו בהלולא דבר יוחאי:
+  FIX: The verse's phrase became a fixed formula of piety, used in the prayers after Tashlich, in the Rosh Hashanah annulment of vows (הַמָּקוֹם בְּרַחֲמָיו יַעְזְרֵנוּ עַל דְּבַר כְּבוֹד שְׁמוֹ), and even in a Lag BaOmer song of the Sefard siddur, where עָ
+  OTHER RUN: supported: ; supported: ; supported: 
