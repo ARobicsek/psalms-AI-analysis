@@ -23,6 +23,11 @@ Rules the prompt enforces (Ps 78, S393, why each exists):
     generated (a Selig page, a Schuetz catalogue entry), and the checker makes its own
     errors ("the Shulchan Arukh has no chapter 237" -- it does), so an addendum may
     correct the check and wins over it.
+Two of those rules are also enforced in code (`guard_edit_list`, S396), because on Ps 79 the
+model broke them: a placeholder-only replacement (`</DEL>`) is a deletion, and a correction
+that quotes the CHECK is withheld and the original marked [unconfirmed] instead. Cost of the
+second guard, measured on Ps 79: it caught all five copied quotations and also one correction
+that quoted the psalm in the checker's words ("to the beasts of the earth", 1 Macc 7:17).
 
 Model (Ps 78, S393, same report and check): Sonnet 5.5 in one pass, effort low, 7.0 cents,
 fixed every WRONG item everywhere it appeared and added nothing. Haiku 4.5 needed a second
@@ -241,9 +246,77 @@ def _call(client, model: str, system: str, report: str, check: str, max_cost: fl
     return CallResult(text, u.input_tokens, 0, 0, u.output_tokens, 0, resp.stop_reason == "max_tokens", cost)
 
 
+# -- two $0 guards on the edit list (Session 396) ---------------------------------------------
+# Ps 79: the prompt already said "to delete, leave the text after === empty" and "do not copy
+# the CHECK's long quotations into the REPORT", and Sonnet 5.5 broke both. (1) Two deletions
+# came back as literal `</DEL>` / `</UNCERTAIN_PLACEHOLDER>` lines, which landed in the report.
+# (2) Five corrections carried the checker's own "actual text" (Hossfeld-Zenger p. 305, Calvin,
+# Soferim, the Esarhaddon curse, Shimush Tehillim) -- the S393 trap: the checker invents
+# quotations -- and the Shimush one reached the printed guide. Code enforces both rules now.
+_PLACEHOLDER = re.compile(r"^(?:\s*(?:</?[A-Za-z][\w\-]*\s*/?>|\[(?:DEL|DELETE|DELETED|REMOVE|REMOVED)\]))+\s*$", re.I)
+_QUOTED = re.compile(r'"([^"\n]+)"|“([^”\n]+)”|«([^»\n]+)»|„([^“”\n]+)[“”]')
+_GERSHAYIM = re.compile(r'(?<=[א-ת])"(?=[א-ת])')   # ע"ט, הקב"ה: not quotation marks
+_DR_WORD = re.compile(r"[^\W_]+", re.U)
+QUOTE_MIN_WORDS = 5    # Ps 79's shortest imported quotation: "to cast down one's enemies"
+
+
+def _dr_words(s: str) -> list:
+    """Words, lower-cased, with accents and Hebrew points removed."""
+    import unicodedata
+    s = unicodedata.normalize("NFD", (s or "").lower())
+    return _DR_WORD.findall("".join(ch for ch in s if not unicodedata.combining(ch)))
+
+
+def _ngrams(words: list, n: int) -> set:
+    return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+def imported_quotation(repl: str, report: str, check: str, n: int = QUOTE_MIN_WORDS) -> Optional[str]:
+    """The first quoted span in `repl` that was copied from the CHECK: at least `n` words in
+    quotation marks sharing an `n`-word run with the CHECK that the original REPORT lacks.
+    Unquoted wording borrowed from the check (a corrected citation) is not a quotation."""
+    check_grams = _ngrams(_dr_words(check), n)
+    report_grams = _ngrams(_dr_words(report), n)
+    for m in _QUOTED.finditer(_GERSHAYIM.sub("״", repl)):
+        span = next(g for g in m.groups() if g is not None)
+        grams = _ngrams(_dr_words(span), n)
+        if grams & (check_grams - report_grams):
+            return span.replace("״", '"')
+    return None
+
+
+def guard_edit_list(response: str, report: str, check: str) -> Tuple[str, Dict]:
+    """Rewrite the model's FIND/REPLACE blocks before they are applied (pure). A replacement
+    that is only a placeholder tag becomes a deletion; one that imports a quotation from the
+    CHECK is withheld and the original text is marked [unconfirmed] instead, with a note in
+    the change's own line. `report` is the ORIGINAL report, also for the sweep pass."""
+    from src.agents.copy_editor import _EDIT_BLOCK
+    counts = {"placeholder_deletions": 0, "quotations_withheld": 0}
+
+    def fix(m: "re.Match") -> str:
+        find, repl = m.group(1), m.group(2)
+        if repl.strip() and _PLACEHOLDER.match(repl):
+            counts["placeholder_deletions"] += 1
+            return f"<<<FIND\n{find}\n===\n\n>>>\n*(guard: the placeholder {repl.strip()[:40]} was read as a deletion)*"
+        q = imported_quotation(repl, report, check) if find.strip() else None
+        if q:
+            counts["quotations_withheld"] += 1
+            short = " ".join(q.split()[:8]) + ("…" if len(q.split()) > 8 else "")
+            marked = find.rstrip() + " [unconfirmed]"
+            return (f"<<<FIND\n{find}\n===\n{marked}\n>>>\n*(guard: the correction quoted the check "
+                    f"(“{short}”), whose quotations are not trusted; the original is marked [unconfirmed] instead)*")
+        return m.group(0)
+
+    return _EDIT_BLOCK.sub(fix, response), counts
+
+
 def _stats_line(stats: Dict) -> str:
-    return (f"{stats.get('applied', 0)} applied of {stats.get('edits', 0)} "
+    line = (f"{stats.get('applied', 0)} applied of {stats.get('edits', 0)} "
             f"({stats.get('not_found', 0)} not found, {stats.get('ambiguous', 0)} ambiguous)")
+    guards = [f"{stats[k]} {label}" for k, label in (("placeholder_deletions", "placeholder(s) read as deletions"),
+                                                    ("quotations_withheld", "quotation(s) from the check withheld"))
+              if stats.get(k)]
+    return line + (f"; guard: {', '.join(guards)}" if guards else "")
 
 
 def clean(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None, client=None,
@@ -295,7 +368,9 @@ def clean(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None, cl
         if first.cut_off:
             total.message = "pass 1 edit list was cut off; nothing written"
             return total
-        cleaned, changes1, stats1 = apply_edit_list(report, first.text)
+        edits1, guard1 = guard_edit_list(first.text, report, check)
+        cleaned, changes1, stats1 = apply_edit_list(report, edits1)
+        stats1.update(guard1)
 
         sweep_note, changes2, stats2 = "", "", {}
         if not sweep:
@@ -309,7 +384,9 @@ def clean(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None, cl
                 if second.cut_off:
                     sweep_note = "Sweep cut off; its edits were NOT applied."
                 else:
-                    cleaned, changes2, stats2 = apply_edit_list(cleaned, second.text)
+                    edits2, guard2 = guard_edit_list(second.text, report, check)
+                    cleaned, changes2, stats2 = apply_edit_list(cleaned, edits2)
+                    stats2.update(guard2)
 
         p.clean.write_text(cleaned, encoding="utf-8")
         body1 = changes1.replace("## Changes", "").strip()

@@ -257,3 +257,91 @@ def test_bundle_label_and_flag_for_checked_research():
     assert "[unconfirmed]" in ra.DEEP_RESEARCH_CHECKED_NOTE
     fields = ra.ResearchBundle.__dataclass_fields__
     assert "deep_research_checked" in fields and fields["deep_research_checked"].default is False
+
+
+# -- Session 396: the two guards on the edit list (Ps 79) ---------------------------------
+
+GUARD_REPORT = """## TOP FINDINGS
+
+* **Blow**: John Blow wrote an anthem on this psalm.
+* **Calvin**: Calvin defends v. 6 (Commentary, 1557).
+* **Soferim**: Soferim 18:2 appoints it for Tisha B'Av.
+"""
+
+GUARD_CHECK = """### 16. Calvin
+* **Status**: **WRONG** -- he writes: "The Prophet, however, does not give loose reins to the passion of anger."
+### 11. Soferim
+* **Status**: **WRONG** -- the appointment is in chapter 18, halakhah 3; it reads «ושני מזמורים הללו אלהים באו גוים בנחלתך (תהלים ע"ט)».
+### 17. Blow
+* **Status**: **WRONG** -- John Blow composed no anthem by this title.
+"""
+
+GUARD_EDITS = """## Changes
+1. [WRONG] **Blow**: no such work; deleted.
+<<<FIND
+* **Blow**: John Blow wrote an anthem on this psalm.
+===
+</DEL>
+>>>
+2. [WRONG] **Calvin**: invented quotation replaced.
+<<<FIND
+* **Calvin**: Calvin defends v. 6 (Commentary, 1557).
+===
+* **Calvin**: Calvin writes: "The Prophet, however, does not give loose reins to the passion of anger." [corrected by check]
+>>>
+3. [WRONG] **Soferim**: chapter corrected.
+<<<FIND
+* **Soferim**: Soferim 18:2 appoints it for Tisha B'Av.
+===
+* **Soferim**: the appointment is in chapter 18, halakhah 3 (Soferim 18:3). [corrected by check]
+>>>
+"""
+
+
+def test_guard_reads_a_placeholder_tag_as_a_deletion():
+    for tag in ("</DEL>", "</UNCERTAIN_PLACEHOLDER>", "<DELETE/>", "[DELETED]", " </DEL>\n"):
+        assert drc._PLACEHOLDER.match(tag), tag
+    for real in ("* a real bullet", "x", "<i>kept</i> text", ""):
+        assert not drc._PLACEHOLDER.match(real), real
+
+
+def test_guard_withholds_a_quotation_copied_from_the_check():
+    assert drc.imported_quotation('Calvin writes: "The Prophet, however, does not give loose reins."',
+                                  GUARD_REPORT, GUARD_CHECK)
+    # Hebrew with gershayim (ע"ט) inside the quotation marks is still one quoted span
+    assert drc.imported_quotation('it reads "ושני מזמורים הללו אלהים באו גוים בנחלתך (תהלים ע"ט)"',
+                                  GUARD_REPORT, GUARD_CHECK)
+    # unquoted wording borrowed from the check is a corrected citation, not a quotation
+    assert drc.imported_quotation("the appointment is in chapter 18, halakhah 3", GUARD_REPORT, GUARD_CHECK) is None
+    # a quotation the REPORT already had is not imported
+    assert drc.imported_quotation('"Calvin defends v. 6 (Commentary, 1557)"', GUARD_REPORT, GUARD_CHECK) is None
+    # short quoted phrases are left alone
+    assert drc.imported_quotation('"loose reins"', GUARD_REPORT, GUARD_CHECK) is None
+
+
+def test_clean_applies_both_guards(tmp_path):
+    p = drc.paths(79, tmp_path)
+    p.raw.write_text(GUARD_REPORT, encoding="utf-8")
+    p.check.write_text(GUARD_CHECK, encoding="utf-8")
+    r = drc.clean(79, tmp_path, client=FakeClient(replies=(GUARD_EDITS,)))
+    assert r.status == "cleaned"
+    text = p.clean.read_text(encoding="utf-8")
+    assert "Blow" not in text and "</DEL>" not in text                     # placeholder -> deletion
+    assert "loose reins" not in text                                        # the check's quotation withheld
+    assert "* **Calvin**: Calvin defends v. 6 (Commentary, 1557). [unconfirmed]" in text
+    assert "(Soferim 18:3). [corrected by check]" in text                   # a plain correction still applies
+    assert r.stats["placeholder_deletions"] == 1 and r.stats["quotations_withheld"] == 1
+    log = p.log.read_text(encoding="utf-8")
+    assert "guard: 1 placeholder(s) read as deletions, 1 quotation(s) from the check withheld" in log
+    assert "whose quotations are not trusted" in log
+
+
+def test_guard_also_runs_on_the_sweep(tmp_path):
+    p = drc.paths(79, tmp_path)
+    p.raw.write_text(GUARD_REPORT, encoding="utf-8")
+    p.check.write_text(GUARD_CHECK, encoding="utf-8")
+    sweep = GUARD_EDITS.split("3. [WRONG]")[0]   # the sweep returns the Blow and Calvin edits
+    r = drc.clean(79, tmp_path, client=FakeClient(replies=(NO_CHANGES, sweep)), sweep=True)
+    text = p.clean.read_text(encoding="utf-8")
+    assert "</DEL>" not in text and "loose reins" not in text
+    assert r.stats["quotations_withheld"] == 1

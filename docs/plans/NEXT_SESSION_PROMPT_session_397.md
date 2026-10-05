@@ -27,8 +27,14 @@ wording came only from Gemini's checker).
 - The echoes **used-works register** reads only `output/psalm_N/psalm_NNN_copy_edited.md`: blind to ~35 older
   printed guides and to A/B-arm guides copied to `Documents` (how Ps 78 repeated Bialik's *Metei Midbar* from the
   printed Ps 76). Details in the S396 log entry.
-- The **deep-research cleaner** leaves `</DEL>`-style placeholder lines and copies the checker's quotations into
-  `_clean.txt`.
+
+## 3b. New this session: the deep-research cleaner's guards
+
+`deep_research_cleaner.guard_edit_list` (S396) turns placeholder replacements into deletions and withholds any
+correction that quotes the CHECK (the original is marked `[unconfirmed]`). On the next psalm, read
+`psalm_NNN_deep_research_clean_log.md`: the stats line counts both guards, and each withheld edit says which
+quotation it refused. Known cost: a correction quoting the psalm in the checker's words is withheld too (Ps 79's
+1 Maccabees item). If that recurs, consider exempting quoted spans found in the psalm's own text.
 
 ## 4. Remote sessions: getting the Gemini output in
 
