@@ -719,7 +719,17 @@ def run_enhanced_pipeline(
             with open(research_file, 'w', encoding='utf-8') as f:
                 f.write(research_bundle_content)
             logger.info("[STEP 2] Reused research bundle: echoes section replaced with this run's dossier")
-        
+        # Session 395: a bundle built before S395 carries the old GPT-5.1 liturgy section; replace it
+        # (one Opus 5.5 call, ~$0.6; a current section is left alone at $0).
+        from src.agents.liturgy_librarian_v2 import refresh_bundle_liturgy
+        _snap = cost_tracker.snapshot()
+        research_bundle_content, _lit_new = refresh_bundle_liturgy(research_bundle_content, psalm_number,
+                                                                   cost_tracker=cost_tracker, logger=logger)
+        if _lit_new:
+            _record_stage("liturgy section (replaced in the reused bundle)", _snap)
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
         tracker.research.lexicon_entries_count = research_stats['lexicon_count']
@@ -1429,7 +1439,11 @@ if __name__ == "__main__":
                              "corrects facts only from its report; plus a $0 citation re-check "
                              "of the copy-edited text where tanakh.db exists")
 
+    parser.add_argument("--liturgy", choices=["v2", "legacy"], default="v2",
+                        help="Session 395: v2 (default) = the liturgy section from a complete per-verse "
+                             "catalogue and one Opus 5.5 call; legacy = the phrase-by-phrase GPT-5.1 librarian")
     args = parser.parse_args()
+    os.environ["PSALMS_LITURGY"] = args.liturgy   # Session 395: read by ResearchAssembler
 
     # Set output directory with psalm-specific subdirectory
     if not args.output_dir:

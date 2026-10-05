@@ -732,6 +732,11 @@ the poem "does". For a flagged conjecture ("perhaps", "may"), list only the fact
    - PRAYERS AND THEIR ORDER (siddur, machzor, selichot, Ne'ilah, the Haggadah): search_liturgy,
      with a Hebrew phrase from the prayer or the prayer's name. Do not guess siddur or machzor
      refs for get_text; use the refs search_liturgy returns.
+   - A claim that RESTRICTS a liturgical use ("only", "in certain selichot", "in the Sefard and
+     Edot HaMizrach forms of", "on Shabbat and festivals") is a claim about where the words are
+     NOT. Search the Hebrew and read the whole list of refs (`every_ref`): if the passage is also
+     in rites or services the claim excludes, the claim is contradicted, even though the place it
+     names is right.
    - THE SEPTUAGINT: get_lxx(ref), with the Hebrew-Bible reference. Sefaria has none.
    - A get_text that fails lists Sefaria's closest titles: try one of those at most once. A work
      Sefaria does not hold (a modern poem, a folk custom) is settled as in step 3.
@@ -1006,10 +1011,11 @@ FUNCTION_TOOLS = [
         "Hebrew and English where available. A ref Sefaria lacks returns its closest titles.",
         {"ref": {"type": "string"}}, ["ref"]),
     # Session 388: both $0.
-    _fn("search_liturgy", "The siddur and machzor (Ashkenaz, Sefard, Edot HaMizrach; Rosh Hashanah and "
-        "Yom Kippur; selichot; the Haggadah). A Hebrew phrase returns the passage around it in each prayer "
-        "that has it; a name ('Neilah', 'Fast of Esther', 'Maariv Aleinu') returns matching prayers and "
-        "their exact refs. Every hit names the prayers before and after it in its service.",
+    _fn("search_liturgy", "The siddur and machzor (Ashkenaz, Sefard, Chabad, Edot HaMizrach; Rosh Hashanah "
+        "and Yom Kippur; the full selichot; kinnot and Tisha B'Av; the Haggadah; Ma'avar Yabbok). A Hebrew "
+        "phrase returns the passage around it in each prayer that has it (and every matching ref); a name "
+        "('Neilah', 'Fast of Esther', 'Maariv Aleinu') returns matching prayers and their exact refs. Every "
+        "hit names the prayers before and after it in its service.",
         {"query": {"type": "string"}}, ["query"]),
     _fn("get_lxx", "The Septuagint for a verse, by its HEBREW-Bible reference ('Psalms 77:11'): Brenton's "
         "Greek text and his English translation (1851). For a few books without Brenton's Greek, the Greek "
@@ -1392,8 +1398,11 @@ def search_liturgy(query: str, db_path: Optional[Path] = None, max_hits: int = 6
                 hits.append({"ref": d["sefaria_ref"], **_prayer_place(rows, d),
                              "opening": _clip(_norm_ws(d["hebrew_text"] or d["english_text"] or ""), 200)})
     partial = locals().get("partial", False)
-    return {"query": q, "source": "liturgy.db (siddurim and machzorim harvested from Sefaria)",
-            "matches": len(hits), "prayers": hits[:max_hits],
+    # Session 395: every hit's ref, not just the first max_hits: a claim that a verse is said ONLY
+    # in one rite or service is a claim about where it is not, and needs the whole list.
+    every = {"every_ref": [h["ref"] for h in hits][:150]} if len(hits) > max_hits else {}
+    return {"query": q, "source": "liturgy.db (siddurim, machzorim, selichot, kinnot harvested from Sefaria)",
+            "matches": len(hits), "prayers": hits[:max_hits], **every,
             **({"partial": "no prayer matches every word; these match the most"} if partial else {}),
             **({"note": f"{len(hits) - max_hits} more; narrow the query"} if len(hits) > max_hits else {})}
 

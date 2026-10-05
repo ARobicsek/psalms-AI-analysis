@@ -1,0 +1,12 @@
+{
+  "model": "claude-opus-5-5",
+  "set_aside": [
+    "v. 10, Ma'avar Yabbok (Siftei Tzedek): שומר בריתו, \"keeps his covenant\" (sexual purity), is an idiom, not this psalm.",
+    "v. 13, Seder Ma'amadot: מַיִם. כְּמוֹ are only adjacent words (\"waters, as it is written\"), a coincidence.",
+    "v. 19, Ma'avar Yabbok (Author's Introduction): לערוך שלחן, \"to set a table\" for the God-fearing, is an idiom, not the psalm's taunt.",
+    "v. 37, blessing on seeing a rainbow (Ashkenaz siddur): נֶאֱמָן בִּבְרִיתוֹ describes God's faithfulness to the covenant of Noah, an idiom, not this psalm.",
+    "v. 37, blessing on seeing a rainbow (Sefard siddur): the same idiom.",
+    "v. 37, blessing on seeing a rainbow (Edot HaMizrach siddur): the same idiom.",
+    "v. 70, Avodah Service, Yom Kippur Musaf (Ashkenaz and Sefard machzorim): מִמִּכְלְאוֹת צֹאן עֲדָרִים דָּלְלוּ belongs to a catalogue of crop failures modelled on Habakkuk 3:17, not David taken from the sheepfolds."
+  ]
+}

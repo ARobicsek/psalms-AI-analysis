@@ -42,11 +42,13 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
 
 
 def test_verse_instructions_are_the_s386_text_byte_for_byte():
-    """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS) and
-    the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS)."""
+    """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS),
+    the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS) and the Session 395 liturgy
+    edit (fw.S395_LITURGY_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
+    expected = fw._apply_edits(expected, fw.S395_LITURGY_EDITS)
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected

@@ -1,0 +1,12 @@
+{
+  "model": "claude-opus-5-5",
+  "set_aside": [
+    "v. 2, Yom Kippur morning reader's repetition (Ashkenaz Kedushah; Sefard reader's repetition), piyyut rhyming on בָּשָׂר: \"בָּשָׂר. צוּר\" spans a line break of the piyyut; idiom, not this psalm.",
+    "v. 9, Yom Kippur services (Maariv, Shacharit, Musaf, Mincha; Ashkenaz and Sefard), \"אַל תַּעַזְבֵנוּ וְאַל תִּטְּשֵׁנוּ וְאַל תַּכְלִימֵנוּ\": stock formula whose order follows 1 Kgs 8:57, not this psalm.",
+    "v. 9, Sefard prayer upon arising (Sefard siddur; Rosh Hashanah and Yom Kippur machzorim): the same \"אַל תַּעַזְבֵנוּ וְאַל תִּטְּשֵׁנוּ\" formula; not this psalm.",
+    "v. 9, *El erekh apayim* before the weekday Torah reading (Sefard; Edot HaMizrach): \"אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנּוּ\" is a stock plea shared with Ps 69:18, 102:3 and 143:7; it cannot be tied to this psalm.",
+    "v. 9, Keter Malkhut: \"אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי\", the same stock plea shared with several psalms; not this psalm.",
+    "v. 11, Aramaic prayer רִבּוֹן עָלְמָא (Edot HaMizrach weekday Shacharit; Edot HaMizrach Yom Kippur Shacharit, Akeidah): \"בְּאֹרַח מֵישַׁר\" is an Aramaic idiom, not this psalm.",
+    "v. 11, Ma'avar Yabbok, *Sefat Emet*: \"אזיל בארח מישור\" inside a Zohar quotation, set against \"ארח תקלה\"; Aramaic idiom, not this psalm."
+  ]
+}

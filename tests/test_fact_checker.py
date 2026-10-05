@@ -663,3 +663,12 @@ def test_apply_edit_list_marks_a_refused_edit():
     resp = "## Changes\n1. [5] **Verse 2**: Pointing.\n<<<FIND\ntwice\n===\nthrice\n>>>\n"
     text, changes, st = ce.apply_edit_list(_GUIDE, resp, guard=lambda f, r: "the MT has the original")
     assert text == _GUIDE and st["refused"] == 1 and "NOT APPLIED: the MT has the original" in changes
+
+
+def test_search_liturgy_lists_every_ref_when_hits_exceed_the_shown_passages(tmp_path):
+    # Session 395: a claim that a verse is said ONLY somewhere needs the whole list, not six.
+    from src.agents.fact_checker import search_liturgy
+    db = _tiny_liturgy_db(tmp_path)
+    r = search_liturgy("Ne'ilah", db, max_hits=2)
+    assert r["matches"] == 3 and len(r["prayers"]) == 2 and len(r["every_ref"]) == 3
+    assert "every_ref" not in search_liturgy("Ne'ilah", db)

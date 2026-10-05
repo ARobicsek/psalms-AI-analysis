@@ -343,9 +343,27 @@ S394_VERSE_EDITS = (
      "1. A header on its own line: `**Verse N**`. Group two to four verses under one header (`**Verses 5–6**`) wherever they make one movement and one note will serve them better than several: a sentence that runs across verses, a list or catalogue, a stretch of narrative, a pair whose point is the pairing. In a long psalm, do this freely, so that the commentary moves at the pace of the poem rather than stopping at every verse. Each verse in a group still gets its own Hebrew line and its own translation, and all of them come before the shared note."),
 )
 
+# ---------------------------------------------------------------------------
+# Session 395: the liturgy section of the research is now a complete catalogue (every placement
+# under its verse, minor echoes gathered at the end, the texts searched stated by code). "Every
+# specific liturgical use" would now oblige the writer to print every echo in Ma'avar Yabbok; and
+# the old guides' errors were restrictions inferred from absence ("in the Nusach Sefard and Edot
+# HaMizrach forms of Uva le-Tziyon", "in certain selichot"), which the writer must not reintroduce.
+# ---------------------------------------------------------------------------
+
+S395_LITURGY_EDITS = (
+    ("Every specific liturgical use in the research should appear somewhere in the guide, here or in a verse note.",
+     "Every placement the research's liturgy section gives under a verse heading should appear somewhere in the guide, "
+     "here or in a verse note; the echoes it gathers at the end are there to use where they illuminate a verse. "
+     "Say where a verse is said as broadly as the research does and no more narrowly: the research names the texts "
+     "that were searched, so never write that a verse is said only somewhere, or in certain or some services or "
+     "communities, unless the research quotes a rubric that says so."),
+)
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
 
 
 # ---------------------------------------------------------------------------

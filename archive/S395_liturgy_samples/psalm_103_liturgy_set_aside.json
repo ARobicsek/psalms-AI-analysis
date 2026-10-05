@@ -1,0 +1,14 @@
+{
+  "model": "claude-opus-5-5",
+  "set_aside": [
+    "v. 8 (catalogued as \"whole psalm\"), Ma'avar Yabbok, Siftei Tzedek: quotes Psalm 86:15, not this psalm.",
+    "v. 8, Ma'avar Yabbok, Minchat Aharon (two rows): quotes Exodus 34:6 and Psalm 86:15, not this psalm.",
+    "v. 8, Tashlich (Sefard Rosh Hashanah machzor): \"ה' ארך אפים ורב חסד\" is Numbers 14:18 (continues \"ונקה לא ינקה פוקד עון אבות\").",
+    "v. 8, Ma'avar Yabbok, Author's Introduction: \"חנון ורחום הוא ... ארך אפים ורב חסד\" follows the Joel 2:13 / Jonah 4:2 order, not this psalm.",
+    "v. 2, Polish selichot, fourth day of the Ten Days: \"וְאַל תִּשְׁכַּח\" is a common idiom in a selicha by Eliyah b. Shemaya, not this psalm.",
+    "v. 4, El Adon (Shabbat and High Holiday morning, all rites): \"חֶסֶד וְרַחֲמִים מָלֵא כְבוֹדוֹ\" is a stock pairing, not this psalm.",
+    "v. 4, Lithuanian selichot, Erev Rosh Hashanah: \"וּמָצָא חֶסֶד וְרַחֲמִים\" (of Jacob) is an idiom, not this psalm.",
+    "v. 4, Ma'avar Yabbok, Imrei Noam: \"חסד ורחמים\" in a kabbalistic discourse is an idiom, not this psalm.",
+    "v. 19, Harachaman of Birkat HaMazon for a Brit Milah (Siddur Sefard; Chabad): \"עַד הוּכַן כִּסְאוֹ כַּשֶּׁמֶשׁ וְיָהֲלוֹם\" speaks of the throne of Elijah (\"like the sun\", cf. Ps 89:37). It is a common idiom of an established throne, not this psalm."
+  ]
+}

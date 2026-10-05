@@ -576,7 +576,14 @@ def run_enhanced_pipeline(
         micro_analysis = load_micro_analysis(str(micro_file))
         with open(research_file, 'r', encoding='utf-8') as f:
             research_bundle_content = f.read()
-        
+        # Session 395: replace a pre-S395 liturgy section in the reused bundle (~$0.6; $0 if current).
+        from src.agents.liturgy_librarian_v2 import refresh_bundle_liturgy
+        research_bundle_content, _lit_new = refresh_bundle_liturgy(research_bundle_content, psalm_number,
+                                                                   cost_tracker=cost_tracker, logger=logger)
+        if _lit_new:
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
         tracker.research.lexicon_entries_count = research_stats['lexicon_count']
@@ -1072,7 +1079,11 @@ if __name__ == "__main__":
                             "prior observations file. Output: output/psalm_NNN/psalm_NNN_synthesis_discovery.md")
     parser.add_argument("--synthesis-discovery", action="store_true", help=argparse.SUPPRESS)  # legacy no-op (default-on now)
 
+    parser.add_argument("--liturgy", choices=["v2", "legacy"], default="v2",
+                        help="Session 395: v2 (default) = the liturgy section from a complete per-verse "
+                             "catalogue and one Opus 5.5 call; legacy = the phrase-by-phrase GPT-5.1 librarian")
     args = parser.parse_args()
+    os.environ["PSALMS_LITURGY"] = args.liturgy   # Session 395: read by ResearchAssembler
 
     # Set output directory with psalm-specific subdirectory
     if not args.output_dir:

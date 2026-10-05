@@ -19,6 +19,7 @@ Input: JSON research request from Scholar-Researcher
 Output: Complete research bundle ready for Scholar-Writer agents
 """
 
+import os
 import sys
 import logging
 from pathlib import Path
@@ -38,6 +39,7 @@ if __name__ == '__main__':
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle, truncate_commentary
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from src.agents.liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
+    from src.agents.liturgy_librarian_v2 import LiturgicalLibrarianV2
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.rag_manager import RAGManager, RAGContext
@@ -51,6 +53,7 @@ else:
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle, truncate_commentary
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from .liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
+    from .liturgy_librarian_v2 import LiturgicalLibrarianV2
     from .sacks_librarian import SacksLibrarian, SacksReference
     from .sacks_librarian import SacksLibrarian, SacksReference
     from .rag_manager import RAGManager, RAGContext
@@ -973,7 +976,13 @@ class ResearchAssembler:
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
         self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
-        self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries, cost_tracker=cost_tracker)  # Phase 4/5: Aggregated phrase-level
+        # Session 395: the liturgy section comes from a complete per-verse catalogue and one grounded
+        # model call (liturgy_librarian_v2). PSALMS_LITURGY=legacy (the pipelines' --liturgy legacy)
+        # restores the phrase-by-phrase GPT-5.1 librarian, which showed its model 5 rows per phrase.
+        if os.environ.get("PSALMS_LITURGY", "v2") == "legacy":
+            self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries, cost_tracker=cost_tracker)
+        else:
+            self.liturgical_librarian = LiturgicalLibrarianV2(cost_tracker=cost_tracker, use_llm=use_llm_summaries)
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
 
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager

@@ -589,7 +589,8 @@ For EACH verse:
 4. **Traditional Commentary**: Read all eleven sources on every verse — Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (the Chida), Malbim, Malbim Beur Hamilot, Torah Temimah — then quote the few that pass RULE 8b's admission test. **RULE 8b tells you what each of them is FOR; read that before you rank them.** The Torah Temimah identifies where texts were mined for aggadic/halachic purposes and Minchat Shai settles questions of spelling, accent and variant reading; these are often the richest material in the bundle. **Reviewing all of it is mandatory; quoting it is earned. A verse whose commentators only paraphrase should show none of them — that is a correct outcome, not a gap.** Adding five sources did not raise the Tier-1 budget by one quotation; it widened the field you are ranking.
 
 5. **Modern Liturgical Context** (CRITICAL - DO NOT SKIP MATERIAL):
-   - You MUST incorporate EVERY specific liturgical reference provided in your research bundle.
+   - You MUST incorporate EVERY placement the research's liturgy section gives under a verse heading; the echoes it gathers at the end are there to use where they illuminate a verse.
+   - Say where a verse is said as broadly as the research does and no more narrowly: never write that it is said only somewhere, or in certain or some services, unless the research quotes a rubric that says so.
    - When a verse appears in liturgy, comment on its usage and what it reveals.
    - **QUOTE** the liturgical texts in Hebrew + English. Be specific about prayer name, service, occasion, and tradition.
 
