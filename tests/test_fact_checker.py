@@ -38,7 +38,9 @@ from src.agents.fact_checker import (  # noqa: E402
 # against `git show HEAD:src/agents/copy_editor.py` when the fact check was
 # built). Change it ONLY in a commit that deliberately edits the prompt, the
 # banned-phrase list or the superlative patterns it is assembled from.
-SYSTEM_PROMPT_SHA256 = "89f73882954e8717a70974b662b73f629732aca9f89b2084fa924b1876f345cf"
+# Session 398: changed deliberately -- one rule added: never abbreviate a divine name written in
+# full (the writer now spells names in full and the printed guide converts them).
+SYSTEM_PROMPT_SHA256 = "db0730f17aed27ebbe2b42c4211f11cf979ea09b5f73c78a580fc0972870de03"
 
 
 # ---------------------------------------------------------------------------

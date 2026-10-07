@@ -360,10 +360,53 @@ S395_LITURGY_EDITS = (
      "communities, unless the research quotes a rubric that says so."),
 )
 
+# ---------------------------------------------------------------------------
+# Session 398: the author, after reading Pss 78-79. (1) Divine names: the Ps 78 writer decided
+# "to avoid quoting them directly in Hebrew where I can" and cut 78:65 short to leave out
+# אֲדֹנָי; the Ps 79 writer converted names itself, copying the example below. "It would be better
+# … to have none of the models worry at all about divine names and then have something
+# programmatic convert everything in the final output, including the thinking." The converter
+# (divine_names_modifier, run on every paragraph of the DOCX) does that, so the writer is told to
+# spell names in full, and the example no longer models a converted name. (2) "My strong
+# preference would be to always include the Hebrew quotations as well. It is OK if that puts us a
+# little over a word limit." About 40% of quotations in both guides had no Hebrew (Ps 74 "You
+# split the sea", Ps 89, Ezek 24:7, Avot 3:17 …) while both essays sat at the 2,000-word cap.
+# ---------------------------------------------------------------------------
+
+_HEBREW_RULE_OLD = """- **Hebrew and English always together.** Every Hebrew word or quotation carries its translation, and every translation its Hebrew. The translation is part of the sentence, not a floating annotation: *The psalm ends with יֵשַׁע אֱלֹקִים, "the salvation of God"* or *God "made the mountain stand" (הֶעֱמַדְתָּה)* — never *יֵשַׁע אֱלֹקִים ("the salvation of God")*. Never put Hebrew (or Greek) inside quotation marks; only the English carries quotes.
+"""
+
+_HEBREW_RULE_NEW = """- **Hebrew and English always together.** Every Hebrew word or quotation carries its translation, and every translation of a Hebrew or Aramaic text carries its Hebrew. This holds for every such source, not only the psalm: other biblical verses, the Mishnah, Talmud and midrash, the commentators, the liturgy, and later Hebrew poetry. Whenever you quote one of them in English, quote it in Hebrew too, taking the words from the text in front of you where the research has it. (A source written in another language follows the echo rule: the original, then the translation.) The translation is part of the sentence, not a floating annotation: *The psalm ends with נוֹרָא לְמַלְכֵי־אָרֶץ, "awesome to the kings of the earth"* or *God "made the mountain stand" (הֶעֱמַדְתָּה)* — never *נוֹרָא לְמַלְכֵי־אָרֶץ ("awesome to the kings of the earth")*. Never put Hebrew (or Greek) inside quotation marks; only the English carries quotes.
+- **Divine names as written.** Write every name of God exactly as your source spells it, and never shorten a quotation, leave out a line or choose a different passage to avoid a name. The printed guide converts every divine name, in the essay, the notes and your reasoning alike, into the forms traditionally used in print, so this is not something you need to think about.
+"""
+
+_LENGTH_OLD = "1,200–2,000 words. Open with"
+_LENGTH_NEW = ("1,200–2,000 words of English. The Hebrew does not count toward them: never drop or shorten "
+               "the Hebrew of a quotation to save space. Open with")
+
+_VERSE_CARRYOVER_OLD = """and WRITING (including "you are the author" — never mention the research or anything behind it)."""
+_VERSE_CARRYOVER_NEW = ("""and WRITING (including "you are the author" — never mention the research or anything behind it; """
+                        """"Hebrew and English always together," which matters most in the notes, where most of the """
+                        """quotations are; and "divine names as written")."""
+                        """ Length is measured in English words only; the Hebrew never counts against it.""")
+
+S398_HEBREW_EDITS = {
+    "essay": (
+        (_HEBREW_RULE_OLD, _HEBREW_RULE_NEW),
+        (_LENGTH_OLD, _LENGTH_NEW),
+    ),
+    "verse": (
+        (_VERSE_CARRYOVER_OLD, _VERSE_CARRYOVER_NEW),
+        ("## THE LITURGICAL SECTION (200–500 words)", "## THE LITURGICAL SECTION (200–500 words of English, not counting the Hebrew)"),
+    ),
+}
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"])
 
 
 # ---------------------------------------------------------------------------

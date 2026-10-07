@@ -298,6 +298,7 @@ CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:
 - Do NOT alter parenthetical Hebrew transliterations.
 - Do NOT restructure the liturgical sections (marked by ---LITURGICAL-SECTION-START---).
 - Do NOT revert or alter modified divine names (e.g., Kel, Elokim, Hashem, G-d, L-rd, and their Hebrew equivalents like קֵל, אלקים, ה׳, צבקות, שקי, אלוק). Leave them exactly as written.
+- Do NOT abbreviate or modify divine names written in full, in Hebrew or English, either: the printed guide converts them later. Never treat a name's spelling as an error.
 - Preserve all line breaks and paragraph structure exactly as given.
 
 After the corrected text, append a "## Changes" section. Number each change

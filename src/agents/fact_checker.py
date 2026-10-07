@@ -672,10 +672,11 @@ RECORD_SCHEMA = {
 # verify_citations checks it against tanakh.db (divine-name aware).
 
 DIVINE_NAMES_NOTE = """### The guide's spelling of divine names (never an error)
-The guide deliberately writes divine names in a reverential form, in its own prose AND inside
-quotations: ה׳ for the Tetragrammaton, אֱלֹקִים / אֱלֹקֵי (etc.) for אֱלֹהִים, קֵל for אֵל, צְבָקוֹת for
+The guide writes divine names in full or in a reverential form, in its own prose AND inside
+quotations, and may mix the two (the writer spells names in full; quoted commentators often
+abbreviate them): ה׳ for the Tetragrammaton, אֱלֹקִים / אֱלֹקֵי (etc.) for אֱלֹהִים, קֵל for אֵל, צְבָקוֹת for
 צְבָאוֹת, שַׁקַּי for שַׁדַּי, אֱלוֹקַּ for אֱלוֹהַּ. Treat each as identical to the Masoretic form. Never
-list, flag or "correct" these spellings."""
+list, flag or "correct" either spelling."""
 
 MATERIALITY_NOTE = """### What counts as contradicted
 Contradicted means a careful reader would come away believing something false: a wrong source,

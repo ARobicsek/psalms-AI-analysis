@@ -34,21 +34,25 @@ def _script_constant(path: Path, name: str) -> str:
 # ---------------------------------------------------------------------------
 
 def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
-    """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)."""
+    """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)
+    and the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
-    assert fw.essay_instructions(76, inputs) == fw._apply_edits(approved, fw.S388_ECHO_EDITS["essay"])
+    expected = fw._apply_edits(approved, fw.S388_ECHO_EDITS["essay"])
+    expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["essay"])
+    assert fw.essay_instructions(76, inputs) == expected
 
 
 def test_verse_instructions_are_the_s386_text_byte_for_byte():
     """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS),
-    the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS) and the Session 395 liturgy
-    edit (fw.S395_LITURGY_EDITS)."""
+    the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS), the Session 395 liturgy
+    edit (fw.S395_LITURGY_EDITS) and the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
     expected = fw._apply_edits(expected, fw.S395_LITURGY_EDITS)
+    expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -600,3 +604,20 @@ def test_s394_thread_and_grouping_are_in_the_verse_instructions():
     assert text.index("## THE THREAD BETWEEN THE NOTES") < text.index("## WHAT A NOTE CAN HOLD")
     assert "In a long psalm, do this freely" in text
     assert "`**Verses 5–6**`" in text
+
+
+def test_s398_hebrew_always_and_divine_names_in_full():
+    """The author (S398): Hebrew with every quotation of a Hebrew source, even past the word limit;
+    no model should think about divine names, the converter handles the printed guide."""
+    import re
+    essay = fw.ESSAY_INSTRUCTIONS
+    assert "every translation of a Hebrew or Aramaic text carries its Hebrew" in essay
+    assert "1,200–2,000 words of English. The Hebrew does not count toward them" in essay
+    assert "**Divine names as written.**" in essay
+    # the instructions must not model a converted (or any) divine name
+    for form in ("אֱלֹקִים", "ה׳", "קֵל", "אֱלֹהִים", "יְהוָה"):
+        assert form not in essay, form
+    verse = fw.verse_instructions(13)
+    assert '"divine names as written"' in verse and '"Hebrew and English always together,"' in verse
+    assert "## THE LITURGICAL SECTION (200–500 words of English, not counting the Hebrew)" in verse
+    assert not re.search(r"\d words\)", verse)

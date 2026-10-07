@@ -79,6 +79,10 @@ Every time you reference a Hebrew word, phrase, or quotation, you MUST provide:
 - Concordance patterns
 - Translations from Greek (LXX), Aramaic, Latin, or any other source language
 
+The Hebrew never counts toward a word limit in this prompt: never drop or shorten the Hebrew of a quotation to save space.
+
+**Divine names:** write every name of God exactly as your source spells it, and never shorten a quotation, leave out a line or choose a different passage to avoid a name. The printed guide converts every divine name into the forms traditionally used in print, so this is not something you need to think about.
+
 **Parentheses Rule (CRITICAL):**
 
 The translation NEVER appears alone in parentheses as a floating annotation. The translation is part of the prose. You have THREE acceptable patterns — pick the one that reads most naturally for the sentence:
@@ -88,16 +92,16 @@ The translation NEVER appears alone in parentheses as a floating annotation. The
 > God "made the mountain stand" (הֶעֱמַדְתָּה) — the causative verb implies divine agency.
 
 **Pattern B — APPOSITION:** Hebrew, comma, English in quotes, comma (or em-dash, or period).
-> The psalm ends with יֵשַׁע אֱלֹקִים, "the salvation of God" — a final benediction.
+> The psalm ends with נוֹרָא לְמַלְכֵי־אָרֶץ, "awesome to the kings of the earth" — a final benediction.
 > The LXX renders this as θεὸς θεῶν κύριος, "God of gods, the LORD."
 
 **Pattern C — WHOLE UNIT PARENTHETICAL:** Used when the Hebrew+English apposition is genuinely an aside to the main sentence. Put translation in quotes inside the existing parens; do NOT nest a second pair.
-> The Sinai formula (אֱלֹקִים אֱלֹקֶיךָ אָנֹכִי, "I am the LORD your God") is echoed in v. 7.
+> The Sinai formula (אֱלֹהִים אֱלֹהֶיךָ אָנֹכִי, "I am the LORD your God") is echoed in v. 7.
 > The psalm turns on a single plea (אַל־יֶחֱרַשׁ, "let Him not be silent") that God answers with irony.
 
 **INCORRECT (translation alone in parens as the default annotation style):**
 > The plea אַל־יֶחֱרַשׁ ("let Him not be silent") is the psalm's ironic engine. ❌
-> The psalm ends with יֵשַׁע אֱלֹקִים ("the salvation of God"). ❌
+> The psalm ends with נוֹרָא לְמַלְכֵי־אָרֶץ ("awesome to the kings of the earth"). ❌
 > The LXX renders this as θεὸς θεῶν κύριος ("God of gods, the LORD"). ❌
 
 Rhythm test: read the sentence aloud with the Hebrew removed. If the English still flows, you're using Pattern A or B correctly. If you have a stranded `("...")` fragment, you've defaulted to the forbidden annotation style — rewrite as A or B.
@@ -172,7 +176,7 @@ RULE 3b tells you when to drop a grammar label. This rule tells you what to do w
 
 **WORKED EXAMPLES — grammar shown, never named.** Calibrate the technique, never the wording.
 
-- *Technique 3 — a whole theological claim carried by bolding two words against each other, with no term named at all.* "Numbers 6:25 reads יָאֵר ה׳ פָּנָיו **אֵלֶיךָ**, 'may the LORD make His face shine **toward you**.' Psalm 67 reads יָאֵר פָּנָיו **אִתָּנוּ**, 'may His face shine **with us**.' The original pictures God's face turning *in your direction*, attention aimed at a recipient; the psalm asks for that shining face to *accompany* — to dwell alongside." The reader sees the change, and never needs the word for it.
+- *Technique 3 — a whole theological claim carried by bolding two words against each other, with no term named at all.* "Numbers 6:25 reads יָאֵר יְהוָה פָּנָיו **אֵלֶיךָ**, 'may the LORD make His face shine **toward you**.' Psalm 67 reads יָאֵר פָּנָיו **אִתָּנוּ**, 'may His face shine **with us**.' The original pictures God's face turning *in your direction*, attention aimed at a recipient; the psalm asks for that shining face to *accompany* — to dwell alongside." The reader sees the change, and never needs the word for it.
 - *Bolding sustained across a chain until the morpheme becomes audible.* הַצִּילֵ**נִי**, עֲנֵ**נִי**, פְּדֵ**נִי** … and then שֻׁלְחָ**נָם**, עֵינֵי**הֶם**, עֲלֵי**הֶם** — "The ear registers the reversal — *me* becoming *them* — as a change of ending, before the mind has parsed a single curse. The suffix is the turn."
 - *Techniques 1 and 2 together — bold the letter, then say in plain words what it does.* The shape to reproduce: bold the exact prefix inside the Hebrew, then tell the reader what that letter is doing — "the little word 'by'", "the 'but' that swings the sentence around", "'as,' in the course of". Bolding shows which mark you mean; the plain-words clause is what teaches it. Never one without the other.
 

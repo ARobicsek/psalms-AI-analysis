@@ -206,7 +206,8 @@ class DocumentGenerator:
                     segs.append((trail, False))
                 return segs
 
-        GLUE = {' ', ' ', '־', '-'}  # space, nbsp, maqqef, ASCII hyphen
+        GLUE = {' ', ' ', '־', '-', '\u2011'}  # space, nbsp, maqqef, ASCII hyphen, and the non-breaking
+        # hyphen that splits a converted divine name (S398, divine_names_modifier.SPLIT)
         APOS = {"'", "’"}  # ASCII / curly apostrophe used as a Hebrew abbreviation mark
         n = len(text)
         segs: List[tuple] = []

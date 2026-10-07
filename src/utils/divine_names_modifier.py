@@ -25,7 +25,14 @@ from typing import Optional
 # Characters that count as a word boundary around a divine name.
 # Includes markdown formatting chars (*_) and punctuation, since names are
 # matched inside commentary prose, not just bare Hebrew text.
-_BOUNDARY = r'[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]'
+# Session 398: curly quotes, dashes, ellipsis and slash too; the sweep of every finished guide
+# found \u201C\u05D0\u05B2\u05D3\u05B9\u05E0\u05B8\u05D9\u2026\u201D (Ps 16), \u201C\u05D4\u05B8\u05D0\u05B5\u05DC\u2026\u201D (Ps 18) and \u201C\u05D0\u05B5\u05DC\u201D (Ps 17) printed unconverted.
+_BOUNDARY = r'[\s\-\u2011\u05BE*_.,;:!?\"\'()\[\]{}\u201C\u201D\u2018\u2019\u201E\u00AB\u00BB\u2026\u2014\u2013/|]'
+
+# Session 398: the hyphen that splits a converted name (אד-ני, י-ה) is U+2011, the NON-BREAKING
+# hyphen. An ASCII hyphen is a line-break opportunity: Word broke Ps 79:12 across two lines of the
+# psalm table at אֲדֹ- / נָי. document_generator glues U+2011 into the Hebrew run.
+SPLIT = '\u2011'
 
 # Up to two stacked prefix letters (he/vav/lamed/bet/kaf/mem), each with its
 # own vowel/dagesh marks: הָאֵל, וְאֵל, לָאֵל, בָּאֵל, כְּאֵל, מֵאֵל, וְלָאֵל, מֵהָאֵל.
@@ -75,6 +82,14 @@ class DivineNamesModifier:
         # 6. Eloah: אֱלוֹהַּ → אֱלוֹקַּ
         modified_text = self._modify_eloah(modified_text)
 
+        # 7-9 (Session 398): the names the writer now spells in full, which used to print as is.
+        # Adonai: אֲדֹנָי → אֲדֹ-נָי
+        modified_text = self._modify_adonai(modified_text)
+        # Yah: יָהּ → יָ-הּ, הַלְלוּיָהּ → הַלְלוּיָ-הּ
+        modified_text = self._modify_yah(modified_text)
+        # Ehyeh, in the Exod 3:14 name only: אֶהְיֶה אֲשֶׁר אֶהְיֶה → אֶ-הְיֶה אֲשֶׁר אֶ-הְיֶה
+        modified_text = self._modify_ehyeh(modified_text)
+
         # Log if text changed
         if modified_text != text and self.logger:
             self.logger.debug(f"Divine names modified in text")
@@ -122,6 +137,13 @@ class DivineNamesModifier:
         # Pattern 4: Construct form with vav-holam: אֱלוֹהֵי (Elohei - "God of")
         elohei_construct_pattern = r'א[\u0591-\u05C7]*[ֱ][\u0591-\u05C7]*ל[\u0591-\u05C7]*ו[\u0591-\u05C7]*[ֹ][\u0591-\u05C7]*ה[\u0591-\u05C7]*[ִֵֶַָ]'
         modified = re.sub(elohei_construct_pattern, elohim_replacer, modified)
+
+        # Pattern 5 (Session 398): an alef with no vowel of its own at the start of a word: cut off
+        # from its prefix by markdown -- the writer bolds the prefix letter it is talking about
+        # (**וֵ**אלֹהִים, Ps 74) -- or quoted without it (the Ps 74 thinking). A lamed with holam
+        # followed by a vowelled he is the name in every form.
+        split_prefix_pattern = r'(?<![א-ת֑-ׇ])א[֑-ׇ]*ל[֑-ׇ]*ֹ[֑-ׇ]*ה(?=[֑-ׇ]*[ִ-ָ])'
+        modified = re.sub(split_prefix_pattern, elohim_replacer, modified)
 
         return modified
 
@@ -276,6 +298,54 @@ class DivineNamesModifier:
 
         modified = re.sub(eloah_pattern, eloah_replacer, modified)
         return modified
+
+    # Session 398: since the writer now spells every name in full and leaves the conversion to
+    # this module, the names it used to avoid reach the printed guide. Each is split by a hyphen
+    # (SPLIT, non-breaking), the form printed books use (אד-ני, י-ה); a hyphen is a boundary to every pattern here, so a
+    # second pass leaves the converted form alone.
+
+    def _modify_adonai(self, text: str) -> str:
+        """אֲדֹנָי → אֲדֹ-נָי, bare or prefixed (לַאדֹנָי, וַאדֹנָי, וְאֶל־אֲדֹנָי).
+
+        Pointed, only with qamats under the nun: אֲדֹנִי (hiriq) is 'my lord' and אֲדֹנַי (patah)
+        'my lords', both profane. Unpointed, only the bare word: in this corpus a bare אדני is
+        always the name (Minchat Shai, the Chida, concordance labels), while a prefixed one could
+        be 'to my lord'.
+        """
+        pointed = (
+            r'(^|' + _BOUNDARY + r')(' + _PREFIX + r')'
+            r'(א[֑-ׇ]*ד[֑-ׇ]*(?:ו[֑-ׇ]*)?)'
+            r'(נ(?=[֑-ׇ]*ָ)(?![֑-ׇ]*[ִַ])[֑-ׇ]*י)'
+            r'(?=[֑-ׇ]*(?:' + _BOUNDARY + r'|$))'
+        )
+        text = re.sub(pointed, lambda m: f"{m.group(1)}{m.group(2)}{m.group(3)}{SPLIT}{m.group(4)}", text)
+        bare = r'(^|' + _BOUNDARY + r')אדני(?=' + _BOUNDARY + r'|$)'
+        return re.sub(bare, lambda m: f"{m.group(1)}אד{SPLIT}ני", text)
+
+    def _modify_yah(self, text: str) -> str:
+        """יָהּ → יָ-הּ (bare or prefixed: בְּיָהּ, לְיָהּ, מַעַלְלֵי־יָהּ) and Halleluyah → הַלְלוּיָ-הּ.
+
+        A bare yod-he is the name only with the mappiq in the he (U+05BC); unpointed יה is left
+        alone. After הללו the word is the name whether or not it is pointed.
+        """
+        hallelu = (
+            r'(הַ?[֑-ׇ]*ל[֑-ׇ]*ל[֑-ׇ]*ו[֑-ׇ]*־?'
+            r'י[֑-ׇ]*)(ה[֑-ׇ]*)(?=' + _BOUNDARY + r'|$)'
+        )
+        text = re.sub(hallelu, lambda m: f"{m.group(1)}{SPLIT}{m.group(2)}", text)
+        yah = (
+            r'(^|' + _BOUNDARY + r')(' + _PREFIX + r')'
+            r'(י[֑-ׇ]*)(ה(?=[֑-ׇ]*ּ)[֑-ׇ]*)'
+            r'(?=' + _BOUNDARY + r'|$)'
+        )
+        return re.sub(yah, lambda m: f"{m.group(1)}{m.group(2)}{m.group(3)}{SPLIT}{m.group(4)}", text)
+
+    def _modify_ehyeh(self, text: str) -> str:
+        """אֶהְיֶה אֲשֶׁר אֶהְיֶה (Exod 3:14) → אֶ-הְיֶה אֲשֶׁר אֶ-הְיֶה. A lone אֶהְיֶה is the verb
+        'I will be' everywhere else, and is left alone."""
+        ehyeh = r'(א[֑-ׇ]*)(ה[֑-ׇ]*י[֑-ׇ]*ה[֑-ׇ]*)'
+        phrase = ehyeh + r'([\s־]+א[֑-ׇ]*ש[֑-ׇ]*ר[֑-ׇ]*[\s־]+)' + ehyeh
+        return re.sub(phrase, lambda m: f"{m.group(1)}{SPLIT}{m.group(2)}{m.group(3)}{m.group(4)}{SPLIT}{m.group(5)}", text)
 
     def has_divine_names(self, text: str) -> bool:
         """Check if text contains any divine names that would be modified"""
