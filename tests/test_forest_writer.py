@@ -47,16 +47,31 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
 def test_verse_instructions_are_the_s386_text_byte_for_byte():
     """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS),
     the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS), the Session 395 liturgy
-    edit (fw.S395_LITURGY_EDITS) and the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS)."""
+    edit (fw.S395_LITURGY_EDITS), the Session 399 survey-not-catalogue edits
+    (fw.S399_LITURGY_EDITS) and the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
     expected = fw._apply_edits(expected, fw.S395_LITURGY_EDITS)
+    expected = fw._apply_edits(expected, fw.S399_LITURGY_EDITS)
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
     assert "READER QUESTIONS" not in fw.VERSE_INSTRUCTIONS.upper().replace("NEVER BEGIN", "")
+
+
+def test_s399_liturgy_is_surveyed_once_and_notes_do_not_catalogue():
+    """The author (Ps 79): the liturgical section lists uses; a note uses one only to make a point.
+    The S395 'every placement should appear somewhere' clause sent the overflow into the notes."""
+    text = fw.verse_instructions(13)
+    assert "should appear somewhere in the guide" not in text
+    assert "Survey, do not catalogue" in text and "in various selichot" in text
+    assert "never the places the line is said" in text
+    assert "only somewhere, or in certain" in text      # the S395 no-restriction rule stays
+    from src.agents.master_editor import MASTER_WRITER_PROMPT_V4
+    assert "You MUST incorporate EVERY placement" not in MASTER_WRITER_PROMPT_V4
+    assert "Never list the places a verse is said in a note" in MASTER_WRITER_PROMPT_V4
 
 
 def test_s388_echo_targets_are_the_authors():

@@ -361,6 +361,40 @@ S395_LITURGY_EDITS = (
 )
 
 # ---------------------------------------------------------------------------
+# Session 399: the author, reading Ps 79: "the writer seems maniacally intent on mentioning every
+# usage … it could say 'various selichot services' … the modern jewish liturgical section is the
+# place to list liturgical uses. IF it's discussing liturgical uses in the verse by verse commentary
+# it should be doing that to make a specific point about reception, interpretation, emotional
+# resonance … NOT to provide a complete catalogue." The S395 coverage clause above did it: the
+# Ps 79 writer was "mapping out every liturgical placement I need to cover", overran the section
+# (599 words of 500) and was "distributing the remaining liturgical cross-references into their
+# verse-specific notes" (v. 1: two rites' fast-day selichot and the Lithuanian fourth day; v. 6:
+# five fasts, the selichot and Yom Kippur). The no-restriction rule stays; a summary by kind
+# ("in various selichot") is not a restriction, and the fact checker flags only restrictions.
+# ---------------------------------------------------------------------------
+
+S399_LITURGY_EDITS = (
+    ("Every placement the research's liturgy section gives under a verse heading should appear somewhere in the guide, "
+     "here or in a verse note; the echoes it gathers at the end are there to use where they illuminate a verse. "
+     "Say where a verse is said as broadly as the research does and no more narrowly:",
+     "This section is the guide's one survey of where the psalm is said; the verse notes do not repeat it or continue it. "
+     "Survey, do not catalogue: name the main placements, and gather the many smaller ones by kind (\"in various "
+     "selichot\", \"in kinnot for Tisha B'Av\", \"through the Yom Kippur services\") instead of listing every day, rite "
+     "and book. Leave out a placement that adds nothing to what the reader already has. "
+     "Say where a verse is said as broadly as the research does and no more narrowly; a summary by kind is not a "
+     "narrowing:"),
+    ("- **The psalm in use**: a prayer that quotes the line (quote the prayer in Hebrew and English, name the service "
+     "and the rite, and say whether it follows the plain sense or puts the words to new use), or a documented moment "
+     "when someone used these words.",
+     "- **The psalm in use**: a prayer that quotes the line, when the setting says something about the line: how the "
+     "prayer rereads it, what its placement shows about how the words were heard, what it does to their weight. Quote "
+     "that prayer in Hebrew and English, name its service and rite, and say whether it follows the plain sense or puts "
+     "the words to new use. Bring in only the setting that makes the point, never the places the line is said: the "
+     "liturgical section surveys those, and a note that lists services stops the reader. Or a documented moment when "
+     "someone used these words."),
+)
+
+# ---------------------------------------------------------------------------
 # Session 398: the author, after reading Pss 78-79. (1) Divine names: the Ps 78 writer decided
 # "to avoid quoting them directly in Hebrew where I can" and cut 78:65 short to leave out
 # אֲדֹנָי; the Ps 79 writer converted names itself, copying the example below. "It would be better
@@ -406,6 +440,7 @@ ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"]
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S399_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"])
 
 
