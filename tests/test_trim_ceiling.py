@@ -17,14 +17,14 @@ PRODUCTION_TRIM_SITES = ("src/agents/master_editor.py", "src/agents/archive/mast
 
 
 def test_short_psalms_keep_the_old_ceiling():
-    assert BASE_MAX_CHARS == 350_000
-    assert max_chars_for_verses(13) == 350_000
-    assert max_chars_for_verses(30) == 350_000
+    assert BASE_MAX_CHARS == 400_000                # S400 (was 350K: Ps 80 lost Related Psalms)
+    assert max_chars_for_verses(13) == 400_000
+    assert max_chars_for_verses(30) == 400_000
 
 
 def test_long_psalms_scale():
-    assert max_chars_for_verses(72) == 560_000      # Ps 78
-    assert max_chars_for_verses(176) == 1_080_000   # Ps 119
+    assert max_chars_for_verses(72) == 610_000      # Ps 78
+    assert max_chars_for_verses(176) == 1_130_000   # Ps 119
 
 
 def test_unknown_psalm_falls_back_to_base():

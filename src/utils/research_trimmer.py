@@ -20,9 +20,11 @@ from src.utils.logger import get_logger
 # Ps 78). Its old 200K-token rationale is gone (Opus 5.5: 1M context, flat price); what it still
 # guards is cost and dilution (S391 §6a). A flat 350K would have cut Related Psalms from every
 # long psalm: Ps 77 (21 verses) already filled ~349K.
-BASE_MAX_CHARS = 350_000
+# Session 400: 350K -> 400K (the author). Ps 80 (20 verses) came to 356K with the reception
+# section and lost its whole Related Psalms section; mid-length psalms now run 327-356K.
+BASE_MAX_CHARS = 400_000
 SCALE_FROM_VERSES = 30          # psalms up to this length keep the old ceiling
-PER_VERSE_CHARS = 5_000         # Ps 78 (72 verses) -> 560K; Ps 119 (176) -> 1.08M
+PER_VERSE_CHARS = 5_000         # Ps 78 (72 verses) -> 610K; Ps 119 (176) -> 1.13M
 
 
 def max_chars_for_verses(verse_count: int) -> int:

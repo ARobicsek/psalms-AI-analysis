@@ -1350,10 +1350,15 @@ class EchoesV3Agent:
                            [{"type": "input_text", "text": prompt_t.format(psalm=psalm, items=block)}],
                            [{"type": "web_search", "search_context_size": "low"}], schema, "",
                            f"echoes-v3-retrieve-ps{psalm}")
-            u = res["usage"]
-            self._bill(f"retrieve_{lane}", self.retrieve_model, t0, input=u["input"], cached=u["cached"],
-                       cache_write=u.get("cache_write", 0), output=u["output"], reasoning=u["reasoning"],
-                       searches=res["searches"])
+            # Billed per price row, as the fact checker bills: the loop runs on its default tier
+            # (flex since S397), and each response is priced by the tier it REPORTS, so a flex
+            # call is `<model>@flex` and a fallback to the standard tier is the model's own row.
+            # The searches go with the first row (they are not tier-priced).
+            rows = res.get("billed") or {self.retrieve_model: res["usage"]}
+            for i, (row, u) in enumerate(rows.items()):
+                self._bill(f"retrieve_{lane}", row, t0 if i == 0 else time.time(), input=u["input"],
+                           cached=u["cached"], cache_write=u.get("cache_write", 0), output=u["output"],
+                           reasoning=u["reasoning"], searches=res["searches"] if i == 0 else 0)
             by_n = {r.get("n"): r for r in res["records"] if isinstance(r, dict)}
             return [by_n.get(k, {"found": False, "note": "no answer returned"}) for k in range(1, len(batches[bi]) + 1)]
 

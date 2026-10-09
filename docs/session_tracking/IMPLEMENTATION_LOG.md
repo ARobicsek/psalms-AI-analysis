@@ -9,6 +9,39 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 400 (2026-10-09): Ps 80's full run, supervised ($8.11, no errors); the S398/S399 changes hold; the writer-side trim ceiling 350K → 400K; echoes' locator billed by its real tier
+
+**The ask.** The author: "please run psalm 80 and supervise it (i.e. see if the pipeline all works). I'm asking you to do this because we've made lots of changes lately." After the report: "1. pls increase to 400K 2. I don't mind waiting 3. pls fix the costing. Did synthesis discovery work?" Then "please document, commit and push".
+
+**Inputs.** `psalm_080_deep_research.txt` and `_check.txt` (put in by the author on 2026-10-09) are genuine Ps 80 files, not copies of Ps 79 (the S396 trap).
+
+**The run** (`run_enhanced_pipeline.py 80 --fact-check`, 08:58–10:28, 20 verses), **$8.11, no ERROR lines, exit 0**:
+
+| Stage | Cost | Notes |
+|---|---|---|
+| macro | $0.26 | |
+| echoes v3 | $1.23 | 49 candidates, 0 dropped by the register (435 works); 24 literary / 15 beyond / 10 far. **33 min**, slowed by flex (below) |
+| micro + bundle | $1.88 | cleaner 5/5 edits, 4.6¢, no guard withholds; liturgy librarian set aside 3 stock phrases correctly; reception 34 passages of 101 (32K chars); Sacks 0 (Ps 80 is not in the Koren siddur) |
+| synthesis discovery | $2.24 | 453 s, `end_turn`, 18 observations; keep-alives read 235,694 / wrote 0 |
+| writer (forest) | $1.14 | essay: cache read 235,694, wrote 19,473; verses: read 255,167, wrote 0 |
+| citations | $0.07 | 0 mismatches before or after the copy edit |
+| fact check | **$0.82** | 281 claims: 248 / 25 / 8; all on `@flex` rows; 2 web searches. Lowest yet (Ps 79 on flex $1.22) |
+| copy editor | $0.47 | 25 of 25 contradicted claims changed, all matched to [FACT-CHECK] entries; 27 changes |
+
+**The S398/S399 checks (the 399/400 handoffs) all pass.** Liturgy in the notes: vv. 10, 17, 19, 20 each use ONE setting to make a point (Shabbat HaGadol piyyut, the Ten Martyrs kinah, *Shomer Yisrael*, the Yom Kippur piyyut that picks up the psalm's last word); no lists. The section ~538 words (rough count, transliterations included; Ps 79 599), a survey grouping the small uses by kind. The verse-call thinking plans no catalogue (it even weighed saving the v. 20 piyyut for the section). Only 3 of 25 contradictions are liturgical (Ps 79: 12 of 78), none a scope claim. Hebrew coverage: essay sentences with a 3+-word quotation and no Hebrew 5/35 (Ps 79 20/52), notes 15/96, every one an English/Latin/Chinese source or a short re-mention of a psalm phrase already given in Hebrew. No divine-name planning in the thinking (it discusses the names only as text, e.g. Ibn Ezra on the Tetragrammaton's return in v. 20). The DOCX (403 paragraphs + tables, appendix included) has no unconverted name.
+
+**Synthesis discovery worked.** Of 18 observations ~13 shaped the guide: the ten-verse disappearance of "we" in the allegory (the essay section "Where 'we' goes"), the vine that never bears fruit (how the psalm keeps Isaiah 5's vineyard without its verdict), God's harm narrowing to "You breached", "cut" never "uprooted" (only God uproots), זִיז שָׂדַי shared only with Ps 50, the Genesis 48 frame, Shimmush Tehillim explained by v. 19's סוג, the midrash's מִיְאוֹר, R. Abbahu on v. 3. Unused: Hosea 2:10/14, Isaiah 44:14.
+
+**Found 1: the writer lost Related Psalms.** The bundle was 356,088 chars against the flat 350K writer-side ceiling (≤ 30 verses); stripping the related psalms' full texts was not enough, so the trimmer removed the whole 14K **Related Psalms Analysis** for both synthesis discovery and the writer (same ceiling, so the cache still matched). Nothing unusual about Ps 80: commentaries 71K (Ps 79 39K), echoes 101K; since the S394 reception section mid-length psalms sit at 327–356K. **Fixed (the author): `research_trimmer.BASE_MAX_CHARS` 350K → 400K**; the per-verse scaling above 30 verses is unchanged and now starts from 400K (Ps 78 610K, Ps 119 1.13M). The Ps 80 guide was NOT re-run on it (from synthesis discovery on ≈ $5). The S380 note "no bundle crosses the 350k trim ceiling" is no longer true.
+
+**Found 2: the echoes locator runs on flex.** `echoes_v3._retrieve` builds a `FactChecker` and calls its `_loop`, which has defaulted to flex since S397, so the gpt-6-luna locator inherited it (not noticed in S397). Flex was busy all morning: 429 `flex_unavailable` on several batches; the S397 fallback fired twice ("flex unavailable twice; this call goes to the standard tier") and every call completed. The fallback holds for ONE call: `_create` changes its local `kw`, so the next round of the same loop starts on flex again and re-waits ~1.5 min. **The author: "I don't mind waiting" — left as it is.**
+
+**Found 3, fixed: echoes billed the locator at standard price.** `_retrieve` billed `res["usage"]` under `self.retrieve_model`, ignoring the `billed` rows `_loop` returns per reported tier; flex calls were over-stated ~2× (≈ 4¢ on Ps 80; the safe direction). Now each `billed` row is billed under its own price row (`gpt-6-luna@flex` or `gpt-6-luna`), web-search fees once (with the first row). The direct `_call_openai` path (used-works filter) never requests flex, so its standard billing is right.
+
+**Code**: `src/utils/research_trimmer.py`, `src/agents/echoes_v3.py`; `tests/test_trim_ceiling.py` (the new ceilings), `tests/test_echoes_v3.py` (+1 `test_retrieval_is_billed_per_reported_tier`, fails on the old code). **467 tests pass** (+1). Guide: `output/psalm_80/psalm_080_commentary.docx` / `.pdf` (not copied to Documents or Drive). **Session spend $8.11.**
+
+---
+
 ## Session 399 (2026-10-08): the liturgy is surveyed once, in its section; a verse note uses a liturgical setting only to make a point
 
 **The ask.** The author, reading Ps 79: "the capture of liturgical uses is much better, but the writer seems maniacally intent on mentioning every usage. it doesn't need to do that. it could say 'various selichot services...' etc. the modern jewish liturgical section is the place to list liturgical uses. IF it's discussing liturgical uses in the verse by verse commentary it should be doing that to make a specific point about reception, interpretation, emotional resonance, etc - NOT to provide a complete catelogue of uses. right now the detailed listing (esp in the verse commentary) simply interrupts the flow." Then "document, commit and push".

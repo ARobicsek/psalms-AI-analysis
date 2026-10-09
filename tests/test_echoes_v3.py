@@ -275,3 +275,33 @@ def test_same_work_needs_more_than_one_stray_shared_word():
     assert same_work({"creator": "Shakespeare", "work": "Hamlet"}, {"creator": "William Shakespeare", "work": "Hamlet"})
     assert same_work({"creator": "J. S. Bach", "work": "The Art of Fugue"},
                      {"creator": "Johann Sebastian Bach", "work": "The Art of Fugue"})
+
+
+# -- S400: the locator is billed by the tier each response reports ----------------------
+
+def test_retrieval_is_billed_per_reported_tier(monkeypatch):
+    """The locator runs inside FactChecker._loop, which has defaulted to flex since S397.
+    Before S400 echoes billed every locator call at the standard row; a flex call must be
+    billed at `<model>@flex`, a fallback at the model's own row, the searches once."""
+    from src.agents import echoes_v3, fact_checker
+    from src.utils.cost_tracker import price_tokens
+    flex = {"input": 1000, "cached": 0, "cache_write": 0, "output": 100, "reasoning": 200}
+    std = {"input": 500, "cached": 0, "cache_write": 0, "output": 50, "reasoning": 0}
+    total = {k: flex[k] + std[k] for k in flex}
+
+    def fake_loop(self, label, model, effort, content, tools, schema, bundle, cache_key):
+        return {"records": [{"n": 1, "found": True}], "usage": total, "searches": 3,
+                "billed": {"gpt-6-luna@flex": flex, "gpt-6-luna": std}}
+
+    monkeypatch.setattr(fact_checker.FactChecker, "_loop", fake_loop)
+    agent = echoes_v3.EchoesV3Agent()
+    monkeypatch.setattr(agent, "_client_openai", lambda: object())
+    out = agent._retrieve(80, "far", [{"work": "W"}])
+    assert out == [{"n": 1, "found": True}]
+    rows = {c.model: c for c in agent._costs}
+    assert set(rows) == {"gpt-6-luna@flex", "gpt-6-luna"}
+    assert rows["gpt-6-luna@flex"].searches == 3 and rows["gpt-6-luna"].searches == 0
+    want = (price_tokens("gpt-6-luna@flex", input_tokens=1000, output_tokens=100, thinking_tokens=200)
+            + price_tokens("gpt-6-luna", input_tokens=500, output_tokens=50)
+            + 3 * echoes_v3.WEB_SEARCH_USD_PER_CALL)
+    assert abs(sum(c.usd for c in agent._costs) - want) < 1e-9
