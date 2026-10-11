@@ -2090,6 +2090,9 @@ Methodological & Bibliographical Summary
                 if 'fact_check' in model_usage:
                     summary_text += f"\n**Fact Check**: {model_usage.get('fact_check', 'N/A')}"
 
+                if 'writer_revision' in model_usage:   # Session 401
+                    summary_text += f"\n**Revision after the Fact Check (the writer)**: {model_usage.get('writer_revision', 'N/A')}"
+
                 if 'copy_editor' in model_usage:
                     summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
 

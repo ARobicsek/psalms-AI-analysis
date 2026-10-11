@@ -216,6 +216,10 @@ def _load(out: Path, psalm: int) -> Dict:
     # print-ready file is written in STEP 5, before any fact check (STEP 5a3/4) of the same run.
     fc_file, anchor = out / f"{stem}_fact_check.json", out / f"{stem}_print_ready.md"
     stale = fc_file.exists() and anchor.exists() and fc_file.stat().st_mtime < anchor.stat().st_mtime
+    # Session 401: the writer's revision after the fact check, if THIS guide had one.
+    rev_file = out / f"{stem}_writer_revision.json"
+    revision = (js("writer_revision.json") if rev_file.exists() and not stale and not (
+        anchor.exists() and rev_file.stat().st_mtime < anchor.stat().st_mtime) else {})
     if stale:
         return {"fc": {}, "tele": {}, "stale_fact_check": True,
                 "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
@@ -226,7 +230,7 @@ def _load(out: Path, psalm: int) -> Dict:
             "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
             "cit_pre": rd("citation_verification.md"), "cit_post": rd("post_copy_edit_citations.md"),
             "cost": js("cost.json"), "writer": js("writer_calls.json"), "stats": js("pipeline_stats.json"),
-            "print_ready": rd("print_ready.md")}
+            "print_ready": rd("print_ready.md"), "revision": revision}
 
 
 def build_markdown(psalm: int, out_dir: Path) -> str:
@@ -246,6 +250,12 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
     by_stage = Counter(r.get("stage", "local") for r in records)
     contra = [r for r in records if r["verdict"] == "contradicted"]
     outcomes = {r["id"]: outcome_for(r, D["final"], entries) for r in contra}
+    rev = D.get("revision") or {}
+    rev_handled = set(rev.get("handled", []))
+    rev_log = rev.get("log", {})
+    rev_pid = {}
+    for a in rev.get("applied", []):
+        rev_pid.setdefault(a["pid"], a)
     n_unchanged = sum(o["unchanged"] for o in outcomes.values())
     n_tagged_match = sum(bool(o["log_entry"] and o["log_entry"]["fact_check_tagged"]) and not o["unchanged"]
                          for o in outcomes.values())
@@ -299,7 +309,14 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
          f"{by_v.get('supported', 0)} / {by_v.get('contradicted', 0)} / {by_v.get('unverifiable', 0)}"],
         ["… settled from local evidence (no web) / sent to the web",
          f"{by_stage.get('local', 0) + by_stage.get('review', 0)} / {by_stage.get('web', 0)}"],
-        ["Contradicted claims the copy editor changed / left word for word",
+    ] + ([
+        ["Contradicted claims the writer rewrote / kept as right / left to the copy editor",
+         f"{sum(1 for c in rev_handled if rev_log.get(c, {}).get('status') != 'kept')} / "
+         f"{sum(1 for c in rev_handled if rev_log.get(c, {}).get('status') == 'kept')} / "
+         f"{len(contra) - len(rev_handled)}"],
+        ["… paragraphs the writer rewrote", f"{len(rev.get('applied', []))}"],
+    ] if rev else []) + [
+        ["Contradicted claims changed in the final text / left word for word",
          f"{len(contra) - n_unchanged} / {n_unchanged}"],
         ["… of the changed ones, matched to a [FACT-CHECK] log entry", f"{n_tagged_match}"],
     ]
@@ -362,6 +379,15 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
           "may correct a fact only where the report says contradicted, tagging the change [FACT-CHECK]; doubts "
           "about anything else go in an UNVERIFIED list for the author, not into the text.", ""]
 
+    if rev:   # Session 401
+        if L and L[-1] == "":
+            L.pop()
+        L += [f"- **The writer, revising** ({rev.get('model', '')}, effort {rev.get('effort', '')}; between the "
+              "fact check and the copy edit): gets its own guide back with every contradicted claim and its "
+              "evidence, and rewrites the whole paragraph that holds each one, or keeps a sentence it is sure is "
+              "right and says why. Code lets it change only those paragraphs and their neighbours. The copy "
+              "editor then sees only the contradicted claims the writer did not handle.", ""]
+
     # --- cost ---------------------------------------------------------------------
     L += _cost_section(D, fc_stage)
 
@@ -383,11 +409,19 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
             if r.get("suggested_fix"):
                 L += [f"**Suggested fix:** {r['suggested_fix']}", ""]
             L += [f"**Ruled by:** {r.get('checked_by', '')}" + (" (stage 1 first said contradicted)"
-                                                                 if r.get("first_verdict") else ""), "",
-                  f"**Copy editor:** {o['status']}.", ""]
+                                                                 if r.get("first_verdict") else ""), ""]
+            if r["id"] in rev_handled:
+                st = rev_log.get(r["id"], {})
+                if st.get("status") == "kept":
+                    L += [f"**The writer kept it:** {st.get('note', '')}", ""]
+                else:
+                    L += ["**The writer rewrote the paragraph**" + (f": {st['note']}" if st.get("note") else "")
+                          + ". The paragraph before and after is in the writer-revision file beside the guide.", ""]
+            else:
+                L += [f"**Copy editor:** {o['status']}.", ""]
             if o["now_reads"]:
                 L += [f"**The final text now reads:** {o['now_reads']}", ""]
-            if o["log_entry"]:
+            if o["log_entry"] and r["id"] not in rev_handled:
                 e = o["log_entry"]
                 L += [f"**Its log entry #{e['n']}:** {e['what']}" + (f" *Why:* {e['why']}" if e["why"] else ""), ""]
 

@@ -435,13 +435,102 @@ S398_HEBREW_EDITS = {
     ),
 }
 
+# ---------------------------------------------------------------------------
+# Session 401: the author, after reading the new Ps 29 beside its January 2026 version.
+# (1) "the echoes are introduced in a VERY predictable, formulaic way": the texts above
+# prescribed the formula (frame the source; quote; "what is genuinely parallel, what differs,
+# and what the difference reveals"; "the same event told by another voice, the same image
+# turned to the opposite use ..."), and the Ps 29 guide used that very vocabulary ("made the
+# same turn", "the same story about another thunder", "the same convulsion and drew the
+# opposite conclusion"). An echo is for "insight and/or emotional resonance and/or humor",
+# brought in as the writer sees fit, quoted as fully as that needs ("no need to skimp").
+# (2) Humour: "Don't try to be funny" deleted (S371: wit rose 3 -> 6 when the wit checklist
+# was deleted; no push either way). (3) Other voices: the guides cite 42-114 traditional
+# voices and ~0-1 modern ones; the insight test called anything "in any standard commentary"
+# context. Other readers count where they shed light; the Greek only for an interesting
+# different understanding, Vorlage or polemic (the two-in-five ration stays). (4) The
+# writer's own views, without a schedule: "One plain place ... once" was a quota.
+# ---------------------------------------------------------------------------
+
+_ESSAY_QUOTE_FRAME_OLD = (
+    "Do not trim a passage below what the comparison needs out of caution: quote the lines that carry the echo "
+    "— typically 3–8 lines of verse (or 2–4 sentences of prose) — in the original language with English "
+    "translation; for public-domain works (ancient, medieval, and anything published before about 1930) quote as "
+    "much as illuminates; for modern works, the passage the research supplies is the passage to use. Where an "
+    "entry says *text not confirmed*, quote it only if you know the passage exactly. Frame the source for the "
+    "reader (who, when, under what circumstances), and after quoting, unfold the resonance: what is genuinely "
+    "parallel, what differs, and what the difference reveals about each. For a resonance beyond literature, state "
+    "the fact precisely — quote the supplied source where it helps — and say what it shows about the line.\n")
+
+_ESSAY_QUOTE_FRAME_NEW = (
+    "Quote as much as the item's purpose needs, and do not skimp: a whole stanza, a whole short poem, a full "
+    "paragraph of prose, in the original language with English translation. For public-domain works (ancient, "
+    "medieval, and anything published before about 1930) quote as much as serves; for modern works, the passage "
+    "the research supplies is the passage to use, and you may use all of it. Where an entry says *text not "
+    "confirmed*, quote it only if you know the passage exactly.\n\n"
+    "An echo is there to do something for the reader: to give an insight into the line, to let them feel what "
+    "the line feels, or to make them laugh. Use each in whatever way does that best. It can come before your "
+    "point or after it, carry the argument or stand beside it, agree with the psalm or press against it; it may "
+    "need a paragraph of unfolding or almost none, and the strongest sometimes need no comment at all. Let the "
+    "reader know whose words these are and, where it matters, when and why they were written, but there is no "
+    "set way to bring one in: echoes that all arrive, are quoted and are weighed the same way stop being heard. "
+    "For a resonance beyond literature, state the fact precisely — quote the supplied source where it helps — "
+    "and let it do its work on the line.\n")
+
+_OTHER_READERS = (
+    "- **Other readers** — the ancient translations, the Dead Sea Scrolls, Christian readings and liturgy, modern "
+    "scholarship: when one sheds light on the line or moves your argument forward, not for coverage. The Greek "
+    "earns its place only when it shows something interesting: a different understanding of the line, a different "
+    "Hebrew text behind the translation, or a theological choice or polemic; a Greek that merely confirms the "
+    "Hebrew stays out.\n")
+
+S401_EDITS = {
+    "essay": (
+        (_ESSAY_QUOTE_FRAME_OLD, _ESSAY_QUOTE_FRAME_NEW),
+        ("- **Don't try to be funny.** If the material itself is dry-funny, a flat sentence will show it.\n", ""),
+        ("- **One plain place.** At the psalm's emotional center you may, once, speak plainly about what this "
+         "feels like from the inside — no device named, no source cited.\n",
+         "- **Your own judgment.** You are a reader with views, not a reporter of other people's. Where you find "
+         "one reading stronger than another, a commentator mistaken, a translation wrong, or a line moving, say so "
+         "and show why, as part of the argument. Where the poem's feeling is the point, you may speak plainly about "
+         "what it is like from the inside, with no device named and no source cited. Say these things when you hold "
+         "them, not to fill a place.\n"),
+        ("- **World literature, and the rest** — see ECHOES AND RESONANCES below.",
+         _OTHER_READERS + "- **World literature, and the rest** — see ECHOES AND RESONANCES below."),
+        ("If a sentence could appear in any standard commentary on this psalm, it is context — useful, brief, and "
+         "never the point.",
+         "A sentence that only restates what any standard commentary says is context — useful, brief, and never the "
+         "point. A finding from scholarship, ancient or modern, that moves your argument forward is not context but "
+         "evidence: use it."),
+    ),
+    "verse": (
+        ("- **The Greek**: when the Septuagint read the Hebrew differently and the difference teaches something "
+         "about the text or its first readers. Ration it: at most two verses in five.\n",
+         "- **The Greek**: only when the Septuagint shows something interesting: a different understanding of the "
+         "line, a different Hebrew text behind it, or a theological choice or polemic. A Greek rendering that merely "
+         "differs, or merely confirms the Hebrew, stays out. Ration it: at most two verses in five.\n"
+         "- **Another reader**: the Dead Sea Scrolls, a Christian reading or liturgical use, a finding of modern "
+         "scholarship, when it sheds light on the line or moves the note's point forward.\n"),
+        ("An item earns its place by showing something about THIS line: the same event told by another voice, the "
+         "same image turned to the opposite use, the same problem solved another way, the same pattern at work in "
+         "another field. Place each at the verse it illuminates. Do not repeat an item the essay used. Quote fully, "
+         "set poems lineated, and frame every source, as the essay instructions describe.",
+         "An item earns its place by what it does for THIS line: an insight into it, a feeling it lets the reader "
+         "share, or a laugh. Place each at the verse it serves. Do not repeat an item the essay used. Quote as fully "
+         "as its purpose needs, set poems lineated, and bring each in the way that serves it, as the essay "
+         "instructions describe."),
+    ),
+}
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S399_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S401_EDITS["verse"])
 
 
 # ---------------------------------------------------------------------------

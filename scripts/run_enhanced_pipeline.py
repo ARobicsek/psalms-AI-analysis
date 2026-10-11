@@ -371,6 +371,7 @@ def run_enhanced_pipeline(
     skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
     fact_check: bool = True,         # Session 385 built it; Session 394: ON by default (the author)
+    writer_revision: bool = True,    # Session 401: the writer fixes the fact check's contradictions itself
     writer_prompt: str = "forest",   # Session 387: two-call forest writer; "v4" = the old one-call prompt
     copy_edit_mode: str = None,      # Session 388: None -> CopyEditor.DEFAULT_EDIT_MODE; "edits" = FIND/REPLACE only
     reception: bool = True,          # Session 391: the Sefaria reception section in the bundle (S394: ON by default)
@@ -1103,10 +1104,12 @@ def run_enhanced_pipeline(
     # prompt is untouched. docs/plans/S385_FACT_CHECK_RESULTS.md.
     # =====================================================================
     fact_check_prompt = None
+    fc_result = None
     if not skip_copy_editor and not smoke_test:
         # Session 390: a copy edit without a fact check this run must not inherit an earlier
         # run's "Fact Check: gpt-6-sol" on the methods page. Re-set below if the check succeeds.
         tracker.model_usage.pop("fact_check", None)
+        tracker.model_usage.pop("writer_revision", None)
     if fact_check and not smoke_test and print_ready_file.exists():
         logger.info("[STEP 5a¾] Fact check (staged: gpt-6-sol local; gpt-6-luna gathers, pages checked, gpt-6-sol judges)...")
         print(f"\n{'='*80}")
@@ -1139,6 +1142,77 @@ def run_enhanced_pipeline(
         _record_stage("fact check", _snap)
 
     # =====================================================================
+    # STEP 5a⅞ (Session 401): the WRITER fixes what the fact check contradicted, rewriting the
+    # whole paragraph (the copy editor's minimal patches left seams). Opus 5.5 at effort high,
+    # no dossier: the guide + each contradicted claim with its evidence. Code accepts only prose
+    # paragraphs holding a claim (or their neighbour in the same section); whatever the writer
+    # did not handle goes to the copy editor as before. print_ready.md is never overwritten (the
+    # editors' report would call the fact check stale); the copy editor reads _revised.md.
+    # =====================================================================
+    copy_input_file = print_ready_file
+    revised_file = output_path / f"psalm_{psalm_number:03d}_revised.md"
+    revision_json = output_path / f"psalm_{psalm_number:03d}_writer_revision.json"
+    revision_md = output_path / f"psalm_{psalm_number:03d}_writer_revision.md"
+    if fc_result is not None and writer_revision and not skip_copy_editor and not smoke_test:
+        for f in (revised_file, revision_json, revision_md):   # never let an earlier run's revision stand
+            if f.exists():
+                f.unlink()
+        logger.info("[STEP 5a⅞] The writer revises what the fact check contradicted...")
+        print(f"\n{'='*80}")
+        print(f"STEP 5a⅞: Writer Revision (Session 401)")
+        print(f"{'='*80}\n")
+        _snap = cost_tracker.snapshot()
+        try:
+            from src.agents.fact_checker import format_copy_editor_prompt
+            from src.agents.writer_revision import WriterRevision, remaining_records, report_markdown
+            from src.utils.debug_paths import thinking_file
+            wrev = WriterRevision(cost_tracker=cost_tracker, logger=logger)
+            res = wrev.revise(psalm_number, print_ready_file.read_text(encoding='utf-8'), fc_result.records)
+            if res.applied:
+                revised_file.write_text(res.revised_text, encoding='utf-8')
+                copy_input_file = revised_file
+                # The revision can misquote too (Ps 29, S401: it printed Rashi's loose quotation of
+                # Ps 18:14 as the verse). Re-run STEP 5a½ on the revised text, so the copy editor's
+                # citation report describes the text it actually receives; the writer's original
+                # report is kept beside it.
+                from src.utils.scripture_verifier import (
+                    verify_citations, format_verification_report, format_fix_prompt, filter_false_positives,
+                )
+                cit_report = output_path / f"psalm_{psalm_number:03d}_citation_verification.md"
+                if cit_report.exists():
+                    cit_report.replace(output_path / f"psalm_{psalm_number:03d}_citation_verification_pre_revision.md")
+                rev_issues = verify_citations(res.revised_text, db_path=db_path, psalm_number=psalm_number)
+                fmodel = ("haiku" if getattr(args, 'haiku_filter', False) else
+                          "gpt" if getattr(args, 'gpt_filter', True) and not getattr(args, 'no_gpt_filter', False)
+                          else None)
+                if fmodel and any(i.issue_type == "NOT_SUBSTRING" for i in rev_issues):
+                    rev_issues, _ = filter_false_positives(rev_issues, commentary_text=res.revised_text,
+                                                           model=fmodel, cost_tracker=cost_tracker)
+                cit_report.write_text(format_verification_report(rev_issues, psalm_number=psalm_number),
+                                      encoding='utf-8')
+                citation_fix_prompt = format_fix_prompt(rev_issues) or None
+                logger.info(f"[STEP 5a⅞] citation check on the revised text: {len(rev_issues)} issue(s) "
+                            f"for the copy editor")
+                for i in rev_issues:
+                    logger.warning(f"  {i.issue_type}: {i.citation_ref} at {i.location_hint}")
+            revision_json.write_text(json.dumps(res.to_json(), ensure_ascii=False, indent=2), encoding='utf-8')
+            revision_md.write_text(report_markdown(psalm_number, res, fc_result.records), encoding='utf-8')
+            if res.thinking:
+                thinking_file(psalm_number, "writer_revision").write_text(res.thinking, encoding='utf-8')
+            if res.sent:
+                fact_check_prompt = format_copy_editor_prompt(
+                    remaining_records(fc_result.records, res.handled)) or None
+                tracker.track_model_for_step("writer_revision", wrev.model)
+            logger.info(f"[STEP 5a⅞] {len(res.handled)} of {len(res.sent)} contradicted claim(s) handled by "
+                        f"the writer; {len(res.applied)} paragraph(s) rewritten — see {revision_md.name}")
+        except Exception as e:
+            halt_on_quota(e, "STEP 5a⅞: Writer Revision", logger, cost_tracker, output_path, psalm_number)
+            copy_input_file = print_ready_file
+            logger.warning(f"[STEP 5a⅞] Writer revision failed (non-fatal; the copy editor gets the "
+                           f"whole fact-check report): {e}")
+        _record_stage("writer revision", _snap)
+
+    # =====================================================================
     # STEP 5b: Copy Editor (Session 280)
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
@@ -1152,7 +1226,7 @@ def run_enhanced_pipeline(
             copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model, edit_mode=copy_edit_mode)
             ce_result = copy_editor.edit_commentary(
                 psalm_number=psalm_number,
-                input_file=print_ready_file,
+                input_file=copy_input_file,
                 output_dir=output_path,
                 supplementary_prompt=(
                     combine_supplementary(citation_fix_prompt, fact_check_prompt)
@@ -1171,7 +1245,7 @@ def run_enhanced_pipeline(
                 from src.utils.scripture_verifier import (
                     verify_citations, new_citation_issues, format_verification_report,
                 )
-                before = verify_citations(print_ready_file.read_text(encoding='utf-8'),
+                before = verify_citations(copy_input_file.read_text(encoding='utf-8'),
                                           db_path=db_path, psalm_number=psalm_number)
                 after = verify_citations(Path(ce_result['edited_file']).read_text(encoding='utf-8'),
                                          db_path=db_path, psalm_number=psalm_number)
@@ -1439,6 +1513,10 @@ if __name__ == "__main__":
                              "corrects facts only from its report; plus a $0 citation re-check "
                              "of the copy-edited text where tanakh.db exists")
 
+    parser.add_argument("--writer-revision", action=argparse.BooleanOptionalAction, default=True,
+                       help="Session 401: after the fact check, the writer (Opus 5.5, effort high, ~$0.5) "
+                            "rewrites the paragraphs holding contradicted claims; the copy editor gets only what it "
+                            "did not handle. --no-writer-revision = the copy editor makes every correction (pre-S401)")
     parser.add_argument("--liturgy", choices=["v2", "legacy"], default="v2",
                         help="Session 395: v2 (default) = the liturgy section from a complete per-verse "
                              "catalogue and one Opus 5.5 call; legacy = the phrase-by-phrase GPT-5.1 librarian")
@@ -1520,6 +1598,7 @@ if __name__ == "__main__":
         skip_beta_reader=not args.beta_reader,
         beta_model=args.beta_model,
         fact_check=args.fact_check,
+        writer_revision=args.writer_revision,
         writer_prompt=args.writer_prompt,
         copy_edit_mode=args.copy_edit_mode,
         reception=args.reception,

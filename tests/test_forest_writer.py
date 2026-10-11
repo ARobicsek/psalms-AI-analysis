@@ -35,12 +35,14 @@ def _script_constant(path: Path, name: str) -> str:
 
 def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)
-    and the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS)."""
+    the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS) and the Session 401 edits
+    (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
     expected = fw._apply_edits(approved, fw.S388_ECHO_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["essay"])
+    expected = fw._apply_edits(expected, fw.S401_EDITS["essay"])
     assert fw.essay_instructions(76, inputs) == expected
 
 
@@ -48,13 +50,15 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS),
     the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS), the Session 395 liturgy
     edit (fw.S395_LITURGY_EDITS), the Session 399 survey-not-catalogue edits
-    (fw.S399_LITURGY_EDITS) and the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS)."""
+    (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS) and the
+    Session 401 edits (fw.S401_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
     expected = fw._apply_edits(expected, fw.S395_LITURGY_EDITS)
     expected = fw._apply_edits(expected, fw.S399_LITURGY_EDITS)
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["verse"])
+    expected = fw._apply_edits(expected, fw.S401_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -636,3 +640,21 @@ def test_s398_hebrew_always_and_divine_names_in_full():
     assert '"divine names as written"' in verse and '"Hebrew and English always together,"' in verse
     assert "## THE LITURGICAL SECTION (200–500 words of English, not counting the Hebrew)" in verse
     assert not re.search(r"\d words\)", verse)
+
+
+def test_s401_echoes_humour_other_readers_and_judgment():
+    """The author (S401, after Ps 29): echoes introduced formulaically -> no prescribed formula,
+    an echo is for insight, feeling or a laugh, quoted as fully as that needs; the humour ban
+    deleted; other readers (and the Greek only when interesting) count; the writer's own views,
+    with no quota."""
+    e, v = fw.ESSAY_INSTRUCTIONS, fw.VERSE_INSTRUCTIONS
+    for gone in ("Don't try to be funny", "what is genuinely parallel, what differs", "typically 3–8 lines",
+                 "One plain place", "at the psalm's emotional center you may, once",
+                 "If a sentence could appear in any standard commentary"):
+        assert gone not in e, gone
+    for gone in ("the same event told by another voice", "frame every source"):
+        assert gone not in v, gone
+    assert "do not skimp" in e and "make them laugh" in e and "**Other readers**" in e
+    assert "**Your own judgment.**" in e and "not to fill a place" in e
+    assert "different Hebrew text behind" in e and "**Another reader**" in v
+    assert "Ration it: at most two verses in five." in v          # the LXX budget stays
