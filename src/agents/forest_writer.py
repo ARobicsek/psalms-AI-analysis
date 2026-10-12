@@ -522,6 +522,44 @@ S401_EDITS = {
     ),
 }
 
+# ---------------------------------------------------------------------------
+# Session 402: the author: the verse notes should think about "where this 'tree' fits into the
+# 'forest', what the poet is doing here, etc and raise it if illuminating (i.e. if it reveals
+# non-obvious)", GENTLY, without formulaic writing; and "if the commentary assiduously avoids
+# essay-ideas the commentary reads as too disconnected. I don't want it repeating points already
+# made, but I do want it to be conscious of the overall arguments being made - and use them."
+# The texts above called the whole essay "spent". Now its evidence is spent and its argument is
+# the frame. The arc question is asked of every verse in the reasoning; a note prints it only
+# when it reveals something, and gets a test, not a model sentence (S401: the echo formula was
+# copied from phrasing the prompts prescribed). The crux deferral (S382) stays.
+# ---------------------------------------------------------------------------
+
+S402_VERSE_EDITS = (
+    ("What the essay said is spent. Do not re-argue it, re-quote its evidence, or reach its conclusions by a "
+     "second route. Where a verse carried the essay's argument, point back to it in one sentence at most (\"the "
+     "introduction took up this line's missing 'us'\") and spend the note on what the essay could not use.",
+     "The essay's evidence is spent; its argument is not. The reader has just finished it, and the notes should "
+     "read as written by someone who knows what it argued and means to use that. Do not restate its points or "
+     "re-quote its evidence. Build on it instead. A note can show the argument at work in a line the essay never "
+     "reached, or test it against a verse that resists it. It can let the reader see a step in the essay's account "
+     "happen in the words themselves. Where a verse carried the essay's argument, point back to it in a sentence "
+     "(\"the introduction took up this line's missing 'us'\") and spend the note on what the essay could not use."),
+    ("Note briefly what it established and which evidence it used. That material is spent.",
+     "Note briefly what it established and which evidence it used. The quotations and evidence are spent; the "
+     "argument is the frame the notes stand in."),
+    ("What does it hand on to the verses after it, and where does the poem move in units larger than a verse?",
+     "What does it hand on to the verses after it, and where does the poem move in units larger than a verse? "
+     "Then step back. What is the poet doing at this point and not another? What does this line advance or hold "
+     "back? Does it reverse something, or bring something to a head? What would the poem lose without it? Most "
+     "of this stays in your reasoning, where it shapes how you read the line."),
+    ("- **A strange or rare word**:",
+     "- **Its place in the whole**: when where the verse stands reveals something a reader would not see alone. "
+     "A line looks routine until you see what it is setting up. A word only lands because of what the poem said "
+     "three verses back. A turn the poem has been holding back finally arrives. If the sentence would be true of "
+     "almost any verse in the middle of almost any psalm, it is not worth writing.\n"
+     "- **A strange or rare word**:"),
+)
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
@@ -531,6 +569,7 @@ VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S399_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S401_EDITS["verse"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S402_VERSE_EDITS)
 
 
 # ---------------------------------------------------------------------------

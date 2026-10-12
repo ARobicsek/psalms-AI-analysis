@@ -50,8 +50,8 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     """The approved S386 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS),
     the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS), the Session 395 liturgy
     edit (fw.S395_LITURGY_EDITS), the Session 399 survey-not-catalogue edits
-    (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS) and the
-    Session 401 edits (fw.S401_EDITS)."""
+    (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS), the
+    Session 401 edits (fw.S401_EDITS) and the Session 402 forest edits (fw.S402_VERSE_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
@@ -59,6 +59,7 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S399_LITURGY_EDITS)
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S401_EDITS["verse"])
+    expected = fw._apply_edits(expected, fw.S402_VERSE_EDITS)
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -658,3 +659,21 @@ def test_s401_echoes_humour_other_readers_and_judgment():
     assert "**Your own judgment.**" in e and "not to fill a place" in e
     assert "different Hebrew text behind" in e and "**Another reader**" in v
     assert "Ration it: at most two verses in five." in v          # the LXX budget stays
+
+
+def test_s402_notes_use_the_essay_and_think_about_the_whole():
+    """The author (S402): the notes should be conscious of the essay's argument and use it
+    (without repeating it), and think about where each verse fits in the whole, printing that
+    only when it reveals something. A test, not a model sentence; the crux deferral stays."""
+    v = fw.VERSE_INSTRUCTIONS
+    for gone in ("What the essay said is spent.", "That material is spent.", "one sentence at most"):
+        assert gone not in v, gone
+    assert "The essay's evidence is spent; its argument is not." in v
+    assert "the argument is the frame the notes stand in" in v
+    assert "Where a verse carried the essay's argument, point back to it in a sentence" in v
+    assert "What is the poet doing at this point and not another?" in v
+    assert "Most of this stays in your reasoning" in v
+    assert "- **Its place in the whole**: when where the verse stands reveals something" in v
+    assert "true of almost any verse in the middle of almost any psalm" in v
+    # the new item sits in the menu, before the rare-word item
+    assert v.index("**Its place in the whole**") < v.index("**A strange or rare word**")
