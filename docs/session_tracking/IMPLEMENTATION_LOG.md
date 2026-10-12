@@ -9,6 +9,45 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 402 (2026-10-12): the verse notes use the essay's argument and think about each verse's place in the whole (`S402_VERSE_EDITS`); Ps 81's first full run ($8.14, no errors)
+
+**The ask.** The author: "do we have anything in the instructions to the writer to 'think about the forest and not just the trees' as it writes the verse by verse commentary (i.e. how does this verse fit into the whole, advance the plot/argument, add to the effect, grow the impact, etc etc)?" Then: "is there a way to GENTLY add something about a verse's job in the arc without leading to formulaic writing? … think and reflect on where this 'tree' fits into the 'forest', what the poet is doing here, etc and raise it if illuminating (i.e. if it reveals non-obvious)?" and "I worry a little about keeping the verse commentary too far from the essay. the whole document SHOULD read as a cohesive whole … I don't want it repeating points already made, but I do want it to be conscious of the overall arguments being made - and use them." Then "incorporate all your suggestions now, commit and push. THEN, let's run new psalm 81".
+
+**Diagnosis ($0; the verse instructions as sent, all edits applied).** Partial coverage only: S394's "How to work" step 2 asked "What does it hand on to the verses after it, and where does the poem move in units larger than a verse?" (reasoning only) and THE THREAD BETWEEN THE NOTES is set-up/pay-off between neighbours, not a verse's place in the arc. Pulling the other way: "What the essay said is spent. Do not re-argue it, re-quote its evidence, or reach its conclusions by a second route", "That material is spent", and a menu of nine items every one of which is local to the line.
+
+**Built: `forest_writer.S402_VERSE_EDITS`** (applied last; the S386 pin test applies it; +1 test):
+- "What the essay said is spent …" → "The essay's evidence is spent; its argument is not. … Do not restate its points or re-quote its evidence. Build on it instead. A note can show the argument at work in a line the essay never reached, or test it against a verse that resists it …". The crux deferral (S382) kept: "Where a verse carried the essay's argument, point back to it in a sentence" ("one sentence at most" dropped).
+- Step 1 now ends "The quotations and evidence are spent; the argument is the frame the notes stand in."
+- Step 2 adds, after the S394 question: "Then step back. What is the poet doing at this point and not another? What does this line advance or hold back? Does it reverse something, or bring something to a head? What would the poem lose without it? Most of this stays in your reasoning, where it shapes how you read the line."
+- A menu item before *A strange or rare word*: **Its place in the whole**, "when where the verse stands reveals something a reader would not see alone", three examples of kinds, and a self-test in place of a model sentence: "If the sentence would be true of almost any verse in the middle of almost any psalm, it is not worth writing." (S401's lesson: the echo formula was copied from phrasing the prompt prescribed.)
+- Commit `77152b6`, pushed before the run.
+
+**The run** (`run_enhanced_pipeline.py 81 --fact-check`, 17:45–18:55, 17 verses), **$8.14, no ERROR lines, exit 0**:
+
+| Stage | Cost | Notes |
+|---|---|---|
+| macro | $0.27 | |
+| echoes v3 | $1.01 | 40 (19 literary / 13 beyond / 8 far), 1 dropped as used; 19 min |
+| micro + bundle | $1.89 | reception 26 passages of 248 (26.7K); bundle 345,539 (under 400K, no trim) |
+| synthesis discovery | $2.25 | 439 s, `end_turn`; keep-alives read 244,478 / wrote 0 |
+| writer (forest) | $1.02 | essay: read 244,478, wrote 19,355; verses: read 263,833, wrote 0 |
+| citations | $0.07 | 0 mismatches |
+| fact check | $0.90 | 276 claims: 254 / 14 / 8; 3 web searches |
+| writer revision | $0.34 | 14/14 handled, 12 paragraphs, 0 rejected |
+| copy editor | $0.38 | 8 changes, 0 [FACT-CHECK] (all plain-language / jargon); 3 UNVERIFIED notes |
+
+**The S402 changes, read before the copy edit (one run; unscored against a baseline).**
+- *The essay used, not repeated*: 4 pointers in the notes, each building (v. 6 "The introduction argued that this is the psalm's only plain act of hearing. Here are the other readers who had to decide whose ear it is"; v. 6 Sotah 10b's reason for the extra ה, tied to בְּסֵתֶר רַעַם in v. 8; v. 11 "The introduction followed the mouth … Two more ways of reading this line are worth adding"). None of the essay's echoes or proof-texts reused (Augustine, Kafka, Rekhmire, Carlill, Jer 11, AZ 5a). One small restatement (v. 13, שִׁלַּח the exodus verb); v. 9's "As the introduction showed, even this fails" is a throwaway.
+- *The whole*: cross-verse references in the notes 10 (Ps 80 2, Ps 79 7, Ps 29 13). Revealing ones: v. 5 (חֹק / מִשְׁפָּט: "the oracle will spend the rest of the psalm in that gap"), v. 13 (him → their heart: "at this point in the poem the breakup is the meaning"), v. 15 (God's יָדִי answering Israel's freed כַּפָּיו of v. 7), v. 16 (the enemies would at least pretend). **Watch**: the arc point tends to be the note's LAST sentence (vv. 3, 8, 9, 10, 13) and "keep that … in mind" occurs twice (vv. 1, 11).
+- *The verse-call thinking summary* (2,696 words) is dominated by echo bookkeeping ("tallying far associations", "the count is already full"); no visible verse-by-verse arc question. A summary, so not proof of absence.
+- *Echoes (the S401 watch item)*: "same move, but…" persists (Douglass "The difference matters"; CFR "The difference is telling"; Zeus "But Zeus…"; Herbert ×2; Rilke "It is the same turn"). Far associations used: Carlill (essay), spring tides (v. 4), lost-wax (v. 11), CFR (vv. 14–15); Chaos Monkey (beyond, v. 8) the weakest item in the guide.
+
+**The fact check caught what mattered.** The essay's OPENING rested on "the Levites sang from verse 7 on Rosh Hashanah" (the v. 7 start is the Thursday-morning case; Musaf began at v. 2); the revision kept the idea and made it true. "הַרְנִינוּ occurs elsewhere only at Deut 32:43" (Ps 32:11 too; confirmed in tanakh.db) fixed. The machzor's whole-psalm placements undercounted (Hodu).
+
+**Echoes' far-lane fields, explained to the author.** Each proposer gets 15 of `echoes_v3.FAR_DOMAINS` (203) drawn by `random.Random(f"{psalm}-{model}")`, so the draw is deterministic per psalm+model (a re-run does not widen the search). Ps 81: 6 of 8 far items from the draw; Opus went outside it for contract law (Carlill), Gemini for metallurgy (lost-wax), both at 81:11. Opus's four were text-anchored; Gemini's mostly generic "both describe…".
+
+**Code**: **475 tests pass** (+1). Memory `author-guide-priorities` gained the S402 preference. **Session spend $8.14.**
+
 ## Session 401 (2026-10-10): the writer fixes the fact check's contradictions itself; echoes, humour, other readers and the writer's own judgment in the forest prompts; Ps 29 run twice ($7.71)
 
 **The ask.** The author ran Ps 29 (its first run since January) and had a model read it beside the January version. Of that reader's suggestions the author rejected most (fewer echoes, fewer far echoes, restoring reader questions) and took three: "the echoes are introduced in a VERY predictable, formulaic way"; the fact-check "seams" ("is there an inexpensive way to have the writer see the checker issues and then do the rewrite itself?"); and "what happened to modern scholarship? … a massive parade of traditional Jewish commentary". Then: humour ("do we still tell the model not to be funny? … remove that instruction"), the writer's own opinions ("I like it when it does that, but I also don't want it doing that mechanically at predictable intervals"), other voices ("not so interested in the names of the scholars or debates … I do like … 'Count other receptions (Christian, Qumran, the Greek) as voices too'"), the LXX ("only … if it sheds light, esp on an INTERESTING different understanding, vorlage or polemic"), the fixer ("writer-fixes-itself-after-checkers using opus 5.5 … in the least expensive way possible"). After run 1: "OK to your suggestions re the cheap fixes, and the re-run"; echoes and humour "leave them as you have edited them and see how things play out over the next few runs".
