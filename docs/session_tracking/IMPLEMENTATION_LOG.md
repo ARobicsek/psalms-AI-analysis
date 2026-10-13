@@ -9,6 +9,23 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 403 (2026-10-12): other languages in English only; single Greek words transliterated (`S403_LANGUAGE_EDITS`) ($0)
+
+**The ask.** The author: "since I don't read greek, it's helpful for the writer to show a transliteration into roman letters any single greek words (e.g from the LXX). For greek poetry, no need to reproduce the greek since I can't read it anyway. this is true for poetry in all languages except hebrew (e.g. if providing chinese poetry, just show the translation)."
+
+**Found.** Every prompt asked for the original of every source: the forest essay's echo paragraph ("in the original language with English translation"), its poem-setting line ("the original first, then a bare `>`, then the translation"), and S398's Hebrew rule ("A source written in another language follows the echo rule: the original, then the translation"); V4 the same in RULE 1's examples (θεὸς θεῶν κύριος), essay item 7, RULE 12 and its Lorca example. Nothing asked for a transliteration of Greek; "Transliteration only when a sound pattern matters" (meant for Hebrew) argued against one.
+
+**Built.**
+- `forest_writer.S403_LANGUAGE_EDITS` (applied last; both pin tests apply it). Essay: a new WRITING item **Other languages** ("The reader reads Hebrew and English, and no other language. A single word or short phrase in another script (the Septuagint's Greek, Syriac, Arabic) is given in its script, then in Roman letters, then in English: σάρξ (*sarx*), "flesh." A longer passage in any language but Hebrew or Aramaic, poetry or prose, is quoted in English translation only, with no original. Where your point rests on the original's own words or sounds, give just those words, in Roman letters."); "Transliteration" → "Transliteration of Hebrew"; the echo paragraph and the poem-setting line split Hebrew/Aramaic (original + translation) from everything else (English only, lineated); S398's parenthesis now points at the new item. Verse: the Greek menu item adds "Give each Greek word in Roman letters too".
+- `master_editor.py` V4 (SI pipeline and `--writer-prompt v4`): the same rule after RULE 1's quotation-mark rule; the Greek examples carry (*theos theōn kyrios*); item 7 and RULE 12 split the same way; the Lorca example is now the English lines alone.
+- Judgment calls, reported to the author: prose included with poetry; Aramaic kept with Hebrew (Targum, Talmud); Yiddish/Ladino count as other languages.
+
+**Not changed.** Echoes v3 still locates and cuts original-language pages (the dossier carries them; the writer no longer prints them; a few tokens). `document_generator` renders a translation-only poem as an ordinary italic English block quote (no original → nothing is tagged translation), not upright.
+
+**Code**: **475 tests pass** (no new tests; the two forest pin tests apply the new edits). Un-run: the next full run is the first on it. **Session spend $0**.
+
+---
+
 ## Session 402 (2026-10-12): the verse notes use the essay's argument and think about each verse's place in the whole (`S402_VERSE_EDITS`); Ps 81's first full run ($8.14, no errors)
 
 **The ask.** The author: "do we have anything in the instructions to the writer to 'think about the forest and not just the trees' as it writes the verse by verse commentary (i.e. how does this verse fit into the whole, advance the plot/argument, add to the effect, grow the impact, etc etc)?" Then: "is there a way to GENTLY add something about a verse's job in the arc without leading to formulaic writing? … think and reflect on where this 'tree' fits into the 'forest', what the poet is doing here, etc and raise it if illuminating (i.e. if it reveals non-obvious)?" and "I worry a little about keeping the verse commentary too far from the essay. the whole document SHOULD read as a cohesive whole … I don't want it repeating points already made, but I do want it to be conscious of the overall arguments being made - and use them." Then "incorporate all your suggestions now, commit and push. THEN, let's run new psalm 81".

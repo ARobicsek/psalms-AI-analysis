@@ -93,7 +93,7 @@ The translation NEVER appears alone in parentheses as a floating annotation. The
 
 **Pattern B — APPOSITION:** Hebrew, comma, English in quotes, comma (or em-dash, or period).
 > The psalm ends with נוֹרָא לְמַלְכֵי־אָרֶץ, "awesome to the kings of the earth" — a final benediction.
-> The LXX renders this as θεὸς θεῶν κύριος, "God of gods, the LORD."
+> The LXX renders this as θεὸς θεῶν κύριος (*theos theōn kyrios*), "God of gods, the LORD."
 
 **Pattern C — WHOLE UNIT PARENTHETICAL:** Used when the Hebrew+English apposition is genuinely an aside to the main sentence. Put translation in quotes inside the existing parens; do NOT nest a second pair.
 > The Sinai formula (אֱלֹהִים אֱלֹהֶיךָ אָנֹכִי, "I am the LORD your God") is echoed in v. 7.
@@ -102,7 +102,7 @@ The translation NEVER appears alone in parentheses as a floating annotation. The
 **INCORRECT (translation alone in parens as the default annotation style):**
 > The plea אַל־יֶחֱרַשׁ ("let Him not be silent") is the psalm's ironic engine. ❌
 > The psalm ends with נוֹרָא לְמַלְכֵי־אָרֶץ ("awesome to the kings of the earth"). ❌
-> The LXX renders this as θεὸς θεῶν κύριος ("God of gods, the LORD"). ❌
+> The LXX renders this as θεὸς θεῶν κύριος (*theos theōn kyrios*) ("God of gods, the LORD"). ❌
 
 Rhythm test: read the sentence aloud with the Hebrew removed. If the English still flows, you're using Pattern A or B correctly. If you have a stranded `("...")` fragment, you've defaulted to the forbidden annotation style — rewrite as A or B.
 
@@ -110,6 +110,8 @@ Rhythm test: read the sentence aloud with the Hebrew removed. If the English sti
 
 **CORRECT:** The piyyut reads רָם וְנִשָּׂא דִּבֶּר וַיִּקְרָא אָרֶץ, "exalted and lifted up, He spoke and summoned the earth."
 **INCORRECT:** The piyyut reads "רָם וְנִשָּׂא דִּבֶּר וַיִּקְרָא אָרֶץ," "exalted and lifted up…" ❌ (Hebrew itself is quoted)
+
+**Other languages (Session 403):** the reader reads Hebrew and English, and no other language. A single word or short phrase in another script (the Septuagint's Greek, Syriac, Arabic) is given in its script, then in Roman letters, then in English, as in the LXX example above. A longer passage in any language but Hebrew or Aramaic, poetry or prose, is quoted in English translation only, with no original. Where your point rests on the original's own words or sounds, give just those words, in Roman letters.
 
 **Syntactic Flow Rule:**
 The English sentence must make complete grammatical sense if the Hebrew were removed. Use Hebrew as a parenthetical anchor.
@@ -504,7 +506,7 @@ Write a scholarly introduction essay that:
 
 6. **Names the human experience**: The best commentary connects the psalm to recognizable human situations — loneliness, gratitude, bewilderment at injustice, the terror of mortality, the vertigo of unmerited grace. Where appropriate, name the experience the psalmist is articulating and show how the poetic craft serves that experience. This is not sentimentality; it is the reason these poems have survived three millennia.
 
-7. **Cross-cultural resonance**: When a work of world literature — a Shakespeare soliloquy, a Chinese poem, a political speech — illuminates the psalm's craft or emotional logic, bring it into the essay where it serves the argument: as a hook, a turn, or a closing insight. One to three in the essay is a natural range when strong ones exist. Always quote the source text in the original language (with English translation if not English), and quote enough to be felt (item 12 below). Most echoes live in the verse commentary; item 12 sets the budget across the whole guide.
+7. **Cross-cultural resonance**: When a work of world literature — a Shakespeare soliloquy, a Chinese poem, a political speech — illuminates the psalm's craft or emotional logic, bring it into the essay where it serves the argument: as a hook, a turn, or a closing insight. One to three in the essay is a natural range when strong ones exist. Quote a Hebrew or Aramaic source in the original with English translation, and a source in any other language in English only (RULE 1, "Other languages"); quote enough to be felt (item 12 below). Most echoes live in the verse commentary; item 12 sets the budget across the whole guide.
 
 8. **Treats the poet as a craftsman with intentions**: Don't just catalog poetic devices ("this is a chiasm"). Show WHY the poet made this choice. What does the chiasm DO to the reader? What effect does the word order create? What would be lost if the poet had said the same thing in prose? The poet is a character in your essay — someone making deliberate, skilled decisions.
 
@@ -622,7 +624,7 @@ For EACH verse:
    **BUDGET: about three echoes for every four verses, across the whole guide (essay + verse commentary).** A 13-verse psalm should carry about 10; a 24-verse psalm about 18. This is a level to reach with GOOD echoes, not a quota to fill with weak ones: rank the dossier's echoes (and any you know that fit better), spend from the top, and place each where it illuminates most. If the dossier holds fewer strong ones, use fewer. What you must not do is ration them to two or three because they feel like a luxury.
 
    **QUOTE FULSOMELY.** Every quotation in the Literary Echoes research was gathered from published, openly available sources, and this guide is a private study text written for one reader's own education; quotation in the service of commentary is its whole purpose. Do not trim a passage below what the comparison needs out of caution:
-   - Quote the lines that carry the echo — typically **3–8 lines of verse** (or 2–4 sentences of prose) — in the original language with English translation.
+   - Quote the lines that carry the echo — typically **3–8 lines of verse** (or 2–4 sentences of prose). A Hebrew or Aramaic source in the original with English translation; a source in any other language in English only.
    - For public-domain works (ancient, medieval, and anything published before about 1930) quote as much as illuminates; a whole short poem or stanza is fine.
    - For modern works, the passage the dossier supplies is the passage to use.
 
@@ -634,17 +636,13 @@ For EACH verse:
    - **Unfold the resonance after the quotation.** Not one sentence — three to five. Be specific about the formal or rhetorical feature being shared. What is genuinely parallel? What differs, and what does the difference reveal about each poet's project? Why does the comparison enrich the reader's hearing of the psalm?
    - **Length permission**: a well-handled literary echo may add 4-8 sentences to a verse's commentary. That is fine — and preferable to three rushed echoes the reader cannot feel. Echoes are one of the few places where a little breadth genuinely earns its keep.
 
-   **HOW TO SET A QUOTED POEM.** Verse is lineated on the page or it stops being verse. Put the original AND the translation inside the block quote, one `> ` line per line of poetry, translation lineated to mirror the original, the two separated by a bare `>`:
+   **HOW TO SET A QUOTED POEM.** Verse is lineated on the page or it stops being verse. A poem in a language other than Hebrew or Aramaic is set in English translation alone, one `> ` line per line of poetry:
 
-   > Empieza el llanto
-   > de la guitarra.
-   > Es inútil callarla.
-   >
-   > "The weeping of the guitar
+   > The weeping of the guitar
    > begins.
-   > It is useless to silence it."
+   > It is useless to silence it.
 
-   Then start the commentary as a new paragraph. Do NOT run the translation into the prose that follows the poem ("...*callarla.*" / `"The weeping of the guitar begins. It is useless to silence it." Lorca's anaphora enacts...`) — set that way it reads as your commentary, not as the poem's other half, and the line breaks the poet chose are gone. Prose quotations — a letter, a novel, an essay — are not lineated and take the ordinary single-line block quote.
+   A Hebrew or Aramaic poem puts the original AND the translation inside the block quote, translation lineated to mirror the original, the two separated by a bare `>`. Then start the commentary as a new paragraph. Do NOT run the poem into the prose that follows it (`"The weeping of the guitar begins. It is useless to silence it." Lorca's anaphora enacts...`) — set that way it reads as your commentary, not as the poem, and the line breaks the poet chose are gone. Prose quotations — a letter, a novel, an essay — are not lineated and take the ordinary single-line block quote.
 
    - These literary echoes can add richness, points of interest, variation, emotional resonance, and (sometimes) gentle amusement to your commentary.
    - Draw on Deep Research and Literary Echoes data.

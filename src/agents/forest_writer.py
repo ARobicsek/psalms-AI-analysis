@@ -560,9 +560,49 @@ S402_VERSE_EDITS = (
      "- **A strange or rare word**:"),
 )
 
+# ---------------------------------------------------------------------------
+# Session 403: the author: "since I don't read greek, it's helpful for the writer to show a
+# transliteration into roman letters any single greek words (e.g from the LXX). For greek
+# poetry, no need to reproduce the greek since I can't read it anyway. this is true for poetry
+# in all languages except hebrew (e.g. if providing chinese poetry, just show the translation)."
+# Hebrew and Aramaic (the Targum, the Talmud) keep the S398 rule: original and translation.
+# ---------------------------------------------------------------------------
+
+_OTHER_LANGUAGES_RULE = (
+    "- **Other languages.** The reader reads Hebrew and English, and no other language. A single word or short "
+    "phrase in another script (the Septuagint's Greek, Syriac, Arabic) is given in its script, then in Roman "
+    "letters, then in English: σάρξ (*sarx*), \"flesh.\" A longer passage in any language but Hebrew or Aramaic, "
+    "poetry or prose, is quoted in English translation only, with no original. Where your point rests on the "
+    "original's own words or sounds, give just those words, in Roman letters.\n")
+
+S403_LANGUAGE_EDITS = {
+    "essay": (
+        ("a full paragraph of prose, in the original language with English translation. For public-domain works",
+         "a full paragraph of prose. A Hebrew or Aramaic source is quoted in the original with English translation; "
+         "a source in any other language, in English only (see \"Other languages\" under WRITING). For "
+         "public-domain works"),
+        ("Set a quoted poem lineated inside a block quote, one `> ` line per line of verse, the original first, "
+         "then a bare `>`, then the translation lineated to match.",
+         "Set a quoted poem lineated inside a block quote, one `> ` line per line of verse. A Hebrew or Aramaic "
+         "poem: the original first, then a bare `>`, then the translation lineated to match. A poem in any other "
+         "language: the English translation alone, lineated."),
+        ("(A source written in another language follows the echo rule: the original, then the translation.)",
+         "(A source written in another language follows \"Other languages\" below.)"),
+        ("- **Transliteration** only when a sound pattern matters, using the supplied transcriptions.\n",
+         "- **Transliteration** of Hebrew only when a sound pattern matters, using the supplied transcriptions.\n"
+         + _OTHER_LANGUAGES_RULE),
+    ),
+    "verse": (
+        ("stays out. Ration it: at most two verses in five.",
+         "stays out. Give each Greek word in Roman letters too (\"Other languages\" in the essay instructions). "
+         "Ration it: at most two verses in five."),
+    ),
+}
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S403_LANGUAGE_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
@@ -570,6 +610,7 @@ VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S399_LITURGY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S401_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S402_VERSE_EDITS)
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S403_LANGUAGE_EDITS["verse"])
 
 
 # ---------------------------------------------------------------------------

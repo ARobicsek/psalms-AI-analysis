@@ -36,13 +36,16 @@ def _script_constant(path: Path, name: str) -> str:
 def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)
     the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS) and the Session 401 edits
-    (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment)."""
+    (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment) and the Session 403
+    language edits (fw.S403_LANGUAGE_EDITS: Greek words transliterated, other-language passages in
+    English only)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
     expected = fw._apply_edits(approved, fw.S388_ECHO_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S401_EDITS["essay"])
+    expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["essay"])
     assert fw.essay_instructions(76, inputs) == expected
 
 
@@ -51,7 +54,8 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     the Session 394 continuity/grouping edits (fw.S394_VERSE_EDITS), the Session 395 liturgy
     edit (fw.S395_LITURGY_EDITS), the Session 399 survey-not-catalogue edits
     (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS), the
-    Session 401 edits (fw.S401_EDITS) and the Session 402 forest edits (fw.S402_VERSE_EDITS)."""
+    Session 401 edits (fw.S401_EDITS), the Session 402 forest edits (fw.S402_VERSE_EDITS) and the
+    Session 403 language edit (fw.S403_LANGUAGE_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
@@ -60,6 +64,7 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S401_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S402_VERSE_EDITS)
+    expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
