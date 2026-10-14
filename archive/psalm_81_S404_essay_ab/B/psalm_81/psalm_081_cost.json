@@ -1,0 +1,236 @@
+{
+  "claude-opus-5-5": {
+    "call_count": 3,
+    "input_tokens": 40575,
+    "output_tokens": 47679,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 264701,
+    "cache_write_tokens": 264701,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.1623,
+      "output_cost": 0.95358,
+      "thinking_cost": 0.0,
+      "cache_cost": 1.3764452000000003,
+      "total_cost": 2.4923252000000002
+    }
+  },
+  "gpt-5.1": {
+    "call_count": 3,
+    "input_tokens": 8688,
+    "output_tokens": 8418,
+    "thinking_tokens": 6522,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.01086,
+      "output_cost": 0.08418,
+      "thinking_cost": 0.06522,
+      "cache_cost": 0.0,
+      "total_cost": 0.16026
+    }
+  },
+  "gpt-6-sol@flex": {
+    "call_count": 1,
+    "input_tokens": 162,
+    "output_tokens": 41338,
+    "thinking_tokens": 27929,
+    "cache_read_tokens": 2220815,
+    "cache_write_tokens": 323390,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.000162,
+      "output_cost": 0.20668999999999998,
+      "thinking_cost": 0.139645,
+      "cache_cost": 0.6263190000000001,
+      "total_cost": 0.972816
+    }
+  },
+  "gpt-6-luna@flex": {
+    "call_count": 1,
+    "input_tokens": 18719,
+    "output_tokens": 1367,
+    "thinking_tokens": 2548,
+    "cache_read_tokens": 4515,
+    "cache_write_tokens": 6096,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.0009359500000000001,
+      "output_cost": 0.00034175,
+      "thinking_cost": 0.000637,
+      "cache_cost": 0.000403575,
+      "total_cost": 0.002318275
+    }
+  },
+  "gpt-5.4": {
+    "call_count": 1,
+    "input_tokens": 25620,
+    "output_tokens": 1765,
+    "thinking_tokens": 17028,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.06405,
+      "output_cost": 0.026475000000000002,
+      "thinking_cost": 0.25542000000000004,
+      "cache_cost": 0.0,
+      "total_cost": 0.34594500000000006
+    }
+  },
+  "total_cost": 3.993664475,
+  "events": [],
+  "charges": [
+    {
+      "label": "web search (OpenAI, $10 per 1,000)",
+      "usd": 0.02,
+      "model": "gpt-6-luna",
+      "detail": "2 searches"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "synthesis discovery",
+      "attempt": 1,
+      "models": {},
+      "charges": [],
+      "cost_usd": 0
+    },
+    {
+      "stage": "master writer (forest: essay call + verse call)",
+      "attempt": 1,
+      "models": {
+        "claude-opus-5-5": {
+          "call_count": 2,
+          "input_tokens": 12419,
+          "output_tokens": 38634,
+          "thinking_tokens": 0,
+          "cache_read_tokens": 264701,
+          "cache_write_tokens": 264701,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 2.198801
+        }
+      },
+      "charges": [],
+      "cost_usd": 2.198801
+    },
+    {
+      "stage": "citation verification (SQL check $0; false-positive filter)",
+      "attempt": 1,
+      "models": {
+        "gpt-5.1": {
+          "call_count": 1,
+          "input_tokens": 2896,
+          "output_tokens": 3749,
+          "thinking_tokens": 3043,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.07154
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.07154
+    },
+    {
+      "stage": "citation verification (SQL check $0; false-positive filter)",
+      "attempt": 2,
+      "models": {
+        "gpt-5.1": {
+          "call_count": 1,
+          "input_tokens": 2896,
+          "output_tokens": 2579,
+          "thinking_tokens": 1929,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.0487
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.0487
+    },
+    {
+      "stage": "fact check",
+      "attempt": 2,
+      "models": {
+        "gpt-6-sol@flex": {
+          "call_count": 1,
+          "input_tokens": 162,
+          "output_tokens": 41338,
+          "thinking_tokens": 27929,
+          "cache_read_tokens": 2220815,
+          "cache_write_tokens": 323390,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.972816
+        },
+        "gpt-6-luna@flex": {
+          "call_count": 1,
+          "input_tokens": 18719,
+          "output_tokens": 1367,
+          "thinking_tokens": 2548,
+          "cache_read_tokens": 4515,
+          "cache_write_tokens": 6096,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.002318
+        }
+      },
+      "charges": [
+        {
+          "label": "web search (OpenAI, $10 per 1,000)",
+          "usd": 0.02,
+          "model": "gpt-6-luna",
+          "detail": "2 searches"
+        }
+      ],
+      "cost_usd": 0.995134
+    },
+    {
+      "stage": "writer revision",
+      "attempt": 2,
+      "models": {
+        "claude-opus-5-5": {
+          "call_count": 1,
+          "input_tokens": 28156,
+          "output_tokens": 9045,
+          "thinking_tokens": 0,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.293524
+        },
+        "gpt-5.1": {
+          "call_count": 1,
+          "input_tokens": 2896,
+          "output_tokens": 2090,
+          "thinking_tokens": 1550,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.04002
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.333544
+    },
+    {
+      "stage": "copy editor",
+      "attempt": 2,
+      "models": {
+        "gpt-5.4": {
+          "call_count": 1,
+          "input_tokens": 25620,
+          "output_tokens": 1765,
+          "thinking_tokens": 17028,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.345945
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.345945
+    }
+  ]
+}

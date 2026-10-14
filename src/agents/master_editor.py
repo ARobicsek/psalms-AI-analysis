@@ -1376,6 +1376,8 @@ class MasterEditor(MasterEditorV2):
         essay_problems = fw.check_essay(essay["text"])
         for p in essay_problems:
             self.logger.error(f"[forest] essay: {p}")
+        for w in fw.essay_shape_warnings(essay["text"]):
+            self.logger.warning(f"[forest] essay: {w}")
 
         # Call 2: liturgy + verses, replaying call 1's thinking unchanged.
         self.logger.info("[forest] call 2: liturgy and verse commentary ...")

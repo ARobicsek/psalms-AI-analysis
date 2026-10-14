@@ -1,0 +1,45 @@
+{
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "calls": [
+    {
+      "label": "essay",
+      "model": "claude-opus-5-5",
+      "usage": {
+        "input": 4,
+        "cache_write": 264701,
+        "cache_write_1h": 0,
+        "cache_read": 0,
+        "output": 8330
+      },
+      "cost_usd": 1.4901,
+      "seconds": 90,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "verses",
+      "model": "claude-opus-5-5",
+      "usage": {
+        "input": 12415,
+        "cache_write": 0,
+        "cache_write_1h": 0,
+        "cache_read": 264701,
+        "output": 30304
+      },
+      "cost_usd": 0.7087,
+      "seconds": 290,
+      "stop_reason": "end_turn"
+    }
+  ],
+  "total_cost_usd": 2.1988,
+  "verses": 17,
+  "essay_problems": [],
+  "structure_problems": [],
+  "chars": {
+    "inputs": 415722,
+    "essay_instructions": 19359,
+    "verse_instructions": 12509,
+    "essay": 11234,
+    "rest": 40111
+  }
+}

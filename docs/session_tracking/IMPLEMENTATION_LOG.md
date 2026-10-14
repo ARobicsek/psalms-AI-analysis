@@ -9,6 +9,33 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 404 (2026-10-13/14): the essay is an argument, not a tour (`S404_ESSAY_EDITS`); Ps 81 A/B, arm B adopted ($3.99)
+
+**The ask.** The author, after reading the Ps 81 essay: "I thought it gestured in a couple places at a great overall point about WHAT the poem is doing (the people are at festival but they should be doing is stopping and listening to God) but this point was kind of buried, and the essay wandered around a fair bit … thoughts on HOW we could make it clearer, more coherent, tracing one or more clear arguments?" Then: "I'm not averse to the essay making more than one argument, but it needs to be clearly argued and insightful. it's unlikely that more than 2-3 arguments would make for a coherent essay. Basically the essay should serve the purpose of helping a reader understand what the poem is ABOUT (often non-obvious from a superficial reading) and HOW it goes about executing its purpose." And: re-run the essay and verse commentary for 81 as 'B' of an A/B test.
+
+**Diagnosis ($0).**
+- The essay stated its thesis at the end of ¶1 and in the last ¶; the middle was a walk through the psalm in verse order, six headings each naming a stretch of verses (prompt: "at most two or three"). The best evidence for the thesis was buried mid-paragraph (הָרִיעוּ / רַעַם; "from producing sound to making room"; the שמע tally), between detours (Joseph's extra ה, Rekhmire, Meribah and Levi, the evil inclination, Hodu, Jer 11, Deut 32 as a second thesis, Carlill). The opening hook (Temple vs synagogue extent) led nowhere ("a poem about that gap") and was the claim the fact check had to correct.
+- The essay thinking found the governing idea early, then "pulling together connections to weave in", then "mapping the shape further", hanging finds on the psalm's sections. No argument outline.
+- The prompt: question 1's "Follow it as an experience, moment by moment" (meant for reasoning) invited the tour; "Choose" was one line; the essay call did not know verse notes follow, so it kept everything; every essay edit since Ps 76 (S388, S401) added kinds of material, none argument. Pss 29, 77–81: 2,083–2,213 words (cap 2,000), 4–6 headings in five of six (Ps 76, approved: 1,164 words, none).
+
+**Built.**
+- `forest_writer.S404_ESSAY_EDITS` (applied last to the essay; the P1 pin test applies it): a new section **THE ESSAY IS AN ARGUMENT** before HOW TO WORK ("help the reader understand what this poem is about, which a quick reading often misses, and how the poem goes about it … one argument, or two or three that belong together; more than three and it stops being one essay"; "The essay is not a tour of the psalm"; "You write the verse-by-verse notes next … A find that is true and interesting but advances no argument … belongs in the note on its verse"); question 1 "In your reasoning, follow it …"; step 4 **Build the argument** (the poem's about-and-how in 2–3 sentences, the arguments, steps as claims not verse ranges, leftovers set aside by verse for the notes; "Spend most of your reasoning on steps 1–4"); a third connection test **Does it serve the argument?**; after THE INSIGHT TEST the first-sentence test (the paragraphs' first sentences, read in order, make the argument); headings "At most three … names a step of the argument, never a stretch of the psalm"; the opening "leads into your argument; an opening the essay then leaves behind is a detour. By the end of the opening the reader should know what you will argue."
+- `forest_writer.essay_shape_warnings` (logged WARNING by `_call_forest_writer`, never a retry): > 3 headings, > 2,000 English words. A's raw essay trips both (6; ~2,150).
+- `forest_writer.essay_subheadings_level3`, applied in `assemble`: B wrote `##` subheadings, which the DOCX set at Heading 2 beside "Introduction"; essay headings are now demoted to `###`.
+- `run_docx_only.py` resolves its folder through `debug_paths.psalm_output_dir`, so `PSALMS_OUTPUT_ROOT` re-renders an A/B arm.
+- Tests: +3 (`test_s404_*`); **478 pass**.
+
+**The A/B** (record `archive/psalm_81_S404_essay_ab/README.md`). A = production Ps 81 (S402). B = writer only on the same inputs (415,722 chars; SD reused at $0; `PSALMS_OUTPUT_ROOT` arm folder), then `--skip-writer --fact-check --writer-revision`. B also carries S403 (Greek transliterated), which postdates A.
+- B essay: ~1,900 words, 3 headings naming argument steps (*The noise was a summons, and something answered*; *Everyone hears except the people*; *The punishment is release, and then the wish*); thesis in ¶1 (the festival's noise clears space for a voice; the voice is longing, its offer never withdrawn), carried to the end. Weak spots I noted: the first section sprawls (a hiddenness sub-thread), the Rekhmire / 1 Kgs 11:28 paragraph is still a detour, Ives and Luke back to back. The notes took material the essay left (v. 6: Joseph's ה from Sotah 10b, Exodus Rabbah's seventy languages) and point back to "the hinge the introduction discussed".
+- Fact check 258 claims, 14 contradicted (A 276 / 14), all 14 handled by the revision, incl. the two I flagged (the Thursday Rosh Hashanah start; the divine name again in v. 16).
+- Cost: writer $2.20 (essay $1.49: full 265K cache write, no SD warm-up; verses $0.71), citations $0.12, fact check $1.00, revision $0.33, copy editor $0.35 = **$3.99**.
+- Delivered as `Documents/Psalm study guide/Psalm 81 - B test (S404 essay prompt).docx` + PDF, title and a one-line A/B note added.
+- **The author: "new essay is much better"**; changes kept. Production `output/psalm_81/` is still A.
+
+**Session spend $3.99.**
+
+---
+
 ## Session 403 (2026-10-12): other languages in English only; single Greek words transliterated (`S403_LANGUAGE_EDITS`) ($0)
 
 **The ask.** The author: "since I don't read greek, it's helpful for the writer to show a transliteration into roman letters any single greek words (e.g from the LXX). For greek poetry, no need to reproduce the greek since I can't read it anyway. this is true for poetry in all languages except hebrew (e.g. if providing chinese poetry, just show the translation)."

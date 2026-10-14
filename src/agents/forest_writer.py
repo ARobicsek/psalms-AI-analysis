@@ -599,10 +599,72 @@ S403_LANGUAGE_EDITS = {
     ),
 }
 
+# ---------------------------------------------------------------------------
+# Session 404: the author, reading Ps 81: the essay "gestured in a couple places at a great
+# overall point about WHAT the poem is doing … but this point was kind of buried, and the essay
+# wandered around a fair bit"; then "I'm not averse to the essay making more than one argument,
+# but it needs to be clearly argued and insightful. it's unlikely that more than 2-3 arguments
+# would make for a coherent essay. Basically the essay should serve the purpose of helping a
+# reader understand what the poem is ABOUT (often non-obvious from a superficial reading) and HOW
+# it goes about executing its purpose." The Ps 81 thinking found the governing idea early, then
+# hung its finds on the psalm's sections in verse order (six headings; the prompt allowed three),
+# and the call did not know the verse notes come next, so it kept everything. Pss 29, 77-81:
+# 2,083-2,213 words, 4-6 headings in five of six.
+# ---------------------------------------------------------------------------
+
+_ESSAY_ARGUMENT_SECTION = (
+    "## THE ESSAY IS AN ARGUMENT\n\n"
+    "The essay's job is to help the reader understand what this poem is about, which a quick reading often "
+    "misses, and how the poem goes about it. It does that by arguing: one argument, or two or three that belong "
+    "together; more than three and it stops being one essay. An argument is a claim a thoughtful reader might not "
+    "have reached alone, made good step by step with evidence from the text. Every paragraph advances one of them, "
+    "and the reader should always know how the paragraph in front of them bears on it.\n\n"
+    "The essay is not a tour of the psalm. It shows the poem's shape once, early; after that it moves by the "
+    "steps of the argument, taking verses in whatever order the argument needs. The strongest evidence goes where "
+    "the argument needs it, not where its verse happens to fall.\n\n"
+    "You write the verse-by-verse notes next, in a separate step, and they carry the local finds: a rare word, a "
+    "commentator's reading, a historical detail, an echo that lights up one line. A find that is true and "
+    "interesting but advances no argument is not lost by leaving it out of the essay; it belongs in the note on "
+    "its verse.\n\n"
+    "## HOW TO WORK (your reasoning phase) — in this order")
+
+S404_ESSAY_EDITS = (
+    ("**What does this poem do to its hearer, and what is it for?** Follow it as an experience",
+     "**What does this poem do to its hearer, and what is it for?** In your reasoning, follow it as an experience"),
+    ("## HOW TO WORK (your reasoning phase) — in this order", _ESSAY_ARGUMENT_SECTION),
+    ("4. **Choose.** Pick the governing idea and the few pieces of evidence and connection that make it land. "
+     "Leave out much that is true.\n\n"
+     "Spend most of your reasoning on steps 1–3.",
+     "4. **Build the argument.** Say, in two or three plain sentences, what the poem is about and how it gets "
+     "there. Then set out the argument, or the two or three arguments, that will show it. Under each, list its "
+     "steps (each a claim, not a stretch of verses) and the evidence and connections that prove each step. "
+     "Whatever you gathered that serves no step, set aside by verse, in a line each, for the notes. Leave out much "
+     "that is true.\n\n"
+     "Spend most of your reasoning on steps 1–4."),
+    ("- **Is it true?** State only what you know to be accurate",
+     "- **Does it serve the argument?** A connection that lights up one line but moves no argument belongs in "
+     "that line's note.\n"
+     "- **Is it true?** State only what you know to be accurate"),
+    ("The essay's point should be something the reader will remember the next time they hear this psalm.",
+     "The essay's point should be something the reader will remember the next time they hear this psalm.\n\n"
+     "Then read the first sentence of each paragraph, in order. Together they should make your argument: a "
+     "reader who read only them should know what the poem is about and how it does it. A paragraph that advances "
+     "no argument, however good its material, is a detour; leave it for the verse notes."),
+    ("At most two or three section headings, and only if the essay truly has movements.",
+     "At most three section headings, and only if the essay truly has movements. A heading names a step of the "
+     "argument, never a stretch of the psalm."),
+    ("Open with something that makes the reader want to hear the poem again — not a summary. Somewhere early, let "
+     "the reader see the poem's shape, in prose.",
+     "Open with something that makes the reader want to hear the poem again — not a summary — and that leads into "
+     "your argument; an opening the essay then leaves behind is a detour. By the end of the opening the reader "
+     "should know what you will argue. Early, let the reader see the poem's shape, in prose, once."),
+)
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S403_LANGUAGE_EDITS["essay"])
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S404_ESSAY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
@@ -779,14 +841,43 @@ def check_essay(essay: str) -> List[str]:
     return problems
 
 
+ESSAY_MAX_HEADINGS = 3
+ESSAY_MAX_WORDS = 2000
+
+
+def essay_shape_warnings(essay: str) -> List[str]:
+    """S404: the instructions' heading and length limits, logged, never retried (a re-run is
+    a full essay call). English words only; the Hebrew and Greek do not count."""
+    body = essay.split(LIT_MARKER)[0]
+    headings = [h for h in re.findall(r"(?m)^#{1,4}\s*(.+?)\s*$", body)
+                if h.strip().upper() != "INTRODUCTION ESSAY"]
+    words = len(re.sub(r"[֐-׿Ͱ-Ͽἀ-῿]+", " ", body).split())
+    warnings = []
+    if len(headings) > ESSAY_MAX_HEADINGS:
+        warnings.append(f"{len(headings)} section headings (the instructions allow {ESSAY_MAX_HEADINGS})")
+    if words > ESSAY_MAX_WORDS:
+        warnings.append(f"about {words} English words (the instructions allow {ESSAY_MAX_WORDS})")
+    return warnings
+
+
+_ESSAY_TOP_HEADING = re.compile(r"(?m)^#{1,2}\s+(?!INTRODUCTION ESSAY\s*$)")
+
+
+def essay_subheadings_level3(essay: str) -> str:
+    """S404: the essay's own section headings print one level below "Introduction". The
+    instructions set no level; the Ps 81 arm B wrote `##`, which the DOCX set at the level of
+    the guide's main sections."""
+    return _ESSAY_TOP_HEADING.sub("### ", essay)
+
+
 def assemble(essay: str, rest: str) -> str:
     """The full writer response, in the shape _parse_writer_response and the copy editor
     expect: essay, then the liturgical marker section, then `### VERSE COMMENTARY`."""
-    return essay.strip() + "\n\n" + rest.strip() + "\n"
+    return essay_subheadings_level3(essay.strip()) + "\n\n" + rest.strip() + "\n"
 
 
 __all__ = [
     "LIT_MARKER", "KEEPALIVE_AFTER_S", "ESSAY_INSTRUCTIONS", "VERSE_INSTRUCTIONS",
     "extract_inputs_block", "split_inputs", "shared_dossier", "SHARED_DOSSIER_END", "commentator_names", "essay_instructions", "psalm_verse_numbers",
-    "verse_instructions", "first_turn", "replayable", "check_structure", "check_essay", "assemble",
+    "verse_instructions", "first_turn", "replayable", "check_structure", "check_essay", "essay_shape_warnings", "assemble",
 ]

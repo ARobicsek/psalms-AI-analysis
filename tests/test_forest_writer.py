@@ -36,9 +36,9 @@ def _script_constant(path: Path, name: str) -> str:
 def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     """The approved S384 P1 text, plus exactly the Session 388 echo edits (fw.S388_ECHO_EDITS)
     the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS) and the Session 401 edits
-    (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment) and the Session 403
+    (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment), the Session 403
     language edits (fw.S403_LANGUAGE_EDITS: Greek words transliterated, other-language passages in
-    English only)."""
+    English only) and the Session 404 argument edits (fw.S404_ESSAY_EDITS)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
@@ -46,6 +46,7 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S398_HEBREW_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S401_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["essay"])
+    expected = fw._apply_edits(expected, fw.S404_ESSAY_EDITS)
     assert fw.essay_instructions(76, inputs) == expected
 
 
@@ -682,3 +683,44 @@ def test_s402_notes_use_the_essay_and_think_about_the_whole():
     assert "true of almost any verse in the middle of almost any psalm" in v
     # the new item sits in the menu, before the rare-word item
     assert v.index("**Its place in the whole**") < v.index("**A strange or rare word**")
+
+
+def test_s404_the_essay_is_an_argument_not_a_tour():
+    """The author (S404, Ps 81): the main point was buried and the essay wandered. The essay
+    helps the reader see what the poem is ABOUT and HOW it does it, by one to three clear
+    arguments; it is not a walk through the verses, and local finds go to the notes."""
+    e = fw.ESSAY_INSTRUCTIONS
+    assert "4. **Choose.**" not in e and "steps 1–3" not in e
+    assert "## THE ESSAY IS AN ARGUMENT" in e
+    assert e.index("## THE ESSAY IS AN ARGUMENT") < e.index("## HOW TO WORK")
+    assert "what this poem is about, which a quick reading often misses, and how the poem goes about it" in e
+    assert "more than three and it stops being one essay" in e
+    assert "The essay is not a tour of the psalm." in e
+    assert "You write the verse-by-verse notes next" in e
+    assert "4. **Build the argument.**" in e and "set aside by verse, in a line each, for the notes" in e
+    assert "**Does it serve the argument?**" in e
+    assert "read the first sentence of each paragraph, in order" in e
+    assert "never a stretch of the psalm" in e and "At most two or three section headings" not in e
+    assert "an opening the essay then leaves behind is a detour" in e
+    assert "In your reasoning, follow it as an experience" in e
+
+
+def test_s404_essay_shape_warnings():
+    ok = "### INTRODUCTION ESSAY\n\n" + "word " * 50 + "\n\n### One\n\nx\n\n### Two\n\ny"
+    assert fw.essay_shape_warnings(ok) == []
+    many = ok + "".join(f"\n\n### H{i}\n\nz" for i in range(3))
+    assert "5 section headings" in fw.essay_shape_warnings(many)[0]
+    long = "### INTRODUCTION ESSAY\n\n" + "word " * 2001 + "שָׁלוֹם " * 500
+    assert len(fw.essay_shape_warnings(long)) == 1 and "English words" in fw.essay_shape_warnings(long)[0]
+    hebrew_only = "### INTRODUCTION ESSAY\n\n" + "word " * 1990 + "שָׁלוֹם " * 500
+    assert fw.essay_shape_warnings(hebrew_only) == []
+
+
+def test_s404_essay_subheadings_print_below_the_introduction():
+    essay = "### INTRODUCTION ESSAY\n\nText.\n\n## A step\n\nMore.\n\n# Another\n\n### Kept\n\n#### Deeper"
+    out = fw.essay_subheadings_level3(essay)
+    assert out.splitlines()[0] == "### INTRODUCTION ESSAY"
+    assert "\n### A step\n" in out and "\n### Another\n" in out and "\n### Kept\n" in out
+    assert "\n#### Deeper" in out
+    assert fw.assemble(essay, "rest").startswith("### INTRODUCTION ESSAY")
+    assert "\n## " not in fw.assemble(essay, "rest")

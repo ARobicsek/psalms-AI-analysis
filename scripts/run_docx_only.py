@@ -18,13 +18,12 @@ def main():
 
     psalm_number = args.psalm
     
-    # Handle optional leading zero directories
-    base_dir = Path(f'output/psalm_{psalm_number:03d}')
+    # Either directory form; PSALMS_OUTPUT_ROOT (S391) points this at an A/B arm's folder
+    from src.utils.debug_paths import psalm_output_dir
+    base_dir = psalm_output_dir(psalm_number)
     if not base_dir.exists():
-        base_dir = Path(f'output/psalm_{psalm_number}')
-        if not base_dir.exists():
-            print(f"Error: Could not find output directory for Psalm {psalm_number}")
-            return
+        print(f"Error: Could not find output directory for Psalm {psalm_number}")
+        return
 
     # Check for copy edited versions first (the final state of the pipeline)
     edited_intro_file = base_dir / f"psalm_{psalm_number:03d}_edited_intro.md"
