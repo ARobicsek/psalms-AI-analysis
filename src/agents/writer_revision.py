@@ -284,13 +284,14 @@ class RevisionResult:
     seconds: float = 0.0
     thinking: str = ""
     raw: str = ""
+    model: str = REVISION_MODEL
 
     def to_json(self) -> Dict:
         return {"applied": self.applied, "rejected": self.rejected,
                 "log": {k: {"status": v[0], "note": v[1]} for k, v in self.log.items()},
                 "sent": self.sent, "unlocated": self.unlocated, "handled": self.handled,
                 "usage": self.usage, "cost_usd": round(self.cost_usd, 4), "seconds": round(self.seconds),
-                "model": REVISION_MODEL, "effort": REVISION_EFFORT}
+                "model": self.model, "effort": REVISION_EFFORT}
 
 
 def plan(print_ready: str, records: List[Dict]):
@@ -324,7 +325,7 @@ def remaining_records(records: List[Dict], handled: List[str]) -> List[Dict]:
 def report_markdown(psalm_number: int, res: RevisionResult, records: List[Dict]) -> str:
     by_id = {r["id"]: r for r in records}
     L = [f"# Psalm {psalm_number}: the writer's revision after the fact check", "",
-         f"{REVISION_MODEL} (effort {REVISION_EFFORT}), ${res.cost_usd:.4f}, {round(res.seconds)} s. "
+         f"{res.model} (effort {REVISION_EFFORT}), ${res.cost_usd:.4f}, {round(res.seconds)} s. "
          f"Contradicted claims sent: {len(res.sent)}; handled (rewritten or kept): {len(res.handled)}; "
          f"left for the copy editor: {len(res.sent) - len(res.handled) + len(res.unlocated)} "
          f"({len(res.unlocated)} outside any prose paragraph).", ""]
@@ -356,7 +357,49 @@ class WriterRevision:
         if self.logger:
             getattr(self.logger, level)(f"[revision] {msg}")
 
+    def _call_gemini(self, user: str) -> Tuple[str, str, Dict[str, int], float]:
+        """Session 405: the same revision on a Gemini writer (thinking "high" = REVISION_EFFORT).
+        Gemini reports cached input inside prompt_token_count, and thinking apart from output."""
+        import os
+
+        from google import genai
+        from google.genai import types
+        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
+                              http_options=types.HttpOptions(timeout=1_800_000))
+        config = types.GenerateContentConfig(
+            system_instruction=SYSTEM, max_output_tokens=REVISION_MAX_TOKENS,
+            thinking_config=types.ThinkingConfig(thinking_level=REVISION_EFFORT, include_thoughts=True))
+        last = None
+        for attempt in range(3):
+            try:
+                t0 = time.time()
+                r = client.models.generate_content(model=self.model, contents=user, config=config)
+                um = r.usage_metadata
+                cached = um.cached_content_token_count or 0
+                u = {"input": (um.prompt_token_count or 0) - cached,
+                     "output": (um.candidates_token_count or 0) + (um.thoughts_token_count or 0),
+                     "cache_read": cached, "cache_write": 0}
+                if self.cost_tracker is not None:
+                    self.cost_tracker.add_usage(model=self.model, input_tokens=u["input"],
+                                                output_tokens=u["output"], thinking_tokens=0,
+                                                cache_read_tokens=u["cache_read"])
+                cand = r.candidates[0] if r.candidates else None
+                finish = str(getattr(cand, "finish_reason", None) or "none").split(".")[-1]
+                parts = (cand.content.parts if cand is not None and cand.content else None) or []
+                text = "".join(p.text for p in parts if p.text and not p.thought)
+                thinking = "\n\n".join(p.text for p in parts if p.text and p.thought)
+                if finish != "STOP" or not text.strip():
+                    raise RuntimeError(f"finish_reason={finish}, text chars={len(text)}")
+                return text, thinking, u, time.time() - t0
+            except Exception as e:  # billed above if a response came back
+                last = e
+                self._log(f"attempt {attempt + 1} failed: {str(e)[:200]}", "warning")
+                time.sleep(30 * (attempt + 1))
+        raise RuntimeError(f"writer revision: all attempts failed: {last}")
+
     def _call(self, user: str) -> Tuple[str, str, Dict[str, int], float]:
+        if self.model.startswith("gemini-"):
+            return self._call_gemini(user)
         from src.utils.model_effort import adaptive_thinking
         kw = {"model": self.model, "max_tokens": REVISION_MAX_TOKENS, "system": SYSTEM,
               "thinking": adaptive_thinking(self.model), "output_config": {"effort": REVISION_EFFORT},
@@ -390,7 +433,8 @@ class WriterRevision:
     def revise(self, psalm_number: int, print_ready: str, records: List[Dict]) -> RevisionResult:
         from src.utils.cost_tracker import resolve_pricing
         lines, paras, shown, items, unlocated = plan(print_ready, records)
-        res = RevisionResult(revised_text=print_ready, unlocated=unlocated, sent=[r["id"] for r, _ in items])
+        res = RevisionResult(revised_text=print_ready, unlocated=unlocated, sent=[r["id"] for r, _ in items],
+                             model=self.model)
         if not items:
             self._log(f"no contradicted claim inside a prose paragraph ({len(unlocated)} elsewhere); no call")
             return res

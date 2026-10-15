@@ -1166,7 +1166,9 @@ def run_enhanced_pipeline(
             from src.agents.fact_checker import format_copy_editor_prompt
             from src.agents.writer_revision import WriterRevision, remaining_records, report_markdown
             from src.utils.debug_paths import thinking_file
-            wrev = WriterRevision(cost_tracker=cost_tracker, logger=logger)
+            # Session 405: a Gemini writer revises its own guide; otherwise Opus 5.5 (S401).
+            rev_kw = {"model": master_editor_model} if master_editor_model.startswith("gemini-") else {}
+            wrev = WriterRevision(cost_tracker=cost_tracker, logger=logger, **rev_kw)
             res = wrev.revise(psalm_number, print_ready_file.read_text(encoding='utf-8'), fc_result.records)
             if res.applied:
                 revised_file.write_text(res.revised_text, encoding='utf-8')
@@ -1429,8 +1431,10 @@ if __name__ == "__main__":
     # claude-opus-5 — while this default silently stayed on 4.8 for six sessions. Ps 72
     # shipped arm E's prompt on the model it was not written for. Do not "restore" 4.8.
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-5-5",
-                       choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-5-5)")
+                       choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6",
+                                "gemini-4-argon"],
+                       help="Model for Master Writer (default: claude-opus-5-5). Session 405: gemini-4-argon "
+                            "runs the same forest calls and also does the post-fact-check revision")
     parser.add_argument("--copy-edit-mode", choices=["full", "edits"], default=None,
                         help="Session 388: 'full' returns the whole corrected guide; 'edits' returns "
                              "FIND/REPLACE edits only, applied in Python (about half the copy editor's cost). "

@@ -169,6 +169,7 @@ def test_every_model_the_pipeline_can_select_is_priced():
 CACHE_READ_MULTIPLIER_EXCEPTIONS = {
     "claude-fable-5-1": 0.025,
     "claude-opus-5-5": 0.05,
+    "gemini-4-argon": 0.05,
 }
 
 

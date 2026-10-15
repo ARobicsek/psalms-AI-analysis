@@ -24,11 +24,13 @@ if __name__ == '__main__' and __package__ is None:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
+    from src.utils.hebrew_punctuation import punctuate_biblical_quotations
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
     from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
+    from .hebrew_punctuation import punctuate_biblical_quotations
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
     from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 
@@ -2030,13 +2032,15 @@ Methodological & Bibliographical Summary
 
         # 3. Add Introduction
         self.document.add_heading('Introduction', level=2)
-        intro_content = self.intro_path.read_text(encoding='utf-8')
+        # Session 405: biblical quotations get the commas and full stops their accents call for
+        # (hebrew_punctuation), before the divine-name converter changes the words it matches on.
+        intro_content = punctuate_biblical_quotations(self.intro_path.read_text(encoding='utf-8'))
         # Use _add_commentary_with_bullets to properly handle blockquotes while preserving headers
         self._process_introduction_content(intro_content.strip(), style='BodySans')
 
         # 4. Add Verse-by-Verse Commentary
         self.document.add_heading('Verse-by-Verse Commentary', level=2)
-        verses_content = self.modifier.modify_text(self.verses_path.read_text(encoding='utf-8'))
+        verses_content = self.modifier.modify_text(punctuate_biblical_quotations(self.verses_path.read_text(encoding='utf-8')))
         parsed_verses = self._parse_verse_commentary(verses_content, psalm_text_data)
 
         for verse in parsed_verses:

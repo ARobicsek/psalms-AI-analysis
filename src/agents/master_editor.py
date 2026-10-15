@@ -1197,15 +1197,19 @@ class MasterEditor(MasterEditorV2):
         self.logger.info(f"Saved {debug_prefix} prompt to {prompt_file}")
 
         # Call model (inherited methods handle the actual API call)
+        forest = getattr(self, "writer_mode", "forest") == "forest"
+        # Session 405: a Gemini model runs the same two forest calls (_forest_gemini).
+        if forest and model.lower().startswith("gemini-"):
+            return self._call_forest_writer(model, prompt, psalm_number, debug_prefix)
         if "claude" in model.lower():
             # Session 387: the two-call forest writer is production. It takes only the
             # INPUTS block of the prompt built above; the V4 rules and task are not sent.
-            if getattr(self, "writer_mode", "forest") == "forest":
+            if forest:
                 return self._call_forest_writer(model, prompt, psalm_number, debug_prefix)
             return self._call_claude_writer(model, prompt, psalm_number, debug_prefix)
         else:
-            if getattr(self, "writer_mode", "forest") == "forest":
-                self.logger.warning(f"The forest writer is Claude-only; {model} runs the one-call V4 prompt")
+            if forest:
+                self.logger.warning(f"The forest writer is Claude/Gemini-only; {model} runs the one-call V4 prompt")
             return self._call_gpt_writer(model, prompt, psalm_number, debug_prefix)
 
     # -------------------------------------------------------------------------
@@ -1304,6 +1308,65 @@ class MasterEditor(MasterEditorV2):
             time.sleep(15 * (attempt + 1))
         raise RuntimeError(f"forest writer {label}: all attempts failed: {last_err}")
 
+    def _forest_gemini(self, base_kwargs: Dict, messages: List[Dict], label: str,
+                       keepalive_turn: Optional[List[Dict]] = None) -> Dict:
+        """Session 405: _forest_stream's twin for a Gemini model. Same messages (Anthropic
+        shape; cache_control is dropped, Gemini caches implicitly, so no keep-alive). An
+        assistant turn is call 1's saved Gemini Content, sent back with its thought
+        signatures. Thinking counts as output and is billed as output."""
+        import time
+
+        from google import genai
+        from google.genai import types
+
+        if getattr(self, "_gemini_client", None) is None:
+            # Long calls: a 30-minute HTTP timeout (ms), as the OpenAI stages use (S387).
+            self._gemini_client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
+                                               http_options=types.HttpOptions(timeout=1_800_000))
+        contents = []
+        for m in messages:
+            if m["role"] == "assistant":
+                contents.append(types.Content.model_validate(m["content"]))
+            else:
+                contents.append(types.Content(role="user", parts=[
+                    types.Part(text=b["text"]) for b in m["content"] if b.get("type") == "text"]))
+        config = types.GenerateContentConfig(
+            max_output_tokens=base_kwargs["max_tokens"],
+            thinking_config=types.ThinkingConfig(thinking_level=base_kwargs["thinking_level"],
+                                                 include_thoughts=True))
+        model = base_kwargs["model"]
+        last_err = None
+        for attempt in range(3):
+            try:
+                t0 = time.time()
+                r = self._gemini_client.models.generate_content(model=model, contents=contents, config=config)
+                um = r.usage_metadata
+                cached = um.cached_content_token_count or 0
+                u = {"input": (um.prompt_token_count or 0) - cached, "cache_write": 0, "cache_write_1h": 0,
+                     "cache_read": cached,
+                     "output": (um.candidates_token_count or 0) + (um.thoughts_token_count or 0)}
+                cand = r.candidates[0] if r.candidates else None
+                finish = str(getattr(cand, "finish_reason", None) or "none").split(".")[-1]
+                row = self._forest_record(model, label, u, time.time() - t0, finish)
+                parts = (cand.content.parts if cand is not None and cand.content else None) or []
+                text = "".join(p.text for p in parts if p.text and not p.thought)
+                thinking = "\n\n".join(p.text for p in parts if p.text and p.thought)
+                if finish != "STOP" or not text.strip():
+                    raise RuntimeError(f"finish_reason={finish}, text chars={len(text)}")
+                self.logger.info(
+                    f"[forest] {label}: {row['seconds']}s, ${row['cost_usd']:.4f}; in {u['input']:,} + "
+                    f"cache read {u['cache_read']:,}; out {u['output']:,} "
+                    f"(thinking {um.thoughts_token_count or 0:,})")
+                return {"text": text, "thinking": thinking,
+                        "content": cand.content.model_dump(mode="json", exclude_none=True)}
+            except Exception as e:
+                if "MAX_TOKENS" in str(e):
+                    raise  # the same prompt would be cut off again, at full price
+                last_err = e
+            self.logger.warning(f"[forest] {label}: attempt {attempt + 1} failed: {str(last_err)[:200]}")
+            time.sleep(30 * (attempt + 1))
+        raise RuntimeError(f"forest writer {label}: all attempts failed: {last_err}")
+
     def _call_forest_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
         """Call 1 writes the essay; call 2, the next turn of the same conversation, writes
         the liturgical section and the verse commentary. See forest_writer.py.
@@ -1329,10 +1392,11 @@ class MasterEditor(MasterEditorV2):
         verse_instr = fw.verse_instructions(len(verses))
         turn1 = fw.first_turn(inputs, essay_instr)
         self._forest_calls: List[Dict] = []
+        gemini = model.lower().startswith("gemini-")
         # Session 388: did synthesis discovery cache this exact dossier head? A mismatch costs
         # money only (this call writes the entry itself, as before S388), so say so loudly.
         sd_sha = getattr(self, "_shared_dossier_sha", None)
-        if sd_sha:
+        if sd_sha and not gemini:  # another vendor's writer cannot read Anthropic's cache
             head, _ = fw.split_inputs(inputs)
             if hashlib.sha256(head.encode("utf-8")).hexdigest() == sd_sha:
                 self.logger.info(f"[forest] dossier head ({len(head):,} chars) matches what synthesis "
@@ -1352,25 +1416,31 @@ class MasterEditor(MasterEditorV2):
 
         from src.utils.model_effort import adaptive_thinking
         # Session 388: the same dict synthesis discovery sends -- part of the shared cache key.
-        base = {"model": model, "max_tokens": 128000, "thinking": adaptive_thinking(model)}
-        apply_effort(base, model, self.logger)
+        if gemini:
+            # Session 405: Gemini 4 Argon's documented default output cap (thinking included);
+            # thinking "high" as Opus runs at effort high.
+            base = {"model": model, "max_tokens": 65536, "thinking_level": "high"}
+            call = self._forest_gemini
+        else:
+            base = {"model": model, "max_tokens": 128000, "thinking": adaptive_thinking(model)}
+            apply_effort(base, model, self.logger)
+            call = self._forest_stream
 
         # Call 1: the essay (writes the cache entry on the first turn).
         turn1_hash = hashlib.sha256(json.dumps(turn1, ensure_ascii=False).encode("utf-8")).hexdigest()
         saved = out_dir / f"{stem}_forest_essay_call.json"
-        essay = None
+        essay = saved_edit = None
         if saved.exists():
             data = json.loads(saved.read_text(encoding="utf-8"))
             # Only an essay whose verse call never finished: a deliberate re-run of the
             # writer on the same inputs must get a new essay, not the old one.
             if data.get("turn1_sha256") == turn1_hash and not data.get("verse_call_done"):
-                essay = data["result"]
+                essay, saved_edit = data["result"], data.get("edit")
                 self.logger.info(f"[forest] reusing the saved essay call ({saved.name}); "
                                  "call 2 will pay a fresh cache write")
         if essay is None:
             self.logger.info("[forest] call 1: the introduction essay ...")
-            essay = self._forest_stream(base, [{"role": "user", "content": turn1}], "essay",
-                                        keepalive_turn=turn1)
+            essay = call(base, [{"role": "user", "content": turn1}], "essay", keepalive_turn=turn1)
             saved.write_text(json.dumps({"turn1_sha256": turn1_hash, "result": essay}, ensure_ascii=False),
                              encoding="utf-8")
         essay_problems = fw.check_essay(essay["text"])
@@ -1379,12 +1449,44 @@ class MasterEditor(MasterEditorV2):
         for w in fw.essay_shape_warnings(essay["text"]):
             self.logger.warning(f"[forest] essay: {w}")
 
-        # Call 2: liturgy + verses, replaying call 1's thinking unchanged.
+        def as_assistant(res: Dict) -> Dict:
+            return {"role": "assistant", "content": res["content"] if gemini else fw.replayable(res["content"])}
+
+        history = [{"role": "user", "content": turn1}, as_assistant(essay)]
+
+        # Session 405: one editing turn when the essay is well over length or its sentences run
+        # long (fw.essay_edit_request); the verse call then sees the edited essay. Logged, and the
+        # draft kept beside the outputs; an edit that breaks the essay's format is not used.
+        essay_edit = None
+        edit_request = fw.essay_edit_request(essay["text"])
+        if edit_request:
+            before = fw.essay_measures(essay["text"])
+            self.logger.info(f"[forest] essay edit: {before['words']:,} words, "
+                             f"{before['long_share']:.0%} long sentences ...")
+            if saved_edit is not None:
+                edited = saved_edit
+            else:
+                edit_turn = {"role": "user", "content": [{"type": "text", "text": edit_request}]}
+                edited = call(base, history + [edit_turn], "essay_edit")
+                saved.write_text(json.dumps({"turn1_sha256": turn1_hash, "result": essay, "edit": edited},
+                                            ensure_ascii=False), encoding="utf-8")
+            if fw.check_essay(edited["text"]):
+                self.logger.error(f"[forest] essay edit broke the format ({fw.check_essay(edited['text'])}); "
+                                  "keeping the draft")
+            else:
+                after = fw.essay_measures(edited["text"])
+                (out_dir / f"{stem}_essay_draft_before_edit.md").write_text(essay["text"], encoding="utf-8")
+                self.logger.info(f"[forest] essay edit: {after['words']:,} words, "
+                                 f"{after['long_share']:.0%} long sentences")
+                essay_edit = {"before": before, "after": after, "thinking": edited["thinking"]}
+                history += [{"role": "user", "content": [{"type": "text", "text": edit_request}]},
+                            as_assistant(edited)]
+                essay = dict(edited, draft_thinking=essay["thinking"])
+
+        # Call 2: liturgy + verses, replaying the earlier turns' thinking unchanged.
         self.logger.info("[forest] call 2: liturgy and verse commentary ...")
-        messages = [{"role": "user", "content": turn1},
-                    {"role": "assistant", "content": fw.replayable(essay["content"])},
-                    {"role": "user", "content": [{"type": "text", "text": verse_instr}]}]
-        rest = self._forest_stream(base, messages, "verses")
+        messages = history + [{"role": "user", "content": [{"type": "text", "text": verse_instr}]}]
+        rest = call(base, messages, "verses")
         saved.write_text(json.dumps({"turn1_sha256": turn1_hash, "result": essay, "verse_call_done": True},
                                     ensure_ascii=False), encoding="utf-8")
         problems = fw.check_structure(rest["text"], verses)
@@ -1396,7 +1498,11 @@ class MasterEditor(MasterEditorV2):
 
         # Thinking capture: the standard file (both parts, headed) plus one file per call,
         # which the DOCX appendix reads.
-        parts = [("Essay call", essay["thinking"]), ("Verse-commentary call", rest["thinking"])]
+        essay_thinking = essay["thinking"]
+        if essay_edit is not None:
+            essay_thinking = "\n\n".join(t for t in (essay.get("draft_thinking"), "Editing pass:",
+                                                       essay["thinking"]) if t)
+        parts = [("Essay call", essay_thinking), ("Verse-commentary call", rest["thinking"])]
         writer_thinking_path(psalm_number, debug_prefix).write_text(
             "\n\n".join(f"## {h}\n\n{t}" for h, t in parts if t), encoding="utf-8")
         for key, (_, t) in zip(("forest_essay", "forest_verses"), parts):
@@ -1404,10 +1510,12 @@ class MasterEditor(MasterEditorV2):
             if not t:
                 self.logger.warning(f"[forest] no summarized thinking came back for the {key} call")
 
-        telemetry = {"model": model, "effort": effort_for(model), "calls": self._forest_calls,
+        telemetry = {"model": model, "effort": base.get("thinking_level") or effort_for(model),
+                     "calls": self._forest_calls,
                      "total_cost_usd": round(sum(c["cost_usd"] for c in self._forest_calls), 4),
                      "verses": len(verses), "essay_problems": essay_problems,
-                     "structure_problems": problems,
+                     "structure_problems": problems, "essay_edit": essay_edit and {
+                         k: essay_edit[k] for k in ("before", "after")},
                      "chars": {"inputs": len(inputs), "essay_instructions": len(essay_instr),
                                "verse_instructions": len(verse_instr), "essay": len(essay["text"]),
                                "rest": len(rest["text"])}}

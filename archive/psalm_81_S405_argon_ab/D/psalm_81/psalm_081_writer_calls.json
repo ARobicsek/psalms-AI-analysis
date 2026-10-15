@@ -1,0 +1,71 @@
+{
+  "model": "gemini-4-argon",
+  "effort": "high",
+  "calls": [
+    {
+      "label": "essay",
+      "model": "gemini-4-argon",
+      "usage": {
+        "input": 183740,
+        "cache_write": 0,
+        "cache_write_1h": 0,
+        "cache_read": 0,
+        "output": 14669
+      },
+      "cost_usd": 0.5142,
+      "seconds": 220,
+      "stop_reason": "STOP"
+    },
+    {
+      "label": "essay_edit",
+      "model": "gemini-4-argon",
+      "usage": {
+        "input": 14906,
+        "cache_write": 0,
+        "cache_write_1h": 0,
+        "cache_read": 183741,
+        "output": 6933
+      },
+      "cost_usd": 0.1175,
+      "seconds": 74,
+      "stop_reason": "STOP"
+    },
+    {
+      "label": "verses",
+      "model": "gemini-4-argon",
+      "usage": {
+        "input": 9884,
+        "cache_write": 0,
+        "cache_write_1h": 0,
+        "cache_read": 198648,
+        "output": 18668
+      },
+      "cost_usd": 0.2263,
+      "seconds": 233,
+      "stop_reason": "STOP"
+    }
+  ],
+  "total_cost_usd": 0.858,
+  "verses": 17,
+  "essay_problems": [],
+  "structure_problems": [],
+  "essay_edit": {
+    "before": {
+      "words": 3021,
+      "sentences": 144,
+      "long_share": 0.076
+    },
+    "after": {
+      "words": 2615,
+      "sentences": 140,
+      "long_share": 0.043
+    }
+  },
+  "chars": {
+    "inputs": 415722,
+    "essay_instructions": 20219,
+    "verse_instructions": 12994,
+    "essay": 16715,
+    "rest": 49094
+  }
+}

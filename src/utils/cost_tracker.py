@@ -445,6 +445,19 @@ PRICING = {
         "cache_write": 0.0,  # Google bills caching by storage-time, not a write multiplier
         "cache_write_1h": 0.00,
     },
+    # Gemini 4 Argon (Google; Session 405, GA on the API 2026-10-13). Verified on Google's
+    # pricing page 2026-10-14: "$4.00 / $20.00 from Dec 1, 2026" (output incl. thinking),
+    # context caching $0.20 (5% of input, implicit caching only). No separate tier for
+    # prompts over 200k tokens. THIS ROW IS THE DECEMBER PRICE; the launch price is an
+    # INTRO_PRICING override below. Caller: the forest writer, when it is given this model.
+    "gemini-4-argon": {
+        "input": 4.00,
+        "output": 20.00,
+        "thinking": 20.00,  # "Output price (including thinking tokens)"
+        "cache_read": 0.20,  # 5% of input
+        "cache_write": 0.0,  # Google bills caching by storage-time, not a write multiplier
+        "cache_write_1h": 0.00,
+    },
 }
 
 
@@ -466,6 +479,12 @@ INTRO_PRICING = {
     "gemini-3.8-flash": {
         "through": date(2026, 12, 31),
         "rates": {"input": 0.75, "output": 3.75, "thinking": 3.75, "cache_read": 0.075},
+    },
+    # Gemini 4 Argon (Session 405): the launch price "through Nov 30, 2026", per Google's page
+    # read 2026-10-14. When it expires, RE-CHECK the durable row.
+    "gemini-4-argon": {
+        "through": date(2026, 11, 30),
+        "rates": {"input": 2.00, "output": 10.00, "thinking": 10.00, "cache_read": 0.10},
     },
     # (Session 388: the gpt-6-sol entry that stood here from S384 was a mix-up with
     # GPT-5.6 Sol's promotion; $2/$10 is gpt-6-sol's standard price -- see its row.)

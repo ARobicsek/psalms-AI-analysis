@@ -36,7 +36,7 @@ Everything here is pure (no API calls); `MasterEditor._call_forest_writer` makes
 from __future__ import annotations
 
 import re
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 LIT_MARKER = "---LITURGICAL-SECTION-START---"
 
@@ -660,11 +660,81 @@ S404_ESSAY_EDITS = (
      "should know what you will argue. Early, let the reader see the poem's shape, in prose, once."),
 )
 
+# ---------------------------------------------------------------------------
+# Session 405: the author, reading Ps 81 written by Gemini 4 Argon (arm C) beside Opus (arm B):
+# Argon preferred ("more interesting information and its explanations were a lot clearer"), but
+# "its opening essay was too long and some of its sentences are quite ponderous and awkward"
+# (3,383 words; mean sentence 31 words vs Opus's 16.6; 29% of the essay's sentences 40+ words,
+# 40% of the notes'); "a fair bit of repetition from the essay into the commentaries" (a source
+# the essay used in a clause, retold in full in the note: Abbahu, the Akkadian kusē'u, Sotah's
+# Jehoseph); and "the inline hebrew quotations are missing punctuation" (both models strip the
+# accents, and with them the verse's only punctuation; the biblical case is fixed in code,
+# src/utils/hebrew_punctuation.py). On repetition the author: "I worry that if we tell it not to
+# reuse hebrew quotations ... it will run into trouble. ... emphasize that it should not repeat
+# ideas/explanations (though of course it can REFER to things its already said, since the reader
+# is reading the essay and verse commentary as a unit)". On the voice: "remind the writer that
+# it's an engaging educator with an elegant and clear style". The essay's length is held by an
+# editing turn in code (essay_edit_request), softened at the author's word: "a 2000 word limit
+# might prove a little draconian". Then, after arm D's fact check (41 contradicted of 247, many
+# of them absolutes: "every other", "only twice", "word for word", "verbatim"), the author: "a
+# prompt line telling it to avoid superlatives and phrases like 'only' unless truly important".
+# ---------------------------------------------------------------------------
+
+_FEW_ABSOLUTES = (
+    "- **Few superlatives and absolutes.** Avoid superlatives and absolute words (\"only,\" \"never,\" "
+    "\"every,\" \"unique,\" \"the first,\" \"word for word,\" \"exactly\") unless the point truly depends "
+    "on one; then make sure the text in front of you bears it out. Absolutes are where accounts most often go "
+    "wrong, and a reader who catches one stops trusting the rest.\n")
+
+_CLEAR_SENTENCES = (
+    "- **Clear sentences.** Most sentences under about 25 words, one idea to a sentence. When a source, its "
+    "words in Hebrew and English, and your point all need saying, give them two or three sentences rather than "
+    "one. Vary the rhythm: a long sentence is welcome when it earns its length, never as a way to fit more in.\n")
+
+_PUNCTUATE_HEBREW = (
+    "- **Punctuate the Hebrew as the English is punctuated.** A Hebrew quotation of more than a few words "
+    "carries punctuation where its translation does. Keep the source's own commas and stops; where it has none "
+    "(many rabbinic texts, and the Bible, whose only punctuation is its accents), add them: a comma at a pause, "
+    "a full stop between two sentences or verses, a question mark at a question.\n")
+
+S405_EDITS = {
+    "essay": (
+        ("your own knowledge is the larger library. Bring it.\n\n",
+         "your own knowledge is the larger library. Bring it.\n\n"
+         "You are also a teacher, and an engaging one. You write with elegance and clarity, and the reader should "
+         "never have to read a sentence twice to follow it.\n\n"),
+        ("- **Divine names as written.**", _PUNCTUATE_HEBREW + "- **Divine names as written.**"),
+        ("- **Show the step.**", _CLEAR_SENTENCES + "- **Show the step.**"),
+        ("- **Paragraphs, not lists.**", _FEW_ABSOLUTES + "- **Paragraphs, not lists.**"),
+    ),
+    "verse": (
+        ('; and "divine names as written")',
+         '; "clear sentences," which matters as much in a note as in the essay; "few superlatives and '
+         'absolutes," which matters most in the notes, where most of the counts and comparisons are; and '
+         '"divine names as written")'),
+        ("The essay's evidence is spent; its argument is not. The reader has just finished it, and the notes should "
+         "read as written by someone who knows what it argued and means to use that. Do not restate its points or "
+         "re-quote its evidence. Build on it instead.",
+         "The essay's explanations are spent; its argument is not. The reader reads the essay and the notes as one "
+         "guide, and has just finished the essay; the notes should read as written by someone who knows what it "
+         "argued and means to use that. Never explain again what the essay explained, even where it did so in a "
+         "clause: an idea, a reading or a source the reader has already been given is not set out a second time, "
+         "at any length. A note may refer back to it (\"the Talmud's reading of this line, met in the "
+         "introduction\") and may quote the same words where the note needs them, and then spends itself on what "
+         "is new. Build on the essay instead."),
+        ("Note briefly what it established and which evidence it used. The quotations and evidence are spent; the "
+         "argument is the frame the notes stand in.",
+         "Note briefly what it established, and every idea, reading and source it explained, even in passing. "
+         "Those explanations are spent; the argument is the frame the notes stand in."),
+    ),
+}
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S403_LANGUAGE_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S404_ESSAY_EDITS)
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S405_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
@@ -673,6 +743,7 @@ VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S398_HEBREW_EDITS["verse"]
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S401_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S402_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S403_LANGUAGE_EDITS["verse"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S405_EDITS["verse"])
 
 
 # ---------------------------------------------------------------------------
@@ -860,6 +931,54 @@ def essay_shape_warnings(essay: str) -> List[str]:
     return warnings
 
 
+# Session 405: an editing turn when the essay is well over length or its sentences run long
+# (the author: soften the 2,000 cap). Arm B (Opus, S404): 1,894 words, 3% long sentences, no
+# edit; arm C (Argon): 3,552 words, 12.5% (both by essay_measures, on the raw essays).
+ESSAY_EDIT_WORDS = 2400
+ESSAY_EDIT_TARGET = "2,000–2,400"
+LONG_SENTENCE_WORDS = 40
+ESSAY_EDIT_LONG_SHARE = 0.10
+
+_NON_ENGLISH = re.compile(r"[֐-׿Ͱ-Ͽἀ-῿]+")
+
+
+def essay_measures(essay: str) -> Dict[str, float]:
+    """English words, and the share of sentences of LONG_SENTENCE_WORDS English words or more."""
+    body = _NON_ENGLISH.sub(" ", essay.split(LIT_MARKER)[0])
+    body = re.sub(r"(?m)^#.*$", "", body)
+    sentences = [s for s in re.split(r"(?<=[.?!])[\"”’)*]*\s+", body)
+                 if len(re.findall(r"[A-Za-z']+", s)) >= 3]
+    lengths = [len(re.findall(r"[A-Za-z']+", s)) for s in sentences]
+    long_share = sum(n >= LONG_SENTENCE_WORDS for n in lengths) / len(lengths) if lengths else 0.0
+    return {"words": len(body.split()), "sentences": len(lengths), "long_share": round(long_share, 3)}
+
+
+def essay_edit_request(essay: str) -> Optional[str]:
+    """The user turn for one editing pass on the essay, or None when it needs none."""
+    m = essay_measures(essay)
+    too_long = m["words"] > ESSAY_EDIT_WORDS
+    too_dense = m["long_share"] > ESSAY_EDIT_LONG_SHARE
+    if not (too_long or too_dense):
+        return None
+    parts = ["Before the verse notes, one editing pass on your essay, the kind a good editor makes on an essay "
+             "they admire."]
+    if too_long:
+        parts.append(f"**Length.** It runs to about {m['words']:,} words of English (the Hebrew does not count). "
+                     f"Bring it to roughly {ESSAY_EDIT_TARGET}. Keep the argument and the evidence that carries "
+                     "it. Material that is good but not needed for the argument can go: the verse notes come "
+                     "next, and it will find a place there. Cut whole passages rather than squeezing sentences.")
+    parts.append(("**Sentences.** About {:.0%} of its sentences run to {} words or more. ".format(
+                  m["long_share"], LONG_SENTENCE_WORDS) if too_dense else "**Sentences.** ")
+                 + "You are an engaging teacher with an elegant, clear style, and a reader should take in each "
+                 "sentence at one reading. Where a sentence carries several things at once (a source, its words "
+                 "in Hebrew and English, and your point), give it two or three sentences. Vary the rhythm, and "
+                 "keep a long sentence only where it earns its length.")
+    parts.append("Keep your argument, your voice, your best lines, and the Hebrew of every quotation you keep. "
+                 "Add nothing new. Return the whole essay in the same format: `### INTRODUCTION ESSAY`, then "
+                 "the essay.")
+    return "\n\n".join(parts)
+
+
 _ESSAY_TOP_HEADING = re.compile(r"(?m)^#{1,2}\s+(?!INTRODUCTION ESSAY\s*$)")
 
 
@@ -880,4 +999,5 @@ __all__ = [
     "LIT_MARKER", "KEEPALIVE_AFTER_S", "ESSAY_INSTRUCTIONS", "VERSE_INSTRUCTIONS",
     "extract_inputs_block", "split_inputs", "shared_dossier", "SHARED_DOSSIER_END", "commentator_names", "essay_instructions", "psalm_verse_numbers",
     "verse_instructions", "first_turn", "replayable", "check_structure", "check_essay", "essay_shape_warnings", "assemble",
+    "essay_measures", "essay_edit_request",
 ]

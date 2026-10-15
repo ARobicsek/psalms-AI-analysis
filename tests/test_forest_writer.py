@@ -38,7 +38,8 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     the Session 398 Hebrew / divine-name edits (fw.S398_HEBREW_EDITS) and the Session 401 edits
     (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment), the Session 403
     language edits (fw.S403_LANGUAGE_EDITS: Greek words transliterated, other-language passages in
-    English only) and the Session 404 argument edits (fw.S404_ESSAY_EDITS)."""
+    English only), the Session 404 argument edits (fw.S404_ESSAY_EDITS) and the Session 405 edits
+    (fw.S405_EDITS: the engaging teacher, clear sentences, punctuated Hebrew)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
@@ -47,6 +48,7 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S401_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S404_ESSAY_EDITS)
+    expected = fw._apply_edits(expected, fw.S405_EDITS["essay"])
     assert fw.essay_instructions(76, inputs) == expected
 
 
@@ -56,7 +58,8 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     edit (fw.S395_LITURGY_EDITS), the Session 399 survey-not-catalogue edits
     (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS), the
     Session 401 edits (fw.S401_EDITS), the Session 402 forest edits (fw.S402_VERSE_EDITS) and the
-    Session 403 language edit (fw.S403_LANGUAGE_EDITS)."""
+    Session 403 language edit (fw.S403_LANGUAGE_EDITS) and the Session 405 edits (fw.S405_EDITS:
+    explanations, not quotations, are spent)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
@@ -66,6 +69,7 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S401_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S402_VERSE_EDITS)
     expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["verse"])
+    expected = fw._apply_edits(expected, fw.S405_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -244,6 +248,90 @@ def test_forest_writer_two_calls_end_to_end(tmp_path, monkeypatch):
     assert (out / "psalm_077_master_writer_v4_forest_essay_thinking.txt").read_text(encoding="utf-8") == "essay thoughts"
     assert (out / "psalm_077_master_writer_v4_forest_verses_thinking.txt").read_text(encoding="utf-8") == "verse thoughts"
     assert json.loads((out / "psalm_077_forest_essay_call.json").read_text(encoding="utf-8"))["verse_call_done"]
+
+
+def _gemini_reply(text, thought, prompt, cached, out, thoughts):
+    from google.genai import types
+    return types.GenerateContentResponse(
+        candidates=[types.Candidate(finish_reason="STOP", content=types.Content(role="model", parts=[
+            types.Part(text=thought, thought=True, thought_signature=b"sig-" + thought.encode()),
+            types.Part(text=text)]))],
+        usage_metadata=types.GenerateContentResponseUsageMetadata(
+            prompt_token_count=prompt, cached_content_token_count=cached,
+            candidates_token_count=out, thoughts_token_count=thoughts))
+
+
+class _GeminiModels:
+    def __init__(self, replies):
+        self.replies, self.calls = list(replies), []
+
+    def generate_content(self, **kw):
+        self.calls.append(kw)
+        return self.replies.pop(0)
+
+
+def _run_gemini_writer(tmp_path, monkeypatch, replies):
+    import src.utils.debug_paths as dp
+    from src.agents.master_editor import MASTER_WRITER_PROMPT_V4, MasterEditor
+
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "output" / "debug").mkdir(parents=True)
+    monkeypatch.setattr(dp, "OUTPUT_ROOT", tmp_path / "output")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    models = _GeminiModels(replies)
+    ed = MasterEditor(main_model="gemini-4-argon", cost_tracker=CostTracker())
+    ed._gemini_client = SimpleNamespace(models=models)
+    psalm_text = "".join(f"### Verse {n}\n**Hebrew:** א\n**English:** e\n\n" for n in (1, 2, 3))
+    prompt = MASTER_WRITER_PROMPT_V4.format(
+        psalm_number=77, psalm_text=psalm_text, macro_analysis="M", micro_analysis="m",
+        research_bundle="### 77:2 — Rashi\nx\n", phonetic_section="P", curated_insights="I",
+        cross_verse_observations="OBS")
+    return ed, models, ed._call_forest_writer("gemini-4-argon", prompt, 77, "master_writer_v4")
+
+
+def test_forest_writer_on_gemini_replays_the_essay_turn_with_its_signatures(tmp_path, monkeypatch):
+    """Session 405: a gemini-* writer runs the same two calls. Call 2 sends call 1's Content
+    back (thought signature included, after a JSON save); thinking is billed as output."""
+    essay = "### INTRODUCTION ESSAY\n\nThe essay."
+    ed, models, res = _run_gemini_writer(tmp_path, monkeypatch, [
+        _gemini_reply(essay, "essay thoughts", 200000, 0, 4000, 6000),
+        _gemini_reply(GOOD_REST, "verse thoughts", 206000, 190000, 30000, 9000)])
+
+    c1, c2 = models.calls
+    assert c1["config"].thinking_config.thinking_level.lower() == "high"
+    assert c2["contents"][0] == c1["contents"][0], "call 2 must open with call 1's exact first turn"
+    replay = c2["contents"][1]
+    assert replay.role == "model" and replay.parts[0].thought_signature == b"sig-essay thoughts"
+    assert "LITURGY AND VERSE COMMENTARY" in c2["contents"][2].parts[0].text
+    assert res["introduction"].startswith("The essay.")
+    assert res["writer_telemetry"]["effort"] == "high" and res["writer_telemetry"]["essay_edit"] is None
+    u = ed.cost_tracker.usage_by_model["gemini-4-argon"]
+    assert (u.input_tokens, u.cache_read_tokens, u.output_tokens) == (216000, 190000, 49000)
+
+
+def test_forest_writer_edits_a_long_essay_before_the_verse_call(tmp_path, monkeypatch):
+    """Session 405: an essay over ESSAY_EDIT_WORDS gets one editing turn; the verse call sees the
+    draft, the request and the edited essay, in that order; the draft is kept beside the outputs."""
+    draft = "### INTRODUCTION ESSAY\n\n" + "The psalm calls the festival and stops the music dead. " * 300
+    edited = "### INTRODUCTION ESSAY\n\nThe shorter essay."
+    ed, models, res = _run_gemini_writer(tmp_path, monkeypatch, [
+        _gemini_reply(draft, "draft thoughts", 200000, 0, 9000, 6000),
+        _gemini_reply(edited, "edit thoughts", 210000, 200000, 2000, 3000),
+        _gemini_reply(GOOD_REST, "verse thoughts", 212000, 205000, 30000, 9000)])
+
+    c1, c_edit, c2 = models.calls
+    assert "one editing pass on your essay" in c_edit["contents"][2].parts[0].text
+    assert [c.role for c in c2["contents"]] == ["user", "model", "user", "model", "user"]
+    assert c2["contents"][3].parts[1].text == edited
+    assert "LITURGY AND VERSE COMMENTARY" in c2["contents"][4].parts[0].text
+    assert res["introduction"].startswith("The shorter essay.")
+    tel = res["writer_telemetry"]
+    assert [c["label"] for c in tel["calls"]] == ["essay", "essay_edit", "verses"]
+    assert tel["essay_edit"]["before"]["words"] > 2400 and tel["essay_edit"]["after"]["words"] < 10
+    out = tmp_path / "output" / "psalm_77"
+    assert (out / "psalm_077_essay_draft_before_edit.md").read_text(encoding="utf-8") == draft
+    thinking = (out / "psalm_077_master_writer_v4_forest_essay_thinking.txt").read_text(encoding="utf-8")
+    assert thinking.startswith("draft thoughts") and thinking.endswith("edit thoughts")
 
 
 def test_forest_writer_refuses_effort_max(monkeypatch):
@@ -674,7 +762,8 @@ def test_s402_notes_use_the_essay_and_think_about_the_whole():
     v = fw.VERSE_INSTRUCTIONS
     for gone in ("What the essay said is spent.", "That material is spent.", "one sentence at most"):
         assert gone not in v, gone
-    assert "The essay's evidence is spent; its argument is not." in v
+    # S405 (the author): explanations are spent, not quotations; "evidence is spent" said both.
+    assert "The essay's explanations are spent; its argument is not." in v
     assert "the argument is the frame the notes stand in" in v
     assert "Where a verse carried the essay's argument, point back to it in a sentence" in v
     assert "What is the poet doing at this point and not another?" in v
@@ -703,6 +792,38 @@ def test_s404_the_essay_is_an_argument_not_a_tour():
     assert "never a stretch of the psalm" in e and "At most two or three section headings" not in e
     assert "an opening the essay then leaves behind is a detour" in e
     assert "In your reasoning, follow it as an experience" in e
+
+
+def test_s405_teacher_clear_sentences_punctuated_hebrew_and_no_re_explaining():
+    """The author (S405, Ps 81 on Argon): the essay too long and some sentences ponderous; repetition
+    from the essay into the notes, but quotations may recur ("it can REFER to things its already
+    said"); Hebrew quotations unpunctuated; "an engaging educator with an elegant and clear style"."""
+    e, v = fw.ESSAY_INSTRUCTIONS, fw.VERSE_INSTRUCTIONS
+    assert "You are also a teacher, and an engaging one. You write with elegance and clarity" in e
+    assert "- **Clear sentences.** Most sentences under about 25 words" in e
+    assert "- **Punctuate the Hebrew as the English is punctuated.**" in e
+    assert '"clear sentences," which matters as much in a note as in the essay' in v
+    # after arm D's fact check (the author): superlatives and "only" only when truly important
+    assert "- **Few superlatives and absolutes.** Avoid superlatives and absolute words" in e
+    assert e.index("**Few superlatives and absolutes.**") < e.index("**Paragraphs, not lists.**")
+    assert '"few superlatives and absolutes," which matters most in the notes' in v
+    assert "re-quote its evidence" not in v and "The quotations and evidence are spent" not in v
+    assert "Never explain again what the essay explained, even where it did so in a clause" in v
+    assert "may quote the same words where the note needs them" in v
+
+
+def test_s405_essay_edit_request():
+    sentence = "The psalm calls the festival into being and then it stops the music dead. "
+    head = "### INTRODUCTION ESSAY\n\n"
+    ok = head + sentence * 150                                     # ~2,100 words, short sentences
+    assert fw.essay_edit_request(ok) is None
+    long = head + sentence * 200 + "שָׁלוֹם " * 900                 # ~2,800 English words
+    req = fw.essay_edit_request(long)
+    assert req and "roughly 2,000–2,400" in req and "Add nothing new" in req
+    assert "About" not in req.split("**Sentences.**")[1][:10]          # length only: no long-share line
+    heavy = head + sentence * 40 + ("word " * 45 + "end. ") * 10   # 10 of 50 sentences are 40+ words
+    req = fw.essay_edit_request(heavy)
+    assert req and "**Length.**" not in req and "About 20% of its sentences run to 40 words" in req
 
 
 def test_s404_essay_shape_warnings():
