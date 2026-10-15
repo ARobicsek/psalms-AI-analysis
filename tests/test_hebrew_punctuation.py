@@ -43,3 +43,19 @@ def test_maqaf_joined_words_and_bold_letters_still_match():
 
 def test_idempotent():
     assert P(P(V8)) == P(V8)
+
+
+def test_a_quotation_ends_with_its_translations_end_mark():
+    """Session 405: `X, "Translation."` -> `X. "Translation."` for a quotation of 3+ words."""
+    from src.utils.hebrew_punctuation import end_hebrew_quotations as E
+    s = 'the hinge: שְׂפַת לֹא־יָדַעְתִּי אֶשְׁמָע, "A language I did not know I hear." Ancient'
+    assert E(s) == s.replace('אֶשְׁמָע, "', 'אֶשְׁמָע. "')
+    cited = 'record: אֶעֶנְךָ בְּסֵתֶר רַעַם, "I answered you from the thunder" (v. 8). Yet'
+    assert E(cited) == cited.replace('רַעַם, "', 'רַעַם. "')
+    q = 'Amos asks הֲיִתֵּן כְּפִיר קוֹלוֹ, "does a young lion give voice?" and'
+    assert E(q) == q.replace('קוֹלוֹ, "', 'קוֹלוֹ? "')
+    for same in ('After חַגֵּנוּ, "our feast day," in verse 4',                          # a term
+                 'says שְׁמַע עַמִּי וְאָעִידָה בָּךְ, "Hear, My people," and then',          # runs on
+                 'words—וּמִצּוּר דְּבַשׁ אַשְׂבִּיעֶ**ךָ**, "I would sate **you**"—He'):  # runs on
+        assert E(same) == same
+    assert E(E(s)) == E(s)

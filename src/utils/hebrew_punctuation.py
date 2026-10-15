@@ -109,6 +109,37 @@ def breaks_for(tokens: List[str], db_path: str = str(DB_PATH)) -> Optional[Dict[
     return found or None
 
 
+# A Hebrew quotation that runs straight into its translation: `<Hebrew>, "<English>."`. Groups:
+# the Hebrew span, the separator (an English comma or nothing), the opening quote, the translation,
+# the closing quote, and an optional citation and the mark after it.
+_QUOTE_THEN_TRANSLATION = re.compile(
+    rf"(?P<heb>{_WORD}(?:{_SEP}{_WORD})*)(?P<sep>,?)(?P<sp>[ \t]+)(?P<open>[\"“])(?P<eng>[^\"“”\n]+?)"
+    rf"(?P<close>[\"”])(?P<cite>[ \t]*\([^)\n]*\))?(?P<after>[.?!])?")
+_END_MARK = re.compile(r"([.?!])[*_]*$")
+MIN_QUOTE_WORDS = 3
+
+
+def end_hebrew_quotations(text: str) -> str:
+    """Session 405: a Hebrew quotation of MIN_QUOTE_WORDS+ words followed by its translation ends
+    with the translation's own end mark. The author, reading Ps 81: the inline Hebrew quotations are
+    "missing punctuation at the end (i.e. a period)": the writers end the Hebrew with the English
+    sentence's separator comma (`X, "Translation."`), which the bidi layout also draws at the
+    Hebrew's START. Only when the translation closes a sentence (its own `.?!`, or one right after
+    its closing quote and citation): `X. "Translation."`. A short term (`חַגֵּנוּ, "our feast day,"`)
+    and a quotation that runs on into the English sentence are left alone. The DOCX then draws the
+    mark at the Hebrew's END (DocumentGenerator._attach_hebrew_end_marks)."""
+    def fix(m: re.Match) -> str:
+        heb = m.group("heb")
+        if len(_WORD_RE.findall(heb)) < MIN_QUOTE_WORDS:
+            return m.group(0)
+        inner = _END_MARK.search(m.group("eng").rstrip())
+        mark = inner.group(1) if inner else m.group("after")
+        if not mark:
+            return m.group(0)
+        return heb + mark + m.group(0)[len(heb) + len(m.group("sep")):]
+    return _QUOTE_THEN_TRANSLATION.sub(fix, text)
+
+
 def punctuate_biblical_quotations(text: str, db_path: str = str(DB_PATH)) -> str:
     """Insert the commas and full stops a biblical quotation's accents call for (see module doc)."""
     def fix(m: re.Match) -> str:

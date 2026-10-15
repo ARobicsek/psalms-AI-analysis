@@ -112,3 +112,19 @@ def test_the_prompt_carries_the_evidence_and_the_rules():
     assert "C1 — in [P1]" in u and 'Evidence — Exod 19:19: "קוֹל"' in u
     assert "Rewrite the whole paragraph" in u and "Never mention the fact check" in u
     assert wr.REVISION_EFFORT != "max"
+
+
+def test_a_replacement_never_carries_block_quote_lines():
+    """Session 405, Ps 81 arm D: Argon returned P6 with the block quote under it, and the guide
+    printed the quotation twice. Block quotes are never numbered paragraphs: drop such lines."""
+    lines, paras, _ = wr.number_paragraphs(GUIDE)
+    allowed = wr.allowed_pids([paras[4]], paras)                    # P5 (verse 1's note)
+    blocks, _ = wr.parse_response("[P5]\nThe verb הָבוּ, \"hand it over,\" is plain speech.\n"
+                                  "> Bless the LORD, O my soul\n## LOG\nC1: fixed in P5 — x")
+    text, applied, rejected = wr.apply_changes(lines, paras, blocks, allowed)
+    assert [a["pid"] for a in applied] == [5] and "is plain speech" in text
+    assert text.count("> Bless the LORD, O my soul") == 1
+    assert rejected and "block-quote" in rejected[0]["reason"]
+    only_quote, _ = wr.parse_response("[P5]\n> Bless the LORD, O my soul\n## LOG")
+    text, applied, rejected = wr.apply_changes(lines, paras, only_quote, allowed)
+    assert applied == [] and text == GUIDE

@@ -153,3 +153,51 @@ def test_no_call_site_segments_a_fragment_with_a_hardcoded_true():
     assert "hebrew_line=True" not in src, (
         "the verdict is always computed from a line, never asserted at a call site"
     )
+
+
+# ---------------------------------------------------------------------------
+# Session 405: the end mark of a Hebrew QUOTATION inside a mixed line
+# ---------------------------------------------------------------------------
+
+def _gen_with_paragraph(parts):
+    from docx import Document
+    gen = DocumentGenerator.__new__(DocumentGenerator)
+    gen.document = Document()
+    p = gen.document.add_paragraph()
+    for text, bold in parts:
+        gen._add_inline_runs(p, text, bold=bold)
+    gen._join_rtl_runs_across_whitespace()
+    gen._attach_hebrew_end_marks()
+    return p
+
+
+def _is_rtl(run):
+    from docx.oxml import ns
+    rPr = run._element.find(ns.qn('w:rPr'))
+    return rPr is not None and rPr.find(ns.qn('w:rtl')) is not None
+
+
+def test_a_quotations_period_before_its_citation_joins_the_hebrew():
+    """Ps 81 arm D, the author: the lines `… תִּשְׁמַע־**לִי**. (v. 9)` "all show periods at the
+    RIGHT side of the hebrew". The bold לִי puts the period in its own markdown fragment."""
+    p = _gen_with_paragraph([("שְׁמַע עַמִּי וְאָעִידָה בָּךְ, יִשְׂרָאֵל אִם־תִּשְׁמַע־", False),
+                             ("לִי", True), (". (v. 9)", False)])
+    runs = [r for r in p.runs if r.text]
+    i = next(k for k, r in enumerate(runs) if r.text == "לִי")
+    assert runs[i + 1].text == "." and _is_rtl(runs[i + 1])
+    assert runs[i + 2].text == " (v. 9)" and not _is_rtl(runs[i + 2])
+    assert p.text == "שְׁמַע עַמִּי וְאָעִידָה בָּךְ, יִשְׂרָאֵל אִם־תִּשְׁמַע־לִי. (v. 9)"
+
+
+def test_a_quotations_period_before_its_translation_joins_the_hebrew():
+    p = _gen_with_paragraph([('told תִּקְעוּ בַחֹדֶשׁ שׁוֹפָר. "Blow the horn." The', False)])
+    runs = [r for r in p.runs if r.text]
+    k = next(k for k, r in enumerate(runs) if r.text == ".")
+    assert _is_rtl(runs[k]) and runs[k + 1].text.startswith(' "Blow')
+
+
+def test_a_term_or_a_sentence_going_on_in_english_keeps_its_english_mark():
+    for parts in ([('call Him אֱלֹקִים. "God" is', False)],                         # one word
+                  [("the line שְׁמַע עַמִּי וְאָעִידָה. Then the poem", False)]):  # English follows
+        p = _gen_with_paragraph(parts)
+        assert not any(r.text.startswith(".") and _is_rtl(r) for r in p.runs)

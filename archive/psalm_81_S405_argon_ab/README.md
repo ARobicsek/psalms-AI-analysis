@@ -76,3 +76,7 @@ replaced: `Documents/Psalm study guide/Psalm 81 - D test (Argon, S405 edits).doc
 D's contradictions: overstated precision ("every other", "only twice", "word for word", "verbatim"), misattributions
 (Rav Hanin, Targum for Rashi, Arakhin, Deut 13:9), errors inside new far associations (Gondor, CFR regret, Byrd,
 Gudea), repeats of C's (Poulenc in Paris, הַרְנִינוּ, the maqaf count); a few pedantic (Deut 5:29 = 5:26 Hebrew).
+
+### After the author's read of D's essay
+
+Three fixes (see IMPLEMENTATION_LOG S405): the revision's duplicated block quotes (D: v. 9/12/14 block, Gondor, Bartleby; C's Rilke, removed by its copy editor) — `apply_changes` now drops `>` lines; quotations end with their translation's mark (`end_hebrew_quotations`); the mark is drawn at the Hebrew's end (`_attach_hebrew_end_marks`). D's duplicates removed by hand (`*.before_dedupe.md` keep the originals); C and D re-rendered; `Documents/…/Psalm 81 - D test (Argon, S405 edits) - fixed.docx` (the original was open in Word).

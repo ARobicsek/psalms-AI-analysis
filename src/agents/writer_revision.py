@@ -185,6 +185,16 @@ def apply_changes(lines: List[str], paras: List[Para], blocks: Dict[int, Optiona
         if repl is not None and not repl:
             rejected.append({"pid": pid, "reason": "empty replacement (DELETE was not written)", "new": ""})
             continue
+        # Session 405: a numbered paragraph is prose only; block quotes are never numbered, so they
+        # stay where they are. Ps 81 arm D: Argon returned P6 with the block quote under it, and the
+        # guide printed the quotation twice. Drop such lines and say so.
+        quoted = [r for r in (repl or []) if r.lstrip().startswith(">")]
+        if quoted:
+            repl = [r for r in repl if not r.lstrip().startswith(">")]
+            rejected.append({"pid": pid, "reason": f"dropped {len(quoted)} block-quote line(s) from the "
+                             "replacement (block quotes are not part of a paragraph)", "new": "\n".join(quoted)})
+            if not repl:
+                continue
         bad = [r for r in (repl or []) if r.startswith("#") or _VERSE_HEADER.match(r) or r.startswith("---")]
         if bad:
             rejected.append({"pid": pid, "reason": f"replacement contains a heading or verse header: {bad[0][:80]}",

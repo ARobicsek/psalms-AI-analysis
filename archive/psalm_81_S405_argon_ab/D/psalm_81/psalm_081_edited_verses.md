@@ -42,8 +42,6 @@ In either case, the shofar blast of verse 4 is an auditory weapon meant to pierc
 
 > Great horns of the North wildly blowing.
 
-> Great horns of the North wildly blowing.
-
 In Tolkien's epic, the horns announce that the king's riders have arrived to save the city. In Psalm 81, the worshipers blow their horns expecting a royal triumph of their own—and instead summon the prosecutor of Sinai.
 
 **Verses 5–6**
@@ -191,8 +189,6 @@ Even Dinesen's ascetics, despite their vows, open their mouths and are transfigu
 > So I let him go in the stubbornness of their heart; let them walk in their own counsels.
 
 Look at the second verb in verse 12: לֹא־אָבָה לִי, "was not willing for Me," or "wanted nothing to do with Me." In Biblical Hebrew, the verb אבה, "to be willing" or "to consent," almost never appears in the affirmative (outside Isaiah 1:19, אִם־תֹּאבוּ וּשְׁמַעְתֶּם, טוּב הָאָרֶץ תֹּאכֵלוּ, "If you are willing and listen, you shall eat the good of the land," which pairs the same two verbs with eating!). Elsewhere, apart from a rhetorical question in Job 39:9, it appears with a negative particle to express a stone-faced refusal of desire. Most piercingly, in Deuteronomy 13:9, Moses uses these exact two negated verbs to command how Israel must treat a family member or close friend who tries to entice them to worship foreign gods: לֹא־תֹאבֶה לוֹ וְלֹא תִשְׁמַע אֵלָיו, "You shall not be willing for him, and you shall not listen to him." In Psalm 81:12, Israel treats YHWH the way the Torah told them to treat an idol-enticer. It is the maddening, impenetrable weapon of passive non-response that Herman Melville immortalized in *Bartleby, the Scrivener* (1853), where the clerk brings his employer's entire world to a standstill without ever raising his voice, simply by answering every request and every kindness with five quiet words:
-
-> "I would prefer not to."
 
 > "I would prefer not to."
 

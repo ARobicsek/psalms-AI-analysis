@@ -26,20 +26,6 @@ The instant that voice takes over, the grammar of possession flips. After חַג
 
 > "If only My people would listen **to Me**, if Israel would follow My paths!"
 
-> שְׁמַע עַמִּי וְאָעִידָה בָּךְ, יִשְׂרָאֵל אִם־תִּשְׁמַע־**לִי**. (v. 9)
-
-> וְלֹא־שָׁמַע עַמִּי לְקוֹלִי, וְיִשְׂרָאֵל לֹא־אָבָה **לִי**. (v. 12)
-
-> לוּ עַמִּי שֹׁמֵעַֽ **לִי**, יִשְׂרָאֵל בִּדְרָכַי יְהַלֵּכוּ. (v. 14)
-
->
-
-> "Hear, My people, and I will admonish you; Israel, if you would but listen **to Me**!"
-
-> "But My people would not listen to My voice, Israel would not obey **Me**."
-
-> "If only My people would listen **to Me**, if Israel would follow My paths!"
-
 Even the causative verbs (the Hebrew *Hiphil* stem, which expresses making something happen) change hands. In verse 2, the human leader gave Israel two causative commands to make noise: הַרְנִינוּ, "make a ringing cry," and הָרִיעוּ, "raise a shout." Once the oracle begins, almost every causative action belongs to God: הֲסִירוֹתִי, "I removed" the burden (v. 7), אַכְנִיעַ, "I would subdue" enemies (v. 15), and אַשְׂבִּיעֶךָ, "I would sate you" (v. 17). God leaves Israel only one *Hiphil* command of His own, beginning with the same *har-* sound as their opening הַרְנִינוּ (`har-NIY-nū`) and הָרִיעוּ (`hā-RIY-ʿū`): הַרְחֶב־פִּיךָ וַאֲמַלְאֵהוּ (`har-ḥev-PIY-khā wa-'a-mal-'Ē-hū`), "Open your mouth wide and I will fill it" (v. 11).
 
 Look at where that command sits. Verses 10 and 11 quote the opening of the Ten Commandments, but backwards. At Sinai (Exod 20:2–3), God first announces His liberating act—"I am YHWH your God who brought you out of the land of Egypt"—and then issues the prohibition: "You shall have no other gods before Me." Psalm 81 reverses the sequence. First comes the prohibition in verse 10: לֹא־יִהְיֶה בְךָ קֵל זָר, וְלֹא תִשְׁתַּחֲוֶה לְקֵל נֵכָר, "You shall have no foreign god in you, you shall not bow to an alien god." Then, in verse 11, comes the self-introduction: אָנֹכִי ה׳ אֱלֹקֶיךָ הַמַּעַלְךָ מֵאֶרֶץ מִצְרָיִם, הַרְחֶב־פִּיךָ וַאֲמַלְאֵהוּ, "I the LORD am your God who brought you out of the land of Egypt; open your mouth wide and I will fill it." By inverting the Decalogue, the poet makes God's liberation from Egypt lead not into a restriction, but into a feeding. God remembers the slave's body in verse 7: הֲסִירוֹתִי מִסֵּבֶל שִׁכְמוֹ, כַּפָּיו מִדּוּד תַּעֲבֹרְנָה, "I relieved his shoulder of the burden, his hands were freed from the basket." Having freed their shoulders from the heavy clay-carrying baskets of Egyptian forced labor, He asks for a different bodily posture now: not lips noisy with temple songs, but the gaping beak of a fledgling bird waiting to be fed.

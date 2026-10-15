@@ -24,13 +24,13 @@ if __name__ == '__main__' and __package__ is None:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
-    from src.utils.hebrew_punctuation import punctuate_biblical_quotations
+    from src.utils.hebrew_punctuation import end_hebrew_quotations, punctuate_biblical_quotations
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
     from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
-    from .hebrew_punctuation import punctuate_biblical_quotations
+    from .hebrew_punctuation import end_hebrew_quotations, punctuate_biblical_quotations
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
     from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
 
@@ -516,6 +516,56 @@ class DocumentGenerator:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
                         process(paragraph)
+
+    HEBREW_END_MARK_MIN_WORDS = 3
+
+    def _attach_hebrew_end_marks(self):
+        """Post-pass (Session 405): the `.` `?` `!` that closes a Hebrew QUOTATION joins the Hebrew,
+        so Word draws it at the Hebrew's end (its left edge) instead of its start.
+
+        In mixed prose `_segment_by_script` leaves a mark after Hebrew in the English run, which
+        is right for a term (`אֱלֹקִים, "God"`: the English sentence's comma) and wrong for a
+        quotation that ends its own sentence. The author, reading Ps 81 arm D: the lines
+        `שְׁמַע עַמִּי … תִּשְׁמַע־**לִי**. (v. 9)` "all show periods at the RIGHT side of the hebrew"
+        (Word's PDF: the period at x=244, right of שְׁמַע at 237; לִי at 79). The line-level
+        verdict cannot catch these: `(v. 9)` has Latin letters, and the bold לִי puts the period
+        in a different markdown fragment. So this works on the finished runs: a mark that
+        follows HEBREW_END_MARK_MIN_WORDS+ Hebrew words in consecutive RTL runs, and is followed
+        by a citation `(`, a quotation mark, or the end of the paragraph, moves into its own RTL
+        run. A mark followed by more English is the English sentence's and stays.
+        Runs after `_join_rtl_runs_across_whitespace`, so a stretch is a row of RTL runs."""
+        import copy
+
+        from docx.text.run import Run
+
+        def is_rtl(run):
+            rPr = run._element.find(ns.qn('w:rPr'))
+            return rPr is not None and rPr.find(ns.qn('w:rtl')) is not None
+
+        def hebrew_words(s: str) -> int:
+            return len([w for w in re.split(r'[\s־]+', s) if re.search(r'[א-ת]', w)])
+
+        def process(paragraph):
+            runs = [r for r in paragraph.runs if r.text]
+            stretch = ""
+            for i, run in enumerate(runs):
+                if is_rtl(run):
+                    stretch += run.text
+                    continue
+                m = re.match(r'([.?!])(.*)$', run.text, re.S)
+                if m and hebrew_words(stretch) >= self.HEBREW_END_MARK_MIN_WORDS:
+                    follow = (m.group(2) + "".join(r.text for r in runs[i + 1:])).lstrip()
+                    if not follow or follow[0] in '("“\'‘':
+                        new_r = copy.deepcopy(run._r)
+                        run._r.addprevious(new_r)
+                        mark = Run(new_r, run._parent)
+                        mark.text = m.group(1)
+                        self._mark_run_hebrew(mark)
+                        run.text = m.group(2)
+                stretch = ""
+
+        for paragraph in self.document.paragraphs:
+            process(paragraph)
 
     def _mirror_bold_to_complex_script(self):
         """Post-pass: mirror w:b onto w:bCs for every complex-script (Hebrew) run.
@@ -2034,13 +2084,14 @@ Methodological & Bibliographical Summary
         self.document.add_heading('Introduction', level=2)
         # Session 405: biblical quotations get the commas and full stops their accents call for
         # (hebrew_punctuation), before the divine-name converter changes the words it matches on.
-        intro_content = punctuate_biblical_quotations(self.intro_path.read_text(encoding='utf-8'))
+        intro_content = end_hebrew_quotations(punctuate_biblical_quotations(self.intro_path.read_text(encoding='utf-8')))
         # Use _add_commentary_with_bullets to properly handle blockquotes while preserving headers
         self._process_introduction_content(intro_content.strip(), style='BodySans')
 
         # 4. Add Verse-by-Verse Commentary
         self.document.add_heading('Verse-by-Verse Commentary', level=2)
-        verses_content = self.modifier.modify_text(punctuate_biblical_quotations(self.verses_path.read_text(encoding='utf-8')))
+        verses_content = self.modifier.modify_text(end_hebrew_quotations(punctuate_biblical_quotations(
+            self.verses_path.read_text(encoding='utf-8'))))
         parsed_verses = self._parse_verse_commentary(verses_content, psalm_text_data)
 
         for verse in parsed_verses:
@@ -2152,6 +2203,7 @@ Methodological & Bibliographical Summary
 
         # 6. Fix complex-script fonts (Arabic/Persian) and Save Document
         self._join_rtl_runs_across_whitespace()
+        self._attach_hebrew_end_marks()
         self._mirror_bold_to_complex_script()
         self._fix_complex_script_fonts()
         self.document.save(self.output_path)
