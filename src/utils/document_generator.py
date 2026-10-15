@@ -872,12 +872,39 @@ class DocumentGenerator:
         if not wrapped:
             while end < len(text) and text[end] in QUOTES:
                 end += 1
+        # Session 405: a quotation's own end mark (`X. "Translation."`, from
+        # hebrew_punctuation.end_hebrew_quotations) belongs to the Hebrew block; left in
+        # `after`, it opened the next line (Ps 81 arm D, the author: "it would be better if the
+        # periods came inline with the hebrew rather than on the NEXT line").
+        # A bold ending (`בְּמוֹעֲצוֹתֵי**הֶם**.`) leaves its closing `**` past the match: take it
+        # first, when the span opened one, so the mark is reached.
+        if text[end:end + 2] == '**' and text[match.start():end].count('**') % 2 == 1:
+            end += 2
+        if end < len(text) and text[end] in '.?!':
+            end += 1
         hebrew = text[match.start():end].strip()
 
         after = text[end:].lstrip()
+        # Session 405: a quotation wrapped in emphasis and/or parentheses — `(*X…Y*), celebrating`
+        # in the Ps 81 writer's reasoning — left `(*` closing the line before the block and `*)`
+        # opening the line after it, printed literally. A quotation set on its own line needs
+        # no italics: drop a matching emphasis pair; keep a matching pair of parentheses with
+        # the Hebrew.
+        for mk in ('**', '*'):
+            if before.endswith(mk) and after.startswith(mk):
+                before, after = before[:-len(mk)].rstrip(), after[len(mk):].lstrip()
+                break
+        if before.endswith('(') and after.startswith(')'):
+            before, after = before[:-1].rstrip(), after[1:].lstrip()
+            hebrew = '(' + hebrew + ')'
         # Strip orphaned leading comma/punctuation from the continuation text
         # (the Hebrew was inline, so the original often had ", translation...")
         after = re.sub(r'^[,;:]\s*', '', after)
+        # A parenthesis that opens before the Hebrew and closes after its translation —
+        # `Tishri (אֵיזֶהוּ חַג…, "On which festival…?"), the poem` — would dangle at the end of
+        # the line before the block; it opens the translation instead.
+        if before.endswith('(') and after:
+            before, after = before[:-1].rstrip(), '(' + after
         return (before, hebrew, after)
 
     def _add_hebrew_block_paragraph(self, hebrew_text: str, style: str = 'Normal', font_name: str = 'Times New Roman'):

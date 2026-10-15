@@ -201,3 +201,35 @@ def test_a_term_or_a_sentence_going_on_in_english_keeps_its_english_mark():
                   [("the line שְׁמַע עַמִּי וְאָעִידָה. Then the poem", False)]):  # English follows
         p = _gen_with_paragraph(parts)
         assert not any(r.text.startswith(".") and _is_rtl(r) for r in p.runs)
+
+
+def test_a_long_quotations_end_mark_stays_with_its_hebrew_block():
+    """Session 405, Ps 81 arm D: a 6+-word quotation is lifted into its own RTL paragraph; its
+    period (`X. "Translation."`) opened the NEXT line. It belongs to the Hebrew block."""
+    gen = DocumentGenerator.__new__(DocumentGenerator)
+    s = ('First comes the prohibition in verse 10: לֹא־יִהְיֶה בְךָ קֵל זָר, וְלֹא תִשְׁתַּחֲוֶה לְקֵל נֵכָר. '
+         '"You shall have no foreign god in you." Then')
+    before, hebrew, after = gen._split_long_hebrew_block(s)
+    assert hebrew.endswith("נֵכָר.") and after.startswith('"You shall')
+    comma = s.replace('נֵכָר. "', 'נֵכָר, "')                 # the pre-S405 shape: comma dropped
+    before, hebrew, after = gen._split_long_hebrew_block(comma)
+    assert hebrew.endswith("נֵכָר") and after.startswith('"You shall')
+    bold = ('verse 13: וָאֲשַׁלְּחֵהוּ בִּשְׁרִירוּת לִבָּם, יֵלְכוּ בְּמוֹעֲצוֹתֵי**הֶם**. '
+            '"So I let him go." As Meiri')
+    before, hebrew, after = gen._split_long_hebrew_block(bold)
+    assert hebrew.endswith("בְּמוֹעֲצוֹתֵי**הֶם**.") and after.startswith('"So I let')
+
+
+def test_a_wrapped_long_quotation_leaves_no_stray_markers_behind():
+    """Session 405: `(*X…Y*), celebrating` (the Ps 81 writer's reasoning) printed `*), celebrating`."""
+    gen = DocumentGenerator.__new__(DocumentGenerator)
+    s = ("verses 4 and 5 of Psalm 81 (*תִּקְעוּ בַחֹדֶשׁ שׁוֹפָר... כִּי חֹק לְיִשְׂרָאֵל הוּא*), "
+         "celebrating the biblical mandate")
+    before, hebrew, after = gen._split_long_hebrew_block(s)
+    assert before == "verses 4 and 5 of Psalm 81"
+    assert hebrew.startswith("(תִּקְעוּ") and hebrew.endswith("הוּא)") and "*" not in hebrew
+    assert after == "celebrating the biblical mandate"
+    open_paren = ('the first of Tishri (אֵיזֶהוּ חַג שֶׁהַחֹדֶשׁ מִתְכַּסֶּה בּוֹ הֱוֵי אוֹמֵר, '
+                  '"Which festival is it?"), the poem')
+    before, hebrew, after = gen._split_long_hebrew_block(open_paren)
+    assert before == "the first of Tishri" and after.startswith('("Which festival is it?"), the poem')
