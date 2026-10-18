@@ -1,0 +1,222 @@
+{
+  "gemini-4-argon": {
+    "call_count": 4,
+    "input_tokens": 218587,
+    "output_tokens": 74333,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 349173,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.437174,
+      "output_cost": 0.7433299999999999,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.034917300000000005,
+      "total_cost": 1.2154213
+    }
+  },
+  "gpt-5.1": {
+    "call_count": 2,
+    "input_tokens": 8141,
+    "output_tokens": 9951,
+    "thinking_tokens": 8070,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.010176250000000001,
+      "output_cost": 0.09951,
+      "thinking_cost": 0.08070000000000001,
+      "cache_cost": 0.0,
+      "total_cost": 0.19038625
+    }
+  },
+  "gpt-6-sol@flex": {
+    "call_count": 1,
+    "input_tokens": 156,
+    "output_tokens": 42573,
+    "thinking_tokens": 32696,
+    "cache_read_tokens": 1312712,
+    "cache_write_tokens": 216722,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.000156,
+      "output_cost": 0.212865,
+      "thinking_cost": 0.16348000000000001,
+      "cache_cost": 0.40217369999999997,
+      "total_cost": 0.7786746999999999
+    }
+  },
+  "gpt-6-luna@flex": {
+    "call_count": 1,
+    "input_tokens": 123677,
+    "output_tokens": 4637,
+    "thinking_tokens": 8327,
+    "cache_read_tokens": 13545,
+    "cache_write_tokens": 3133,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.00618385,
+      "output_cost": 0.00115925,
+      "thinking_cost": 0.00208175,
+      "cache_cost": 0.0002635375,
+      "total_cost": 0.0096883875
+    }
+  },
+  "gpt-5.4": {
+    "call_count": 1,
+    "input_tokens": 22708,
+    "output_tokens": 1216,
+    "thinking_tokens": 16571,
+    "cache_read_tokens": 2816,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.05677,
+      "output_cost": 0.01824,
+      "thinking_cost": 0.24856499999999998,
+      "cache_cost": 0.000704,
+      "total_cost": 0.32427899999999993
+    }
+  },
+  "total_cost": 2.5584496374999994,
+  "events": [],
+  "charges": [
+    {
+      "label": "web search (OpenAI, $10 per 1,000)",
+      "usd": 0.04,
+      "model": "gpt-6-luna",
+      "detail": "4 searches"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "synthesis discovery",
+      "attempt": 1,
+      "models": {},
+      "charges": [],
+      "cost_usd": 0
+    },
+    {
+      "stage": "master writer (forest: essay call + verse call)",
+      "attempt": 1,
+      "models": {
+        "gemini-4-argon": {
+          "call_count": 3,
+          "input_tokens": 194938,
+          "output_tokens": 44815,
+          "thinking_tokens": 0,
+          "cache_read_tokens": 349173,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.872943,
+          "promo_through": "2026-11-30",
+          "cost_usd_at_durable_rates": 1.745887
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.872943
+    },
+    {
+      "stage": "citation verification (SQL check $0; false-positive filter)",
+      "attempt": 1,
+      "models": {
+        "gpt-5.1": {
+          "call_count": 1,
+          "input_tokens": 4075,
+          "output_tokens": 5101,
+          "thinking_tokens": 4236,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.098464
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.098464
+    },
+    {
+      "stage": "fact check",
+      "attempt": 1,
+      "models": {
+        "gpt-6-sol@flex": {
+          "call_count": 1,
+          "input_tokens": 156,
+          "output_tokens": 42573,
+          "thinking_tokens": 32696,
+          "cache_read_tokens": 1312712,
+          "cache_write_tokens": 216722,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.778675
+        },
+        "gpt-6-luna@flex": {
+          "call_count": 1,
+          "input_tokens": 123677,
+          "output_tokens": 4637,
+          "thinking_tokens": 8327,
+          "cache_read_tokens": 13545,
+          "cache_write_tokens": 3133,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.009688
+        }
+      },
+      "charges": [
+        {
+          "label": "web search (OpenAI, $10 per 1,000)",
+          "usd": 0.04,
+          "model": "gpt-6-luna",
+          "detail": "4 searches"
+        }
+      ],
+      "cost_usd": 0.828363
+    },
+    {
+      "stage": "writer revision",
+      "attempt": 1,
+      "models": {
+        "gemini-4-argon": {
+          "call_count": 1,
+          "input_tokens": 23649,
+          "output_tokens": 29518,
+          "thinking_tokens": 0,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.342478,
+          "promo_through": "2026-11-30",
+          "cost_usd_at_durable_rates": 0.684956
+        },
+        "gpt-5.1": {
+          "call_count": 1,
+          "input_tokens": 4066,
+          "output_tokens": 4850,
+          "thinking_tokens": 3834,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.091923
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.434401
+    },
+    {
+      "stage": "copy editor",
+      "attempt": 1,
+      "models": {
+        "gpt-5.4": {
+          "call_count": 1,
+          "input_tokens": 22708,
+          "output_tokens": 1216,
+          "thinking_tokens": 16571,
+          "cache_read_tokens": 2816,
+          "cache_write_tokens": 0,
+          "cache_write_1h_tokens": 0,
+          "cost_usd": 0.324279
+        }
+      },
+      "charges": [],
+      "cost_usd": 0.324279
+    }
+  ]
+}

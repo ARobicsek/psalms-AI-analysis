@@ -9,6 +9,36 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 406 (2026-10-16): Ps 82 head-to-head, Opus 5.5 (A, production) vs Gemini 4 Argon (B) as the writer; Argon's error rate at Opus's level ($9.78)
+
+**The ask.** The author: "please run and keep and eye on psalm 82, as an A B test where A uses opus 5.5 for all the master writer functions, and B uses argon for the same (as we did in the last session)." No code changes this session.
+
+**Inputs.** `data/deep_research/psalm_082_deep_research.txt` and `_check.txt` were in place (2026-10-14); the pipeline's cleanup ran inside the bundle step.
+
+**Arm A** (production `output/psalm_82/`, log `archive/psalm_82_S406_opus_argon_ab/A_run.log`): `python scripts/run_enhanced_pipeline.py 82` (defaults: fact check, revision, reception, Targum ON). No errors. Bundle 316K trimmed (reception 13 passages, 12.9K chars); SD $2.60 (652 s, out 66.6K, cache write 216K, "cache shared with the writer: yes"); writer $0.90: essay read 216,009 from SD's cache and wrote only the 24K tail, verses read 240,045, wrote 0 (cache exact); essay edit NOT triggered; citation check 8 flags, all filtered; fact check 168 claims, 21 contradicted, 4 unverifiable, 2 web searches, $0.52 (flex); Opus revision 21/21, 14 ¶, $0.33, re-check clean; copy editor $0.31; one post-copy-edit citation flag, a false alarm: the copy editor removed the inner quotes from Rashi's עַל דֶּרֶךְ "כִּי הַשֹּׁחַד יְעַוֵּר", so the checker read Rashi's lead-in as part of Exod 23:8. **Total $7.22** (echoes $0.93).
+
+**Arm B** (`archive/psalm_82_S406_opus_argon_ab/B/psalm_82/`, log `B/run.log`): A's macro, micro_v2, research_v2, synthesis_discovery, liturgy_catalogue, liturgy_set_aside and `echoes/` copied; started as soon as A's writer finished (in parallel with A's fact check): `PSALMS_OUTPUT_ROOT=archive/psalm_82_S406_opus_argon_ab/B … --master-editor-model gemini-4-argon --skip-macro --skip-micro --reuse-synthesis-discovery --skip-lit-echoes --fact-check --writer-revision --delay 0`. Writer $0.87: essay $0.47 (167.8K input, out 13.3K incl. 7.7K thinking; shape warning ~2,860 words), essay edit triggered (2,838 words, 16% long → 2,618, 3%; $0.15), verses $0.25 (out 20.9K incl. 10.8K thinking; far below the 65,536 cap). Citation check $0.10; fact check 205 claims, 23 contradicted, 11 unverifiable, $0.83; Argon revision 23/23, 19 ¶, $0.43, **one block quote dropped by the S405 guard** (P52: 11 `>` lines; the Aleinu-attribution fix kept); copy editor $0.32; citations clean. **Writer-onward $2.56** (A's equivalent $2.12).
+
+**Measured** (`archive/psalm_82_S406_opus_argon_ab/measure.py`, run on Ps 81 B and D too for a like-for-like scale; its numbers differ from S405's table, which used another count):
+
+| copy-edited guide | 81 B Opus | 81 D Argon | 82 A Opus | 82 B Argon |
+|---|---|---|---|---|
+| Essay words / mean sentence / 40+ | 1,859 / 17.5 / 4% | 2,375 / 23.2 / 6% | 1,855 / 17.5 / 5% | 2,241 / 24.2 / 9% |
+| Notes words / mean sentence / 40+ | 5,463 / 18.5 / 7% | 6,061 / 32.3 / 33% | 3,024 / 17.6 / 4% | 3,457 / 30.7 / 26% |
+| Hebrew words | 586 | 753 | 418 | 583 |
+| "The introduction showed…" in notes | 0 | 5 | 2 | 1 |
+| Absolutes / 1,000 words (raw writer output) | 8.0 | 8.4 | 8.2 | 9.1 |
+
+Both PDFs 14 pp.
+
+**Fact check: the finding.** Contradictions per 100 claims: A 12.5, B 11.2 (Ps 81: Opus 5.4, Argon 12.6–16.6). The few-absolutes line (S405, un-run until now) is not shown to be the cause: the crude count of absolutes rose slightly. About half the contradictions are in BOTH arms, so they come from the shared dossier: LXX Deut 32:8 read as "sons of God" (Brenton's Greek: "angels of God"), Avot 3's three as a court (a study group), Reish Lakish's no-children line taken as the Talmud's conclusion (the sugya revises it), Irenaeus as the first patristic user (Justin), "נִצָּב alone" marks the singular (יִשְׁפֹּט too), Radak's "perhaps" Jehoshaphat made definite. A only: the Wednesday psalm / Ps 94 sequence (three claims), baraita for mishnah, Alshich on Selah (twice), the Targum's two words, Malbim's verse. B only: the far associations (the Mozilla/Microsoft/Google certificate revocation, Yassib in the Keret epic), יַצֵּב from יצב not נצב, a צדק verb in Leviticus, commentator overreads (Rashi ×2, Meiri, Malbim), Levi read into Halevi/Radak, Numbers 18:20 to Aaron, Aleinu's date.
+
+**Delivered**: `Documents/Psalm study guide/Psalm 82 - A test (Opus 5.5).docx` and `Psalm 82 - B test (Gemini 4 Argon).docx` (+ PDFs). Production `output/psalm_82/` is arm A.
+
+**Session spend $9.78** (A $7.22, B $2.56).
+
+---
+
 ## Session 405 (2026-10-14/15): Gemini 4 Argon as the writer (Ps 81 arms C, D); the engaging teacher, clear sentences, few absolutes (`S405_EDITS`); an essay editing turn; biblical quotations punctuated from their accents ($7.13)
 
 **The ask.** The author: "is there a API avail of Gemini 4 argon? I have it as of today through its webpage. If so I'd love to test it as the writer agent for ps 81." Then, mid-run: "please run with all writer steps (including post fact check revisions) done by argon, and include the fact check, citation check, etc and final document generation."
