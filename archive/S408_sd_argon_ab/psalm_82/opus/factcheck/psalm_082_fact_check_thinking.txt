@@ -1,0 +1,61 @@
+## local 1/3 [Introduction › OBSERVATION 1 … Introduction › OBSERVATION 8] (gpt-6-sol)
+
+**Creating a plan for research**
+
+I need to make a time budget, especially since there are large claims to consider, around 45. I should get tools for three counts, specifically prayers, maamadot, and Tosefta pairs. There are verses missing at 74, 79, and 94, and I'll need a morphological search for opening those. If I have specific doubts about Ugaritic, I’ll need web access to verify the lexicon roots in my research. It sounds like I’ll work in batches.
+
+**Checking for accurate paraphrase**
+
+I've found a major error in my work related to the phrase "how long" — it doesn't match with "עד מתי." I need to retrieve the text from liturgy to verify the full sequence. Also, I'll conduct a specific search in the Yerushalmi to locate the correct citation or the relevant section. It’s essential that I get this accurate, so I’m focusing on clarifying the details!
+
+**Searching for Seder liturgy passages**
+
+I need to confirm the exact form of Ps 58:2 is indeed תִּשְׁפְּטוּ. Now I want to find a passage from the Seder liturgy that relates to Joel and Deuteronomy. It might take some digging, but I’m ready to explore different sources to locate the right texts. This should give me the context I need to bridge these passages together effectively. Let's see what I can find!
+
+**Examining the scope of lemmas**
+
+I’m looking into the references regarding six lemmas in Psalm 72. It appears it may not be accurate since Psalm 72 contains more than six lemmas, at least eight based on my understanding. I want to ensure I'm counting correctly and not getting mixed up with vague details. I should clarify the range that "six lemmas" covers and check the guide, as it seems to indicate a connection to other texts, including the entire Psalm.
+
+## local 2/3 [Introduction › OBSERVATION 9 … Introduction › OBSERVATION 19] (gpt-6-sol)
+
+**Budgeting time for research**
+
+I need to figure out the time budget for this task. The focus is on verifying tools like Targum, Aquila, Shimush, and examining forms for uniqueness. I have to check resources like the Sanhedrin and 11Q. The user wants every checkable fact, aiming for about 35-45 records. It sounds like I should perform parallel searches to gather all needed data efficiently. Let's ensure everything is accurate and thorough!
+
+**Deciding on format for excerpts**
+
+I need to decide whether to list the anchors as bullet points or sentences. The user has requested an excerpt that includes sentences, where the anchors contain factual information and quotation lists. I want to confirm my research with BDB excerpts and make sure to include references like "BDB lists עולות Ps58:3." It’s important that I get this right to meet the user’s needs effectively.
+
+## local 3/3 [Introduction › OBSERVATION 20 … Introduction › OBSERVATION 27] (gpt-6-sol)
+
+**Evaluating biblical texts**
+
+I'm considering the Bible's idea of gods assigned to nations, but the wording seems vague and subjective. The phrase "most explicit" doesn't sit right, so I might skip that. Looking at Deuteronomy 32:8, it suggests a distinction concerning patron gods and the nation of Israel. The Septuagint mentions "angels of God" as a variant, which adds another layer. I'm wondering about the significance in how these texts are interpreted.
+
+## gather 1/1 (gpt-6-luna)
+
+**Planning fact-checking process**
+
+I need to make sure I follow the output JSON schema for fact-checking. The user wants URLs and verbatim quotes, so I’ll search for each claim with a maximum of one search per claim. Hmm, can I combine searches? I think I can issue seven queries in one call. I'll need to gather source snippets from direct primary sources and provide the exact passages and URLs. Time to start searching!
+
+**Clarifying the citation issue**
+
+I’m looking into claim 5, and it seems that the cited source mentions chapter 63 and possibly numbers like 5 instead of 82. That makes me wonder if the claim might be incorrect. I need to specifically find where Psalm 82 is referenced in the PDF, so I’ll use a search function to look for “82.” This should help me clarify the actual content and see if any adjustments are necessary!
+
+**Exploring scholarly sources**
+
+I’m considering using a Google Books source, but I wonder if a scholarly PDF might show different translations. The claim I'm looking into seems to have two parts, but I notice my source only supports one. I might need to rely on the primary source from Sefaria instead. I should also check the bible.com version of the Peshitta and ensure I'm using credible sources. The extracted quote needs to be accurate, reflecting the information I gather. I'll keep track of any discrepancies for the user.
+
+**Gathering source quotes**
+
+I realize I need to include a parenthetical label from the page that clarifies it’s not from the Mishnah but from liturgy. I’ll add a second source from Princeton that discusses its origins in Temple days, which helps refute medieval classifications. I need to ensure I get the exact URL from YIVO for my next claim and note my quotes verbatim. I’ll format everything correctly with valid JSON, remembering to escape any quotes properly. Each detail matters for accuracy!
+
+**Structuring the output**
+
+I need to make sure the output follows a strict schema, specifically an array of claims. Each claim should be an object containing the necessary fields, including a sources array with objects for title, URL, and quote, plus an optional note for additional context. It’s crucial to formulate this in valid JSON without any markdown formatting. I’ll take care to double-check everything so the structure is clear and correct!
+
+## judge 1/1 (gpt-6-sol)
+
+**Ensuring diligence in research**
+
+I need to be careful here. It seems there's an unverified quote that I can't find on the page, which means there's no solid evidence for it. I could consider using the get_text function for "Shimush Tehillim 82." I believe that might work with Sefaria. Let's see if I can run these queries in parallel to gather more information effectively!

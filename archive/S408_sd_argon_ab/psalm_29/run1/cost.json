@@ -1,0 +1,20 @@
+{
+  "gemini-4-argon": {
+    "call_count": 1,
+    "input_tokens": 173079,
+    "output_tokens": 44310,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.346158,
+      "output_cost": 0.44310000000000005,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.0,
+      "total_cost": 0.789258
+    }
+  },
+  "total_cost": 0.789258,
+  "events": []
+}

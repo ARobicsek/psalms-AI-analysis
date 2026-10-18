@@ -1,0 +1,2046 @@
+{
+  "meta": {
+    "psalm": 29,
+    "model": "gpt-6-sol",
+    "effort": "high",
+    "web_searches": 1,
+    "function_calls": 191,
+    "cost_usd": 0.6698202125,
+    "token_cost_usd": 0.6598202125,
+    "search_cost_usd": 0.01,
+    "usage": {
+      "input": 42936,
+      "cached": 1287524,
+      "cache_write": 215777,
+      "output": 32831,
+      "reasoning": 23379
+    },
+    "seconds": 652,
+    "chunks": [
+      "Introduction › OBSERVATION 1 … Introduction › OBSERVATION 4",
+      "Introduction › OBSERVATION 5 … Introduction › OBSERVATION 8",
+      "Introduction › OBSERVATION 9 … Introduction › OBSERVATION 12",
+      "Introduction › OBSERVATION 13"
+    ],
+    "stages": {
+      "local": {
+        "claims": 104,
+        "needs_web": 5,
+        "contradicted": 30
+      },
+      "per_stage": {
+        "local": {
+          "model": "gpt-6-sol",
+          "usage": {
+            "input": 99,
+            "cached": 1279443,
+            "cache_write": 210375,
+            "output": 30428,
+            "reasoning": 19549
+          },
+          "billed": {
+            "gpt-6-sol@flex": {
+              "input": 99,
+              "cached": 1279443,
+              "cache_write": 210375,
+              "output": 30428,
+              "reasoning": 19549
+            }
+          },
+          "searches": 0,
+          "tools": {
+            "get_text": 34,
+            "search_research": 57,
+            "search_liturgy": 13,
+            "get_verse": 56,
+            "search_tanakh": 16,
+            "get_lxx": 12
+          },
+          "cost_usd": 0.6409
+        },
+        "gather": {
+          "model": "gpt-6-luna",
+          "usage": {
+            "input": 42831,
+            "cached": 4515,
+            "cache_write": 1031,
+            "output": 1227,
+            "reasoning": 3046
+          },
+          "billed": {
+            "gpt-6-luna@flex": {
+              "input": 42831,
+              "cached": 4515,
+              "cache_write": 1031,
+              "output": 1227,
+              "reasoning": 3046
+            }
+          },
+          "searches": 1,
+          "tools": {},
+          "cost_usd": 0.0133
+        },
+        "judge": {
+          "model": "gpt-6-sol",
+          "usage": {
+            "input": 6,
+            "cached": 3566,
+            "cache_write": 4371,
+            "output": 1176,
+            "reasoning": 784
+          },
+          "billed": {
+            "gpt-6-sol@flex": {
+              "input": 6,
+              "cached": 3566,
+              "cache_write": 4371,
+              "output": 1176,
+              "reasoning": 784
+            }
+          },
+          "searches": 0,
+          "tools": {
+            "get_verse": 3
+          },
+          "cost_usd": 0.0156
+        }
+      },
+      "per_model": {
+        "gpt-6-sol@flex": {
+          "usage": {
+            "input": 105,
+            "cached": 1283009,
+            "cache_write": 214746,
+            "output": 31604,
+            "reasoning": 20333
+          },
+          "searches": 0,
+          "cost_usd": 0.6565
+        },
+        "gpt-6-luna@flex": {
+          "usage": {
+            "input": 42831,
+            "cached": 4515,
+            "cache_write": 1031,
+            "output": 1227,
+            "reasoning": 3046
+          },
+          "searches": 1,
+          "cost_usd": 0.0133
+        }
+      },
+      "gemini_search_queries": 0,
+      "gemini_search_cost_if_paid": 0.0
+    },
+    "verdicts": {
+      "supported": 65,
+      "contradicted": 31,
+      "unverifiable": 8
+    }
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "location": "Observation 1 — Claim",
+      "sentence": "Across the psalm's 4 + 10 + 4 arrangement of the eighteen occurrences of `יְהוָה`, the grammatical role of the divine name and the distribution of the preposition `לְ` invert completely between the outer frames.",
+      "claim": "Divine names follow a 4 + 10 + 4 distribution",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C2",
+      "location": "Observation 1 — Claim",
+      "sentence": "In vv. 1–2, all four occurrences of the name carry the dative prefix `לַיהוָה` as the indirect object of tribute imperatives (`הָבוּ`, `הִשְׁתַּחֲווּ`), while `יְהוָה` is never a verbal subject; across the storm of vv. 3–9, the prefix `לְ` disappears entirely (`0x`) as `יְהוָה` moves from construct (`קוֹל יְהוָה`, 7x) into unprefixed verbal agency in the B-cola of the three staircases (vv. 3c, 5b, 8b); and in vv. 10–11, `קוֹל` disappears (`0x`), `יְהוָה` stands four times as the unprefixed nominative subject of finite verbs (fronted at the head of the colon in 10a, 11a, 11b), and the prefix `לְ` returns three times—now attached to the cosmos, eternity, and Israel (`לַמַּבּוּל`, `לְעוֹלָם`, `לְעַמּוֹ`).",
+      "claim": "Four divine names have לַ in verses 1–2",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C3",
+      "location": "Observation 1 — Claim",
+      "sentence": "In vv. 1–2, all four occurrences of the name carry the dative prefix `לַיהוָה` as the indirect object of tribute imperatives (`הָבוּ`, `הִשְׁתַּחֲווּ`), while `יְהוָה` is never a verbal subject; across the storm of vv. 3–9, the prefix `לְ` disappears entirely (`0x`) as `יְהוָה` moves from construct (`קוֹל יְהוָה`, 7x) into unprefixed verbal agency in the B-cola of the three staircases (vv. 3c, 5b, 8b); and in vv. 10–11, `קוֹל` disappears (`0x`), `יְהוָה` stands four times as the unprefixed nominative subject of finite verbs (fronted at the head of the colon in 10a, 11a, 11b), and the prefix `לְ` returns three times—now attached to the cosmos, eternity, and Israel (`לַמַּבּוּל`, `לְעוֹלָם`, `לְעַמּוֹ`).",
+      "claim": "Verses 3–9 have seven קוֹל יְהוָה phrases",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C4",
+      "location": "Observation 1 — Claim",
+      "sentence": "In vv. 1–2, all four occurrences of the name carry the dative prefix `לַיהוָה` as the indirect object of tribute imperatives (`הָבוּ`, `הִשְׁתַּחֲווּ`), while `יְהוָה` is never a verbal subject; across the storm of vv. 3–9, the prefix `לְ` disappears entirely (`0x`) as `יְהוָה` moves from construct (`קוֹל יְהוָה`, 7x) into unprefixed verbal agency in the B-cola of the three staircases (vv. 3c, 5b, 8b); and in vv. 10–11, `קוֹל` disappears (`0x`), `יְהוָה` stands four times as the unprefixed nominative subject of finite verbs (fronted at the head of the colon in 10a, 11a, 11b), and the prefix `לְ` returns three times—now attached to the cosmos, eternity, and Israel (`לַמַּבּוּל`, `לְעוֹלָם`, `לְעַמּוֹ`).",
+      "claim": "Verses 10–11 have four unprefixed divine subjects",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C5",
+      "location": "Observation 1 — Claim",
+      "sentence": "In vv. 1–2, all four occurrences of the name carry the dative prefix `לַיהוָה` as the indirect object of tribute imperatives (`הָבוּ`, `הִשְׁתַּחֲווּ`), while `יְהוָה` is never a verbal subject; across the storm of vv. 3–9, the prefix `לְ` disappears entirely (`0x`) as `יְהוָה` moves from construct (`קוֹל יְהוָה`, 7x) into unprefixed verbal agency in the B-cola of the three staircases (vv. 3c, 5b, 8b); and in vv. 10–11, `קוֹל` disappears (`0x`), `יְהוָה` stands four times as the unprefixed nominative subject of finite verbs (fronted at the head of the colon in 10a, 11a, 11b), and the prefix `לְ` returns three times—now attached to the cosmos, eternity, and Israel (`לַמַּבּוּל`, `לְעוֹלָם`, `לְעַמּוֹ`).",
+      "claim": "Prefixed לְ is absent in verses 3–9",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C6",
+      "location": "Observation 1 — Anchors",
+      "sentence": "`לַיהוָה` occurs 4x in vv. 1–2 and 0x in vv. 3–11; unprefixed `יְהוָה` occurs 14x in vv. 3–5, 7–11 (Distributional SQL table: Repeated forms & Divine-name tally).",
+      "claim": "Four prefixed and fourteen unprefixed divine names",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C7",
+      "location": "Observation 1 — Anchors",
+      "sentence": "Outside the superscription `לְדָוִד`, the prefix `לְ` occurs 4x in vv. 1–2 (`לַיהוָה`), 0x in vv. 3–9 (`לַהֲבוֹת` in v. 7 has a root lamed from `להב`), and 3x in vv. 10–11 (`לַמַּבּוּל` v. 10a, `לְעוֹלָם` v. 10b, `לְעַמּוֹ` v. 11a) (Psalm text, vv. 1–11).",
+      "claim": "Prepositional לְ occurs four, zero, three times",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C8",
+      "location": "Observation 1 — Anchors",
+      "sentence": "In v. 1, `הָבוּ` comes from the defective root `יהב` (attested in Biblical Hebrew only in Qal imperatives demanding that something be handed over), whereas v. 11 switches to `יִתֵּן` from `נתן` for YHWH's bestowal of `עֹז` upon `לְעַמּוֹ` (Verse-Level Notes, vv. 1, 11; BDB `יהב`).",
+      "claim": "Biblical Hebrew יהב verb occurs only as imperatives",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C9",
+      "location": "Observation 1 — Novelty",
+      "sentence": "Commentators note the 4 + 10 + 4 count of `יְהוָה` and the `עֹז` inclusio separately, without observing that all four `יְהוָה` in vv. 1–2 are dative `לַיהוָה`, that `לְ` vanishes in vv. 3–9, and that vv. 10–11 convert `יְהוָה` into a fronted nominative while transferring `לְ` to `לַמַּבּוּל`, `לְעוֹלָם`, and `לְעַמּוֹ`.",
+      "claim": "Commentators note the specific 4 + 10 + 4 count",
+      "claim_type": "commentator_reading",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "The supplied entries note eighteen divine-name mentions, but do not establish that commentators note their specific 4 + 10 + 4 distribution.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C10",
+      "location": "Observation 2 — Claim",
+      "sentence": "All four occurrences of `כָּבוֹד` remain in the heavenly and temple sphere (`כָּבוֹד וָעֹז` v. 1c, `כְּבוֹד שְׁמוֹ` v. 2a, `אֵל־הַכָּבוֹד` v. 3b), culminating when the palace assembly answers the opening summons by crying only the first word of the pair, `כָּבוֹד` (`וּבְהֵיכָלוֹ כֻּלּוֹ אֹמֵר כָּבוֹד`, v. 9c); the second word, `עֹז`, is withheld from the entire body of the storm (where v. 4a substitutes `בַּכֹּחַ`) and from the temple cry of v. 9c so that YHWH can hand it down to His people on earth in v. 11a (`יְהוָה עֹז לְעַמּוֹ יִתֵּן`), paired no longer with `כָּבוֹד` but with `שָׁלוֹם`.",
+      "claim": "כָּבוֹד occurs four times; עֹז frames psalm",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C11",
+      "location": "Observation 2 — Anchors",
+      "sentence": "`כָּבוֹד` / `הַכָּבוֹד` occurs 4x (vv. 1, 2, 3, 9c) and 0x in vv. 10–11; `עֹז` occurs 2x (v. 1c and v. 11a) and 0x in vv. 2–10 (Psalm text; Structural Overview).",
+      "claim": "Specified כבוד and עז occurrence counts",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C12",
+      "location": "Observation 2 — Anchors",
+      "sentence": "Every other noun demanded of the worshippers in vv. 1–2 (`כָּבוֹד` in vv. 1–2, `הַדְרַת` in v. 2b, `קֹדֶשׁ` in v. 2b) reappears inside the storm of vv. 3–9 (`אֵל־הַכָּבוֹד` v. 3b, `בֶּהָדָר` v. 4b, `קָדֵשׁ` v. 8b, `כָּבוֹד` v. 9c), whereas v. 4a uses `בַּכֹּחַ` rather than `בָּעֹז` (Verse-Level Notes, vv. 2, 4, 8, 9).",
+      "claim": "Verse 8 repeats verse 2’s noun קֹדֶשׁ",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Psalms 29:2, 29:8, Masoretic text",
+          "quote": "בְּהַדְרַת־קֹדֶשׁ ... מִדְבַּר קָדֵשׁ",
+          "url": null
+        }
+      ],
+      "explanation": "קֹדֶשׁ in verse 2 is the noun ‘holiness’; קָדֵשׁ in verse 8 is the place-name Kadesh. They are related in form, but the noun does not reappear there.",
+      "suggested_fix": "Say that `קֹדֶשׁ` in v. 2b is echoed by the related place-name `קָדֵשׁ` in v. 8b.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C13",
+      "location": "Observation 3 — Claim",
+      "sentence": "The prose direct-object marker `אֶת־` and the Piel verb stem each occur only twice in Psalm 29, and they land on the exact same two clauses: `וַיְשַׁבֵּר יְהוָה אֶת־אַרְזֵי הַלְּבָנוֹן` (v. 5b) and `יְהוָה יְבָרֵךְ אֶת־עַמּוֹ בַשָּׁלוֹם` (v. 11b).",
+      "claim": "אֶת־ occurs only in verses 5 and 11",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C14",
+      "location": "Observation 3 — Claim",
+      "sentence": "The prose direct-object marker `אֶת־` and the Piel verb stem each occur only twice in Psalm 29, and they land on the exact same two clauses: `וַיְשַׁבֵּר יְהוָה אֶת־אַרְזֵי הַלְּבָנוֹן` (v. 5b) and `יְהוָה יְבָרֵךְ אֶת־עַמּוֹ בַשָּׁלוֹם` (v. 11b).",
+      "claim": "Piel forms occur only in verses 5 and 11",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C15",
+      "location": "Observation 3 — Claim",
+      "sentence": "Both verses open in colon A with a Qal verb lacking `אֶת־` (`שֹׁבֵר אֲרָזִים` // `עֹז לְעַמּוֹ יִתֵּן`) and escalate in colon B to `יְהוָה` + Piel verb + `אֶת־` + definite object, with a phonetic echo between the two Piel forms (`way-shab-BĒR` from `שׁבר` and `yə-vā-RĒKH` from `ברך`).",
+      "claim": "Both A-cola have Qal; B-cola have Piel and אֶת־",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C16",
+      "location": "Observation 3 — Anchors",
+      "sentence": "`וַיְשַׁבֵּר` (v. 5b, Piel of `שׁבר`) and `יְבָרֵךְ` (v. 11b, Piel of `ברך`) are the only two Piel verbs in the psalm (`יְחוֹלֵל` in v. 9a is Polel of hollow `חיל/חול`), and both follow a Qal verb in the A-colon (`שֹׁבֵר` in v. 5a; `יִתֵּן` in v. 11a) (Verse-Level Notes, vv. 5, 9, 11).",
+      "claim": "יְחוֹלֵל is Polel, not Piel",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C17",
+      "location": "Observation 3 — Anchors",
+      "sentence": "Redaction-critical proposals (Kraus, Loretz) argue that v. 11 is a secondary post-exilic/Jerusalemite addition to an older Canaanite core in vv. 3–9 (Deep Web Research, §1; Open Question 10).",
+      "claim": "Kraus and Loretz specifically date verse 11 secondary",
+      "claim_type": "commentator_reading",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "The verified passage attributes an archaic core to Kraus but says nothing about either scholar dating verse 11 as a secondary addition.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "web",
+      "checked_by": "gpt-6-sol (high) judging passages gathered by gpt-6-luna (medium) with web search"
+    },
+    {
+      "id": "C18",
+      "location": "Observation 4 — Claim",
+      "sentence": "Scattered across four different Talmudic tractates are separate derivations that, when held together, show the Sages read Psalm 29 not merely as a numerical prooftext for the eighteen blessings of the Amidah, but as a complete miniature blueprint of statutory Jewish prayer: its 18 occurrences of `יְהוָה` plus the single epithet `אֵל־הַכָּבוֹד` (v. 3b) give the 18 + 1 blessings of the weekday Amidah; its 7 `קוֹלוֹת` (vv. 3–9) give the 7 blessings of the Shabbat Amidah; its opening three clauses (vv. 1–2) mandate the opening triad of every Amidah (*Avot*, *Gevurot*, *Kedushat HaShem*); and its closing clause (v. 11b) mandates that the Amidah and Priestly Blessing seal with *Shalom*.",
+      "claim": "Derivations occur across four different tractates",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Berakhot 28b:16–17, 21–22; 29a:9–11",
+          "quote": "כנגד שמונה עשרה אזכרות שאמר דוד ב״הבו לה׳ בני אלים״ ... כנגד ״אל הכבוד הרעים״ ... כנגד שבעה ״קולות״ שאמר דוד על המים",
+          "url": "https://www.sefaria.org/Berakhot_28b"
+        },
+        {
+          "source": "Megillah 17b; 18a; Rosh Hashanah 32a:6; Jerusalem Talmud Berakhot 4:3:7",
+          "quote": "מנין שאומרים אבות ... ומה ראו לומר ״שים שלום״ אחר ברכת כהנים? ... שבע של שבת מניין ... כנגד שבעה קולות",
+          "url": null
+        }
+      ],
+      "explanation": "The cited passages are in three tractates—Berakhot, Megillah, and Rosh Hashanah—across the Bavli and Yerushalmi. Berakhot in the two Talmuds is not two different tractates.",
+      "suggested_fix": "Replace “four different Talmudic tractates” with “three tractates across the Bavli and Yerushalmi”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C19",
+      "location": "Observation 4 — Claim",
+      "sentence": "Scattered across four different Talmudic tractates are separate derivations that, when held together, show the Sages read Psalm 29 not merely as a numerical prooftext for the eighteen blessings of the Amidah, but as a complete miniature blueprint of statutory Jewish prayer: its 18 occurrences of `יְהוָה` plus the single epithet `אֵל־הַכָּבוֹד` (v. 3b) give the 18 + 1 blessings of the weekday Amidah; its 7 `קוֹלוֹת` (vv. 3–9) give the 7 blessings of the Shabbat Amidah; its opening three clauses (vv. 1–2) mandate the opening triad of every Amidah (*Avot*, *Gevurot*, *Kedushat HaShem*); and its closing clause (v. 11b) mandates that the Amidah and Priestly Blessing seal with *Shalom*.",
+      "claim": "Bavli matches eighteen names and extra epithet",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C20",
+      "location": "Observation 4 — Claim",
+      "sentence": "Scattered across four different Talmudic tractates are separate derivations that, when held together, show the Sages read Psalm 29 not merely as a numerical prooftext for the eighteen blessings of the Amidah, but as a complete miniature blueprint of statutory Jewish prayer: its 18 occurrences of `יְהוָה` plus the single epithet `אֵל־הַכָּבוֹד` (v. 3b) give the 18 + 1 blessings of the weekday Amidah; its 7 `קוֹלוֹת` (vv. 3–9) give the 7 blessings of the Shabbat Amidah; its opening three clauses (vv. 1–2) mandate the opening triad of every Amidah (*Avot*, *Gevurot*, *Kedushat HaShem*); and its closing clause (v. 11b) mandates that the Amidah and Priestly Blessing seal with *Shalom*.",
+      "claim": "Seven voices correspond to seven Shabbat blessings",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C21",
+      "location": "Observation 4 — Claim",
+      "sentence": "Scattered across four different Talmudic tractates are separate derivations that, when held together, show the Sages read Psalm 29 not merely as a numerical prooftext for the eighteen blessings of the Amidah, but as a complete miniature blueprint of statutory Jewish prayer: its 18 occurrences of `יְהוָה` plus the single epithet `אֵל־הַכָּבוֹד` (v. 3b) give the 18 + 1 blessings of the weekday Amidah; its 7 `קוֹלוֹת` (vv. 3–9) give the 7 blessings of the Shabbat Amidah; its opening three clauses (vv. 1–2) mandate the opening triad of every Amidah (*Avot*, *Gevurot*, *Kedushat HaShem*); and its closing clause (v. 11b) mandates that the Amidah and Priestly Blessing seal with *Shalom*.",
+      "claim": "Opening three clauses supply all three blessings",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Megillah 17b",
+          "quote": "מנין שאומרים אבות — שנאמר: ״הבו לה׳ בני אלים״. ומנין שאומרים גבורות — שנאמר: ״הבו לה׳ כבוד ועוז״. ומנין שאומרים קדושות — שנאמר: ״הבו לה׳ כבוד שמו השתחוו לה׳ בהדרת קדש״.",
+          "url": "https://www.sefaria.org/Megillah_17b"
+        }
+      ],
+      "explanation": "The third derivation cites both clauses of verse 2. The three blessings are derived from three successive citations, not just the psalm’s first three clauses.",
+      "suggested_fix": "Replace “its opening three clauses (vv. 1–2)” with “three successive citations from its opening verses (vv. 1–2)”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C22",
+      "location": "Observation 4 — Claim",
+      "sentence": "Scattered across four different Talmudic tractates are separate derivations that, when held together, show the Sages read Psalm 29 not merely as a numerical prooftext for the eighteen blessings of the Amidah, but as a complete miniature blueprint of statutory Jewish prayer: its 18 occurrences of `יְהוָה` plus the single epithet `אֵל־הַכָּבוֹד` (v. 3b) give the 18 + 1 blessings of the weekday Amidah; its 7 `קוֹלוֹת` (vv. 3–9) give the 7 blessings of the Shabbat Amidah; its opening three clauses (vv. 1–2) mandate the opening triad of every Amidah (*Avot*, *Gevurot*, *Kedushat HaShem*); and its closing clause (v. 11b) mandates that the Amidah and Priestly Blessing seal with *Shalom*.",
+      "claim": "Psalm mandates Priestly Blessing’s closing Shalom",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Megillah 18a",
+          "quote": "ומה ראו לומר ״שים שלום״ אחר ברכת כהנים? דכתיב: ״ושמו את שמי על בני ישראל ואני אברכם״, ברכה דהקדוש ברוך הוא שלום, שנאמר: ״ה׳ יברך את עמו בשלום״.",
+          "url": "https://www.sefaria.org/Megillah_18a"
+        },
+        {
+          "source": "Numbers 6:26–27",
+          "quote": "וְיָשֵׂ֥ם לְךָ֖ שָׁלֽוֹם ... וַאֲנִ֖י אֲבָרְכֵֽם",
+          "url": null
+        }
+      ],
+      "explanation": "The Priestly Blessing already ends with ‘peace’ in Numbers 6:26. Megillah uses Psalm 29:11 to explain why *Sim Shalom* follows the Priestly Blessing, not to prescribe the Priestly Blessing’s wording.",
+      "suggested_fix": "Say that v. 11b supports placing *Sim Shalom* after the Priestly Blessing.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C23",
+      "location": "Observation 4 — Anchors",
+      "sentence": "18 `יְהוָה` = 18 blessings of the weekday Amidah, and `אֵל־הַכָּבוֹד הִרְעִים` (v. 3b) = the 19th blessing (*Birkat HaMinim*, against sectarians/arrogant) added at Yavneh (b. Berakhot 28b–29a in Torah Temimah on 29:3; y. Berakhot 4:3:4 in Rabbinic Reception; Deep Web Research).",
+      "claim": "Bavli associates epithet with Yavneh blessing",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C24",
+      "location": "Observation 4 — Anchors",
+      "sentence": "18 `יְהוָה` = 18 blessings of the weekday Amidah, and `אֵל־הַכָּבוֹד הִרְעִים` (v. 3b) = the 19th blessing (*Birkat HaMinim*, against sectarians/arrogant) added at Yavneh (b. Berakhot 28b–29a in Torah Temimah on 29:3; y. Berakhot 4:3:4 in Rabbinic Reception; Deep Web Research).",
+      "claim": "Yerushalmi gives the same simple nineteenth-blessing derivation",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Jerusalem Talmud Berakhot 4:3:4",
+          "quote": "והכתיב אל הכבוד הרעים. אמר ליה והתני כולל של מינים ושל פושעים במכניע זידים. ושל זקינים ושל גרים במבטח לצדיקים ושל דוד בבונה ירושלים.",
+          "url": "https://www.sefaria.org/Jerusalem_Talmud_Berakhot_4:3:4"
+        }
+      ],
+      "explanation": "The Yerushalmi raises the extra divine title as an objection, then answers by discussing the combination of blessings. It does not present the Bavli’s straightforward assignment of that title to a separate nineteenth blessing.",
+      "suggested_fix": "Attribute the extra-title-to-nineteenth-blessing equation to the Bavli; note separately that the Yerushalmi debates how to reconcile the extra title with the blessing count.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C25",
+      "location": "Observation 4 — Anchors",
+      "sentence": "The first three blessings of the Amidah are derived sequentially from vv. 1–2: *Avot* from `הָבוּ לַיהוָה בְּנֵי אֵלִים`, *Gevurot* from `הָבוּ לַיהוָה כָּבוֹד וָעֹז`, and *Kedushat HaShem* from `הָבוּ לַיהוָה כְּבוֹד שְׁמוֹ הִשְׁתַּחֲווּ לַיהוָה בְּהַדְרַת־קֹדֶשׁ` (b. Megillah 17b:9; b. Rosh Hashanah 32a:6; Rashi on 29:1–2).",
+      "claim": "Talmud derives opening blessings in that order",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C26",
+      "location": "Observation 4 — Anchors",
+      "sentence": "The closing blessing of the Amidah (*Sim Shalom*) and Priestly Blessing is derived from v. 11b `יְהוָה יְבָרֵךְ אֶת־עַמּוֹ בַשָּׁלוֹם` (y. Berakhot 2:4:14 in Rabbinic Reception; b. Megillah 18a in Torah Temimah on 29:11).",
+      "claim": "Priestly Blessing’s closing words derive from verse 11",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Megillah 18a",
+          "quote": "ומה ראו לומר ״שים שלום״ אחר ברכת כהנים? דכתיב: ״ושמו את שמי על בני ישראל ואני אברכם״, ברכה דהקדוש ברוך הוא שלום, שנאמר: ״ה׳ יברך את עמו בשלום״.",
+          "url": "https://www.sefaria.org/Megillah_18a"
+        },
+        {
+          "source": "Jerusalem Talmud Berakhot 2:4:14",
+          "quote": "וחותם בשלום שכל הברכות חותמיהן שלום ... ומה טעם יי עוז לעמו יתן יי יברך את עמו בשלום.",
+          "url": "https://www.sefaria.org/Jerusalem_Talmud_Berakhot_2:4:14"
+        }
+      ],
+      "explanation": "These sources support ending the Amidah’s blessings with peace and the ordering of *Sim Shalom* after the Priestly Blessing; neither derives the Priestly Blessing itself from Psalm 29.",
+      "suggested_fix": "Replace “The closing blessing of the Amidah (*Sim Shalom*) and Priestly Blessing is derived” with “The Amidah’s closing blessing, *Sim Shalom*, is linked”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C27",
+      "location": "Observation 4 — Payoff",
+      "sentence": "In rabbinic liturgy, reciting Psalm 29 at the climax of *Kabbalat Shabbat* (just before the 7-blessing Friday night Amidah) and when returning the Torah to the Ark (just after the Shabbat *Musaf* Amidah) is an enactment of the Amidah's own archetype—the one biblical text that contains the opening triad, the weekday 18+1 count, the Shabbat 7 count, and the closing seal of `שָׁלוֹם` in a single eleven-verse arc.",
+      "claim": "Psalm 29 is recited immediately before Friday-night Amidah",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Siddur Ashkenaz, Shabbat, Kabbalat Shabbat, Psalm 29; Lekha Dodi; Psalm 92",
+          "quote": "The Kabbalat Shabbat sequence lists Psalm 29, then Ana Bekoach, Lekha Dodi, Psalms 92–93 and further prayers before Maariv.",
+          "url": "https://www.sefaria.org/Siddur_Ashkenaz,_Shabbat,_Kabbalat_Shabbat,_Psalm_29,_Psalm_29"
+        },
+        {
+          "source": "Siddur Ashkenaz, Shabbat, Maariv, Blessings of the Shema, Shema",
+          "quote": "שמע ישראל יהוה אלהינו יהוה אחד",
+          "url": null
+        }
+      ],
+      "explanation": "Several Kabbalat Shabbat prayers and the evening service’s Shema and blessings intervene; Psalm 29 is not ‘just before’ the Amidah.",
+      "suggested_fix": "Replace “just before the 7-blessing Friday night Amidah” with “before the Friday-night service and its 7-blessing Amidah”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C28",
+      "location": "Observation 4 — Payoff",
+      "sentence": "In rabbinic liturgy, reciting Psalm 29 at the climax of *Kabbalat Shabbat* (just before the 7-blessing Friday night Amidah) and when returning the Torah to the Ark (just after the Shabbat *Musaf* Amidah) is an enactment of the Amidah's own archetype—the one biblical text that contains the opening triad, the weekday 18+1 count, the Shabbat 7 count, and the closing seal of `שָׁלוֹם` in a single eleven-verse arc.",
+      "claim": "Ark-return Psalm follows Shabbat Musaf Amidah",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Siddur Ashkenaz, Shabbat, Shacharit, Returning Sefer to Aron",
+          "quote": "כשמחזירין הספר תורה להיכל אומרים ... בשבת: מזמור לדוד. הבו לה׳ בני אלים",
+          "url": "https://www.sefaria.org/Siddur_Ashkenaz,_Shabbat,_Shacharit,_Returning_Sefer_to_Aron,_Returning_Sefer_to_Aron"
+        },
+        {
+          "source": "Siddur Ashkenaz, Shabbat, Musaf LeShabbat, Amidah, Patriarchs",
+          "quote": "כי שם ה׳ אקרא הבו גדל לאלהינו: אדני שפתי תפתח ופי יגיד תהלתך",
+          "url": null
+        }
+      ],
+      "explanation": "The cited Ark-return passage belongs to Shabbat *Shacharit*: the Torah is returned before, not just after, the Shabbat *Musaf* Amidah.",
+      "suggested_fix": "Replace “just after the Shabbat *Musaf* Amidah” with “before the Shabbat *Musaf* Amidah”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C29",
+      "location": "Observation 5 — Claim",
+      "sentence": "Although Psalm 29 adapts the conventions of a Canaanite storm-god hymn (where the climax of Baal's thundering voice in KTU 1.4 V and VII is the release of life-giving rain, `mṭr`/`gšm`, upon the earth), the psalm never once mentions rain (`מָטָר` or `גֶּשֶׁם`), clouds, or agricultural fertility.",
+      "claim": "KTU passages culminate in Baal releasing rain",
+      "claim_type": "ancient_source_or_inscription",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "The only supplied passage about the KTU texts was not found on its page. No verified passage establishes their claimed climax.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "web",
+      "checked_by": "gpt-6-sol (high) judging passages gathered by gpt-6-luna (medium) with web search"
+    },
+    {
+      "id": "C30",
+      "location": "Observation 5 — Claim",
+      "sentence": "Although Psalm 29 adapts the conventions of a Canaanite storm-god hymn (where the climax of Baal's thundering voice in KTU 1.4 V and VII is the release of life-giving rain, `mṭr`/`gšm`, upon the earth), the psalm never once mentions rain (`מָטָר` or `גֶּשֶׁם`), clouds, or agricultural fertility.",
+      "claim": "Psalm 29 lacks rain, cloud, fertility vocabulary",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C31",
+      "location": "Observation 5 — Claim",
+      "sentence": "Inside the poem, this omission strips the storm of Baal's seasonal fertility function so that what descends from heaven at the end is not rain on the soil, but covenantal `עֹז` and `שָׁלוֹם` upon `עַמּוֹ` (v. 11); in liturgical reception, this same absence of rain—leaving cosmic waters (`מַיִם רַבִּים` v. 3, `מַבּוּל` v. 10) alongside dry-wilderness fire (`לַהֲבוֹת אֵשׁ` v. 7, `מִדְבַּר קָדֵשׁ` v. 8)—is what enabled Jewish tradition to assign the same psalm to two opposite poles of the calendar: the autumn rain-threshold of Sukkot/Shemini Atzeret and the dry late-spring Sinai revelation of Shavuot.",
+      "claim": "Cited words occur in the specified verses",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C32",
+      "location": "Observation 5 — Anchors",
+      "sentence": "Second Temple and rabbinic sources assign Psalm 29 both to the autumn water/rain festival of Sukkot / Shemini Atzeret (LXX superscription `ἐξοδίου σκηνῆς`; b. Sukkah 55a) and to the late-spring Sinai Torah festival of Shavuot (Tractate Soferim 18:3; Mekhilta Yitro; b. Zevachim 116a) (Deep Web Research, §4; Traditional Commentaries, Radak on v. 3).",
+      "claim": "LXX heading contains ἐξοδίου σκηνῆς",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C33",
+      "location": "Observation 5 — Anchors",
+      "sentence": "Second Temple and rabbinic sources assign Psalm 29 both to the autumn water/rain festival of Sukkot / Shemini Atzeret (LXX superscription `ἐξοδίου σκηνῆς`; b. Sukkah 55a) and to the late-spring Sinai Torah festival of Shavuot (Tractate Soferim 18:3; Mekhilta Yitro; b. Zevachim 116a) (Deep Web Research, §4; Traditional Commentaries, Radak on v. 3).",
+      "claim": "Cited sources assign it to Shemini Atzeret",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Septuagint, Psalms 28:1",
+          "quote": "Ψαλμὸς τῷ Δαυὶδ ἐξοδίου σκηνῆς.",
+          "url": null
+        },
+        {
+          "source": "Babylonian Talmud, Sukkah 55a",
+          "quote": "בחולו של מועד, בראשון מה היו אומרים: ״הבו לה׳ בני אלים״.",
+          "url": "https://www.sefaria.org/Sukkah_55a"
+        }
+      ],
+      "explanation": "The Greek heading mentions the departure of the tent, not Shemini Atzeret by name. Sukkah 55a specifies the first intermediate day of Sukkot, not Shemini Atzeret. A connection between the heading and Shemini Atzeret is an interpretation, not an explicit assignment in either cited text.",
+      "suggested_fix": "Say that the LXX heading mentions the departure of the tent and Sukkah 55a assigns the psalm to the first intermediate day of Sukkot; qualify any Shemini Atzeret connection as an interpretation.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C34",
+      "location": "Observation 5 — Anchors",
+      "sentence": "Second Temple and rabbinic sources assign Psalm 29 both to the autumn water/rain festival of Sukkot / Shemini Atzeret (LXX superscription `ἐξοδίου σκηνῆς`; b. Sukkah 55a) and to the late-spring Sinai Torah festival of Shavuot (Tractate Soferim 18:3; Mekhilta Yitro; b. Zevachim 116a) (Deep Web Research, §4; Traditional Commentaries, Radak on v. 3).",
+      "claim": "Soferim assigns Psalm 29 to Shavuot",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C35",
+      "location": "Observation 5 — Anchors",
+      "sentence": "Second Temple and rabbinic sources assign Psalm 29 both to the autumn water/rain festival of Sukkot / Shemini Atzeret (LXX superscription `ἐξοδίου σκηνῆς`; b. Sukkah 55a) and to the late-spring Sinai Torah festival of Shavuot (Tractate Soferim 18:3; Mekhilta Yitro; b. Zevachim 116a) (Deep Web Research, §4; Traditional Commentaries, Radak on v. 3).",
+      "claim": "Zevachim and Mekhilta assign Shavuot use",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Tractate Soferim 18:3",
+          "quote": "ובחג השבועות (תהלים כט) הבו לה׳ בני אלים",
+          "url": "https://www.sefaria.org/Tractate_Soferim_18:3"
+        },
+        {
+          "source": "Babylonian Talmud, Zevachim 116a, as quoted in Torah Temimah on Psalms 29:9",
+          "quote": "ר״א המודעי אומר מתן תורה שמע [ובא] ... שנאמר ובהיכלו כולו אומר כבוד",
+          "url": null
+        },
+        {
+          "source": "Radak on Psalms 29:3",
+          "quote": "דרשו רבותינו זכרם לברכה (מכלתא יתרו בחדש ה; ספרי שמג; בבלי זבחים קטז א) בזה המזמור שנאמר על יום מתן תורה.",
+          "url": null
+        }
+      ],
+      "explanation": "Soferim names the Feast of Weeks. The Mekhilta/Zevachim reading associates the psalm with the giving of the Torah; it does not itself prescribe the psalm for Shavuot.",
+      "suggested_fix": "Attribute the Shavuot assignment to Tractate Soferim 18:3, and the Sinai interpretation to the Mekhilta and Zevachim 116a.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C36",
+      "location": "Observation 6 — Claim",
+      "sentence": "Psalm 96 does not merely quote Ps 29:1–2 while replacing `בְּנֵי אֵלִים` with `מִשְׁפְּחוֹת עַמִּים` (96:7–9); across 96:7–12 it systematically rewrites the entire storm-theophany of Ps 29:3–10 (`רעם`, `חיל`, `יהוה מלך`, `יער`) so that every passive or ravaged target of YHWH's storm in Psalm 29 becomes an active worshipper.",
+      "claim": "Psalm 96 replaces בני אלים with משפחות עמים",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C37",
+      "location": "Observation 6 — Claim",
+      "sentence": "Psalm 96 does not merely quote Ps 29:1–2 while replacing `בְּנֵי אֵלִים` with `מִשְׁפְּחוֹת עַמִּים` (96:7–9); across 96:7–12 it systematically rewrites the entire storm-theophany of Ps 29:3–10 (`רעם`, `חיל`, `יהוה מלך`, `יער`) so that every passive or ravaged target of YHWH's storm in Psalm 29 becomes an active worshipper.",
+      "claim": "Specified roots and royal phrase recur",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C38",
+      "location": "Observation 6 — Claim",
+      "sentence": "Moreover, Ps 96:8b's insertion of `שְׂאוּ־מִנְחָה וּבוֹאוּ לְחַצְרוֹתָיו` (\"bring an offering and come into His courts\") immediately before `בְּהַדְרַת־קֹדֶשׁ` explains all three major LXX/Peshitta divergences in Ps 29:1–2: why `הָבוּ` is rendered `Ἐνέγκατε` (\"bring [an offering]\"), why `בְּנֵי אֵלִים` (consonantally identical to defective `בְּנֵי אֵילִים`) is rendered as the sacrificial object \"young rams\" (`υἱοὺς κριῶν`), and why `בְּהַדְרַת־קֹדֶשׁ` is rendered \"in His holy court\" (`ἐν αὐλῇ ἁγίᾳ αὐτοῦ`).",
+      "claim": "Psalm 96 places offering before hadrat-qodesh",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C39",
+      "location": "Observation 6 — Claim",
+      "sentence": "Moreover, Ps 96:8b's insertion of `שְׂאוּ־מִנְחָה וּבוֹאוּ לְחַצְרוֹתָיו` (\"bring an offering and come into His courts\") immediately before `בְּהַדְרַת־קֹדֶשׁ` explains all three major LXX/Peshitta divergences in Ps 29:1–2: why `הָבוּ` is rendered `Ἐνέγκατε` (\"bring [an offering]\"), why `בְּנֵי אֵלִים` (consonantally identical to defective `בְּנֵי אֵילִים`) is rendered as the sacrificial object \"young rams\" (`υἱοὺς κριῶν`), and why `בְּהַדְרַת־קֹדֶשׁ` is rendered \"in His holy court\" (`ἐν αὐλῇ ἁγίᾳ αὐτοῦ`).",
+      "claim": "Quoted Greek renderings occur in LXX",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C40",
+      "location": "Observation 6 — Anchors",
+      "sentence": "Following the verbatim quotation of Ps 29:1–2 in Ps 96:7–9a, Ps 96:9b–12 redeploys the signature roots of Ps 29:3–10 in inverted roles: `חִילוּ מִפָּנָיו כָּל־הָאָרֶץ` (96:9b ↔ `יָחִיל` / `יְחוֹלֵל` in 29:8–9), `אִמְרוּ בַגּוֹיִם יְהוָה מָלָךְ` (96:10 ↔ `אֹמֵר` + `יְהוָה מֶלֶךְ` in 29:9c–10), `יִרְעַם הַיָּם` (96:11 ↔ `הִרְעִים` over the waters in 29:3), and `אָז יְרַנְּנוּ כָּל־עֲצֵי־יָעַר` (96:12 ↔ stripped `יְעָרוֹת` in 29:9b) (Related Psalms Analysis, Psalm 96; Concordance `רעם`).",
+      "claim": "Psalm 96:7–9a quotes 29:1–2 verbatim",
+      "claim_type": "biblical_quotation",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Psalms 29:1–2",
+          "quote": "הָבוּ לַיהֹוָה בְּנֵי אֵלִים ... הָבוּ לַיהֹוָה כְּבוֹד שְׁמוֹ הִשְׁתַּחֲווּ לַיהֹוָה בְּהַדְרַת־קֹדֶשׁ",
+          "url": null
+        },
+        {
+          "source": "Psalms 96:7–9",
+          "quote": "הָבוּ לַיהֹוָה מִשְׁפְּחוֹת עַמִּים ... הָבוּ לַיהֹוָה כְּבוֹד שְׁמוֹ שְׂאוּ־מִנְחָה וּבֹאוּ לְחַצְרוֹתָיו׃ הִשְׁתַּחֲווּ לַיהֹוָה בְּהַדְרַת־קֹדֶשׁ חִילוּ מִפָּנָיו כׇּל־הָאָרֶץ",
+          "url": null
+        }
+      ],
+      "explanation": "The addressee changes, and Psalm 96 inserts the offering-and-courts instruction and adds a command to tremble. Only portions are verbatim.",
+      "suggested_fix": "Replace “the verbatim quotation of Ps 29:1–2” with “the close reuse of Ps 29:1–2.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C41",
+      "location": "Observation 6 — Anchors",
+      "sentence": "In Ps 29:1–2 (LXX Ps 28:1–2), the LXX renders `הָבוּ` five times as `Ἐνέγκατε` (\"bring/carry\"), adds the doublet `ἐνέγκατε τῷ Κυρίῳ υἱοὺς κριῶν` (\"bring to the Lord young rams\", reading `אֵלִים` as defective `אֵילִם` = \"rams\", cf. Num 7:23; 29:23 in the `בני אלים` concordance, while the Peshitta translates *only* \"offspring of rams\"), and both LXX (`ἐν αὐλῇ ἁγίᾳ αὐτοῦ`) and Peshitta (`בדרתא דקודשה`) render `בְּהַדְרַת־קֹדֶשׁ` as \"in His holy court\" (Psalm Text; Verse-Level Notes, vv. 1–2; Deep Web Research, §2).",
+      "claim": "LXX has five instances of Ἐνέγκατε",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Septuagint, Psalms 28:1–2",
+          "quote": "Ἐνέγκατε τῷ Κυρίῳ υἱοὶ Θεοῦ, ἐνέγκατε τῷ Κρίῳ υἱοὺς κριῶν· ἐνέγκατε τῷ Κυρίῳ δόξαν καὶ τιμὴν, ἐνέγκατε τῷ Κυρίῳ δόξαν ὀνόματι αὐτοῦ· προσκυνήσατε τῷ Κυρίῳ ἐν αὐλῇ ἁγίᾳ αὐτοῦ.",
+          "url": null
+        }
+      ],
+      "explanation": "There are four instances of ἐνέγκατε: three in Greek verse 1 and one in verse 2. The Hebrew has three instances of הָבוּ.",
+      "suggested_fix": "Change “five times” to “four times (including once in the added doublet).”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C42",
+      "location": "Observation 6 — Anchors",
+      "sentence": "In Ps 29:1–2 (LXX Ps 28:1–2), the LXX renders `הָבוּ` five times as `Ἐνέγκατε` (\"bring/carry\"), adds the doublet `ἐνέγκατε τῷ Κυρίῳ υἱοὺς κριῶν` (\"bring to the Lord young rams\", reading `אֵלִים` as defective `אֵילִם` = \"rams\", cf. Num 7:23; 29:23 in the `בני אלים` concordance, while the Peshitta translates *only* \"offspring of rams\"), and both LXX (`ἐν αὐλῇ ἁγίᾳ αὐτοῦ`) and Peshitta (`בדרתא דקודשה`) render `בְּהַדְרַת־קֹדֶשׁ` as \"in His holy court\" (Psalm Text; Verse-Level Notes, vv. 1–2; Deep Web Research, §2).",
+      "claim": "LXX retains sons of God and adds rams",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C43",
+      "location": "Observation 6 — Anchors",
+      "sentence": "In Ps 29:1–2 (LXX Ps 28:1–2), the LXX renders `הָבוּ` five times as `Ἐνέγκατε` (\"bring/carry\"), adds the doublet `ἐνέγκατε τῷ Κυρίῳ υἱοὺς κριῶν` (\"bring to the Lord young rams\", reading `אֵלִים` as defective `אֵילִם` = \"rams\", cf. Num 7:23; 29:23 in the `בני אלים` concordance, while the Peshitta translates *only* \"offspring of rams\"), and both LXX (`ἐν αὐλῇ ἁγίᾳ αὐτοῦ`) and Peshitta (`בדרתא דקודשה`) render `בְּהַדְרַת־קֹדֶשׁ` as \"in His holy court\" (Psalm Text; Verse-Level Notes, vv. 1–2; Deep Web Research, §2).",
+      "claim": "Quoted Peshitta readings and wording are exact",
+      "claim_type": "grammar_or_textual",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "The available primary texts include the Septuagint but not the Peshitta. The research summary reports these readings; it does not independently verify their exact wording.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C44",
+      "location": "Observation 7 — Claim",
+      "sentence": "The exact consonantal string `קדש` appears twice in Psalm 29—both times as the final word of its verse—linking the heavenly command `הִשְׁתַּחֲווּ לַיהוָה בְּהַדְרַת־קֹדֶשׁ` (\"bow down to YHWH in the majesty of holiness,\" v. 2) to the southern climax of the storm, `יָחִיל יְהוָה מִדְבַּר קָדֵשׁ` (\"YHWH convulses the wilderness of Kadesh,\" v. 8).",
+      "claim": "קדש occurs twice, verse-final, in Psalm 29",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C45",
+      "location": "Observation 7 — Claim",
+      "sentence": "That this consonantal pairing across vv. 2 and 8 was heard as a deliberate structural link in antiquity is demonstrated by Psalm 96:9 (`הִשְׁתַּחֲווּ לַיהוָה בְּהַדְרַת־קֹדֶשׁ חִילוּ מִפָּנָיו כָּל־הָאָרֶץ`), which quotes Ps 29:2b in its first colon and immediately supplies the verb `חיל` from Ps 29:8 (`יָחִיל מִדְבַּר קָדֵשׁ`) in its second colon.",
+      "claim": "Psalm 96:9 juxtaposes quotation and חיל imperative",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C46",
+      "location": "Observation 7 — Anchors",
+      "sentence": "In Ps 29:8, the verb governing `מִדְבַּר קָדֵשׁ` is `יָחִיל` (from `חיל`, \"writhe/tremble\", repeated 2x in v. 8 and continued by `יְחוֹלֵל` in v. 9a) (Psalm text, vv. 8–9).",
+      "claim": "יחיל occurs twice in Psalm 29:8",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C47",
+      "location": "Observation 8 — Claim",
+      "sentence": "In both the Ugaritic Baal Cycle (KTU 1.4 VI 18–38) and the biblical accounts of building the Jerusalem Temple (1 Kgs 5–7; 2 Chr 2; Ezra 3:7), cedars of Lebanon and Sirion (`אֲרָזִים מִן־הַלְּבָנוֹן`, `lbnn // šryn`), forest timber (`יַעַר`), stone-hewing (`חֹצֵב`), and fire (`אֵשׁ` / `לַהֲבוֹת`) are the technical materials and operations used to *construct* a royal temple (`הֵיכָל` / `hkl`).",
+      "claim": "Biblical temple accounts name Sirion as material source",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "I Kings 5:27–32",
+          "quote": "וַיִּשְׁלָחֵם לְבָנוֹנָה ... וּשְׁמֹנִים אֶלֶף חֹצֵב בָּהָר ... וַיָּכִינוּ הָעֵצִים וְהָאֲבָנִים לִבְנוֹת הַבָּיִת",
+          "url": null
+        },
+        {
+          "source": "II Chronicles 2:7–8",
+          "quote": "וּשְׁלַח־לִי עֲצֵי אֲרָזִים בְּרוֹשִׁים וְאַלְגּוּמִּים מֵהַלְּבָנוֹן ... עֲבָדֶיךָ יוֹדְעִים לִכְרֹת עֲצֵי לְבָנוֹן",
+          "url": null
+        },
+        {
+          "source": "Ezra 3:7",
+          "quote": "לַחֹצְבִים ... לַצִּדֹנִים וְלַצֹּרִים לְהָבִיא עֲצֵי אֲרָזִים מִן־הַלְּבָנוֹן",
+          "url": null
+        }
+      ],
+      "explanation": "The cited biblical construction accounts name Lebanon, timber and hewers, but not Sirion. The Lebanon–Sirion pairing belongs to Psalm 29 and the proposed Ugaritic parallel, not to these biblical construction accounts.",
+      "suggested_fix": "Distinguish the sources: the biblical accounts specify Lebanon timber and stone-hewing, while the Lebanon–Sirion pairing occurs in Psalm 29 and the cited Baal Cycle passage.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C48",
+      "location": "Observation 8 — Anchors",
+      "sentence": "In KTU 1.4 VI 18–38, Baal's palace (`hkl`) is built by fetching choice cedars (`arz`) from Lebanon and Sirion (`lbnn // šryn`) and kindling fire (`išt` / `nblat`) inside the structure for seven days until the house is cast in silver and gold (Deep Web Research, §3; Structural Overview).",
+      "claim": "KTU specifies the quoted materials and seven-day sequence",
+      "claim_type": "ancient_source_or_inscription",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "Neither supplied quotation was found on its page, so the materials and sequence cannot be established or contradicted from this evidence.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "web",
+      "checked_by": "gpt-6-sol (high) judging passages gathered by gpt-6-luna (medium) with web search"
+    },
+    {
+      "id": "C49",
+      "location": "Observation 8 — Anchors",
+      "sentence": "Out of only 5 occurrences of the exact consonantal form `חצב` in the entire Tanakh, three (1 Kgs 5:29; 2 Chr 2:1, 17) designate Solomon's 80,000 stone-hewers (`חֹצֵב בָּהָר`) sent to Lebanon alongside the cedar-cutters to build the Temple (`הֵיכָל`), and Ezra 3:7 pairs `לַחֹצְבִים` (\"to the stone-hewers\") with `עֲצֵי אֲרָזִים מִן־הַלְּבָנוֹן` (\"cedar trees from Lebanon\") for the Second Temple (Distributional SQL table: Rare forms `חצב`; Concordance `חצב` & `ארזים`; Shared-Vocabulary Parallels, Ezra 3:7).",
+      "claim": "Unprefixed consonantal form חצב occurs five times",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "The five are Isaiah 5:2, I Kings 5:29, II Chronicles 2:1 and 2:17, and Psalms 29:7. This counts the exact unprefixed consonantal form, not the whole חצב word family.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C50",
+      "location": "Observation 8 — Anchors",
+      "sentence": "Out of only 5 occurrences of the exact consonantal form `חצב` in the entire Tanakh, three (1 Kgs 5:29; 2 Chr 2:1, 17) designate Solomon's 80,000 stone-hewers (`חֹצֵב בָּהָר`) sent to Lebanon alongside the cedar-cutters to build the Temple (`הֵיכָל`), and Ezra 3:7 pairs `לַחֹצְבִים` (\"to the stone-hewers\") with `עֲצֵי אֲרָזִים מִן־הַלְּבָנוֹן` (\"cedar trees from Lebanon\") for the Second Temple (Distributional SQL table: Rare forms `חצב`; Concordance `חצב` & `ארזים`; Shared-Vocabulary Parallels, Ezra 3:7).",
+      "claim": "Three references mention Solomon’s 80,000 hewers",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C51",
+      "location": "Observation 8 — Anchors",
+      "sentence": "Out of only 5 occurrences of the exact consonantal form `חצב` in the entire Tanakh, three (1 Kgs 5:29; 2 Chr 2:1, 17) designate Solomon's 80,000 stone-hewers (`חֹצֵב בָּהָר`) sent to Lebanon alongside the cedar-cutters to build the Temple (`הֵיכָל`), and Ezra 3:7 pairs `לַחֹצְבִים` (\"to the stone-hewers\") with `עֲצֵי אֲרָזִים מִן־הַלְּבָנוֹן` (\"cedar trees from Lebanon\") for the Second Temple (Distributional SQL table: Rare forms `חצב`; Concordance `חצב` & `ארזים`; Shared-Vocabulary Parallels, Ezra 3:7).",
+      "claim": "Solomon sent the stone-hewers to Lebanon",
+      "claim_type": "date_name_or_history",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "I Kings 5:27–29",
+          "quote": "וַיַּעַל הַמֶּלֶךְ שְׁלֹמֹה מַס מִכׇּל־יִשְׂרָאֵל ... וַיִּשְׁלָחֵם לְבָנוֹנָה ... וַיְהִי לִשְׁלֹמֹה שִׁבְעִים אֶלֶף נֹשֵׂא סַבָּל וּשְׁמֹנִים אֶלֶף חֹצֵב בָּהָר",
+          "url": null
+        },
+        {
+          "source": "I Kings 5:31–32",
+          "quote": "וַיָּסִעוּ אֲבָנִים גְּדֹלוֹת ... לְיַסֵּד הַבָּיִת ... וַיָּכִינוּ הָעֵצִים וְהָאֲבָנִים לִבְנוֹת הַבָּיִת",
+          "url": null
+        }
+      ],
+      "explanation": "Kings identifies the labor force sent to Lebanon separately, then introduces the 80,000 quarriers working ‘in the hills’ to prepare foundation stones. It does not say the quarriers were sent to Lebanon with the timber workers.",
+      "suggested_fix": "Change “stone-hewers ... sent to Lebanon alongside the cedar-cutters” to “stone-hewers working alongside the cedar-cutting enterprise for the Temple.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C52",
+      "location": "Observation 8 — Anchors",
+      "sentence": "Out of only 5 occurrences of the exact consonantal form `חצב` in the entire Tanakh, three (1 Kgs 5:29; 2 Chr 2:1, 17) designate Solomon's 80,000 stone-hewers (`חֹצֵב בָּהָר`) sent to Lebanon alongside the cedar-cutters to build the Temple (`הֵיכָל`), and Ezra 3:7 pairs `לַחֹצְבִים` (\"to the stone-hewers\") with `עֲצֵי אֲרָזִים מִן־הַלְּבָנוֹן` (\"cedar trees from Lebanon\") for the Second Temple (Distributional SQL table: Rare forms `חצב`; Concordance `חצב` & `ארזים`; Shared-Vocabulary Parallels, Ezra 3:7).",
+      "claim": "Ezra 3:7 pairs hewers with Lebanon cedarwood",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C53",
+      "location": "Observation 8 — Anchors",
+      "sentence": "In Ps 29:5–9, `קוֹל יְהוָה` shatters `אַרְזֵי הַלְּבָנוֹן` (v. 5), makes `לְבָנוֹן וְשִׂרְיֹן` skip (v. 6), \"hews flames of fire\" (`חֹצֵב לַהֲבוֹת אֵשׁ`, v. 7), and strips `יְעָרוֹת` (v. 9b, cf. 1 Kgs 7:2 `בֵּית יַעַר הַלְּבָנוֹן`), culminating in `וּבְהֵיכָלוֹ כֻּלּוֹ אֹמֵר כָּבוֹד` (v. 9c) (Psalm text, vv. 5–9; Verse-Level Notes, vv. 5, 7, 9).",
+      "claim": "Specified images and phrases occur in cited verses",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C54",
+      "location": "Observation 9",
+      "sentence": "Verse 6 (`וַיַּרְקִידֵם כְּמוֹ־עֵגֶל לְבָנוֹן וְשִׂרְיֹן כְּמוֹ בֶן־רְאֵמִים`) is",
+      "claim": "Verse 6 alone lacks the divine name",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C55",
+      "location": "Observation 9",
+      "sentence": "Verse 6 (`וַיַּרְקִידֵם כְּמוֹ־עֵגֶל לְבָנוֹן וְשִׂרְיֹן כְּמוֹ בֶן־רְאֵמִים`) is",
+      "claim": "The divine name occurs eighteen times",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C56",
+      "location": "Observation 9",
+      "sentence": "Verse 6 (`וַיַּרְקִידֵם כְּמוֹ־עֵגֶל לְבָנוֹן וְשִׂרְיֹן כְּמוֹ בֶן־רְאֵמִים`) is",
+      "claim": "Seven קוֹל ה׳ phrases exclude verse 6",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C57",
+      "location": "Observation 9",
+      "sentence": "Inside the poem, vacating the divine",
+      "claim": "Pesachim prescribes seven voices before nighttime drinking",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C58",
+      "location": "Observation 9",
+      "sentence": "Inside the poem, vacating the divine",
+      "claim": "Pesachim’s Hebrew quotation omits verse 6",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C59",
+      "location": "Observation 9",
+      "sentence": "Verse 6 contains the northern mountain",
+      "claim": "Lebanon and Sirion appear with bovine similes",
+      "claim_type": "biblical_quotation",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C60",
+      "location": "Observation 9",
+      "sentence": "Verse 6 contains the northern mountain pair `לְבָנוֹן וְשִׂרְיֹן` and the bovine similes `כְּמוֹ־עֵגֶל` (\"like a calf\") and `כְּמוֹ בֶן־רְאֵמִים` (\"like a young wild ox\"), corresponding to Baal's bull iconography and northern sanctuary (Verse-Level Notes, v. 6).",
+      "claim": "The named mountains were Baal’s northern sanctuary",
+      "claim_type": "ancient_source_or_inscription",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "The Baal Cycle",
+          "quote": "KTU 1.4 col vi: Kothar-wa-Khasis arrives at Baʿlu's Ṣapunu and begins the construction of the palace; cedar, silver, gold and lapis-lazuli are gathered.",
+          "url": "https://www.wheelofheaven.world/library/baal-cycle-woh/"
+        }
+      ],
+      "explanation": "The cited account locates Baal’s palace at Ṣapunu, not at either mountain named in Psalm 29:6. The evidence supports a northern geographical comparison, but not identifying Lebanon and Sirion as his sanctuary.",
+      "suggested_fix": "Verse 6 contains the northern mountain pair `לְבָנוֹן וְשִׂרְיֹן` and the bovine similes `כְּמוֹ־עֵגֶל` (\"like a calf\") and `כְּמוֹ בֶן־רְאֵמִים` (\"like a young wild ox\"), corresponding to Baal's bull iconography and evoking northern geography; Baal's palace was at Ṣapunu (Verse-Level Notes, v. 6).",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "web",
+      "checked_by": "gpt-6-sol (high) judging passages gathered by gpt-6-luna (medium) with web search"
+    },
+    {
+      "id": "C61",
+      "location": "Observation 9",
+      "sentence": "In b. Pesachim 112a:3, the Hebrew",
+      "claim": "Hebrew jumps directly from verse 5 to 7",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C62",
+      "location": "Observation 9",
+      "sentence": "In b. Pesachim 112a:3, the Hebrew",
+      "claim": "Sefaria’s English supplies omitted verse 6",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C63",
+      "location": "Observation 10",
+      "sentence": "In the Septuagint of v. 6",
+      "claim": "Quoted Greek text matches LXX Psalm 28:6",
+      "claim_type": "biblical_quotation",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C64",
+      "location": "Observation 10",
+      "sentence": "Reading `וַיַּרְקִידֵם` (via `ד`/`ר` confusion",
+      "claim": "Greek uses a definite article before calf",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C65",
+      "location": "Observation 10",
+      "sentence": "Reading `וַיַּרְקִידֵם` (via `ד`/`ר` confusion",
+      "claim": "Deuteronomy 33:17 uses κέρατα μονοκέρωτος",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C66",
+      "location": "Observation 10",
+      "sentence": "The Greek renderings and their Pentateuchal LXX matches (`ἐλέπτυνεν ... τὸν μόσχον` in Exod 32:20/Deut 9:21; `ὁ ἠγαπημένος` and `μονοκέρωτος` in Deut 33:5, 17, 26) are exact; that these two Pentateuchal passages jointly shaped the translator's antithesis in v. 6 is the most economical explanation of all three shifts.",
+      "claim": "ἐλέπτυνεν occurs in both cited calf passages",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "LXX Exodus 32:20",
+          "quote": "καὶ κατήλεσεν αὐτὸν λεπτὸν",
+          "url": null
+        },
+        {
+          "source": "LXX Deuteronomy 9:21",
+          "quote": "καὶ συνέκοψα αὐτὸν καταλέσας σφόδρα ἕως ἐγένετο λεπτόν",
+          "url": null
+        }
+      ],
+      "explanation": "Both passages express grinding or fineness, but neither has the asserted verb ἐλέπτυνεν.",
+      "suggested_fix": "Replace “`ἐλέπτυνεν ... τὸν μόσχον` in Exod 32:20/Deut 9:21” with “`τὸν μόσχον` and language of grinding fine in Exod 32:20/Deut 9:21.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C67",
+      "location": "Observation 10",
+      "sentence": "In Exod 32:19–20 (the first entry in the `עגל` concordance) and Deut 9:21, Moses shatters (`וַיְשַׁבֵּר`, cf. Ps 29:5 `וַיְשַׁבֵּר`) the tablets upon seeing the Calf (`אֶת־הָעֵגֶל`, LXX `τὸν μόσχον`) and grinds it until it is fine (`עַד אֲשֶׁר־דָּק`, rendered in LXX Exod 32:20 and Deut 9:21 by `λεπτύνω`: `καὶ ἐλέπτυνεν` / `καὶ ἐλέπτυνα`) (Concordance `עגל`; Verse-Level Notes, v. 6; general LXX scholarship).",
+      "claim": "Exodus 32:19–20 is first calf occurrence",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Exodus 32:4",
+          "quote": "וַיַּעֲשֵׂ֖הוּ עֵ֣גֶל מַסֵּכָ֑ה",
+          "url": null
+        }
+      ],
+      "explanation": "The calf is already called עֵגֶל earlier in Exodus 32. A consonantal-substring concordance also finds earlier, unrelated words such as עֶגְלָה in Genesis 15:9.",
+      "suggested_fix": "Delete “(the first entry in the `עגל` concordance).”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C68",
+      "location": "Observation 10",
+      "sentence": "In Exod 32:19–20 (the first entry in the `עגל` concordance) and Deut 9:21, Moses shatters (`וַיְשַׁבֵּר`, cf. Ps 29:5 `וַיְשַׁבֵּר`) the tablets upon seeing the Calf (`אֶת־הָעֵגֶל`, LXX `τὸν μόσχον`) and grinds it until it is fine (`עַד אֲשֶׁר־דָּק`, rendered in LXX Exod 32:20 and Deut 9:21 by `λεπτύνω`: `καὶ ἐλέπτυνεν` / `καὶ ἐλέπτυνα`) (Concordance `עגל`; Verse-Level Notes, v. 6; general LXX scholarship).",
+      "claim": "Both Greek verses use the quoted λεπτυν forms",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "LXX Exodus 32:20",
+          "quote": "καὶ κατήλεσεν αὐτὸν λεπτὸν",
+          "url": null
+        },
+        {
+          "source": "LXX Deuteronomy 9:21",
+          "quote": "καὶ συνέκοψα αὐτὸν καταλέσας σφόδρα ἕως ἐγένετο λεπτόν",
+          "url": null
+        }
+      ],
+      "explanation": "The quoted Greek verbs are in neither verse.",
+      "suggested_fix": "Replace “rendered ... by `λεπτύνω`: `καὶ ἐλέπτυνεν` / `καὶ ἐλέπτυνα`” with “expressed in Greek with `λεπτόν` (‘fine’) and verbs of grinding.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C69",
+      "location": "Observation 10",
+      "sentence": "In Exod 32:19–20 (the first",
+      "claim": "Moses shatters tablets and grinds calf",
+      "claim_type": "biblical_quotation",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C70",
+      "location": "Observation 10",
+      "sentence": "In Deut 32:15 and 33:5, 26, the LXX translates `יְשֻׁרוּן` as `ὁ ἠγαπημένος` (\"the beloved\"), and in the same chapter (Deut 33:17, third entry in the `ראמים` concordance) blesses Joseph/Israel with `קַרְנֵי רְאֵם` (LXX `κέρατα μονοκέρωτος`, cf. Num 23:22; 24:8 `ὡς δόξα μονοκέρωτος`) (Verse-Level Notes, v. 6; Concordance `ראמים`).",
+      "claim": "All three verses have exact form ὁ ἠγαπημένος",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "LXX Deuteronomy 32:15",
+          "quote": "ἀπελάκτισεν ὁ ἠγαπημένος",
+          "url": null
+        },
+        {
+          "source": "LXX Deuteronomy 33:5",
+          "quote": "ἐν τῷ ἠγαπημένῳ",
+          "url": null
+        },
+        {
+          "source": "LXX Deuteronomy 33:26",
+          "quote": "τοῦ ἠγαπημένου",
+          "url": null
+        }
+      ],
+      "explanation": "All three use forms of ‘beloved,’ but only Deuteronomy 32:15 has the quoted nominative form.",
+      "suggested_fix": "Change “as `ὁ ἠγαπημένος`” to “with forms of `ἠγαπημένος` (‘beloved’).”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C71",
+      "location": "Observation 10",
+      "sentence": "In Deut 32:15 and 33:5, 26, the LXX translates `יְשֻׁרוּן` as `ὁ ἠγαπημένος` (\"the beloved\"), and in the same chapter (Deut 33:17, third entry in the `ראמים` concordance) blesses Joseph/Israel with `קַרְנֵי רְאֵם` (LXX `κέρατα μονοκέρωτος`, cf. Num 23:22; 24:8 `ὡς δόξα μονοκέρωτος`) (Verse-Level Notes, v. 6; Concordance `ראמים`).",
+      "claim": "Deuteronomy 33:17 is third ראמים occurrence",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Deuteronomy 33:17",
+          "quote": "וְקַרְנֵ֤י רְאֵם֙ קַרְנָ֔יו",
+          "url": null
+        },
+        {
+          "source": "Psalm 29:6",
+          "quote": "כְּמ֣וֹ בֶן־רְאֵמִֽים",
+          "url": null
+        },
+        {
+          "source": "Isaiah 34:7",
+          "quote": "וְיָרְד֤וּ רְאֵמִים֙ עִמָּ֔ם",
+          "url": null
+        }
+      ],
+      "explanation": "Deuteronomy has singular רְאֵם, not the searched plural ראמים. The plural consonantal form occurs in Psalm 29:6 and Isaiah 34:7.",
+      "suggested_fix": "Delete “third entry in the `ראמים` concordance.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C72",
+      "location": "Observation 10",
+      "sentence": "In Deut 32:15 and 33:5,",
+      "claim": "Greek Deuteronomy 33:17 has κέρατα μονοκέρωτος",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C73",
+      "location": "Observation 10",
+      "sentence": "In Deut 32:15 and 33:5,",
+      "claim": "Numbers 23:22 and 24:8 use μονοκέρωτος",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C74",
+      "location": "Observation 10",
+      "sentence": "What looks in English translation of the Septuagint like surreal nonsense (\"He will pulverize them like the calf, Lebanon, and the beloved is like a young unicorn\") turns out to be a learned midrashic translation in Greek: once `עֵגֶל` was read negatively as *the* Golden Calf ground to dust (`λεπτυνεῖ ... ὡς τὸν μόσχον`), the gloriousPentateuchal title `בֶן־רְאֵמִים` (`υἱὸς μονοκερώτων`) could no longer apply to the same idolatrous target and was reassigned to `יְשֻׁרוּן` (`ὁ ἠγαπημένος`).",
+      "claim": "בֶן־רְאֵמִים is a Pentateuchal title",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Psalm 29:6",
+          "quote": "כְּמ֣וֹ בֶן־רְאֵמִֽים",
+          "url": null
+        },
+        {
+          "source": "Deuteronomy 33:17",
+          "quote": "וְקַרְנֵ֤י רְאֵם֙ קַרְנָ֔יו",
+          "url": null
+        }
+      ],
+      "explanation": "The phrase בֶן־רְאֵמִים occurs in Psalm 29:6, not in the Pentateuch. Deuteronomy supplies a related wild-ox image.",
+      "suggested_fix": "Replace “the gloriousPentateuchal title `בֶן־רְאֵמִים`” with “the wild-ox image of `בֶן־רְאֵמִים`, echoed by the Pentateuch.”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C75",
+      "location": "Observation 11",
+      "sentence": "In the entire Tanakh, the plural of `יַעַר` (\"forest\") is elsewhere always masculine `יְעָרִים` (5x); only in Ps 29:9b does it take the feminine plural form `יְעָרוֹת` (`קוֹל יְהוָה יְחוֹלֵל אַיָּלוֹת וַיֶּחֱשֹׂף יְעָרוֹת`).",
+      "claim": "Masculine forest plural occurs five times",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Ezekiel 34:25",
+          "quote": "וְיָשְׁנ֖וּ בַּיְּעָרִֽים",
+          "url": null
+        },
+        {
+          "source": "Ezekiel 39:10",
+          "quote": "וְלֹ֤א יַחְטְבוּ֙ מִן־הַיְּעָרִ֔ים",
+          "url": null
+        },
+        {
+          "source": "Joshua 17:15",
+          "quote": "עֲלֵ֣ה לְךָ֣ הַיַּ֔עְרָה",
+          "url": null
+        },
+        {
+          "source": "Isaiah 22:8",
+          "quote": "אֶל־נֶ֖שֶׁק בֵּ֥ית הַיָּֽעַר",
+          "url": null
+        }
+      ],
+      "explanation": "The ordinary masculine plural meaning ‘forests’ appears in the two cited Ezekiel verses, not five times. Some apparent additional יערים matches belong to the place-name Kiriath-jearim.",
+      "suggested_fix": "Replace “(5x)” with “(in Ezek 34:25 and 39:10).”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C76",
+      "location": "Observation 11",
+      "sentence": "In the entire Tanakh, the plural",
+      "claim": "Psalm 29:9 uniquely has feminine יְעָרוֹת",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C77",
+      "location": "Observation 11",
+      "sentence": "`יְעָרוֹת` (v. 9b) is a unique consonantal form in the Tanakh (1x); elsewhere the plural of `יַעַר` (\"wood, forest\") is always masculine `יְעָרִים` (5x: Josh 17:15 margin/Ezek 34:25 Qere, Isa 22:8, Jer 26:18, Mic 3:12, Ezra 2:25) (BDB `יַעַר`; Distributional SQL table: Rare forms `יערות`).",
+      "claim": "Listed references attest five masculine forest plurals",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Joshua 17:15",
+          "quote": "הַיַּ֔עְרָה",
+          "url": null
+        },
+        {
+          "source": "Ezekiel 34:25",
+          "quote": "בַּיְּעָרִֽים",
+          "url": null
+        },
+        {
+          "source": "Isaiah 22:8",
+          "quote": "בֵּ֥ית הַיָּֽעַר",
+          "url": null
+        },
+        {
+          "source": "Micah 3:12",
+          "quote": "לְבָמ֥וֹת יָֽעַר",
+          "url": null
+        },
+        {
+          "source": "Ezra 2:25",
+          "quote": "בְּנֵ֨י קִרְיַ֤ת עָרִים֙",
+          "url": null
+        }
+      ],
+      "explanation": "Most listed forms are singular יער; Ezra has עָרִים (‘towns’). Ezekiel 39:10, an actual second ordinary forest plural, is missing.",
+      "suggested_fix": "Replace the parenthetical list with “(Ezek 34:25; 39:10).”",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C78",
+      "location": "Observation 11",
+      "sentence": "`יְעָרוֹת` (v. 9b) is a",
+      "claim": "יערות is a unique consonantal form",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C79",
+      "location": "Observation 11",
+      "sentence": "In vv. 5–6, trees (`אֲרָזִים` /",
+      "claim": "Verses 5–6 name trees and young animals",
+      "claim_type": "biblical_quotation",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C80",
+      "location": "Observation 11",
+      "sentence": "In vv. 5–6, trees (`אֲרָזִים` /",
+      "claim": "Verse 9 names hinds and forests",
+      "claim_type": "biblical_quotation",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C81",
+      "location": "Observation 11",
+      "sentence": "Since Bishop Robert Lowth (1753), scholars troubled by the pairing of animals (`אַיָּלוֹת`, \"hinds\") with trees (`יְעָרוֹת`, \"forests\") have either revocalized `אַיָּלוֹת` to `אֵילוֹת` (\"oaks\", RSV, NIV, NET, and Solomon ben Meir's gloss in Radak) or emended `יְעָרוֹת` to `יַעֲלוֹת` (\"mountain goats\", Ginsberg) (Deep Web Research, §§2, 7; Radak on v. 9).",
+      "claim": "Ginsberg proposed the specified mountain-goats emendation",
+      "claim_type": "date_name_or_history",
+      "verdict": "unverifiable",
+      "evidence": [],
+      "explanation": "The verified passage mentions a mountain-goat emendation but does not name Ginsberg or establish the attribution.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "web",
+      "checked_by": "gpt-6-sol (high) judging passages gathered by gpt-6-luna (medium) with web search"
+    },
+    {
+      "id": "C82",
+      "location": "Observation 11",
+      "sentence": "Since Bishop Robert Lowth (1753), scholars",
+      "claim": "Solomon ben Meir’s gloss proposes trees",
+      "claim_type": "commentator_reading",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C83",
+      "location": "Observation 12",
+      "sentence": "First, whereas the divine beings in",
+      "claim": "Verses 1–2 use plural imperatives",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C84",
+      "location": "Observation 12",
+      "sentence": "First, whereas the divine beings in",
+      "claim": "כֻּלּוֹ has singular suffix; אֹמֵר singular participle",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C85",
+      "location": "Observation 12",
+      "sentence": "First, whereas the divine beings in vv. 1–2 were addressed with 2nd-person masculine plural imperatives (`הָבוּ ... בְּנֵי אֵלִים ... הִשְׁתַּחֲווּ`), v. 9c replaces the plural assembly with a 3rd-person masculine singular collective suffix and singular participle (`כֻּלּוֹ אֹמֵר`, \"all of it is saying\") whose grammatical antecedent—reinforced by the Masoretic *atnach* on `וּבְהֵיכָלוֹ`—is the `הֵיכָל` itself; second, this singular `כֻּלּוֹ` (`kul-LŌ`) is chosen over plural `כֻּלָּם` (`kul-LĀM`) so that it both rhymes internally with `וּבְהֵיכָלוֹ` (`ū-və-hēy-khā-LŌ kul-LŌ`) and answers the sevenfold `קוֹל` (`QŌL`, vv. 3–9a) with a phonetic near-mirror (`QŌL` → `kul-LŌ`) that endlich gives articulate speech (`אֹמֵר כָּבוֹד`) to a storm in which YHWH's `קוֹל` never spoke a quoted word.",
+      "claim": "The suffix definitively refers to the temple itself",
+      "claim_type": "grammar_or_textual",
+      "verdict": "unverifiable",
+      "evidence": [
+        {
+          "source": "Psalm 29:9",
+          "quote": "וּבְהֵיכָל֑וֹ כֻּ֝לּ֗וֹ אֹמֵ֥ר כָּבֽוֹד",
+          "url": null
+        },
+        {
+          "source": "Ibn Ezra on Psalm 29:9",
+          "quote": "וטעם שהשוכנים בו יתנו כבוד לשם ... ואחרים אמרו: כי הטעם על הכהנים והלוים העומדים להתפלל",
+          "url": null
+        }
+      ],
+      "explanation": "The accent on הֵיכָלוֹ and the singular forms are present, but they do not settle what ‘all’ denotes. Ibn Ezra reports readings involving those who inhabit the temple or stand there to pray.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C86",
+      "location": "Observation 12",
+      "sentence": "Plural imperatives and vocative in vv.",
+      "claim": "הָבוּ occurs three times in verses 1–2",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C87",
+      "location": "Observation 12",
+      "sentence": "Plural imperatives and vocative in vv.",
+      "claim": "Atnach falls on וּבְהֵיכָלוֹ",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C88",
+      "location": "Observation 12",
+      "sentence": "`קוֹל` (`QŌL`, root `קול`) occurs",
+      "claim": "Seven קוֹל instances precede verse 9c",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C89",
+      "location": "Observation 12",
+      "sentence": "`קוֹל` (`QŌL`, root `קול`) occurs",
+      "claim": "כָּבוֹד is the psalm’s sole quoted word",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C90",
+      "location": "Observation 13 — Claim",
+      "sentence": "While the noun `מַבּוּל` (\"Flood\") occurs 12 times in Genesis 6–11 and once in Psalm 29:10, the exact consonantal string `למבול` (with the prefixed preposition `לְ`) occurs **only twice in the entire Tanakh**: in Ps 29:10 (`יְהוָה לַמַּבּוּל יָשָׁב`, vocalized with the article) and in God's post-Flood covenant oath in Genesis 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל לְשַׁחֵת כָּל־בָּשָׂר`, vocalized without the article).",
+      "claim": "מַבּוּל occurs twelve times in Genesis 6–11",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Tanakh concordance, search for מבול",
+          "quote": "12 occurrences total: Genesis 6:17; 7:6, 7:7, 7:10, 7:17; 9:11, 9:15, 9:28; 10:1, 10:32; 11:10; Psalms 29:10.",
+          "url": null
+        }
+      ],
+      "explanation": "The noun occurs eleven times in Genesis and once in Psalms, twelve times in the Tanakh altogether.",
+      "suggested_fix": "Change “12 times in Genesis 6–11” to “11 times in Genesis 6–11”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C91",
+      "location": "Observation 13 — Claim",
+      "sentence": "While the noun `מַבּוּל` (\"Flood\") occurs 12 times in Genesis 6–11 and once in Psalm 29:10, the exact consonantal string `למבול` (with the prefixed preposition `לְ`) occurs **only twice in the entire Tanakh**: in Ps 29:10 (`יְהוָה לַמַּבּוּל יָשָׁב`, vocalized with the article) and in God's post-Flood covenant oath in Genesis 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל לְשַׁחֵת כָּל־בָּשָׂר`, vocalized without the article).",
+      "claim": "מַבּוּל occurs once in Psalm 29:10",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C92",
+      "location": "Observation 13 — Claim",
+      "sentence": "While the noun `מַבּוּל` (\"Flood\") occurs 12 times in Genesis 6–11 and once in Psalm 29:10, the exact consonantal string `למבול` (with the prefixed preposition `לְ`) occurs **only twice in the entire Tanakh**: in Ps 29:10 (`יְהוָה לַמַּבּוּל יָשָׁב`, vocalized with the article) and in God's post-Flood covenant oath in Genesis 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל לְשַׁחֵת כָּל־בָּשָׂר`, vocalized without the article).",
+      "claim": "Consonantal למבול occurs only in these verses",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C93",
+      "location": "Observation 13 — Claim",
+      "sentence": "While the noun `מַבּוּל` (\"Flood\") occurs 12 times in Genesis 6–11 and once in Psalm 29:10, the exact consonantal string `למבול` (with the prefixed preposition `לְ`) occurs **only twice in the entire Tanakh**: in Ps 29:10 (`יְהוָה לַמַּבּוּל יָשָׁב`, vocalized with the article) and in God's post-Flood covenant oath in Genesis 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל לְשַׁחֵת כָּל־בָּשָׂר`, vocalized without the article).",
+      "claim": "Psalm has article; Genesis lacks it",
+      "claim_type": "grammar_or_textual",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C94",
+      "location": "Observation 13 — Claim",
+      "sentence": "This unique two-occurrence consonantal link explains both why b. Zevachim 116a explicitly cites Gen 9:15 to interpret Ps 29:10 (`ה׳ לַמַּבּוּל יָשָׁב וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) as God's oath never again to destroy the world by flood, and why the psalm itself moves from a terrifying storm over `הַמָּיִם` (v. 3) to `לַמַּבּוּל יָשָׁב` (v. 10, sitting in royal restraint over the deluge) to `שָׁלוֹם` (v. 11).",
+      "claim": "Zevachim 116a explicitly cites Genesis 9:15",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Babylonian Talmud, Zevachim 116a:23, Hebrew text",
+          "quote": "נתקבצו כולם אצל בלעם הרשע, ואמרו לו: מה קול ההמון אשר שמענו? שמא מבול בא לעולם (אמר להם) – ״ה׳ למבול ישב״? [אמר להם]: ״וישב ה׳ מלך לעולם״ – כבר נשבע הקדוש ברוך הוא שאינו מביא מבול לעולם.",
+          "url": "https://www.sefaria.org/Zevachim_116a:23"
+        }
+      ],
+      "explanation": "The passage quotes Psalm 29:10 and invokes an oath, but does not quote or explicitly cite Genesis 9:15. Sefaria’s English translation supplies Genesis 9:15 as an explanatory cross-reference; it is not an explicit citation in the Hebrew passage.",
+      "suggested_fix": "Change “explicitly cites Gen 9:15” to “invokes God's post-Flood oath without explicitly citing Gen 9:15”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C95",
+      "location": "Observation 13 — Claim",
+      "sentence": "This unique two-occurrence consonantal link explains both why b. Zevachim 116a explicitly cites Gen 9:15 to interpret Ps 29:10 (`ה׳ לַמַּבּוּל יָשָׁב וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) as God's oath never again to destroy the world by flood, and why the psalm itself moves from a terrifying storm over `הַמָּיִם` (v. 3) to `לַמַּבּוּל יָשָׁב` (v. 10, sitting in royal restraint over the deluge) to `שָׁלוֹם` (v. 11).",
+      "claim": "Zevachim connects Psalm 29:10 with no further flood",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C96",
+      "location": "Observation 13 — Anchors, first bullet",
+      "sentence": "The consonantal string `למבול` occurs 2x in all Tanakh: Ps 29:10 (`לַמַּבּוּל`) and Gen 9:15 (`לְמַבּוּל` in `וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל לְשַׁחֵת כָּל־בָּשָׂר`); the other 11 occurrences of `מַבּוּל` in Gen 6–11 lack `לְ` (Distributional SQL table: Rare forms `למבול`; Concordance `מבול`).",
+      "claim": "Eleven other Genesis occurrences lack prefixed לְ",
+      "claim_type": "count_or_uniqueness",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Tanakh concordance, searches for מבול and למבול",
+          "quote": "מבול: 12 occurrences, eleven in Genesis and one in Psalms 29:10. למבול: Genesis 9:15; Psalms 29:10.",
+          "url": null
+        }
+      ],
+      "explanation": "Genesis has eleven occurrences total, including Genesis 9:15. The other ten Genesis occurrences lack the prefix.",
+      "suggested_fix": "Change “the other 11 occurrences” to “the other 10 occurrences”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C97",
+      "location": "Observation 13 — Anchors, second bullet",
+      "sentence": "In b. Zevachim 116a:23 (and Rashi and Ibn Ezra on v. 10), when the terrified kings ask Balaam whether a flood is coming (`שֶׁמָּא מַבּוּל בָּא לָעוֹלָם – ה׳ לַמַּבּוּל יָשָׁב`), Balaam answers with v. 10b (`וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) that God already swore after the Flood never again to bring a flood, quoting Gen 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל`) (Rabbinic Reception, Verse 10 — Zevachim 116a:23; Rashi and Ibn Ezra on v. 10).",
+      "claim": "Kings question Balaam; he answers with 29:10b",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C98",
+      "location": "Observation 13 — Anchors, second bullet",
+      "sentence": "In b. Zevachim 116a:23 (and Rashi and Ibn Ezra on v. 10), when the terrified kings ask Balaam whether a flood is coming (`שֶׁמָּא מַבּוּל בָּא לָעוֹלָם – ה׳ לַמַּבּוּל יָשָׁב`), Balaam answers with v. 10b (`וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) that God already swore after the Flood never again to bring a flood, quoting Gen 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל`) (Rabbinic Reception, Verse 10 — Zevachim 116a:23; Rashi and Ibn Ezra on v. 10).",
+      "claim": "Rashi recounts the frightened nations and Balaam",
+      "claim_type": "commentator_reading",
+      "verdict": "supported",
+      "evidence": [],
+      "explanation": "",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C99",
+      "location": "Observation 13 — Anchors, second bullet",
+      "sentence": "In b. Zevachim 116a:23 (and Rashi and Ibn Ezra on v. 10), when the terrified kings ask Balaam whether a flood is coming (`שֶׁמָּא מַבּוּל בָּא לָעוֹלָם – ה׳ לַמַּבּוּל יָשָׁב`), Balaam answers with v. 10b (`וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) that God already swore after the Flood never again to bring a flood, quoting Gen 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל`) (Rabbinic Reception, Verse 10 — Zevachim 116a:23; Rashi and Ibn Ezra on v. 10).",
+      "claim": "Ibn Ezra recounts the kings questioning Balaam",
+      "claim_type": "commentator_reading",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Ibn Ezra on Psalms 29:10, full entry supplied",
+          "quote": "ואחרים אמרו: כי טעם להזכיר המבול, בעבור שהזכיר חלק מנפלאותיו והוא רדת הגשם, הזכיר הפלא העצום והוא הגשם הרב בימי נח ... ויש אומרים: כי הזכיר המבול – בעבור השבועה שמים לא ישחתו כל הארץ ... ויש אומרים: כי מיום שישב לשפוט בימי המבול נראתה מלכותו",
+          "url": null
+        }
+      ],
+      "explanation": "Ibn Ezra offers explanations for mentioning the Flood, including the oath, but does not recount the kings’ exchange with Balaam.",
+      "suggested_fix": "Change “(and Rashi and Ibn Ezra on v. 10)” to “(and Rashi on v. 10; Ibn Ezra also mentions the post-Flood oath)”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C100",
+      "location": "Observation 13 — Anchors, second bullet",
+      "sentence": "In b. Zevachim 116a:23 (and Rashi and Ibn Ezra on v. 10), when the terrified kings ask Balaam whether a flood is coming (`שֶׁמָּא מַבּוּל בָּא לָעוֹלָם – ה׳ לַמַּבּוּל יָשָׁב`), Balaam answers with v. 10b (`וַיֵּשֶׁב ה׳ מֶלֶךְ לְעוֹלָם`) that God already swore after the Flood never again to bring a flood, quoting Gen 9:15 (`וְלֹא־יִהְיֶה עוֹד הַמַּיִם לְמַבּוּל`) (Rabbinic Reception, Verse 10 — Zevachim 116a:23; Rashi and Ibn Ezra on v. 10).",
+      "claim": "Balaam explicitly quotes Genesis 9:15",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Babylonian Talmud, Zevachim 116a:23, Hebrew text",
+          "quote": "[אמר להם]: ״וישב ה׳ מלך לעולם״ – כבר נשבע הקדוש ברוך הוא שאינו מביא מבול לעולם.",
+          "url": "https://www.sefaria.org/Zevachim_116a:23"
+        },
+        {
+          "source": "Genesis 9:11",
+          "quote": "וְלֹֽא־יִהְיֶ֥ה ע֛וֹד מַבּ֖וּל לְשַׁחֵ֥ת הָאָֽרֶץ׃",
+          "url": null
+        }
+      ],
+      "explanation": "Balaam states the oath but does not quote Genesis 9:15. Genesis 9:11 also states the promise, so the unspecific allusion does not identify 9:15 as its exact cited verse.",
+      "suggested_fix": "Change “quoting Gen 9:15” to “alluding to the post-Flood promise (cf. Gen 9:11, 15)”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C101",
+      "location": "Observation 13 — Anchors, third bullet",
+      "sentence": "Parallel judicial idiom `יָשַׁב לְ־` (\"sit for [judgment/governance]\", cf. Ps 9:8; 122:5) vs. `עַל־הַמָּיִם` in v. 3 (Verse-Level Notes, v. 10; Figurative Language Insights, Throne #2).",
+      "claim": "Psalm 9:8 has judicial יָשַׁב לְ־",
+      "claim_type": "grammar_or_textual",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Psalms 9:8",
+          "quote": "וַֽ֭יהֹוָה לְעוֹלָ֣ם יֵשֵׁ֑ב כּוֹנֵ֖ן לַמִּשְׁפָּ֣ט כִּסְאֽוֹ׃",
+          "url": null
+        },
+        {
+          "source": "Psalms 122:5",
+          "quote": "כִּ֤י שָׁ֨מָּה ׀ יָשְׁב֣וּ כִסְא֣וֹת לְמִשְׁפָּ֑ט כִּ֝סְא֗וֹת לְבֵ֣ית דָּוִֽד׃",
+          "url": null
+        }
+      ],
+      "explanation": "Psalm 9:8 says the LORD sits *forever* and establishes a throne *for judgment*; its לְ after the sitting verb is temporal, not “for judgment.” Psalm 122:5 does put sitting thrones and “for judgment” together.",
+      "suggested_fix": "Change the parenthesis to “cf. Ps 9:8, which links sitting forever with a throne for judgment, and 122:5, where thrones sit for judgment”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C102",
+      "location": "Observation 13 — Payoff",
+      "sentence": "What looks in b. Zevachim 116a like a homiletical leap—reading \"YHWH sat `לַמַּבּוּל`\" as a reassurance that no new flood will destroy the world—is actually anchored in a precise lexical *gezerah shavah* between the only two `למבול` forms in Scripture (Ps 29:10 and Gen 9:15), and illuminates the psalm's own logic: the storm over `הַמָּיִם` (v. 3) ends in `שָׁלוֹם` (v. 11) because YHWH's eternal throne at the `מַבּוּל` (v. 10) guarantees that `הַמָּיִם` will never again become `לְמַבּוּל`.",
+      "claim": "Zevachim derives its reading through lexical gezerah shavah",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Babylonian Talmud, Zevachim 116a:23, Hebrew text",
+          "quote": "שמא מבול בא לעולם (אמר להם) – ״ה׳ למבול ישב״? [אמר להם]: ״וישב ה׳ מלך לעולם״ – כבר נשבע הקדוש ברוך הוא שאינו מביא מבול לעולם.",
+          "url": "https://www.sefaria.org/Zevachim_116a:23"
+        }
+      ],
+      "explanation": "The two biblical forms do match, but the Talmud does not cite Genesis 9:15 or present a verbal derivation from that match. The proposed lexical link is the guide’s observation, not an attested *gezerah shavah* in Zevachim.",
+      "suggested_fix": "Change “is actually anchored in a precise lexical *gezerah shavah* between” to “can be read alongside the precise lexical match between”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C103",
+      "location": "Observation 13 — Novelty of the linkage",
+      "sentence": "Commentators note that `מַבּוּל` occurs only in Gen 6–11 and Ps 29:10, without noticing that the prefixed form `למבול` is shared exclusively by Ps 29:10 and the rainbow-covenant oath of Gen 9:15 (`הַמַּיִם לְמַבּוּל`), which is the exact verse b. Zevachim 116a uses to unlock v. 10.",
+      "claim": "Commentators explicitly note the noun’s exclusive distribution",
+      "claim_type": "commentator_reading",
+      "verdict": "unverifiable",
+      "evidence": [
+        {
+          "source": "BDB Dictionary, entry מַבּוּל, in the research bundle",
+          "quote": "מ׳ only Gn and ψ 29:10",
+          "url": null
+        }
+      ],
+      "explanation": "The distribution is correct and a lexicon explicitly notes it, but the supplied commentators’ entries do not identify a commentator who states this count. The assertion about what commentators noticed is not established by the cited material.",
+      "suggested_fix": null,
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    },
+    {
+      "id": "C104",
+      "location": "Observation 13 — Novelty of the linkage",
+      "sentence": "Commentators note that `מַבּוּל` occurs only in Gen 6–11 and Ps 29:10, without noticing that the prefixed form `למבול` is shared exclusively by Ps 29:10 and the rainbow-covenant oath of Gen 9:15 (`הַמַּיִם לְמַבּוּל`), which is the exact verse b. Zevachim 116a uses to unlock v. 10.",
+      "claim": "Zevachim uses Genesis 9:15 as its exact verse",
+      "claim_type": "rabbinic_or_liturgical",
+      "verdict": "contradicted",
+      "evidence": [
+        {
+          "source": "Babylonian Talmud, Zevachim 116a:23, Hebrew text",
+          "quote": "[אמר להם]: ״וישב ה׳ מלך לעולם״ – כבר נשבע הקדוש ברוך הוא שאינו מביא מבול לעולם.",
+          "url": "https://www.sefaria.org/Zevachim_116a:23"
+        }
+      ],
+      "explanation": "Zevachim invokes an oath without naming or quoting Genesis 9:15; Genesis 9:11 also states the no-more-flood promise.",
+      "suggested_fix": "Change “which is the exact verse b. Zevachim 116a uses to unlock v. 10” to “whose promise resembles the oath invoked in b. Zevachim 116a’s reading of v. 10”.",
+      "notes": [],
+      "sentence_found": true,
+      "stage": "local",
+      "checked_by": "gpt-6-sol (high), no web"
+    }
+  ]
+}
