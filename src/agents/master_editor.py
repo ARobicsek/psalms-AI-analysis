@@ -1199,7 +1199,10 @@ class MasterEditor(MasterEditorV2):
         # Call model (inherited methods handle the actual API call)
         forest = getattr(self, "writer_mode", "forest") == "forest"
         # Session 405: a Gemini model runs the same two forest calls (_forest_gemini).
-        if forest and model.lower().startswith("gemini-"):
+        if model.lower().startswith("gemini-"):
+            if not forest:  # Session 407: never let a Gemini model fall into the GPT branch below
+                raise ValueError(f"{model} runs only the forest writer; the one-call V4 writer needs "
+                                 "a Claude model")
             return self._call_forest_writer(model, prompt, psalm_number, debug_prefix)
         if "claude" in model.lower():
             # Session 387: the two-call forest writer is production. It takes only the

@@ -359,7 +359,7 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-5-5",
+    master_editor_model: str = "gemini-4-argon",  # Session 407: the author's choice after Pss 81, 29 (was Opus 5.5)
     synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 5.5 since S387)
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
@@ -378,6 +378,15 @@ def run_enhanced_pipeline(
     targum: bool = True,             # Session 391: a **Targum:** line per verse in the writer's psalm text (S394: ON)
 ):
     logger = get_logger("enhanced_pipeline_test")
+    # Session 407: Gemini 4 Argon is the default writer. It runs only the forest writer, and it
+    # makes more factual slips than Opus (Ps 81: 2.5-3x), so it should never ship unchecked.
+    if master_editor_model.startswith("gemini-"):
+        if writer_prompt != "forest":
+            raise ValueError(f"{master_editor_model} runs only the forest writer; for --writer-prompt "
+                             f"{writer_prompt} pass a Claude writer (--master-editor-model claude-opus-5-5)")
+        if not (fact_check and writer_revision) and not skip_writer:
+            logger.warning(f"{master_editor_model} is writing WITHOUT the fact check and its revision; "
+                           "its guides need both (more contradictions than Opus)")
     logger.info(f"=" * 80)
     logger.info(f"ENHANCED PIPELINE (TEST - MASTER WRITER) - Psalm {psalm_number}")
     if smoke_test:
@@ -1430,11 +1439,15 @@ if __name__ == "__main__":
     # was designed and A/B'd on Opus 5 via ab_writer_prompts.py, whose DEFAULT_MODEL is
     # claude-opus-5 — while this default silently stayed on 4.8 for six sessions. Ps 72
     # shipped arm E's prompt on the model it was not written for. Do not "restore" 4.8.
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5-5",
+    # Session 407: THE DEFAULT WRITER IS GEMINI 4 ARGON (the author preferred it on Pss 81 and
+    # 29). It writes the forest calls AND does the post-fact-check revision. --writer-prompt v4
+    # with no model given falls back to Opus 5.5 (the one-call prompt has no Gemini path).
+    parser.add_argument("--master-editor-model", type=str, default=None,
                        choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6",
                                 "gemini-4-argon"],
-                       help="Model for Master Writer (default: claude-opus-5-5). Session 405: gemini-4-argon "
-                            "runs the same forest calls and also does the post-fact-check revision")
+                       help="Model for Master Writer (default: gemini-4-argon since S407, which also does the "
+                            "post-fact-check revision; claude-opus-5-5 for --writer-prompt v4). "
+                            "claude-opus-5-5 = the S387-S406 production writer")
     parser.add_argument("--copy-edit-mode", choices=["full", "edits"], default=None,
                         help="Session 388: 'full' returns the whole corrected guide; 'edits' returns "
                              "FIND/REPLACE edits only, applied in Python (about half the copy editor's cost). "
@@ -1525,6 +1538,8 @@ if __name__ == "__main__":
                         help="Session 395: v2 (default) = the liturgy section from a complete per-verse "
                              "catalogue and one Opus 5.5 call; legacy = the phrase-by-phrase GPT-5.1 librarian")
     args = parser.parse_args()
+    if args.master_editor_model is None:
+        args.master_editor_model = "claude-opus-5-5" if args.writer_prompt == "v4" else "gemini-4-argon"
     os.environ["PSALMS_LITURGY"] = args.liturgy   # Session 395: read by ResearchAssembler
 
     # Set output directory with psalm-specific subdirectory

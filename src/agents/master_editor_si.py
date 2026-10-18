@@ -226,6 +226,10 @@ class MasterEditorSI(MasterEditor):
         self.logger.info(f"Saved {debug_prefix} prompt to {prompt_file}")
 
         # Call model
+        if model.lower().startswith("gemini-"):
+            # Session 407: the SI writer is the one-call V4 prompt, which has no Gemini path
+            # (Argon writes only the forest calls); the SI pipeline stays on Opus 5.5.
+            raise ValueError(f"the SI writer has no Gemini path ({model}); use a Claude model")
         if "claude" in model.lower():
             return self._call_claude_writer(model, prompt, psalm_number, debug_prefix)
         else:

@@ -431,8 +431,47 @@ def test_opus_defaults_are_opus_5_5():
     from src.utils.model_effort import effort_for
     assert MacroAnalyst.DEFAULT_MODEL == DEFAULT_MODEL == "claude-opus-5-5"
     assert effort_for("claude-opus-5-5") == "high"  # its API default is medium
+    # The SI pipeline's writer is the one-call V4 prompt, so it stays on Opus 5.5 (S407).
+    si = (ROOT / "scripts" / "run_si_pipeline.py").read_text(encoding="utf-8")
+    assert 'master_editor_model: str = "claude-opus-5-5"' in si and 'default="claude-opus-5-5"' in si
+
+
+def test_the_default_writer_is_gemini_4_argon():
+    """Session 407: the author chose Argon after Pss 81 and 29, for the writer and the revision.
+    --writer-prompt v4 with no model given falls back to Opus 5.5 (no Gemini one-call path)."""
     src = (ROOT / "scripts" / "run_enhanced_pipeline.py").read_text(encoding="utf-8")
-    assert 'master_editor_model: str = "claude-opus-5-5"' in src and 'default="claude-opus-5-5"' in src
+    assert 'master_editor_model: str = "gemini-4-argon"' in src
+    assert ('args.master_editor_model = "claude-opus-5-5" if args.writer_prompt == "v4" '
+            'else "gemini-4-argon"') in src
+    # the revision follows a Gemini writer (Opus 5.5 stays the class default for Claude writers)
+    assert 'rev_kw = {"model": master_editor_model} if master_editor_model.startswith("gemini-") else {}' in src
+
+
+def test_the_pipeline_refuses_gemini_on_the_one_call_writer():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    try:
+        import importlib
+        pipe = importlib.import_module("run_enhanced_pipeline")
+    finally:
+        sys.path.pop(0)
+    with pytest.raises(ValueError, match="only the forest writer"):
+        pipe.run_enhanced_pipeline(psalm_number=1, writer_prompt="v4")
+
+
+def test_a_gemini_writer_never_falls_into_the_gpt_branch(monkeypatch):
+    from src.agents.master_editor import MasterEditor
+    from src.agents.master_editor_si import MasterEditorSI
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    ed = MasterEditor(main_model="gemini-4-argon", cost_tracker=CostTracker(), writer_mode="v4")
+    called = []
+    monkeypatch.setattr(ed, "_call_gpt_writer", lambda *a, **k: called.append(a))
+    with pytest.raises(ValueError, match="only the forest writer"):
+        ed._perform_writer_synthesis(1, {}, {}, "", "", "", {}, "")
+    si = MasterEditorSI(main_model="gemini-4-argon", cost_tracker=CostTracker())
+    monkeypatch.setattr(si, "_call_gpt_writer", lambda *a, **k: called.append(a))
+    with pytest.raises(ValueError, match="no Gemini path"):
+        si._perform_writer_synthesis(1, {}, {}, "", "", "", {}, "")
+    assert not called
 
 
 # ---------------------------------------------------------------------------
