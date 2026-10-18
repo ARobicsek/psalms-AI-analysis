@@ -87,6 +87,19 @@ class DocumentGenerator:
         "thinking display, a summary and not a verbatim trace. It shows what the writer weighed and set "
         "aside. The guide above was afterwards fact-checked and copy edited, so where the two differ, "
         "the guide is the later text.")
+    # Session 407: a Gemini writer's appendix is Google's thought summaries, not Claude's.
+    APPENDIX_NOTE_GEMINI = (
+        "The summarized reasoning the writer ({model}) returned while writing this guide: Google's "
+        "thought summaries, written as the model thought, and not a verbatim trace. It shows what the "
+        "writer weighed and set aside. The guide above was afterwards fact-checked and copy edited, so "
+        "where the two differ, the guide is the later text.")
+
+    def appendix_note(self) -> str:
+        model = writer_model(self.psalm_num)
+        if model and model.lower().startswith("gemini-"):
+            name = " ".join(w if w[:1].isdigit() else w.capitalize() for w in model.split("-"))
+            return self.APPENDIX_NOTE_GEMINI.format(model=name)
+        return self.APPENDIX_NOTE
 
     # Session 387: the compact print layout is the default (the author: the old layout "takes more space
     # on the page than needed"). Same fonts and structure; smaller body, tighter spacing, no forced page
@@ -2065,7 +2078,7 @@ Methodological & Bibliographical Summary
         for r in h.runs:
             r.font.name = 'Aptos'
         note = doc.add_paragraph(style='AppendixText')
-        run = note.add_run(self.APPENDIX_NOTE)
+        run = note.add_run(self.appendix_note())
         run.italic = True
         run.font.color.rgb = RGBColor(0x59, 0x59, 0x59)
 
@@ -2235,6 +2248,19 @@ Methodological & Bibliographical Summary
         self._fix_complex_script_fonts()
         self.document.save(self.output_path)
         print(f"Successfully generated Word document: {self.output_path}")
+
+
+def writer_model(psalm_number: int) -> Optional[str]:
+    """The writer model recorded in the psalm's psalm_NNN_writer_calls.json, or None."""
+    try:
+        from src.utils.debug_paths import psalm_output_dir
+    except ImportError:  # pragma: no cover
+        from .debug_paths import psalm_output_dir
+    f = psalm_output_dir(psalm_number) / f"psalm_{psalm_number:03d}_writer_calls.json"
+    try:
+        return json.loads(f.read_text(encoding="utf-8")).get("model")
+    except (OSError, ValueError, AttributeError):
+        return None
 
 
 def writer_reasoning_parts(psalm_number: int) -> list:

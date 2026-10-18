@@ -1313,11 +1313,15 @@ class MasterEditor(MasterEditorV2):
         """Session 405: _forest_stream's twin for a Gemini model. Same messages (Anthropic
         shape; cache_control is dropped, Gemini caches implicitly, so no keep-alive). An
         assistant turn is call 1's saved Gemini Content, sent back with its thought
-        signatures. Thinking counts as output and is billed as output."""
+        signatures. Thinking counts as output and is billed as output. Streamed since S407:
+        unstreamed, Gemini returns one thought summary, cut off at ~3,300 chars and often a draft
+        rather than reasoning (src/utils/gemini_stream.py)."""
         import time
 
         from google import genai
         from google.genai import types
+
+        from src.utils.gemini_stream import stream_generate
 
         if getattr(self, "_gemini_client", None) is None:
             # Long calls: a 30-minute HTTP timeout (ms), as the OpenAI stages use (S387).
@@ -1339,18 +1343,17 @@ class MasterEditor(MasterEditorV2):
         for attempt in range(3):
             try:
                 t0 = time.time()
-                r = self._gemini_client.models.generate_content(model=model, contents=contents, config=config)
-                um = r.usage_metadata
+                r = stream_generate(self._gemini_client, model, contents, config)
+                um = r.usage
+                if um is None:
+                    raise RuntimeError(f"the stream reported no usage (finish_reason={r.finish})")
                 cached = um.cached_content_token_count or 0
                 u = {"input": (um.prompt_token_count or 0) - cached, "cache_write": 0, "cache_write_1h": 0,
                      "cache_read": cached,
                      "output": (um.candidates_token_count or 0) + (um.thoughts_token_count or 0)}
-                cand = r.candidates[0] if r.candidates else None
-                finish = str(getattr(cand, "finish_reason", None) or "none").split(".")[-1]
+                finish = r.finish
                 row = self._forest_record(model, label, u, time.time() - t0, finish)
-                parts = (cand.content.parts if cand is not None and cand.content else None) or []
-                text = "".join(p.text for p in parts if p.text and not p.thought)
-                thinking = "\n\n".join(p.text for p in parts if p.text and p.thought)
+                text, thinking = r.text, r.thinking
                 if finish != "STOP" or not text.strip():
                     raise RuntimeError(f"finish_reason={finish}, text chars={len(text)}")
                 self.logger.info(
@@ -1358,7 +1361,7 @@ class MasterEditor(MasterEditorV2):
                     f"cache read {u['cache_read']:,}; out {u['output']:,} "
                     f"(thinking {um.thoughts_token_count or 0:,})")
                 return {"text": text, "thinking": thinking,
-                        "content": cand.content.model_dump(mode="json", exclude_none=True)}
+                        "content": r.content.model_dump(mode="json", exclude_none=True)}
             except Exception as e:
                 if "MAX_TOKENS" in str(e):
                     raise  # the same prompt would be cut off again, at full price

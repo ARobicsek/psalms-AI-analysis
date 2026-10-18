@@ -362,6 +362,7 @@ class WriterRevision:
         self.cost_tracker = cost_tracker
         self.logger = logger
         self.model = model
+        self._gemini_client = None  # built on the first Gemini call (tests set a fake)
 
     def _log(self, msg: str, level: str = "info"):
         if self.logger:
@@ -369,12 +370,15 @@ class WriterRevision:
 
     def _call_gemini(self, user: str) -> Tuple[str, str, Dict[str, int], float]:
         """Session 405: the same revision on a Gemini writer (thinking "high" = REVISION_EFFORT).
-        Gemini reports cached input inside prompt_token_count, and thinking apart from output."""
+        Gemini reports cached input inside prompt_token_count, and thinking apart from output.
+        Streamed since S407, for the whole thought summary (src/utils/gemini_stream.py)."""
         import os
 
         from google import genai
         from google.genai import types
-        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"],
+
+        from src.utils.gemini_stream import stream_generate
+        client = self._gemini_client or genai.Client(api_key=os.environ["GEMINI_API_KEY"],
                               http_options=types.HttpOptions(timeout=1_800_000))
         config = types.GenerateContentConfig(
             system_instruction=SYSTEM, max_output_tokens=REVISION_MAX_TOKENS,
@@ -383,8 +387,10 @@ class WriterRevision:
         for attempt in range(3):
             try:
                 t0 = time.time()
-                r = client.models.generate_content(model=self.model, contents=user, config=config)
-                um = r.usage_metadata
+                r = stream_generate(client, self.model, user, config)
+                um = r.usage
+                if um is None:
+                    raise RuntimeError(f"the stream reported no usage (finish_reason={r.finish})")
                 cached = um.cached_content_token_count or 0
                 u = {"input": (um.prompt_token_count or 0) - cached,
                      "output": (um.candidates_token_count or 0) + (um.thoughts_token_count or 0),
@@ -393,11 +399,7 @@ class WriterRevision:
                     self.cost_tracker.add_usage(model=self.model, input_tokens=u["input"],
                                                 output_tokens=u["output"], thinking_tokens=0,
                                                 cache_read_tokens=u["cache_read"])
-                cand = r.candidates[0] if r.candidates else None
-                finish = str(getattr(cand, "finish_reason", None) or "none").split(".")[-1]
-                parts = (cand.content.parts if cand is not None and cand.content else None) or []
-                text = "".join(p.text for p in parts if p.text and not p.thought)
-                thinking = "\n\n".join(p.text for p in parts if p.text and p.thought)
+                finish, text, thinking = r.finish, r.text, r.thinking
                 if finish != "STOP" or not text.strip():
                     raise RuntimeError(f"finish_reason={finish}, text chars={len(text)}")
                 return text, thinking, u, time.time() - t0

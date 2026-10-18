@@ -250,24 +250,37 @@ def test_forest_writer_two_calls_end_to_end(tmp_path, monkeypatch):
     assert json.loads((out / "psalm_077_forest_essay_call.json").read_text(encoding="utf-8"))["verse_call_done"]
 
 
-def _gemini_reply(text, thought, prompt, cached, out, thoughts):
+def _gemini_reply(text, thought, prompt, cached, out, thoughts, finish="STOP"):
+    """Session 407: a STREAMED reply, chunk by chunk, as the probe saw Gemini 4 Argon send one:
+    one chunk per thought summary, the answer in fragments, the thought signature on an empty
+    last text part, the usage and the finish reason on the last chunk. `thought` is one summary
+    or a list of them."""
     from google.genai import types
-    return types.GenerateContentResponse(
-        candidates=[types.Candidate(finish_reason="STOP", content=types.Content(role="model", parts=[
-            types.Part(text=thought, thought=True, thought_signature=b"sig-" + thought.encode()),
-            types.Part(text=text)]))],
-        usage_metadata=types.GenerateContentResponseUsageMetadata(
-            prompt_token_count=prompt, cached_content_token_count=cached,
-            candidates_token_count=out, thoughts_token_count=thoughts))
+    summaries = [thought] if isinstance(thought, str) else list(thought)
+    half = len(text) // 2
+    parts = ([types.Part(text=t, thought=True) for t in summaries]
+             + [types.Part(text=text[:half]), types.Part(text=text[half:]),
+                types.Part(text="", thought_signature=b"sig-" + summaries[0].encode())])
+    chunks = []
+    for i, p in enumerate(parts):
+        last = i == len(parts) - 1
+        chunks.append(types.GenerateContentResponse(
+            candidates=[types.Candidate(finish_reason=finish if last else None,
+                                        content=types.Content(role="model", parts=[p]))],
+            usage_metadata=types.GenerateContentResponseUsageMetadata(
+                prompt_token_count=prompt, cached_content_token_count=cached,
+                candidates_token_count=out, thoughts_token_count=thoughts) if last else None))
+    return chunks
 
 
 class _GeminiModels:
+    """No generate_content: the Gemini calls must stream (S407)."""
     def __init__(self, replies):
         self.replies, self.calls = list(replies), []
 
-    def generate_content(self, **kw):
+    def generate_content_stream(self, **kw):
         self.calls.append(kw)
-        return self.replies.pop(0)
+        return iter(self.replies.pop(0))
 
 
 def _run_gemini_writer(tmp_path, monkeypatch, replies):
@@ -301,7 +314,9 @@ def test_forest_writer_on_gemini_replays_the_essay_turn_with_its_signatures(tmp_
     assert c1["config"].thinking_config.thinking_level.lower() == "high"
     assert c2["contents"][0] == c1["contents"][0], "call 2 must open with call 1's exact first turn"
     replay = c2["contents"][1]
-    assert replay.role == "model" and replay.parts[0].thought_signature == b"sig-essay thoughts"
+    assert replay.role == "model" and replay.parts[0].thought and replay.parts[0].text == "essay thoughts"
+    assert len(replay.parts) == 2, "the answer's streamed fragments are replayed as one part"
+    assert replay.parts[1].text == essay and replay.parts[1].thought_signature == b"sig-essay thoughts"
     assert "LITURGY AND VERSE COMMENTARY" in c2["contents"][2].parts[0].text
     assert res["introduction"].startswith("The essay.")
     assert res["writer_telemetry"]["effort"] == "high" and res["writer_telemetry"]["essay_edit"] is None
@@ -332,6 +347,67 @@ def test_forest_writer_edits_a_long_essay_before_the_verse_call(tmp_path, monkey
     assert (out / "psalm_077_essay_draft_before_edit.md").read_text(encoding="utf-8") == draft
     thinking = (out / "psalm_077_master_writer_v4_forest_essay_thinking.txt").read_text(encoding="utf-8")
     assert thinking.startswith("draft thoughts") and thinking.endswith("edit thoughts")
+
+
+def test_forest_writer_on_gemini_keeps_every_streamed_thought_summary(tmp_path, monkeypatch):
+    """Session 407: unstreamed, Gemini returned one summary cut off at ~3,300 chars (Ps 29's was
+    the opening of an essay draft). Streamed, each stage of the thinking comes as its own summary;
+    the capture keeps all of them, in order, and replays them all."""
+    essay = "### INTRODUCTION ESSAY\n\nThe essay."
+    ed, models, res = _run_gemini_writer(tmp_path, monkeypatch, [
+        _gemini_reply(essay, ["**Weighing**\n\nthree readings\n\n", "**Thesis**\n\nthe voice"], 200000, 0, 4000, 6000),
+        _gemini_reply(GOOD_REST, ["**Verses**\n\nplan", "**Liturgy**\n\nsurvey"], 206000, 190000, 30000, 9000)])
+    out = tmp_path / "output" / "psalm_77"
+    assert (out / "psalm_077_master_writer_v4_forest_essay_thinking.txt").read_text(encoding="utf-8") == \
+        "**Weighing**\n\nthree readings\n\n**Thesis**\n\nthe voice"
+    assert (out / "psalm_077_master_writer_v4_forest_verses_thinking.txt").read_text(encoding="utf-8") == \
+        "**Verses**\n\nplan\n\n**Liturgy**\n\nsurvey"
+    replay = models.calls[1]["contents"][1]
+    assert [p.thought for p in replay.parts] == [True, True, None]
+    assert res["verse_commentary"].startswith("**Verse 1**")
+
+
+def test_forest_writer_on_gemini_does_not_retry_a_cut_off_stream(tmp_path, monkeypatch):
+    """A MAX_TOKENS stop is raised at once: the same prompt would be cut off again, at full price."""
+    import pytest
+    with pytest.raises(RuntimeError, match="MAX_TOKENS"):
+        _run_gemini_writer(tmp_path, monkeypatch, [
+            _gemini_reply("### INTRODUCTION ESSAY\n\nThe ess", "t", 200000, 0, 65000, 500, finish="MAX_TOKENS")])
+
+
+def test_writer_revision_on_gemini_streams_and_bills(monkeypatch):
+    """Session 407: the Gemini revision streams too; cached input is split out of the prompt count
+    and thinking is billed as output."""
+    from src.agents import writer_revision as wr
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
+    rev = wr.WriterRevision(cost_tracker=CostTracker(), model="gemini-4-argon")
+    models = _GeminiModels([_gemini_reply("REVISED", ["**Claim 1**\n\nfix", "**Claim 2**\n\nkeep"],
+                                          30000, 10000, 2000, 3000)])
+    rev._gemini_client = SimpleNamespace(models=models)
+    text, thinking, u, _ = rev._call("the user turn")
+    assert text == "REVISED" and thinking == "**Claim 1**\n\nfix\n\n**Claim 2**\n\nkeep"
+    assert models.calls[0]["contents"] == "the user turn"
+    assert u == {"input": 20000, "output": 5000, "cache_read": 10000, "cache_write": 0}
+    usage = rev.cost_tracker.usage_by_model["gemini-4-argon"]
+    assert (usage.input_tokens, usage.cache_read_tokens, usage.output_tokens) == (20000, 10000, 5000)
+
+
+def test_appendix_note_names_the_writer_model(tmp_path, monkeypatch):
+    """Session 407: an Argon guide's appendix said "the writer (Claude)"; the note now reads the
+    model from psalm_NNN_writer_calls.json, and a Claude (or unrecorded) writer keeps the old note."""
+    import src.utils.debug_paths as dp
+    from src.utils.document_generator import DocumentGenerator, writer_model
+    monkeypatch.setattr(dp, "OUTPUT_ROOT", tmp_path)
+    d = tmp_path / "psalm_77"
+    d.mkdir()
+    gen = DocumentGenerator.__new__(DocumentGenerator)
+    gen.psalm_num = 77
+    assert writer_model(77) is None and gen.appendix_note() == DocumentGenerator.APPENDIX_NOTE
+    (d / "psalm_077_writer_calls.json").write_text(json.dumps({"model": "claude-opus-5-5"}), encoding="utf-8")
+    assert gen.appendix_note() == DocumentGenerator.APPENDIX_NOTE
+    (d / "psalm_077_writer_calls.json").write_text(json.dumps({"model": "gemini-4-argon"}), encoding="utf-8")
+    note = gen.appendix_note()
+    assert "(Gemini 4 Argon)" in note and "Google's thought summaries" in note and "Claude" not in note
 
 
 def test_forest_writer_refuses_effort_max(monkeypatch):
