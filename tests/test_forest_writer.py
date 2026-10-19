@@ -39,7 +39,8 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     (fw.S401_EDITS: echoes, humour, other readers, the writer's own judgment), the Session 403
     language edits (fw.S403_LANGUAGE_EDITS: Greek words transliterated, other-language passages in
     English only), the Session 404 argument edits (fw.S404_ESSAY_EDITS) and the Session 405 edits
-    (fw.S405_EDITS: the engaging teacher, clear sentences, punctuated Hebrew)."""
+    (fw.S405_EDITS: the engaging teacher, clear sentences, punctuated Hebrew), and the Session 409
+    inputs-list edit (fw.S409_ESSAY_EDITS: shared passages replaced the related psalms)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
@@ -49,6 +50,7 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S404_ESSAY_EDITS)
     expected = fw._apply_edits(expected, fw.S405_EDITS["essay"])
+    expected = fw._apply_edits(expected, fw.S409_ESSAY_EDITS)
     assert fw.essay_instructions(76, inputs) == expected
 
 

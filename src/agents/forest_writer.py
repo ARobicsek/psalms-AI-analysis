@@ -729,12 +729,19 @@ S405_EDITS = {
     ),
 }
 
+# Session 409: the Related Psalms Analysis section is gone from the bundle; what replaced it
+# lists only the passages the psalm shares word for word with another text (most psalms: none).
+S409_ESSAY_EDITS = (
+    ("liturgical uses; related psalms;", "liturgical uses; passages it shares with other texts;"),
+)
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S403_LANGUAGE_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S404_ESSAY_EDITS)
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S405_EDITS["essay"])
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S409_ESSAY_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)

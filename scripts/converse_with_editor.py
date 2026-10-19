@@ -197,6 +197,7 @@ def parse_research_bundle(filepath: Path) -> dict:
         "Traditional Jewish Commentaries": "Traditional commentaries",
         "Liturgical Usage": "Liturgical usage",
         "Related Psalms": "Related psalms",
+        "Shared Passages": "Shared passages",
         "Rabbi Jonathan Sacks References": "Sacks references",
         "Deep Web Research": "Deep web research",
         "Scholarly Context (RAG)": "Scholarly context (RAG)",

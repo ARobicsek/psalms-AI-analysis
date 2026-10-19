@@ -43,7 +43,6 @@ if __name__ == '__main__':
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.rag_manager import RAGManager, RAGContext
-    from src.agents.related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
     from src.agents.figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
     from src.agents.literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 else:
@@ -57,7 +56,6 @@ else:
     from .sacks_librarian import SacksLibrarian, SacksReference
     from .sacks_librarian import SacksLibrarian, SacksReference
     from .rag_manager import RAGManager, RAGContext
-    from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
     from .figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
     from .literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 
@@ -353,8 +351,6 @@ class ResearchBundle:
     sacks_references: Optional[List[SacksReference]]  # Rabbi Jonathan Sacks references to this psalm
     sacks_markdown: Optional[str]  # Pre-formatted Sacks markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
-    related_psalms: Optional[List[RelatedPsalmMatch]]  # Related psalms from top connections analysis
-    related_psalms_markdown: Optional[str]  # Pre-formatted related psalms markdown for LLM consumption
     request: ResearchRequest
     # Deep Web Research (Gemini Deep Research output)
     deep_research_content: Optional[str] = None  # Raw content from deep research file
@@ -372,6 +368,10 @@ class ResearchBundle:
     # Session 384: deterministic shared-vocabulary parallels (intertext radar)
     shared_vocabulary_markdown: Optional[str] = None
     shared_vocabulary_count: int = 0
+    # Session 409: doublets and shared lines (src/concordance/shared_passages.py); replaces
+    # the Related Psalms Analysis section. Empty for most psalms.
+    shared_passages_markdown: Optional[str] = None
+    shared_passages_refs: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -383,7 +383,7 @@ class ResearchBundle:
             'commentary': [c.to_dict() for c in self.commentary_bundles] if self.commentary_bundles else [],
             'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
             'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
-            'related_psalms': [r.to_dict() for r in self.related_psalms] if self.related_psalms else [],
+            'shared_passages': list(self.shared_passages_refs),
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
@@ -397,7 +397,7 @@ class ResearchBundle:
                 'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
                 'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
-                'related_psalms': len(self.related_psalms) if self.related_psalms else 0,
+                'shared_passages': len(self.shared_passages_refs),
                 'deep_research_included': self.deep_research_included,
                 'deep_research_removed_for_space': self.deep_research_removed_for_space,
                 'deep_research_chars': len(self.deep_research_content) if self.deep_research_content else 0,
@@ -579,6 +579,10 @@ class ResearchBundle:
         # LLM-chosen concordance searches, which it complements.
         if self.shared_vocabulary_markdown:
             md += self.shared_vocabulary_markdown
+            md += "---\n\n"
+        # Session 409: doublets and shared lines; absent when the psalm shares no wording.
+        if self.shared_passages_markdown:
+            md += self.shared_passages_markdown
             md += "---\n\n"
 
         # Figurative language section
@@ -774,11 +778,6 @@ class ResearchBundle:
 
 
 
-        # Related Psalms section
-        if self.related_psalms_markdown:
-            md += self.related_psalms_markdown
-            md += "\n---\n\n"
-
         # Deep Web Research section (Gemini Deep Research output)
         if self.deep_research_included and self.deep_research_content:
             md += "## Deep Web Research\n\n"
@@ -806,7 +805,7 @@ class ResearchBundle:
         md += f"- **Liturgical prayers (aggregated)**: {summary['liturgical_prayers_aggregated']}\n"
         md += f"- **Rabbi Sacks references**: {summary['sacks_references']}\n"
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
-        md += f"- **Related psalms analyzed**: {summary['related_psalms']}\n"
+        md += f"- **Shared passages listed**: {summary['shared_passages']}\n"
         md += f"- **Deep web research included**: {'Yes' if summary['deep_research_included'] else 'No'}\n"
         md += f"- **Literary echoes included**: {'Yes' if summary['literary_echoes_included'] else 'No'}\n"
         
@@ -986,8 +985,6 @@ class ResearchAssembler:
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
 
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
-        self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
-        self.related_psalms_librarian.logger = self.logger  # Pass logger for debug output
 
         # Figurative Curator for LLM-enhanced figurative insights (Session 226)
         self.use_figurative_curator = use_figurative_curator
@@ -1248,18 +1245,22 @@ class ResearchAssembler:
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
 
-        # Fetch related psalms from top connections analysis (ALWAYS included)
-        related_psalms = self.related_psalms_librarian.get_related_psalms(request.psalm_chapter)
-        related_psalms_markdown = None
-        if related_psalms:
-            related_psalms_markdown = self.related_psalms_librarian.format_for_research_bundle(
-                request.psalm_chapter,
-                related_psalms,
-                max_size_chars=50000  # Reduced from default 100KB to prevent token limit overflow
-            )
+        # Session 409: doublets and shared lines, computed over the whole Bible. Replaces the
+        # Related Psalms Analysis section (5-23K chars of word lists; this is ~0.4K on average,
+        # nothing for most psalms). Never fatal.
+        shared_passages_markdown, shared_passages_refs = "", []
+        try:
+            try:
+                from ..concordance.shared_passages import compute_shared_passages
+            except ImportError:
+                from src.concordance.shared_passages import compute_shared_passages
+            shared_passages_markdown, shared_passages_refs = compute_shared_passages(request.psalm_chapter)
             if self.logger:
-                self.logger.info(f"Related Psalms for Psalm {request.psalm_chapter}: "
-                               f"{len(related_psalms)} matches, markdown size: {len(related_psalms_markdown)} chars")
+                self.logger.info(f"Shared passages: {len(shared_passages_refs)} listed, "
+                                 f"{len(shared_passages_markdown):,} chars")
+        except Exception as e:
+            if self.logger:
+                self.logger.warning(f"Shared passages skipped: {e}")
 
         # Load deep research content (Gemini Deep Research output) if available
         deep_research_content = self._load_deep_research(request.psalm_chapter)
@@ -1301,8 +1302,6 @@ class ResearchAssembler:
             sacks_references=sacks_references if sacks_references else None,
             sacks_markdown=sacks_markdown if sacks_markdown else None,
             rag_context=rag_context,
-            related_psalms=related_psalms if related_psalms else None,
-            related_psalms_markdown=related_psalms_markdown if related_psalms_markdown else None,
             request=request,
             # Deep research - initially included if available, may be removed for space later
             deep_research_content=deep_research_content,
@@ -1317,6 +1316,8 @@ class ResearchAssembler:
             models_used=models_used,
             shared_vocabulary_markdown=shared_vocabulary_markdown or None,
             shared_vocabulary_count=shared_vocabulary_count,
+            shared_passages_markdown=shared_passages_markdown or None,
+            shared_passages_refs=shared_passages_refs,
         )
 
     def assemble_from_json(self, json_str: str) -> ResearchBundle:

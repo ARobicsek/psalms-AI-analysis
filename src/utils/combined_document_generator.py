@@ -29,12 +29,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
-    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
+    from src.utils.pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines, intertext_methods_line
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
-    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines
+    from .pipeline_summary import concordance_methods_summary, echoes_methods_lines, deep_research_methods_value, reception_methods_lines, intertext_methods_line
 
 
 def add_page_number(paragraph):
@@ -1221,17 +1221,8 @@ class CombinedDocumentGenerator:
             figurative_breakdown_str = f" ({'; '.join(items)})"
 
         sacks_count = research_data.get('sacks_references_count', 0)
-        related_psalms_count = research_data.get('related_psalms_count', 0)
-        related_psalms_list = research_data.get('related_psalms_list', [])
-
-        # Format related psalms display: count and list
-        if related_psalms_count > 0 and related_psalms_list:
-            psalms_list_str = ', '.join(str(p) for p in related_psalms_list)
-            related_psalms_str = f"{related_psalms_count} (Psalms {psalms_list_str})"
-        elif related_psalms_count > 0:
-            related_psalms_str = str(related_psalms_count)
-        else:
-            related_psalms_str = 'N/A'
+        # Session 409: one shared implementation (pipeline_summary.intertext_methods_line)
+        intertext_label, intertext_value = intertext_methods_line(research_data)
 
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
@@ -1273,7 +1264,7 @@ Methodological & Bibliographical Summary
 **Concordance Searches**: {concordance_summary}
 **Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
-{reception_block}**Similar Psalms Analyzed**: {related_psalms_str}
+{reception_block}**{intertext_label}**: {intertext_value}
 **Deep Web Research**: {deep_research_str}
 **Literary Echoes Research**: {literary_echoes_str}
 **Master Editor Prompt Size**: {prompt_chars_str}

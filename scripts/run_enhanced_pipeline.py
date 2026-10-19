@@ -201,33 +201,6 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
     return stats
 
 
-def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
-    """Parse related psalms section."""
-    related_psalms = []
-    if "## Related Psalms Analysis" not in markdown_content:
-        return related_psalms
-
-    start_match = re.search(r'## Related Psalms Analysis', markdown_content)
-    if not start_match:
-        return related_psalms
-
-    start_pos = start_match.end()
-    end_match = re.search(r'\n## [^#]', markdown_content[start_pos:])
-    if end_match:
-        end_pos = start_pos + end_match.start()
-        related_section = markdown_content[start_pos:end_pos]
-    else:
-        related_section = markdown_content[start_pos:]
-
-    psalm_matches = re.findall(r'### Psalm (\d+)', related_section)
-    for psalm_num_str in psalm_matches:
-        try:
-            related_psalms.append(int(psalm_num_str))
-        except ValueError:
-            pass
-    return related_psalms
-
-
 def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> tuple:
     """Extract introduction and verse commentary sections from a copy-edited markdown file.
     
@@ -739,6 +712,14 @@ def run_enhanced_pipeline(
             _record_stage("liturgy section (replaced in the reused bundle)", _snap)
             with open(research_file, 'w', encoding='utf-8') as f:
                 f.write(research_bundle_content)
+        # Session 409: a pre-S409 bundle carries the Related Psalms Analysis section; swap in
+        # the Shared Passages section ($0; a current bundle is left alone).
+        from src.concordance.shared_passages import refresh_bundle_shared_passages
+        research_bundle_content, _sp_new = refresh_bundle_shared_passages(research_bundle_content, psalm_number)
+        if _sp_new:
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+            logger.info("[STEP 2] Reused research bundle: Related Psalms replaced by Shared Passages")
 
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
@@ -777,10 +758,8 @@ def run_enhanced_pipeline(
             micro_model_used = MicroAnalystV2.DEFAULT_MODEL
         tracker.track_model_for_step("micro_analysis", micro_model_used)
 
-        related_psalms = _parse_related_psalms_from_markdown(research_bundle_content)
-        if related_psalms:
-            tracker.research.related_psalms_count = len(related_psalms)
-            tracker.research.related_psalms_list = related_psalms
+        from src.concordance.shared_passages import parse_shared_passages_refs
+        tracker.research.shared_passages_refs = parse_shared_passages_refs(research_bundle_content)
 
         tracker.save_json(str(output_path))
         logger.info(f"Research stats extracted from markdown and saved")

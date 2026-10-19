@@ -78,8 +78,11 @@ class ResearchStats:
     figurative_parallels_reviewed: Dict[str, int] = field(default_factory=dict)  # vehicle -> count (for curated output)
     commentary_counts: Dict[str, int] = field(default_factory=dict)  # commentator -> count
     sacks_references_count: int = 0  # Rabbi Jonathan Sacks references
-    related_psalms_count: int = 0  # Related psalms from top connections analysis
-    related_psalms_list: List[int] = field(default_factory=list)  # List of psalm numbers analyzed
+    related_psalms_count: int = 0  # Pre-S409 runs: Related psalms from top connections analysis
+    related_psalms_list: List[int] = field(default_factory=list)  # Pre-S409 runs: psalm numbers analyzed
+    # Session 409: references the Shared Passages section lists. None = a run that never had
+    # the section (its methods page keeps the old "Similar Psalms Analyzed" line).
+    shared_passages_refs: Optional[List[str]] = None
 
 
 
@@ -313,10 +316,8 @@ class PipelineSummaryTracker:
         if research_bundle.sacks_references:
             self.research.sacks_references_count = len(research_bundle.sacks_references)
 
-        # Related psalms (from top connections analysis)
-        if research_bundle.related_psalms:
-            self.research.related_psalms_count = len(research_bundle.related_psalms)
-            self.research.related_psalms_list = [p.psalm_number for p in research_bundle.related_psalms]
+        # Session 409: shared passages (replaced the related-psalms analysis)
+        self.research.shared_passages_refs = list(getattr(research_bundle, 'shared_passages_refs', []) or [])
 
 
 
@@ -692,6 +693,9 @@ class PipelineSummaryTracker:
                 'sacks_references_count': self.research.sacks_references_count,
                 'related_psalms_count': self.research.related_psalms_count,
                 'related_psalms_list': self.research.related_psalms_list,
+                'shared_passages_refs': self.research.shared_passages_refs,
+                # Session 409: never saved before, so the methods page never showed the radar
+                'shared_vocabulary_count': self.research.shared_vocabulary_count,
                 'research_bundle_chars': self.research.research_bundle_chars,
                 'research_bundle_tokens': self.research.research_bundle_tokens,
                 'deep_research_available': self.research.deep_research_available,
@@ -800,6 +804,27 @@ def deep_research_methods_value(research_data: Dict[str, Any]) -> str:
     if research_data.get('deep_research_available', False):
         return "No (available but not included)"
     return "No"
+
+
+SHARED_PASSAGES_SHOWN = 12  # references printed on the methods page
+
+
+def intertext_methods_line(research_data: Dict[str, Any]) -> Tuple[str, str]:
+    """The methods page's shared-passages line as (label, value); one implementation for
+    the two renderers that print it (Session 409). A run from before the Shared Passages
+    section keeps its old 'Similar Psalms Analyzed' line."""
+    refs = research_data.get('shared_passages_refs')
+    if refs is not None:
+        if not refs:
+            return "Shared Passages (Doublets, Shared Lines)", "None found"
+        shown = "; ".join(refs[:SHARED_PASSAGES_SHOWN])
+        more = f"; and {len(refs) - SHARED_PASSAGES_SHOWN} more" if len(refs) > SHARED_PASSAGES_SHOWN else ""
+        return "Shared Passages (Doublets, Shared Lines)", f"{len(refs)} ({shown}{more})"
+    count = research_data.get('related_psalms_count', 0) or 0
+    listed = research_data.get('related_psalms_list', []) or []
+    if count and listed:
+        return "Similar Psalms Analyzed", f"{count} (Psalms {', '.join(str(p) for p in listed)})"
+    return "Similar Psalms Analyzed", str(count) if count else 'N/A'
 
 
 def reception_methods_lines(research_data: Dict[str, Any]) -> List[Tuple[str, str]]:
