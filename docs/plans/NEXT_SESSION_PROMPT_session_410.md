@@ -27,6 +27,13 @@ Ask for it. Things the author may notice, already known:
   checked against the verse it comments on; after the revision 1. Harmless this time (the copy editor sees the
   post-revision report, and the revision changed no citation), but the pre-revision report is noisy. Offer to look at
   how quotes are paired with citations; do not build unasked.
+- **Shimush Tehillim (the author asked, then chose "doing nothing right now")**: the `#### Practical Kabbalah`
+  subsection is missing from Pss 81 and 83. The research and the prompt still carry it; Argon omitted it (Ps 81: the
+  assignment was unconfirmed, a defensible omission; Ps 83: a confirmed wartime neck-amulet entry dropped by misapplying
+  the echoes' never-repeat rule). Offered: (1) a `forest_writer` edit making the subsection required when the research
+  has the material, never a repeat, Hebrew quoted only where not `[unconfirmed]`; (2) a $0 post-writer warning into the
+  log and editors' report; (3) Ps 83 itself (writer onward ~$3, or a drafted subsection for approval). Raise only if
+  the author brings it up again or it recurs; watch the next guide for it.
 - **`--skip-micro` never refreshes a bundle's deep research** (carried from the 409 prompt §1): echoes, liturgy and now
   shared passages have in-place swaps; deep research has none. A `replace_deep_research_section` would close it.
 
