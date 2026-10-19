@@ -327,6 +327,9 @@ class PipelineSummaryTracker:
             self.research.deep_research_included = research_bundle.deep_research_included
             self.research.deep_research_removed_for_space = research_bundle.deep_research_removed_for_space
             self.research.deep_research_chars = len(research_bundle.deep_research_content) if research_bundle.deep_research_content else 0
+            # Session 409: only the --skip-micro path (parsed from the markdown) set this, so every
+            # full run's methods page said "Yes" for a report corrected against its check.
+            self.research.deep_research_checked = bool(getattr(research_bundle, 'deep_research_checked', False))
 
         # Literary Echoes (Cross-cultural literary comparisons)
         if hasattr(research_bundle, 'literary_echoes_content'):

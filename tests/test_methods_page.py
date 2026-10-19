@@ -292,3 +292,24 @@ def test_document_generator_options_are_keyword_only():
     assert "reader_questions_path" not in params
     assert params["appendix_parts"].kind is inspect.Parameter.KEYWORD_ONLY
     assert params["compact"].kind is inspect.Parameter.KEYWORD_ONLY
+
+
+def test_a_full_run_records_a_checked_deep_research_report():
+    """Session 409: track_research_bundle never copied deep_research_checked, so every full run's
+    methods page (Pss 29, 81, 82, 83) said 'Yes' for a report corrected against its check."""
+    import inspect
+    from src.agents.research_assembler import ResearchBundle, ResearchRequest
+    from src.utils.pipeline_summary import PipelineSummaryTracker
+    req = ResearchRequest(**{k: (83 if k == 'psalm_chapter' else [])
+                             for k, p in inspect.signature(ResearchRequest).parameters.items()
+                             if p.default is inspect._empty})
+    for checked in (True, False):
+        b = ResearchBundle(psalm_chapter=83, lexicon_bundle=None, concordance_bundles=[], figurative_bundles=[],
+                           commentary_bundles=None, liturgical_usage=None, liturgical_usage_aggregated=None,
+                           liturgical_markdown=None, sacks_references=None, sacks_markdown=None, rag_context=None,
+                           request=req, deep_research_content="report", deep_research_included=True,
+                           deep_research_checked=checked, shared_passages_refs=["Ps 97:9"])
+        t = PipelineSummaryTracker(83)
+        t.track_research_bundle(b)
+        assert t.research.deep_research_checked is checked
+        assert t.research.shared_passages_refs == ["Ps 97:9"]
