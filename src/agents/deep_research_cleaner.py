@@ -37,6 +37,15 @@ Cost: the input is counted first (free endpoint, or a 2-chars-a-token estimate f
 and max_tokens is cut so input + the most output we allow stays under MAX_COST_USD. When a
 long report leaves Sonnet less than MIN_SINGLE_PASS_OUTPUT tokens, the run falls back to
 Haiku with the sweep; if even that cannot fit, the call is refused.
+
+Session 409: the cap is 20 cents (was 10). At 10, every report in the longer S393 format
+(Pss 29, 82, 83: 31-38K tokens with the check) left Sonnet under MIN_SINGLE_PASS_OUTPUT and
+went to Haiku, whose first pass gets half the cap: Ps 29's was cut off and nothing was
+written. At 20, Sonnet gets its full MAX_OUTPUT_TOKENS on all of them, and keeps
+MIN_SINGLE_PASS_OUTPUT up to ~80K input tokens. A run costs what Sonnet writes (5-11 cents
+so far), not the cap. And a cleanup that fails now STOPS the pipeline (ensure_clean raises
+DeepResearchCleanupFailed; the author: "let's stop if it hits the cap"): before S409 the
+bundle silently fell back to the unchecked report, whose errors the check had listed.
 """
 
 from __future__ import annotations
@@ -56,7 +65,7 @@ logger = logging.getLogger(__name__)
 DEEP_RESEARCH_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "deep_research"
 MODEL = "claude-sonnet-5-5"
 FALLBACK_MODEL = "claude-haiku-4-5-20251001"
-MAX_COST_USD = 0.10
+MAX_COST_USD = 0.20                       # Session 409 (was 0.10: long reports went to Haiku and failed)
 MIN_SINGLE_PASS_OUTPUT = 4000             # Sonnet's Ps 78 edit list: 3,049 tokens incl. thinking
 SWEEP_MODELS = {FALLBACK_MODEL}           # Haiku misses repeats without a second pass (Ps 78)
 LOW_EFFORT_MODELS = {"claude-sonnet-5-5", "claude-sonnet-5"}
@@ -407,15 +416,40 @@ def clean(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None, cl
         return total
 
 
+class DeepResearchCleanupFailed(RuntimeError):
+    """A check file exists but the cleanup left no current clean file. The pipeline stops on
+    this rather than build a guide on the unchecked report (Session 409)."""
+
+
+def ensure_clean(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None
+                 ) -> Optional[CleanResult]:
+    """Run the cleanup when a check is newer than the clean file (None when nothing needed
+    doing). Raises DeepResearchCleanupFailed when it leaves no current clean file, whatever
+    the reason: the cap (refused, or an edit list cut off) or an error."""
+    if not needs_cleaning(psalm, directory):
+        return None
+    r = clean(psalm, directory, cost_tracker=cost_tracker)
+    logger.info(f"Deep research cleanup for Psalm {psalm}: {r.status} {r.message}".rstrip())
+    if not clean_is_current(paths(psalm, directory)):
+        raise DeepResearchCleanupFailed(
+            f"Deep research cleanup for Psalm {psalm} did not produce a checked report "
+            f"({r.status}: {r.message or 'no message'}; ${r.cost:.2f} spent, cap ${MAX_COST_USD:.2f}). "
+            f"Stopped so that no guide is built on the unchecked report, which the independent check "
+            f"found errors in. To fix: clean it with a higher cap, e.g. python -c \"import "
+            f"src.agents.deep_research_cleaner as d; print(d.clean({psalm}, max_cost=0.40))\", "
+            f"then re-run the pipeline (add --resume to keep the steps already paid for).")
+    return r
+
+
 def load_for_bundle(psalm: int, directory: Path = DEEP_RESEARCH_DIR, cost_tracker=None,
                     auto_clean: bool = True) -> Tuple[Optional[str], str]:
     """(content for the bundle or None, kind) where kind is 'checked' (the clean file) or
-    'unchecked' (the raw report). Runs the cleanup first when a check file is newer than the
-    clean file. Headings are demoted either way."""
+    'unchecked' (the raw report: only when there is no check file, or auto_clean=False). Runs
+    the cleanup first when a check file is newer than the clean file, and raises
+    DeepResearchCleanupFailed if that fails. Headings are demoted either way."""
     p = paths(psalm, directory)
-    if auto_clean and needs_cleaning(psalm, directory):
-        r = clean(psalm, directory, cost_tracker=cost_tracker)
-        logger.info(f"Deep research cleanup for Psalm {psalm}: {r.status} {r.message}".rstrip())
+    if auto_clean:
+        ensure_clean(psalm, directory, cost_tracker=cost_tracker)
     if clean_is_current(p) and p.raw.exists():
         text = p.clean.read_text(encoding="utf-8").strip()
         if text:

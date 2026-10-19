@@ -484,6 +484,25 @@ def run_enhanced_pipeline(
              logger.info("Writer output exists. Moving to downstream steps.")
         resume = False
 
+    # Session 409: when the deep research has a new independent check, clean it FIRST and stop
+    # here if that fails, before any paid step (the author: "let's stop if it hits the cap").
+    # The bundle used to fall back silently to the unchecked report. The assembler raises the
+    # same error as a backstop.
+    if not smoke_test and not skip_micro:
+        from src.agents.deep_research_cleaner import ensure_clean, DeepResearchCleanupFailed
+        _dr_snap = cost_tracker.snapshot()
+        try:
+            _dr = ensure_clean(psalm_number, cost_tracker=cost_tracker)
+        except DeepResearchCleanupFailed as e:
+            _record_stage("deep research cleanup (FAILED)", _dr_snap)
+            logger.error(f"[STEP 0] {e}")
+            print(f"\nSTOPPED: {e}\n")
+            (output_path / f"psalm_{psalm_number:03d}_cost.json").write_text(
+                json.dumps(cost_tracker.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8")
+            sys.exit(3)
+        if _dr is not None:
+            _record_stage("deep research cleanup", _dr_snap)
+
     # =====================================================================
     # STEP 1: Macro Analysis
     # =====================================================================

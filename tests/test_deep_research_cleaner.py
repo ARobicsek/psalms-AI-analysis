@@ -113,9 +113,20 @@ def test_default_is_one_sonnet_pass_at_low_effort(tmp_path):
     assert r.cost < 0.10
 
 
+def test_the_cap_gives_sonnet_full_room_on_the_long_s393_reports(tmp_path):
+    """Session 409: at 10 cents Pss 29, 82, 83 (31-38K tokens) went to Haiku and Ps 29 failed."""
+    assert drc.MAX_COST_USD == 0.20
+    _write(tmp_path)
+    client = FakeClient(n_in=38000)  # Ps 29, the longest so far
+    r = drc.clean(78, tmp_path, client=client)
+    assert r.status == "cleaned" and r.model == drc.MODEL and len(client.calls) == 1
+    assert client.calls[0]["max_tokens"] == drc.MAX_OUTPUT_TOKENS
+    assert drc.output_budget(80_000) >= drc.MIN_SINGLE_PASS_OUTPUT   # Sonnet's headroom: ~2x Ps 29
+
+
 def test_long_report_falls_back_to_haiku_with_the_sweep(tmp_path):
     _write(tmp_path)
-    client = FakeClient(n_in=35000)  # leaves Sonnet < MIN_SINGLE_PASS_OUTPUT under $0.10
+    client = FakeClient(n_in=85000)  # leaves Sonnet < MIN_SINGLE_PASS_OUTPUT under $0.20
     r = drc.clean(78, tmp_path, client=client)
     assert r.status == "cleaned" and r.model == drc.FALLBACK_MODEL
     assert [c["model"] for c in client.calls] == [drc.FALLBACK_MODEL] * 2
@@ -243,6 +254,39 @@ def test_load_for_bundle_runs_cleanup_when_check_is_new(tmp_path, monkeypatch):
     monkeypatch.setattr(drc, "clean", fake_clean)
     text, kind = drc.load_for_bundle(78, tmp_path)
     assert seen["called"] == 78 and kind == "checked" and text == "### cleaned"
+
+
+def test_a_cleanup_over_the_cap_stops_the_run(tmp_path, monkeypatch):
+    """Session 409, the author: "let's stop if it hits the cap"."""
+    import pytest
+    _write(tmp_path)
+    client = FakeClient(n_in=300_000)  # too big even for Haiku: the call is refused, nothing sent
+    real = drc.clean
+    monkeypatch.setattr(drc, "clean", lambda psalm, d, cost_tracker=None, **kw: real(psalm, d, client=client))
+    with pytest.raises(drc.DeepResearchCleanupFailed, match=r"refused.*Stopped"):
+        drc.ensure_clean(78, tmp_path)
+    assert not drc.paths(78, tmp_path).clean.exists() and client.calls == []
+
+
+def test_a_cut_off_edit_list_stops_the_run_and_so_does_the_bundle_load(tmp_path, monkeypatch):
+    import pytest
+    _write(tmp_path)
+    monkeypatch.setattr(drc, "clean", lambda psalm, d, cost_tracker=None, **kw:
+                        drc.CleanResult("failed", message="pass 1 edit list was cut off; nothing written"))
+    with pytest.raises(drc.DeepResearchCleanupFailed, match="cut off"):
+        drc.ensure_clean(78, tmp_path)
+    with pytest.raises(drc.DeepResearchCleanupFailed):   # the assembler's path: the backstop
+        drc.load_for_bundle(78, tmp_path)
+
+
+def test_ensure_clean_does_nothing_when_clean_is_current_or_there_is_no_check(tmp_path, monkeypatch):
+    monkeypatch.setattr(drc, "clean", lambda *a, **k: (_ for _ in ()).throw(AssertionError("called")))
+    p = _write(tmp_path, check=False)
+    assert drc.ensure_clean(78, tmp_path) is None                 # no check: the raw report is all there is
+    p.check.write_text("check", encoding="utf-8")
+    p.clean.write_text("clean", encoding="utf-8")
+    _age(p.raw, 100), _age(p.check, 100)
+    assert drc.ensure_clean(78, tmp_path) is None
 
 
 def test_prompt_states_the_three_verdict_rules():

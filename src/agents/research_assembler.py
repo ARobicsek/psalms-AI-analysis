@@ -60,6 +60,7 @@ else:
     from .literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 
 from src.agents.deep_research_cleaner import load_for_bundle as load_deep_research_for_bundle
+from src.agents.deep_research_cleaner import DeepResearchCleanupFailed
 
 # Session 393: the label on a deep-research section that has been cleaned against an
 # independent check (deep_research_cleaner). The unchecked label is unchanged.
@@ -1015,12 +1016,16 @@ class ResearchAssembler:
             Deep research content as string, or None if not found
         """
         # Session 393: when an independent check file exists, the report is cleaned against it
-        # first (deep_research_cleaner: Sonnet 5.5, ~7 cents, once; capped at 10) and the clean file is used. Headings are
-        # demoted under the bundle's '## Deep Web Research' either way.
+        # first (deep_research_cleaner: Sonnet 5.5, ~7 cents, once; capped at 20 since S409) and the clean file is used. Headings are
+        # demoted under the bundle's '## Deep Web Research' either way. Session 409: a failed
+        # cleanup stops the run (DeepResearchCleanupFailed passes through) instead of falling
+        # back to the unchecked report.
         self._deep_research_kind = "none"
         try:
             content, kind = load_deep_research_for_bundle(
                 psalm_chapter, self._deep_research_dir, cost_tracker=self.cost_tracker)
+        except DeepResearchCleanupFailed:
+            raise
         except Exception as e:
             self.logger.warning(f"Failed to load deep research for Psalm {psalm_chapter}: {e}")
             return None
