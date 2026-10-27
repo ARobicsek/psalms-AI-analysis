@@ -9,6 +9,31 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 410 (2026-10-27): Ps 84 run and supervised; no code changes ($8.32)
+
+**The ask.** The author: "please run and supervise ps 84"; then "awesome. please do all end of session stuff".
+
+**Run** (`archive/psalm_84_S410_run/README.md`; `python scripts/run_enhanced_pipeline.py 84`, all defaults; exit 0). **$8.32**: deep-research cleanup $0.14 (the S409 pre-flight, Sonnet 5.5 alone, under the $0.20 cap; `deep_research_checked` recorded True), macro $0.28, echoes $0.88 (15 literature / 6 far / 10 beyond, none dropped as used), micro + bundle $1.61, SD $2.33, Argon writer $1.24 (essay $0.49, edit $0.09, verses $0.66), citation check $0.07, fact check $0.97, revision $0.37, copy editor $0.43. Guide: `Documents/Psalm study guide/Psalm 84.docx` (+ PDF, 20 pp).
+
+**What the S409 watch items showed.**
+- **Shared Passages**: none for Ps 84 (the standalone module agrees: nothing shared), and no Related Psalms section. Bundle 362,830 chars after the reception section (24 of 252 passages, 20.6K).
+- **Essay length**: draft 2,548 words / 16% long sentences; the edit turn **2,444 / 6%** (~2,280 true, the counter reads ~7% high): inside the 2,000–2,400 target, where Ps 83 ended at 3,084.
+- **Shimush Tehillim**: the `#### Practical Kabbalah` subsection is back (absent from Pss 81, 83), Hebrew + translation; the fact check caught it adding "bodily odor" to the prescription (revised).
+- **Argon's verse call**: 24.5K output (10.1K thinking) of the 65,536 cap.
+
+**Found on the run (nothing changed).**
+- **Gemini's implicit cache missed on the verse call**: 205,092 input tokens, cache read 0 (Pss 29 and 83 read 180–200K there; the essay-edit turn just before DID read 184K). ≈ $0.38 extra. No code changed since S409; treated as Google's best-effort cache. Watch for a repeat.
+- **Sacks: 9 aligned comments, 0 kept** — all on Ashrei (84:5 opens it), so about Ps 145; the S392 mosaic rule dropped them, correctly.
+- **Rashi's pinned Hebrew version** ("Sefaria vocalized edition") is no longer served; the fetch fell back to "Vocalized Edition" with the designed WARNING (also on Ps 83). `PINNED_VERSIONS` not changed.
+- **Sefaria 504** on Mesillat Yesharim 7:21 (reception), recovered on the third try; no passage lost.
+- **Citation checker, both flags false**: before the revision, Prov 26:2 quoted in its ketiv לֹא (qere לוֹ) with a matching translation ("a causeless curse does not alight") — sound; the post-revision re-check dropped it, so the copy editor was never told to "correct" it. After the copy edit, the Shabbat 30a quotation (the copy editor had removed Makkot's spliced speaker formula, a fact-check item outside the prose) was checked against the neighbouring 1 Kings 3:4 and a word clipped at its prefix (ּנְךָ from בִּנְךָ); the text is intact. Two more examples of the pairing noise the 410 handoff offers to look at.
+
+**Fact check**: 235 claims, **30 contradicted (12.8/100**; Ps 82 B 11.2, Ps 83 13.8), 7 unverifiable. Mostly source handling: composite Talmud quotations (Menachot 53a with Sifrei's בית; Shabbat 30a with Makkot's speaker), Ibn Balaam credited with Ibn Ezra's gloss, Rav and R. Levi merged, Radak's conditional pilgrim reading made plain, Rashi's מורה cut before his second reading, Rashi's weeping Jews moved from Gehenna to a return from baptism; text slips (84:5 quoted as בְּבֵיתֶךָ; v. 6's בָךְ overlooked, so "the ending first puts בְּ on You" was wrong; "the King" in vv. 8–10); absolutes (swifts' "only" Jerusalem resting place, sparrows "regularly" in stork nests, "all rites"); liturgy details (Yom Kippur Mincha, Abudraham's attribution, Numbers 28 called a Torah reading); a far association's fact (every OSPF router maps the whole network). Revision 28/28 in 17 paragraphs; the block-quote guard fired on 6 (prose fixes kept). The 2 outside prose went to the copy editor (11 changes: 6 superlatives/overclaims, the two quotations, others).
+
+**Session spend $8.32.** No code or tests changed.
+
+---
+
 ## Session 409 (2026-10-19): Related Psalms replaced by Shared Passages (doublets and shared lines over the whole Bible); the deep-research cleaner made reliable; Ps 83 run (~$7.53)
 
 **The ask.** The author: "I'd love to hear your assessment of whether we should continue generating the similar psalms section in the research bundle"; then "once we're running it for doublets, are we confident that all doublets will be detected in psalms, 1 Chronicles and 2 Sam 22?"; then "I'm OK building this and incorporating if it will result in LESS content getting to the writer than today, not more"; then "please make sure this is now in the prod pipeline, committed, pushed, documented, etc. then run ps 83 end to end and keep an eye on it."
