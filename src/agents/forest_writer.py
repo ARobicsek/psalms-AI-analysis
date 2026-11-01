@@ -735,6 +735,30 @@ S409_ESSAY_EDITS = (
     ("liturgical uses; related psalms;", "liturgical uses; passages it shares with other texts;"),
 )
 
+# Session 412: the writer no longer gets the used-works register (every dossier entry is checked
+# against it before the writer sees it; Ps 84's writer spent a pass re-checking them). What the
+# writer adds from memory is checked once the guide is written, and a repeat is cut.
+S412_ECHO_EDITS = {
+    "essay": (
+        ("Two readers proposed them independently and nobody has filtered them: there is more than you can use, "
+         "and some miss.",
+         "Two readers proposed them independently, and nothing has been filtered out except what other guides "
+         "in this collection already used: there is more than you can use, and some miss."),
+        ("Add items of your own that fit better, but never anything ruled out by the list of what this "
+         "collection has already used, which ends that section (for a text only the passage it names is ruled "
+         "out; another passage of the same work is fine): the collection must not repeat itself, even from "
+         "your memory.",
+         "Add items of your own that fit better. The collection must not repeat itself, so add only what you "
+         "do not remember from another guide in it; everything you add is checked against the collection "
+         "once the guide is written."),
+    ),
+    "verse": (
+        ("(never a passage or item the already-used list rules out)",
+         "(the research's items are already checked against the rest of the collection; what you add is "
+         "checked once the guide is written)"),
+    ),
+}
+
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S388_ECHO_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S398_HEBREW_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S401_EDITS["essay"])
@@ -742,6 +766,7 @@ ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S403_LANGUAGE_EDITS["essay
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S404_ESSAY_EDITS)
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S405_EDITS["essay"])
 ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S409_ESSAY_EDITS)
+ESSAY_INSTRUCTIONS = _apply_edits(ESSAY_INSTRUCTIONS, S412_ECHO_EDITS["essay"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S388_ECHO_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S394_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S395_LITURGY_EDITS)
@@ -751,6 +776,7 @@ VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S401_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S402_VERSE_EDITS)
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S403_LANGUAGE_EDITS["verse"])
 VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S405_EDITS["verse"])
+VERSE_INSTRUCTIONS = _apply_edits(VERSE_INSTRUCTIONS, S412_ECHO_EDITS["verse"])
 
 
 # ---------------------------------------------------------------------------

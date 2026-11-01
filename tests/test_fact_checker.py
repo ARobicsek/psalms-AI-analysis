@@ -331,8 +331,9 @@ def test_fact_check_is_on_by_default_in_the_pipeline():
     src = (Path(__file__).resolve().parent.parent / "scripts" / "run_enhanced_pipeline.py").read_text(encoding="utf-8")
     assert "fact_check: bool = True" in src
     assert 'parser.add_argument("--fact-check", action=argparse.BooleanOptionalAction, default=True' in src
-    # Without it (--no-fact-check) the copy editor gets exactly the citation report, as before.
-    assert "if fact_check else citation_fix_prompt" in src
+    # Without it (--no-fact-check) the copy editor gets the citation report, as before, plus
+    # (Session 412) any echo the writer repeated from another guide.
+    assert "if fact_check else combine_supplementary(citation_fix_prompt, repeats_prompt)" in src
     assert "if fact_check and not smoke_test and print_ready_file.exists():" in src
 
 

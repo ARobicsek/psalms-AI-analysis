@@ -220,8 +220,12 @@ def _load(out: Path, psalm: int) -> Dict:
     rev_file = out / f"{stem}_writer_revision.json"
     revision = (js("writer_revision.json") if rev_file.exists() and not stale and not (
         anchor.exists() and rev_file.stat().st_mtime < anchor.stat().st_mtime) else {})
+    # Session 412: echoes the writer repeated from another guide (STEP 5a⅝), for THIS guide only.
+    rep_file = out / f"{stem}_echo_repeats.json"
+    repeats = (js("echo_repeats.json").get("repeats", []) if rep_file.exists() and not (
+        anchor.exists() and rep_file.stat().st_mtime < anchor.stat().st_mtime) else None)
     if stale:
-        return {"fc": {}, "tele": {}, "stale_fact_check": True,
+        return {"fc": {}, "tele": {}, "stale_fact_check": True, "repeats": repeats,
                 "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
                 "cit_pre": rd("citation_verification.md"), "cit_post": rd("post_copy_edit_citations.md"),
                 "cost": js("cost.json"), "writer": js("writer_calls.json"), "stats": js("pipeline_stats.json"),
@@ -230,7 +234,7 @@ def _load(out: Path, psalm: int) -> Dict:
             "changes": rd("copy_edit_changes.md"), "final": rd("copy_edited.md"),
             "cit_pre": rd("citation_verification.md"), "cit_post": rd("post_copy_edit_citations.md"),
             "cost": js("cost.json"), "writer": js("writer_calls.json"), "stats": js("pipeline_stats.json"),
-            "print_ready": rd("print_ready.md"), "revision": revision}
+            "print_ready": rd("print_ready.md"), "revision": revision, "repeats": repeats}
 
 
 def build_markdown(psalm: int, out_dir: Path) -> str:
@@ -455,6 +459,16 @@ def build_markdown(psalm: int, out_dir: Path) -> str:
         L += _table(["ID", "Where", "Claim", "Why"],
                     [[r["id"], r.get("location", ""), _clip(r.get("claim", ""), 180),
                       _clip(r.get("explanation", ""), 200)] for r in unv]) if unv else ["None.", ""]
+
+    # --- echoes repeated from another guide (Session 412) ----------------------------------
+    if D.get("repeats"):
+        L += ["## Echoes repeated from another guide", "",
+              "The writer added these from memory, and another psalm's guide already used them. The copy editor "
+              "was told to cut each one.", ""]
+        L += _table(["Work", "Passage", "Already in"],
+                    [[f"{r.get('creator') + ', ' if r.get('creator') else ''}{r.get('work', '')}",
+                      _clip(r.get("passage") or r.get("quote") or "", 120), f"Psalm {r.get('used_in')}"]
+                     for r in D["repeats"]])
 
     # --- copy editor ---------------------------------------------------------------------
     L += ["## The copy editor", ""]

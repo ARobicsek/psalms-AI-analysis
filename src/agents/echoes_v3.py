@@ -334,6 +334,16 @@ JUDGE_SCHEMA = {
 # something else -- an artwork, music, an artifact, a finding -- which is used as a whole.
 USED_WORKS_VERSION = 3
 
+# S412: Sefer Shimush Tehillim is consulted for every psalm (the research asks for its entry on
+# each one), so no guide "uses it up". The register listed it as used as a whole, and the Ps 83
+# writer left it out on the never-repeat rule. It never enters the register, nor the repeat check.
+REGISTER_EXEMPT = re.compile(r"shimush\s+tehil", re.I)
+
+
+def register_exempt(w: Dict) -> bool:
+    return bool(REGISTER_EXEMPT.search(f"{w.get('creator') or ''} {w.get('work') or ''}"))
+
+
 USED_WORKS_PROMPT = """Below is a study guide on Psalm {psalm}. List every work OUTSIDE the Hebrew Bible and the
 rabbinic/medieval commentary tradition that it QUOTES or holds up as a comparison: poems, songs, hymns,
 piyyutim and other liturgical poetry, novels, plays, essays, speeches, paintings and other artworks,
@@ -622,12 +632,16 @@ def repeats_quote(text: str, quote: str) -> bool:
     return m.size >= need
 
 
+def _retrieved_text(e: Dict) -> str:
+    r = e.get("retrieved") or {}
+    return " ".join(r.get(k, "") for k in ("original", "translation", "quote")).strip()
+
+
 def repeated_quotation(e: Dict, used: List[Dict]) -> Optional[Dict]:
     """After retrieval: the register entry whose quotation this entry's cut text repeats (S390;
     the check that catches a passage whose locus was named differently, or not at all)."""
-    r = e.get("retrieved") or {}
-    text = " ".join(r.get(k, "") for k in ("original", "translation", "quote"))
-    if not text.strip():
+    text = _retrieved_text(e)
+    if not text:
         return None
     for u in used:
         if is_text_entry(u) and u.get("quote") and same_work(e["candidate"], u) and repeats_quote(text, u["quote"]):
@@ -649,6 +663,72 @@ def used_works_block(used: List[Dict]) -> str:
         else:
             rows.add((head.lower(), f"- {head} (used as a whole)"))
     return "\n".join(r for _, r in sorted(rows)) or "(none yet)"
+
+
+def guide_repeats(works: List[Dict], used: List[Dict]) -> List[Dict]:
+    """S412: the works a finished guide uses (USED_WORKS_PROMPT's list) that another psalm's guide
+    already used. The writer no longer reads the register: every dossier entry was checked before
+    it, so this catches only what the writer added from memory (Pss 81-84: 13 such works, none a
+    repeat). A text repeats by its passage or its quoted words, anything else as a whole. Stricter
+    than `register_hit` in one way: a flag here cuts written prose, so a text another guide only
+    MENTIONED never counts (Ps 80's Shabbat HaGadol piyyut against Ps 49's bare 'a piyyut for
+    Shabbat HaGadol', the one false alarm over Pss 79-84)."""
+    def repeats(c, quote, u):
+        if not same_work(c, u):
+            return False
+        if is_text_entry(u):
+            return same_locus(c["locus"], u.get("passage", "")) or bool(
+                quote and u.get("quote") and repeats_quote(quote, u["quote"]))
+        return u.get("kind") != "text"
+
+    out = []
+    for w in works:
+        if register_exempt(w):
+            continue
+        c = {"creator": w.get("creator", ""), "work": w.get("work", ""), "locus": w.get("passage", "")}
+        hit = next((u for u in used if repeats(c, w.get("quote", ""), u)), None)
+        if hit:
+            out.append(dict(w, used_in=hit.get("psalm"), used_passage=hit.get("passage", ""),
+                            used_quote=hit.get("quote", "")))
+    return out
+
+
+def repeats_path(out_dir: Path, psalm: int) -> Path:
+    return Path(out_dir) / f"psalm_{psalm:03d}_echo_repeats.json"
+
+
+def run_repeat_check(psalm: int, guide_file: Path, out_dir: Path, db_path: str = "database/tanakh.db",
+                     logger=None, cost_tracker=None) -> Optional[str]:
+    """Both pipelines' STEP 5a⅝ (S412): check the writer's guide, save what repeats (the editors'
+    report reads it), and return the copy editor's instruction (None when nothing repeats)."""
+    agent = EchoesV3Agent(db_path=db_path, logger=logger, cost_tracker=cost_tracker)
+    repeats = agent.check_guide_repeats(psalm, Path(guide_file).read_text(encoding="utf-8"))
+    repeats_path(out_dir, psalm).write_text(json.dumps({"repeats": repeats}, ensure_ascii=False, indent=1),
+                                            encoding="utf-8")
+    for r in repeats:
+        agent._log(f"  REPEAT: {r.get('creator') or ''} {r.get('work', '')} {r.get('passage') or ''} "
+                   f"(already in the guide to Ps {r.get('used_in')}); sent to the copy editor to cut")
+    return repeats_copy_editor_prompt(repeats) or None
+
+
+def repeats_copy_editor_prompt(repeats: List[Dict]) -> str:
+    """The copy editor's instruction for each repeat (the writer revision cannot do it: its guard
+    rails never let it touch a quoted poem)."""
+    if not repeats:
+        return ""
+    out = ["## ECHOES THIS GUIDE REPEATS FROM ANOTHER GUIDE IN THE COLLECTION", "",
+           "The collection never uses the same echo twice (for a poem, play or other text: the same "
+           "passage). Each item below is already in the guide to another psalm. Cut it from this guide: "
+           "the quotation, if there is one, and the sentences that introduce and unfold it. Then mend the "
+           "join so the paragraph still reads. Cut nothing else, and log each cut.", ""]
+    for r in repeats:
+        head = f"{r.get('creator') + ', ' if r.get('creator') else ''}*{r.get('work', '')}*"
+        bits = [f"passage: {r['passage']}" if r.get("passage") else "",
+                f"it begins: “{' '.join((r.get('quote') or '').split()[:12])}…”" if r.get("quote") else ""]
+        bits = [b for b in bits if b]
+        out.append(f"- {head}{' (' + '; '.join(bits) + ')' if bits else ''}: already in the guide to "
+                   f"Psalm {r.get('used_in')}")
+    return "\n".join(out) + "\n"
 
 
 UNION_FACTOR = 1.35   # two judges' union may run past one judge's budget; the author accepts longer guides
@@ -1082,7 +1162,32 @@ def dedupe_passages(pool: List[Dict]) -> List[Dict]:
     return kept
 
 
-WRITER_LANES = (("literature", "Literary echoes"), ("beyond", "Resonances beyond literature"),
+def merge_retrieved_twins(entries: List[Dict]) -> List[Dict]:
+    """S412: one passage proposed twice under two spellings and two loci passes `dedupe_passages`
+    (Ps 84: Bialik's 'El Ha-Tzipor', 'Stanza 1' / 'El ha-Tsippor', 'Opening stanzas'). Once both
+    texts are cut from their pages the overlap shows: the longer text stays, and the other's
+    reason joins its `also`. Two passages of one work (Dickinson's stanza 1 and stanzas 2-3)
+    share no words and stay apart."""
+    kept: List[Dict] = []
+    for e in entries:
+        text = _retrieved_text(e)
+        twin = next((k for k in kept if text and k["lane"] == e["lane"] and _retrieved_text(k)
+                     and same_work(k["candidate"], e["candidate"])
+                     and (repeats_quote(_retrieved_text(k), text) or repeats_quote(text, _retrieved_text(k)))),
+                    None)
+        if twin is None:
+            kept.append(e)
+            continue
+        keep, drop = (twin, e) if len(_retrieved_text(twin)) >= len(text) else (e, twin)
+        dc = drop["candidate"]
+        keep["candidate"] = dict(keep["candidate"], also=list(keep["candidate"].get("also", [])) + [
+            {"source": dc.get("_source", ""), "move": dc.get("move", ""), "locus": dc.get("locus", "")}]
+            + list(dc.get("also", [])))
+        kept[kept.index(twin)] = keep
+    return kept
+
+
+WRITER_LANES =(("literature", "Literary echoes"), ("beyond", "Resonances beyond literature"),
                 ("far", "Far associations"))
 DOSSIER_OPENING = "Two readers proposed these independently for this psalm"
 
@@ -1100,15 +1205,20 @@ def methods_models() -> Dict[str, str]:
             "echoes_locate": RETRIEVE_MODEL}
 
 
-def assemble_writer_dossier(psalm: int, entries: List[Dict], used: List[Dict]) -> str:
-    """The unfiltered dossier the writer chooses from. No model names: the writer is told only
-    that two readers proposed these independently."""
+def assemble_writer_dossier(psalm: int, entries: List[Dict]) -> str:
+    """The dossier the writer chooses from, unranked. No model names: the writer is told only
+    that two readers proposed these independently. S412: no register at the end. Every entry has
+    been checked against it already (`filter_used`, `repeated_quotation`), and on Ps 84 it was
+    529 rows, 57K chars, 61% of the section, which the writer read through to re-check entries
+    that were already cleared. What the writer adds itself is checked after (`guide_repeats`)."""
     # Headings start at ### : the dossier sits under the bundle's '## Cross-Cultural Literary
     # Echoes' section, and a '## ' inside it would end that section for every reader of the bundle.
     out = [DOSSIER_OPENING + ", in three kinds: literary echoes, "
            "resonances beyond literature, and far associations (a pattern in the psalm found in a distant "
-           "field). Nothing here has been ranked or filtered: there is more than you can use, and some "
-           "entries miss. Where a passage or a source is quoted, it was cut from, or found on, the page "
+           "field). Nothing here has been ranked or filtered for quality: there is more than you can use, "
+           "and some entries miss. Every entry has already been checked against what the guides to other "
+           "psalms in this collection used, and none repeats it. "
+           "Where a passage or a source is quoted, it was cut from, or found on, the page "
            "named under it. *Text not confirmed* means the reference could not be checked: quote it only "
            "if you know the passage exactly.", ""]
     for lane, title in WRITER_LANES:
@@ -1156,12 +1266,6 @@ def assemble_writer_dossier(psalm: int, entries: List[Dict], used: List[Dict]) -
                     out += [f"*Note:* {r['note']}", ""]
             else:
                 out += [f"*Text not confirmed* — reference: {c.get('locus', '')}.", ""]
-    out += ["### Already used in this collection — never repeat these", "",
-            "The guides to other psalms already used what is listed here, and the collection must never "
-            "repeat itself, even from your own knowledge. For a poem, play or other text only the passage "
-            "shown was used: never quote that passage again, but another passage of the same work is "
-            "welcome. Anything marked \"used as a whole\" must not be used at all. Other works by the same "
-            "authors are fine.", "", used_works_block(used), ""]
     return "\n".join(out).rstrip() + "\n"
 
 
@@ -1510,7 +1614,18 @@ class EchoesV3Agent:
         # guide only CITES as a comparison is used too. S390: for a TEXT that means the passage
         # (register_hit / repeated_quotation). The register is the latest guide per psalm: a
         # regenerated guide replaces its psalm's entry.
-        return [dict(w, psalm=n) for n, works in found for w in works]
+        return [dict(w, psalm=n) for n, works in found for w in works if not register_exempt(w)]
+
+    def check_guide_repeats(self, psalm: int, guide: str) -> List[Dict]:
+        """S412: the works this guide uses that another guide already used. One gpt-6-luna read
+        of the guide (~0.4¢, the same read that later puts it into the register)."""
+        used = self.used_works(psalm)
+        got, _ = self._call("used_works", RETRIEVE_MODEL, USED_WORKS_PROMPT.format(psalm=psalm, guide=guide),
+                            USED_WORKS_SCHEMA, effort="low")
+        repeats = guide_repeats(got.get("works", []), used)
+        self._log(f"[echoes] repeat check: {len(got.get('works', []))} works in the guide to Ps {psalm}, "
+                  f"{len(repeats)} already used in another guide")
+        return repeats
 
     def run_for_writer(self, psalm: int, psalm_text: str, n_verses: int, macro: Optional[Dict] = None,
                        out_dir: Optional[Path] = None) -> EchoesV3Result:
@@ -1586,7 +1701,11 @@ class EchoesV3Agent:
                          "guide: " + "; ".join(f"{c.get('creator') or ''} {c.get('work', '')} (Ps {c['used_in']})".strip()
                                                for c in repeats))
             self._log(f"[echoes] {len(repeats)} located passage(s) repeat a quotation in another guide; dropped")
-        md = assemble_writer_dossier(psalm, entries, used)
+        n_before = len(entries)
+        entries = merge_retrieved_twins(entries)
+        if len(entries) < n_before:
+            notes.append(f"{n_before - len(entries)} entry(ies) merged: the same passage proposed twice")
+        md = assemble_writer_dossier(psalm, entries)
         record = {"mode": "writer", "used_works": len(used), "dropped_as_used": removed}
         res = EchoesV3Result(psalm, md, entries, pool, proposals, record, list(self._costs), notes)
         if out_dir:

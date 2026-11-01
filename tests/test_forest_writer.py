@@ -40,7 +40,8 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     language edits (fw.S403_LANGUAGE_EDITS: Greek words transliterated, other-language passages in
     English only), the Session 404 argument edits (fw.S404_ESSAY_EDITS) and the Session 405 edits
     (fw.S405_EDITS: the engaging teacher, clear sentences, punctuated Hebrew), and the Session 409
-    inputs-list edit (fw.S409_ESSAY_EDITS: shared passages replaced the related psalms)."""
+    inputs-list edit (fw.S409_ESSAY_EDITS: shared passages replaced the related psalms), and the
+    Session 412 echo edits (fw.S412_ECHO_EDITS: the writer no longer reads the used-works list)."""
     inputs = (TRIALS / "inputs_block.txt").read_text(encoding="utf-8")
     assert len(fw.commentator_names(inputs)) == 11
     approved = (TRIALS / "p1_instructions.txt").read_text(encoding="utf-8")
@@ -51,6 +52,7 @@ def test_essay_instructions_for_ps76_are_the_approved_p1_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S404_ESSAY_EDITS)
     expected = fw._apply_edits(expected, fw.S405_EDITS["essay"])
     expected = fw._apply_edits(expected, fw.S409_ESSAY_EDITS)
+    expected = fw._apply_edits(expected, fw.S412_ECHO_EDITS["essay"])
     assert fw.essay_instructions(76, inputs) == expected
 
 
@@ -61,7 +63,7 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     (fw.S399_LITURGY_EDITS), the Session 398 Hebrew edits (fw.S398_HEBREW_EDITS), the
     Session 401 edits (fw.S401_EDITS), the Session 402 forest edits (fw.S402_VERSE_EDITS) and the
     Session 403 language edit (fw.S403_LANGUAGE_EDITS) and the Session 405 edits (fw.S405_EDITS:
-    explanations, not quotations, are spent)."""
+    explanations, not quotations, are spent) and the Session 412 echo edit (fw.S412_ECHO_EDITS)."""
     s385 = _script_constant(ROOT / "scripts" / "s385_two_call_writer.py", "VERSE_INSTRUCTIONS")
     expected = fw._apply_edits(s385, fw.S388_ECHO_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S394_VERSE_EDITS)
@@ -72,6 +74,7 @@ def test_verse_instructions_are_the_s386_text_byte_for_byte():
     expected = fw._apply_edits(expected, fw.S402_VERSE_EDITS)
     expected = fw._apply_edits(expected, fw.S403_LANGUAGE_EDITS["verse"])
     expected = fw._apply_edits(expected, fw.S405_EDITS["verse"])
+    expected = fw._apply_edits(expected, fw.S412_ECHO_EDITS["verse"])
     for key, value in {"n_verses": 13, "far_target": 2, "lit_lo": 7, "lit_hi": 20}.items():
         expected = expected.replace("{" + key + "}", str(value))
     assert fw.verse_instructions(13) == expected
@@ -98,7 +101,8 @@ def test_s388_echo_targets_are_the_authors():
     text = fw.verse_instructions(20)
     assert "at least 4" in text and "about 10 to 30" in text and "Jewish or Hebrew poem" in text
     essay = fw.essay_instructions(77, "")
-    assert "this collection has already used" in essay and "another passage of the same work" in essay
+    # S412: the writer no longer reads the register; what it adds is checked after the guide is written
+    assert "already used" in essay and "checked against the collection once the guide is written" in essay
     assert "haunting" in essay
     assert "LITERARY ECHOES" not in essay and "LITERARY ECHOES" not in fw.VERSE_INSTRUCTIONS
 

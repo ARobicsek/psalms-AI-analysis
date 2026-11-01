@@ -96,6 +96,24 @@ class ResearchTrimmer:
         )
         return stripped
 
+    # Session 412: echoes dossiers written before S412 end with the whole used-works register
+    # (Ps 84: 529 rows, 57K chars), which the writer re-checked already-cleared entries against.
+    # The dossier no longer carries it; this strips it from bundles and saved dossiers on disk.
+    # It is the dossier's last sub-section, so it runs to the next '#'/'##'/'###' heading.
+    USED_WORKS_REGISTER_HEADING = "### Already used in this collection"
+
+    def strip_used_works_register(self, research_bundle: str) -> str:
+        start = research_bundle.find(self.USED_WORKS_REGISTER_HEADING)
+        if start == -1:
+            return research_bundle
+        match = re.compile(r"^#{1,3} ", re.M).search(
+            research_bundle, start + len(self.USED_WORKS_REGISTER_HEADING)
+        )
+        end = match.start() if match else len(research_bundle)
+        self.logger.info(f"Stripped the legacy used-works register from the echoes dossier "
+                         f"({end - start:,} chars); the dossier was checked against it already")
+        return research_bundle[:start] + research_bundle[end:]
+
     def trim_bundle(self, research_bundle: str, max_chars: int = 400000) -> Tuple[str, bool, bool]:
         """
         Intelligently trim research bundle to fit within token limits.
@@ -124,6 +142,7 @@ class ResearchTrimmer:
         # every real bundle (~226k against a 350k ceiling), so anything placed after
         # it would never run.
         research_bundle = self.strip_analytical_framework(research_bundle)
+        research_bundle = self.strip_used_works_register(research_bundle)
 
         original_size = len(research_bundle)
 

@@ -45,6 +45,7 @@ from src.utils.pipeline_summary import PipelineSummaryTracker
 from src.utils.cost_tracker import CostTracker
 from src.utils.research_trimmer import ResearchTrimmer
 from src.utils.api_guard import halt_on_quota
+from src.agents.fact_checker import combine_supplementary
 
 
 def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
@@ -579,6 +580,13 @@ def run_enhanced_pipeline(
             with open(research_file, 'w', encoding='utf-8') as f:
                 f.write(research_bundle_content)
             logger.info("[STEP 2] Reused research bundle: Related Psalms replaced by Shared Passages")
+        # Session 412: a pre-S412 bundle has no Sound Patterns section (four psalms have one; $0).
+        from src.concordance.sound_patterns import refresh_bundle_sound_patterns
+        research_bundle_content, _snd_new = refresh_bundle_sound_patterns(research_bundle_content, psalm_number)
+        if _snd_new:
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+            logger.info("[STEP 2] Reused research bundle: Sound Patterns section added")
 
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
@@ -863,6 +871,20 @@ def run_enhanced_pipeline(
             logger.warning(f"[STEP 5a½] Citation verification failed (non-fatal): {e}")
 
     # =====================================================================
+    # STEP 5a⅝ (Session 412): echoes repeated from another guide (the writer no longer reads the
+    # used-works register); a repeat goes to the copy editor to cut. ~0.4¢.
+    # =====================================================================
+    repeats_prompt = None
+    if not skip_copy_editor and not smoke_test and print_ready_file.exists():
+        from src.agents.echoes_v3 import run_repeat_check
+        try:
+            repeats_prompt = run_repeat_check(psalm_number, print_ready_file, output_path, db_path=db_path,
+                                              logger=logger, cost_tracker=cost_tracker)
+        except Exception as e:
+            halt_on_quota(e, "STEP 5a⅝: Echo repeat check", logger, cost_tracker, output_path, psalm_number)
+            logger.warning(f"[STEP 5a⅝] Echo repeat check failed (non-fatal): {e}")
+
+    # =====================================================================
     # STEP 5b: Copy Editor (Session 280)
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
@@ -877,7 +899,7 @@ def run_enhanced_pipeline(
                 psalm_number=psalm_number,
                 input_file=print_ready_file,
                 output_dir=output_path,
-                supplementary_prompt=citation_fix_prompt,
+                supplementary_prompt=combine_supplementary(citation_fix_prompt, repeats_prompt),
             )
             tracker.track_model_for_step("copy_editor", copy_editor.model)
             logger.info(f"Copy Editor complete: {ce_result['edited_file']}")

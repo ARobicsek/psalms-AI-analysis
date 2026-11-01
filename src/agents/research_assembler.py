@@ -373,6 +373,8 @@ class ResearchBundle:
     # the Related Psalms Analysis section. Empty for most psalms.
     shared_passages_markdown: Optional[str] = None
     shared_passages_refs: List[str] = field(default_factory=list)
+    # Session 412: rhyme clusters (src/concordance/sound_patterns.py). Four psalms have one.
+    sound_patterns_markdown: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -584,6 +586,10 @@ class ResearchBundle:
         # Session 409: doublets and shared lines; absent when the psalm shares no wording.
         if self.shared_passages_markdown:
             md += self.shared_passages_markdown
+            md += "---\n\n"
+        # Session 412: rhyme clusters; absent from all but four psalms.
+        if self.sound_patterns_markdown:
+            md += self.sound_patterns_markdown
             md += "---\n\n"
 
         # Figurative language section
@@ -1267,6 +1273,20 @@ class ResearchAssembler:
             if self.logger:
                 self.logger.warning(f"Shared passages skipped: {e}")
 
+        # Session 412: verses where three or more words rhyme (four in the Psalter). Never fatal.
+        sound_patterns_markdown = ""
+        try:
+            try:
+                from ..concordance.sound_patterns import compute_sound_patterns
+            except ImportError:
+                from src.concordance.sound_patterns import compute_sound_patterns
+            sound_patterns_markdown, _sp_verses = compute_sound_patterns(request.psalm_chapter)
+            if self.logger and _sp_verses:
+                self.logger.info(f"Sound patterns: verse(s) {_sp_verses}")
+        except Exception as e:
+            if self.logger:
+                self.logger.warning(f"Sound patterns skipped: {e}")
+
         # Load deep research content (Gemini Deep Research output) if available
         deep_research_content = self._load_deep_research(request.psalm_chapter)
         deep_research_checked = self._deep_research_kind == "checked"
@@ -1323,6 +1343,7 @@ class ResearchAssembler:
             shared_vocabulary_count=shared_vocabulary_count,
             shared_passages_markdown=shared_passages_markdown or None,
             shared_passages_refs=shared_passages_refs,
+            sound_patterns_markdown=sound_patterns_markdown or None,
         )
 
     def assemble_from_json(self, json_str: str) -> ResearchBundle:

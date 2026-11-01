@@ -739,6 +739,13 @@ def run_enhanced_pipeline(
             with open(research_file, 'w', encoding='utf-8') as f:
                 f.write(research_bundle_content)
             logger.info("[STEP 2] Reused research bundle: Related Psalms replaced by Shared Passages")
+        # Session 412: a pre-S412 bundle has no Sound Patterns section (four psalms have one; $0).
+        from src.concordance.sound_patterns import refresh_bundle_sound_patterns
+        research_bundle_content, _snd_new = refresh_bundle_sound_patterns(research_bundle_content, psalm_number)
+        if _snd_new:
+            with open(research_file, 'w', encoding='utf-8') as f:
+                f.write(research_bundle_content)
+            logger.info("[STEP 2] Reused research bundle: Sound Patterns section added")
 
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
@@ -1103,6 +1110,23 @@ def run_enhanced_pipeline(
         _record_stage("citation verification (SQL check $0; false-positive filter)", _snap)
 
     # =====================================================================
+    # STEP 5a⅝ (Session 412): echoes repeated from another guide. The writer no longer reads the
+    # used-works register (its dossier was checked against it), so what it added from memory is
+    # checked here (~0.4¢) and any repeat goes to the copy editor to cut.
+    # =====================================================================
+    repeats_prompt = None
+    if not skip_copy_editor and not smoke_test and print_ready_file.exists():
+        from src.agents.echoes_v3 import run_repeat_check
+        _snap = cost_tracker.snapshot()
+        try:
+            repeats_prompt = run_repeat_check(psalm_number, print_ready_file, output_path, db_path=db_path,
+                                              logger=logger, cost_tracker=cost_tracker)
+        except Exception as e:
+            halt_on_quota(e, "STEP 5a⅝: Echo repeat check", logger, cost_tracker, output_path, psalm_number)
+            logger.warning(f"[STEP 5a⅝] Echo repeat check failed (non-fatal): {e}")
+        _record_stage("echo repeat check", _snap)
+
+    # =====================================================================
     # STEP 5a¾: Evidence-based fact check (Session 385) — OFF by default.
     # gpt-6-sol + web search + verse/commentary/concordance lookups verifies the
     # guide's checkable claims and returns verdicts WITH evidence. Its report
@@ -1238,8 +1262,8 @@ def run_enhanced_pipeline(
                 input_file=copy_input_file,
                 output_dir=output_path,
                 supplementary_prompt=(
-                    combine_supplementary(citation_fix_prompt, fact_check_prompt)
-                    if fact_check else citation_fix_prompt
+                    combine_supplementary(citation_fix_prompt, fact_check_prompt, repeats_prompt)
+                    if fact_check else combine_supplementary(citation_fix_prompt, repeats_prompt)
                 ),
             )
             tracker.track_model_for_step("copy_editor", copy_editor.model)

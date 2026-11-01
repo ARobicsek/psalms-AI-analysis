@@ -86,7 +86,7 @@ def test_a_copy_edit_without_a_fact_check_drops_the_fact_check_line():
 
 def test_v3_dossier_is_recognised_and_the_assembler_labels_it():
     from src.agents.echoes_v3 import assemble_writer_dossier, is_v3_dossier
-    assert is_v3_dossier(assemble_writer_dossier(77, [], []))
+    assert is_v3_dossier(assemble_writer_dossier(77, []))
     assert not is_v3_dossier("### Psalm 75:1 — The Plea Against Destruction\n")
     src = (ROOT / "src" / "agents" / "research_assembler.py").read_text(encoding="utf-8")
     assert "is_v3_dossier(literary_echoes_content)" in src and "methods_models()" in src

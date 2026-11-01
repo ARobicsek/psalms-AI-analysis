@@ -203,15 +203,17 @@ def test_the_same_passage_merges_but_another_passage_of_the_work_stays():
     assert kept[2]["also"][0]["move"] == "m4"
 
 
-def test_the_writer_dossier_nests_under_the_bundle_section_and_lists_the_register():
+def test_the_writer_dossier_nests_under_the_bundle_section_and_carries_no_register():
     e = {"lane": "far", "verses": "77:20", "status": "verified", "use": True,
          "candidate": {"creator": "", "work": "The watermark", "domain": "papermaking", "pattern": "seen only against the light",
                        "what": "A mark visible only when held up to light.", "move": "m", "also": []},
          "retrieved": {"quote": "A watermark is visible when held to light.", "url": "https://x", "source_title": "T"}}
-    md = assemble_writer_dossier(77, [e], [{"creator": "Paul Celan", "work": "Psalm", "psalm": 41}])
+    md = assemble_writer_dossier(77, [e])
     assert not any(line.startswith("## ") or line.startswith("# ") for line in md.split("\n"))
     assert "### Far associations (1)" in md and "*The pattern:* seen only against the light" in md
-    assert "- Paul Celan, Psalm (used as a whole)" in md and "never repeat these" in md
+    # S412: the register is not printed; the writer is told the entries were checked against it
+    assert "Already used" not in md and "used as a whole" not in md
+    assert "already been checked against what the guides to other psalms" in md
 
 
 def test_a_reused_bundle_gets_the_new_echoes_and_loses_all_of_the_old():
@@ -305,3 +307,80 @@ def test_retrieval_is_billed_per_reported_tier(monkeypatch):
             + price_tokens("gpt-6-luna", input_tokens=500, output_tokens=50)
             + 3 * echoes_v3.WEB_SEARCH_USD_PER_CALL)
     assert abs(sum(c.usd for c in agent._costs) - want) < 1e-9
+
+
+# --- Session 412: the writer never reads the register ---------------------------------------------
+
+def _entry(eid, lane, creator, work, locus, original, source="a", move="m"):
+    return {"id": eid, "lane": lane, "status": "verified", "use": True,
+            "candidate": {"id": eid, "creator": creator, "work": work, "locus": locus, "_source": source,
+                          "move": move, "also": []},
+            "retrieved": {"original": original}}
+
+
+def test_the_same_passage_under_two_spellings_merges_once_its_text_is_cut():
+    """Ps 84: Bialik's 'El Ha-Tzipor' (Stanza 1) and 'El ha-Tsippor' (Opening stanzas) passed
+    dedupe_passages and reached the writer twice; Dickinson's stanza 1 and stanzas 2-3 are two passages."""
+    from src.agents.echoes_v3 import merge_retrieved_twins
+    stanza = "שָׁלוֹם רָב שׁוּבֵךְ צִפֹּרָה נֶחְמֶדֶת מֵאַרְצוֹת הַחֹם אֶל חַלּוֹנִי"
+    es = [_entry("C1", "literature", "Hayim Nahman Bialik", "El Ha-Tzipor (To the Bird)", "Stanza 1", stanza, "g", "m1"),
+          _entry("C2", "literature", "Emily Dickinson", "Some keep the Sabbath going to Church –", "Stanza 1",
+                 "Some keep the Sabbath going to Church - I keep it, staying at Home - With a Bobolink for a Chorister"),
+          _entry("C3", "literature", "Hayim Nahman Bialik", "El ha-Tsippor (To the Bird)", "Opening stanzas",
+                 stanza + " אֶל קוֹלֵךְ כִּי עָרֵב מַה נַּפְשִׁי כָלָתָה", "o", "m3"),
+          _entry("C4", "literature", "Emily Dickinson", "Some keep the Sabbath going to Church", "all three stanzas",
+                 "Some keep the Sabbath in Surplice - I, just wear my Wings - And instead of tolling the Bell")]
+    out = merge_retrieved_twins(es)
+    assert [e["id"] for e in out] == ["C3", "C2", "C4"]            # the longer Bialik text, in the first's place
+    assert out[0]["candidate"]["also"][0]["move"] == "m1"
+
+
+def test_guide_repeats_reads_texts_by_passage_or_words_and_never_flags_shimush_tehillim():
+    from src.agents.echoes_v3 import guide_repeats, register_exempt
+    used = [{"creator": "William Shakespeare", "work": "Hamlet", "kind": "text", "passage": "Act 3, Scene 1",
+             "quote": "To be, or not to be, that is the question", "psalm": 39},
+            {"creator": "Gerard Manley Hopkins", "work": "I wake and feel the fell of dark", "kind": "text",
+             "passage": "", "quote": "I wake and feel the fell of dark, not day.", "psalm": 43},
+            {"creator": "J. S. Bach", "work": "The Art of Fugue", "kind": "other", "passage": "", "quote": "", "psalm": 77},
+            {"creator": "", "work": "Sefer Shimush Tehillim", "kind": "other", "passage": "", "quote": "", "psalm": 79}]
+    works = [{"creator": "Shakespeare", "work": "Hamlet", "kind": "text", "passage": "3.1.56-88", "quote": ""},
+             {"creator": "Shakespeare", "work": "Hamlet", "kind": "text", "passage": "Act 5, Scene 2", "quote": ""},
+             {"creator": "G. M. Hopkins", "work": "I wake and feel the fell of dark", "kind": "text", "passage": "",
+              "quote": "I wake and feel the fell of dark, not day. What hours"},
+             {"creator": "Bach", "work": "The Art of Fugue", "kind": "other", "passage": "", "quote": ""},
+             {"creator": "", "work": "Sefer Shimush Tehillim", "kind": "other", "passage": "", "quote": ""}]
+    hits = guide_repeats(works, used)
+    assert [(h["work"], h["used_in"]) for h in hits] == [("Hamlet", 39), ("I wake and feel the fell of dark", 43),
+                                                         ("The Art of Fugue", 77)]
+    assert register_exempt({"work": "Shimush Tehillim"}) and not register_exempt({"work": "Tehillim Zakkai"})
+    # a text another guide only mentioned is not a repeat (Ps 80's piyyut vs Ps 49's mention)
+    mention = [{"creator": "", "work": "Piyyut for Shabbat HaGadol", "kind": "text", "passage": "", "quote": "", "psalm": 49}]
+    quoted = [{"creator": "", "work": "Piyyut for Shabbat HaGadol beginning כֶּרֶם חֶמֶד", "kind": "text",
+               "passage": "Quoted stanza", "quote": "כֶּרֶם חֶמֶד נֶטַע שַׁעֲשׁוּעִים", "quoted": True}]
+    assert guide_repeats(quoted, mention) == []
+
+
+def test_the_copy_editor_is_told_to_cut_each_repeat_and_nothing_when_none():
+    from src.agents.echoes_v3 import repeats_copy_editor_prompt
+    assert repeats_copy_editor_prompt([]) == ""
+    p = repeats_copy_editor_prompt([{"creator": "Paul Celan", "work": "Psalm", "passage": "lines 1-4",
+                                     "quote": "No one kneads us again out of earth and clay", "used_in": 41}])
+    assert "Cut it from this guide" in p and "Paul Celan, *Psalm*" in p and "Psalm 41" in p
+
+
+def test_a_legacy_bundle_loses_the_register_and_keeps_what_follows():
+    from src.utils.research_trimmer import ResearchTrimmer
+    bundle = ("## Cross-Cultural Literary Echoes\n\n### Literary echoes (1)\n\n#### 84:4 — X\n\nkeep me\n\n"
+              "### Already used in this collection — never repeat these\n\nThe guides...\n\n- A, B (used as a whole)\n"
+              "- C, D — passage: 1\n\n---\n\n## Research Summary\n\nstats\n")
+    out, _, _ = ResearchTrimmer().trim_bundle(bundle)
+    assert "Already used" not in out and "(used as a whole)" not in out
+    assert "keep me" in out and "## Research Summary" in out
+    assert ResearchTrimmer().strip_used_works_register("## A\n\nx\n") == "## A\n\nx\n"
+
+
+def test_the_writer_prompts_no_longer_point_at_a_register():
+    import src.agents.forest_writer as fw
+    for text in (fw.ESSAY_INSTRUCTIONS, fw.VERSE_INSTRUCTIONS):
+        assert "already-used list" not in text and "which ends that section" not in text
+        assert "once the guide is written" in text
