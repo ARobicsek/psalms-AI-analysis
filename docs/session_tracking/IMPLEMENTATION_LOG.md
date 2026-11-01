@@ -9,6 +9,34 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 411 (2026-10-29): Ps 85 run and supervised; no code changes ($7.96)
+
+**The ask.** The author: "please run our pipeline for ps 85 and keep an eye on it"; then "pls do end of session documentation".
+
+**Run** (`archive/psalm_85_S411_run/README.md`; `python scripts/run_enhanced_pipeline.py 85`, all defaults; exit 0). **$7.96**: deep-research cleanup $0.09 (pre-flight, Sonnet 5.5 alone, single pass; `deep_research_checked` recorded True), macro $0.26, echoes $1.02 (16 literature / 8 far / 12 beyond, none dropped as used), micro + bundle $1.75, SD $2.24, Argon writer $0.89 (essay $0.51, edit $0.11, verses $0.26), citation check $0.08, fact check $0.86, revision $0.36, copy editor $0.40. Guide: `Documents/Psalm study guide/Psalm 85.docx` (+ PDF, 20 pp).
+
+**What the S410 watch items showed.**
+- **Gemini's implicit cache on the verse call HIT**: 9,475 fresh + 197,005 cache read (Ps 84: read 0). The verse call cost $0.26 against Ps 84's $0.66. Ps 84's miss stays a one-off.
+- **Rashi's pinned Hebrew version** still unavailable; fell back to "Vocalized Edition" with the designed WARNING (third psalm running: 83, 84, 85). `PINNED_VERSIONS` not changed; the re-pin is offered in the 412 prompt.
+- **Shared Passages**: none for Ps 85 (as the 411 prompt expected), no Related Psalms. Bundle 360,951 chars after the reception section (23 of 138 passages, 22.5K); Sacks section 6 references (the guide names him once).
+- **Cleaner pre-flight**: 9¢, Sonnet alone, single pass.
+
+**Found on the run (nothing changed).**
+- **OpenAI flex 429s** ("Flex processing is temporarily unavailable") on the echoes locator at 21:45; the S397 handling (429s are not billed; wait, then the third attempt on the standard tier) absorbed them. Echoes finished in ~12 minutes at $1.02.
+- **Synthesis discovery**: 617 s, 61,626 output tokens (12.8K thinking), `end_turn`; not cache-shared with the writer (correct with Argon writing).
+- **Essay**: draft 2,823 words (the pipeline's warning counter said 2,846) / 13% long sentences; after the edit turn **2,641 / 2%** (~2,470 true): a little over the 2,000–2,400 target, between Ps 84 (2,444) and Ps 83 (3,084). The edit turn read the essay call's 182K from Gemini's cache.
+- **Verse call**: 22,553 output (9,874 thinking) of the 65,536 cap.
+- **Citation checker**: 7 candidates, the GPT-5.1 filter kept 1: a whole midrash passage (Israel and God each saying "the returning is yours", quoting Mal 3:7 with נְאֻם ה' and Ps 85:5 שׁוּבֵנוּ) checked word for word against Mal 3:7 alone: the pairing defect again. 0 issues on the revised text; the copy editor introduced none.
+- **Revision block-quote guard** fired on 4 of 21 paragraphs (P15, P42 with 15 lines, P54, P67); all 23 claims reported handled.
+- **Practical Kabbalah present** (Shimush Tehillim: reconciling with a friend or enemy who bears a grudge).
+- **Ps 86 preview** (for the handoff, $0): Shared Passages has three shared lines (86:14 ~ Ps 54:5; 86:15 ~ Exod 34:6 and four others; 86:6 ~ Ps 130:2); the 130:2 line prints `אזְנֶיךָ` without the aleph's qamats (not investigated).
+
+**Fact check**: 191 claims, **23 contradicted (12.0/100**; Ps 84 12.8, Ps 83 13.8), 12 unverifiable, 4 web searches. Commentator readings misassigned or inverted (Radak's opening read as recollection, which he gives only as ויש מפרשים; Malbim's chesed/emet producing tzedek/shalom inverted; Ezekiel's dry bones credited to three commentators, only Rashi invokes Ezek 37; Hayyuj named by Radak, not Meiri; Rashi's earthly righteousness made heavenly; Radak and Meiri calling the מֵ־ prefix, not מחרון, an infinitive; Malbim given a crying-parent analogy he does not make; Meiri's simple-stem שובנו overlooked); absolutes (נשאת עון "only here and Ps 32:5", also Ezek 4:5; v. 8 "asks only for" חסדך; a blanket repeated-liturgy claim; God's other objects of רצה); slips (a "four-word" ending of three; the bearing/forgetting wordplay as a shin-dot alone, but נושא/נושה differ in their last letter; John's ἐσκήνωσεν called the LXX's exact word; Deut 26:15 given to the firstfruits basket; Bereshit Rabbah said to cite Prov 22:2; Ezekiel's departure vision dated to the fall; the Cyrus return put in Ezra–Nehemiah's days; Rav Idi credited with a rule he transmits; an "eastern-wall labors" sequence whose source puts ploughing in June, not spring; aftershock decay "proportional"). Revision 23/23 in 21 paragraphs, nothing outside prose. Copy editor 7 changes: two superlatives ("most famous self-description", "sharpest text-critical crux"), an "exact" Exod 33 correspondence scaled back, a manuscript siglum and a grammar label removed, a "because" split, a causal claim about Christmas lectionaries softened.
+
+**Session spend $7.96.** No code or tests changed.
+
+---
+
 ## Session 410 (2026-10-27): Ps 84 run and supervised; no code changes ($8.32)
 
 **The ask.** The author: "please run and supervise ps 84"; then "awesome. please do all end of session stuff".
