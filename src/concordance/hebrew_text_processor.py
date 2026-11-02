@@ -22,8 +22,10 @@ from typing import List, Tuple
 
 # Unicode ranges for Hebrew text components
 # Based on Unicode Hebrew block (U+0590-U+05FF)
-CANTILLATION_RANGE = r'[\u0591-\u05AF\u05BD\u05BF\u05C0\u05C3-\u05C7]'  # te'amim marks
-VOWEL_RANGE = r'[\u05B0-\u05BC\u05C1\u05C2]'  # niqqud points + shin/sin dots
+# U+05C7 is QAMATS QATAN, a vowel: it once ended the cantillation range, which stripped it from every
+# word_voweled token in tanakh.db (S413: 0 of 312,479 tokens kept it; \u05D0\u05C7\u05D6\u05B0\u05E0\u05B6\u05D9\u05DA\u05B8 printed as \u05D0\u05D6\u05B0\u05E0\u05B6\u05D9\u05DA\u05B8).
+CANTILLATION_RANGE = r'[\u0591-\u05AF\u05BD\u05BF\u05C0\u05C3-\u05C6]'  # te'amim marks
+VOWEL_RANGE = r'[\u05B0-\u05BC\u05C1\u05C2\u05C7]'  # niqqud points + shin/sin dots + qamats qatan
 COMBINED_DIACRITICS = r'[\u0591-\u05C7]'  # both cantillation and vowels (simplified)
 
 
@@ -44,7 +46,7 @@ def strip_cantillation(text: str) -> str:
     if not text:
         return text
 
-    # Remove only cantillation marks (U+0591-U+05C7), preserve vowels
+    # Remove only cantillation marks, preserve vowels (qamats qatan included)
     return re.sub(CANTILLATION_RANGE, '', text)
 
 

@@ -214,7 +214,9 @@ def test_a_long_quotations_end_mark_stays_with_its_hebrew_block():
     comma = s.replace('נֵכָר. "', 'נֵכָר, "')                 # the pre-S405 shape: comma dropped
     before, hebrew, after = gen._split_long_hebrew_block(comma)
     assert hebrew.endswith("נֵכָר") and after.startswith('"You shall')
-    bold = ('verse 13: וָאֲשַׁלְּחֵהוּ בִּשְׁרִירוּת לִבָּם, יֵלְכוּ בְּמוֹעֲצוֹתֵי**הֶם**. '
+    # S413: v. 13 alone is five words (`**` inside a word no longer counts as a break), so it now
+    # stays inline; the end of v. 12 makes it a long quotation again.
+    bold = ('verses 12–13: לֹא אָבָה לִי. וָאֲשַׁלְּחֵהוּ בִּשְׁרִירוּת לִבָּם, יֵלְכוּ בְּמוֹעֲצוֹתֵי**הֶם**. '
             '"So I let him go." As Meiri')
     before, hebrew, after = gen._split_long_hebrew_block(bold)
     assert hebrew.endswith("בְּמוֹעֲצוֹתֵי**הֶם**.") and after.startswith('"So I let')
@@ -233,3 +235,15 @@ def test_a_wrapped_long_quotation_leaves_no_stray_markers_behind():
                   '"Which festival is it?"), the poem')
     before, hebrew, after = gen._split_long_hebrew_block(open_paren)
     assert before == "the first of Tishri" and after.startswith('("Which festival is it?"), the poem')
+
+
+def test_bold_letters_inside_words_neither_lift_a_short_line_nor_unbalance_a_long_one():
+    """Session 413: Ps 85's acrostic `**י**וֹמָם, **הַ**רְאֵנוּ, **וְ**חֶסֶד, **ה**וֹדוּ` counted as 8 words, was
+    lifted onto its own line with its opening `**` left behind, and printed `ה**וֹדוּ`."""
+    gen = DocumentGenerator.__new__(DocumentGenerator)
+    acrostic = ("four verses are arranged so that their first letters—**י**וֹמָם, **הַ**רְאֵנוּ, "
+                "**וְ**חֶסֶד, **ה**וֹדוּ—spell out the four-letter Divine Name.")
+    assert gen._split_long_hebrew_block(acrostic) is None
+    long_line = ("the first letters—**א**ַשְׁרֵי הָאִישׁ אֲשֶׁר לֹא הָלַךְ בַּעֲצַת **ר**ְשָׁעִים—spell it")
+    before, hebrew, after = gen._split_long_hebrew_block(long_line)
+    assert before == "the first letters—" and hebrew.startswith("**א**") and hebrew.count("**") % 2 == 0

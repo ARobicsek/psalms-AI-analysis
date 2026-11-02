@@ -158,6 +158,18 @@ def test_reassemble_accepts_a_range_header_first():
     assert out.split("## Verse-by-Verse Commentary\n")[1] == verses
 
 
+def test_reassemble_keeps_the_newline_before_the_methods_rule():
+    # S413: _split_changes rstrips the reply, and the closing '---' was glued to the last verse
+    # paragraph ("…already given.---") in the copy-edited file of many psalms.
+    intro, verses = "Essay.\n", "**Verse 1**\nCommentary one.\n"
+    zones = _zones(intro, verses) + [
+        {"type": "protected", "label": "methodology", "content": "---\n## Methodological & Bibliographical Summary\n"}]
+    ed = ce.CopyEditor.__new__(ce.CopyEditor)
+    ed.logger = ce.get_logger("test_copy_editor")
+    out = ed._reassemble(zones, (intro + verses).rstrip("\n"))
+    assert "Commentary one.\n---\n## Methodological" in out
+
+
 def test_standalone_header_pattern():
     pat = ce.CopyEditor.STANDALONE_VERSE_HEADER
     assert pat.search("**Verse 1**")

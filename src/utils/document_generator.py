@@ -848,8 +848,12 @@ class DocumentGenerator:
 
         Returns (before, hebrew, after) tuple if found, or None.
         """
-        heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        separator = r'(?:[\s:;,./?!()\[\]"\'\-–—\u2026\u05BE\u05C0\u05C3]|\*{1,2})+'
+        # S413: emphasis glued INSIDE a word (an acrostic's bold first letters, `**X**YZ`) is part of
+        # the word, and a bare `**` alone separates nothing: Ps 85's four-word acrostic line counted as
+        # eight words, reached the 6-word threshold and was lifted, printing `X**YZ` for its last word.
+        heb_word = r'[\u05D0-\u05EA\u05F3\u05F4](?:[\u0590-\u05FF]|\*{1,2}(?=[\u0590-\u05FF]))*'
+        sep_char = r'[\s:;,./?!()\[\]"\'\-–—\u2026\u05BE\u05C0\u05C3]'
+        separator = rf'\*{{0,2}}(?:{sep_char}+\*{{0,2}})+'
         # Match 6+ consecutive Hebrew words
         bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{5,}})(?![\u05D0-\u05EA])'
 
@@ -891,11 +895,17 @@ class DocumentGenerator:
         # periods came inline with the hebrew rather than on the NEXT line").
         # A bold ending (`בְּמוֹעֲצוֹתֵי**הֶם**.`) leaves its closing `**` past the match: take it
         # first, when the span opened one, so the mark is reached.
-        if text[end:end + 2] == '**' and text[match.start():end].count('**') % 2 == 1:
+        start = match.start()
+        if text[end:end + 2] == '**' and text[start:end].count('**') % 2 == 1:
             end += 2
+        # S413: and a bold that opens just BEFORE the match (`—**י**וֹמָם…`) is taken too, or
+        # the block holds an odd number of markers and one prints literally.
+        if text[start - 2:start] == '**' and text[start:end].count('**') % 2 == 1:
+            start -= 2
+            before = text[:start].rstrip()
         if end < len(text) and text[end] in '.?!':
             end += 1
-        hebrew = text[match.start():end].strip()
+        hebrew = text[start:end].strip()
 
         after = text[end:].lstrip()
         # Session 405: a quotation wrapped in emphasis and/or parentheses — `(*X…Y*), celebrating`

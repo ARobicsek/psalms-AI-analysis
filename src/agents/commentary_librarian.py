@@ -179,7 +179,9 @@ COMMENTATORS = {
 # versions and, comment by comment, the first in Sefaria's order that has it: verified identical
 # to the old output on every verse of Pss 1, 23, 27, 76 and 77 (660 verse-commentator pairs).
 PINNED_VERSIONS: Dict[str, Tuple[str, Optional[str]]] = {
-    "Rashi": ("Sefaria vocalized edition",
+    # S413: Sefaria renamed "Sefaria vocalized edition" (the fallback fired on Pss 83-86); the text is
+    # byte-identical (Pss 29, 76 cached under the old title vs the new one).
+    "Rashi": ("Vocalized Edition",
               "The Judaica Press complete Tanach with Rashi, translated by A. J. Rosenberg"),
     "Ibn Ezra": ("Ibn Ezra on Psalms -- Daat", None),
     "Radak": ("Derekh Mesilah, Furth 1843", None),

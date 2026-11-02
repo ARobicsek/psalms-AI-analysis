@@ -124,7 +124,7 @@ def test_partial_english_is_merged_comment_by_comment(lib):
 
 
 def test_rashi_english_is_pinned_not_merged(lib):
-    lib.session = FakeSession([chapter([["r"]], en=[["Rosenberg"]], he_title="Sefaria vocalized edition")])
+    lib.session = FakeSession([chapter([["r"]], en=[["Rosenberg"]], he_title="Vocalized Edition")])
     e = lib.fetch_commentary(1, 1, "Rashi")
     assert e.english == "Rosenberg"
     params = lib.session.calls[0][1]

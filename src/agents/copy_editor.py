@@ -1029,7 +1029,12 @@ class CopyEditor:
             if z['type'] == 'protected':
                 result_parts.append(z['content'])
             else:
-                result_parts.append(corrected_map.get(z['label'], z['content']))
+                new = corrected_map.get(z['label'], z['content'])
+                # S413: _split_changes rstrips the reply, so the last zone lost the newline that ended it
+                # and the protected '---' after it was glued on ("…already given.---"). Keep the zone's
+                # own trailing whitespace.
+                tail = z['content'][len(z['content'].rstrip()):]
+                result_parts.append(new.rstrip() + tail if tail else new)
 
         return ''.join(result_parts)
 
